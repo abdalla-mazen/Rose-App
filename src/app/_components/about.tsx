@@ -1,14 +1,23 @@
+import { ArrowRight, Check } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
-const ABOUT_STATEMENTS = [
-  "Competitive Prices & Easy Shopping",
-  "Premium Quality & Elegant Packaging",
-  "Perfect for Every Occasion",
-  "Fast & Reliable Delivery",
-];
-
 export default function About() {
+  // Translation
+  const t = useTranslations();
+  const locale = useLocale();
+
+  const isRtl = locale === "ar";
+
+  // About statements
+  const ABOUT_STATEMENTS: string[] = [
+    t("about-statement-1"),
+    t("about-statement-2"),
+    t("about-statement-3"),
+    t("about-statement-4"),
+  ];
+
   return (
     <section className="items-center gap-20 grid grid-cols-2 mx-auto mt-32 w-11/12 max-w-7xl h-96">
       {/* Left side images */}
@@ -32,6 +41,7 @@ export default function About() {
             height={193}
             className="rounded-full max-w-48 max-h-48"
           />
+
           <Image
             src="/assets/images/about/3.png"
             alt="Opening Box"
@@ -45,44 +55,29 @@ export default function About() {
       {/* Right side content */}
       <div className="flex flex-col space-y-6 max-w-xl">
         <span className="font-bold text-softPink-500 dark:text-maroon-400 text-base">
-          About
+          {t("about")}{" "}
         </span>
+
         <h2 className="font-bold text-maroon-700 dark:text-softPink-200 [&>*]:dark:text-maroon-400 [&>*]:text-softPink-500 text-3xl">
-          Delivering the <span>Finest</span> Gift Boxes for Your{" "}
-          <span>Special</span> Moments
+          {t.rich("about-title", {
+            span: (chunks) => <span>{chunks}</span>,
+          })}
         </h2>
 
         {/* Main paragraph  */}
         <p className="dark:text-zinc-400 -translate-y-4">
-          Make every moment memorable with our premium gift boxes. Carefully
-          curated and beautifully packaged, each box is filled with handpicked
-          items designed to impress. Whether it &apos s for a birthday, wedding,
-          or a simple “thank you,” our gift boxes are crafted to leave a lasting
-          impression — because thoughtful gifting starts here.
+          {t("about-paragraph")}
         </p>
 
         {/* Discover Link */}
         <Link
-          className="flex items-center gap-1 bg-maroon-600 dark:bg-softPink-200 px-4 py-2.5 border-none rounded-xl outline-none w-32 text-white dark:text-zinc-800 -translate-y-4"
+          className="flex items-center gap-2.5 bg-maroon-600 dark:bg-softPink-200 px-4 py-2.5 border-none rounded-xl outline-none w-32 text-white dark:text-zinc-800 -translate-y-4"
           href="/"
         >
-          Discover
-          {/* Right arrow */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentcolor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            className="lucide-arrow-right lucide-arrow-right-icon lucide"
-          >
-            <path d="M5 12h14" data--h-bstatus="0OBSERVED" />
-            <path d="m12 5 7 7-7 7" data--h-bstatus="0OBSERVED" />
-          </svg>
+          {t("discover")}
+
+          {/* Arrow */}
+          <ArrowRight className={`mt-1 h-4 ${isRtl ? "rotate-180" : ""}`} />
         </Link>
 
         {/* About statements */}
@@ -94,20 +89,7 @@ export default function About() {
             >
               {/* Check icon */}
               <span className="text-maroon-700 dark:text-softPink-400">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  className="lucide lucide-check-icon lucide-check"
-                >
-                  <path d="M20 6 9 17l-5-5" data--h-bstatus="0OBSERVED" />
-                </svg>
+                <Check />
               </span>
 
               {/* Statement */}
