@@ -1,3 +1,20 @@
 {
-  "title": "Rose App"
+  "title": "Rose App",
+  "loading": "Loading...",
+  "homepage": {
+    "bestSelling": {
+      "title": "Best Selling",
+      "sub-title": "Check Out What Everyone’s Buying Right Now",
+      "paragraph": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
+      "explore-btn": "Explore gifts"
+    },
+    "mostPopular": {
+      "title": "Most Popular",
+      "view-btn": "View More",
+      "product": {
+        "new": "NEW",
+        "out-of-stock": "OUT OF STOCK"
+      }
+    }
+  }
 }
