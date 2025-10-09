@@ -1,14 +1,11 @@
 import { ArrowRight, Check } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function About() {
   // Translation
   const t = useTranslations();
-  const locale = useLocale();
-
-  const isRtl = locale === "ar";
 
   // About statements
   const ABOUT_STATEMENTS: string[] = [
@@ -21,16 +18,17 @@ export default function About() {
   return (
     <section className="items-center gap-20 grid grid-cols-2 mx-auto mt-32 w-11/12 max-w-7xl h-96">
       {/* Left side images */}
-      <div className="flex items-center gap-2 h-80">
-        <div className="relative h-80">
+      <div className="flex items-center gap-2">
+        <div className="relative w-[19rem] h-96">
           <Image
             src="/assets/images/about/1.png"
             alt="Opening Box"
             width={300}
             height={320}
-            className="rounded-[7.5rem] rounded-tl-[3.125rem] max-w-80 max-h-80 translate-y-1"
+            className="rounded-[7.5rem] rounded-tl-[3.125rem] max-w-[19rem] max-h-[21.5rem] object-cover translate-y-8"
           />
-          <span className="-z-10 absolute border-4 border-maroon-600 dark:border-softPink-400 rounded-[7.5rem] rounded-tl-[3.125rem] rounded-tr-[6rem] w-64 h-[21rem] rotate-3 -translate-x-4 -translate-y-[330px]"></span>
+
+          <span className="-z-10 absolute border-4 border-maroon-600 dark:border-softPink-400 rounded-[7.5rem] rounded-tl-[3.125rem] rounded-tr-[7.5rem] w-72 h-[23rem] rotate-3 -translate-x-4 -translate-y-[330px]"></span>
         </div>
 
         <div className="flex flex-col items-center gap-2">
@@ -54,11 +52,11 @@ export default function About() {
 
       {/* Right side content */}
       <div className="flex flex-col space-y-6 max-w-xl">
-        <span className="font-bold text-softPink-500 dark:text-maroon-400 text-base">
+        <span className="font-bold text-softPink-500 dark:text-maroon-400 text-base uppercase tracking-widest">
           {t("about")}{" "}
         </span>
 
-        <h2 className="font-bold text-maroon-700 dark:text-softPink-200 [&>*]:dark:text-maroon-400 [&>*]:text-softPink-500 text-3xl">
+        <h2 className="font-bold text-maroon-700 dark:text-softPink-200 [&>*]:dark:text-maroon-400 [&>*]:text-softPink-500 text-3xl capitalize">
           {t.rich("about-title", {
             span: (chunks) => <span>{chunks}</span>,
           })}
@@ -71,13 +69,13 @@ export default function About() {
 
         {/* Discover Link */}
         <Link
-          className="flex items-center gap-2.5 bg-maroon-600 dark:bg-softPink-200 px-4 py-2.5 border-none rounded-xl outline-none w-32 text-white dark:text-zinc-800 -translate-y-4"
+          className="flex items-center gap-2.5 bg-maroon-600 dark:bg-softPink-200 px-4 py-2.5 border-none rounded-xl outline-none w-32 text-white dark:text-zinc-800 capitalize -translate-y-4"
           href="/"
         >
           {t("discover")}
 
           {/* Arrow */}
-          <ArrowRight className={`mt-1 h-4 ${isRtl ? "rotate-180" : ""}`} />
+          <ArrowRight className={"h-4 mt-1 rtl:rotate-180"} />
         </Link>
 
         {/* About statements */}
@@ -93,7 +91,7 @@ export default function About() {
               </span>
 
               {/* Statement */}
-              <p className="font-normal text-zinc-800 dark:text-zinc-50 text-base">
+              <p className="font-normal text-zinc-800 dark:text-zinc-50 text-base capitalize">
                 {statement}
               </p>
             </div>

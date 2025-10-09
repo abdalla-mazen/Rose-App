@@ -16,10 +16,7 @@ export default function Companies() {
 
   return (
     <section className="flex flex-col items-center gap-10 bg-maroon-50 dark:bg-zinc-700 mx-auto my-32 px-6 py-10 rounded-2xl w-11/12 max-w-7xl h-52">
-      <p className="font-bold text-maroon-700 dark:text-softPink-200 text-4xl">
-        {/* Trusted by over 
-        <span className="text-softPink-500 dark:text-maroon-400">4.5k+</span>
-         companies */}
+      <p className="font-bold text-maroon-700 dark:text-softPink-200 text-4xl capitalize">
         {t.rich("companies", {
           span: (chunk) => (
             <span className="text-softPink-500 dark:text-maroon-400">
