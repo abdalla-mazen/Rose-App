@@ -1,3 +1,20 @@
 {
-  "title": "Rose App"
+  "title": "Rose App",
+  "searchPlaceholder": "What awesome gift are you looking for?",
+  "login": "Login",
+  "language": "العربية",
+  "home": "Home",
+  "products": "Products",
+  "categories": "Categories",
+  "occasions": "Occasions",
+  "contact": "Contact",
+  "about": "About",
+  "discover": "Discover our website",
+  "getCoupon": " Get <span >20%</span> Off Discount Coupon",
+  "subscribe": "By subscribing to our newsletter",
+  "aboutTerms": "About Terms & Conditions",
+  "privacyPolicy": "Privacy Policy",
+  "faqs": "FAQs",
+  "emailInputPlaceholder": "Enter your email",
+  "subscribeButton": "Subscribe"
 }

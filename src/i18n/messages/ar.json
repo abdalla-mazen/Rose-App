@@ -1,3 +1,21 @@
 {
-  "title": "Rose App"
+  "title": "Rose App",
+  "searchPlaceholder": "ما الهدية الرائعة التي تبحث عنها؟",
+  "login": "تسجيل الدخول",
+  "language": "English",
+  "home": "الرئيسية",
+  "products": "المنتجات",
+  "categories": "الفئات",
+  "occasions": "المناسبات",
+  "contact": "اتصل بنا",
+  "about": "من نحن",
+   "discover": "اكتشف موقعنا",
+  "getCoupon": "حصل على <span>20%</span> خصم كوبون",
+  "subscribe": " من خلال الاشتراك في النشرة الإخبارية لدينا  ",
+  "aboutTerms": "من نحن والشروط والأحكام",
+  "privacyPolicy": "سياسة الخصوصية",
+  "faqs": "الأسئلة الشائعة",
+  "emailInputPlaceholder": "ادخل بريدك الالكتروني",
+"subscribeButton": "اشتراك"
+
 }
