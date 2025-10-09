@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Metadata } from "next";
 import "./globals.css";
 import { Sarabun } from "next/font/google";
 import { Tajawal } from "next/font/google";
+import localFont from "next/font/local";
 
 
 const geistSans = localFont({
@@ -41,4 +41,5 @@ export default function RootLayout({
       </body>
     </html>
   );
+
 }
