@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Sarabun } from "next/font/google";
 import { Tajawal } from "next/font/google";
-import Providers from "./components/providers";
+import Providers from "@/components/providers";
 
 // fonts
 const geistSans = localFont({
@@ -38,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${sarabun.variable} ${tajawal.variable} ${sarabun.className} antialiased`}
+        className={`${geistSans.variable} ${sarabun.variable} ${tajawal.variable} ${tajawal.className} ${sarabun.className} antialiased`}
       >
         <Providers>{children}</Providers>
       </body>
