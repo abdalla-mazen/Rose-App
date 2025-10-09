@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Subtitle from "@/components/features/subtitle";
+import Subtitle from "@/components/shared/subtitle";
 import { MostPopularApi } from "@/lib/apis/product.api";
 import { useTranslations } from "next-intl";
 import DisplayProduct from "../../display-product";
