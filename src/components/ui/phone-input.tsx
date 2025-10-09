@@ -90,7 +90,7 @@ const CountrySelect = ({
     <Popover
       open={isOpen}
       modal
-      onOpenChange={(open) => {
+      onOpenChange={(open: boolean) => {
         setIsOpen(open);
         if (open) setSearchValue("");
       }}

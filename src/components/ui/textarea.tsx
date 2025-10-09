@@ -6,6 +6,10 @@ interface TextareaProps
   error?: boolean;
 }
 
+/**
+ * @example
+ * <Textarea placeholder="your message" />
+ */
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, error, ...props }, ref) => {
     return (

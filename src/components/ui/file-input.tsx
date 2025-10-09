@@ -2,6 +2,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Upload } from "lucide-react";
 
+// types
 interface FileInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: boolean;
@@ -9,7 +10,8 @@ interface FileInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 /**
- *     <FileInput label="Upload your resume" buttonText="Choose File" onChange={(e) => console.log(e.target.files)} multiple/>
+ * @example
+ * <FileInput label="Upload your resume" buttonText="Choose File" onChange={(e) => console.log(e.target.files)} multiple/>
  */
 const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
   (
@@ -26,11 +28,12 @@ const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
     },
     ref
   ) => {
+    // Create a stable id if not provided
     const inputId =
       id ?? "file-input-" + Math.random().toString(36).slice(2, 9);
     const [fileNames, setFileNames] = React.useState<string>("");
 
-// Handles file selection updates displayed file names
+    // Handles file selection updates displayed file names
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
       const files = e.target.files;
       if (files && files.length > 0) {

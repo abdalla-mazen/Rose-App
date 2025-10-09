@@ -1,4 +1,4 @@
-import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
@@ -45,7 +45,11 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
+    <html
+      lang={locale}
+      dir={locale === "ar" ? "rtl" : "ltr"}
+      suppressHydrationWarning
+    >
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

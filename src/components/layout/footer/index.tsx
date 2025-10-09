@@ -5,7 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 export default function Footer() {
+  // translations
   const t = useTranslations();
+
+  // links
   const links = [
     { href: "/", label: t("home") },
     { href: "/products", label: t("products") },
@@ -16,10 +19,12 @@ export default function Footer() {
     { href: "/Privacy Policy", label: t("privacyPolicy") },
     { href: "/FAQs", label: t("faqs") },
   ];
+
   return (
     <>
       <div className="flex  justify-between  bg-zinc-800 dark:text-zinc-50 dark:bg-zinc-900">
-        <div className="flex items-center  bg-zinc-800 dark:text-zinc-50">
+        {/*  Left side logo and navigation links  */}
+        <div className="flex items-center  bg-zinc-800 dark:text-zinc-50 dark:bg-zinc-900">
           <div className="flex flex-col items-center py-10  ms-20 me-4">
             <Image
               src="/assets/images/logo.png"
@@ -32,9 +37,11 @@ export default function Footer() {
               Rose E-Commerce App
             </h2>
             <p className="text-sm text-zinc-100">
-              All rights reserved | {new Date().getFullYear()}
+              {t("copyright")} | {new Date().getFullYear()}
             </p>
           </div>
+
+          {/* Discover section with links */}
           <div className="ps-4">
             <h3 className="text-softPink-300 fonst-semibold text-lg">
               {t("discover")}
@@ -53,7 +60,9 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="me-20 items-start flex flex-col w-[23.438rem] mt-10  ">
+
+        {/*  Right side newsletter subscription*/}
+        <div className="me-20 items-start flex flex-col w-[23.438rem] mt-10   ">
           <p className="text-softPink-300 fonst-semibold text-xl">
             {t.rich("getCoupon", {
               span: (chunks) => (
@@ -68,11 +77,11 @@ export default function Footer() {
             <Input
               placeholder={t("emailInputPlaceholder")}
               type="email"
-              className="rounded-full w-full bg-zinc-700 border-none text-zinc-50 placeholder:text-zinc-400 ps-4  pe-4 "
+              className="rounded-full w-full  bg-zinc-700 border-none text-zinc-50 placeholder:text-zinc-400 ps-4  pe-4 "
             />
             <Button
               variant={"secondary"}
-              className="absolute top-1/2 -translate-y-1/2 right-0 rounded-full h-full w-32 ps-4 pe-2.5 rtl:right-auto rtl:left-0"
+              className="absolute top-1/2 -translate-y-1/2 right-0 rounded-full h-full w-32 ps-4 pe-2.5 rtl:right-auto rtl:left-0 dark:bg-softPink-300 dark:text-zinc-800 dark:hover:bg-softPink-400 hover:dark:text-zinc-800"
             >
               {t("subscribeButton")}
               <ArrowRight size={16} className="rtl:rotate-180" />{" "}
