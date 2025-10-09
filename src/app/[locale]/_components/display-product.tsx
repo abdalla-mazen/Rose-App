@@ -4,7 +4,7 @@ import React from "react";
 
 export default function DisplayProduct(product: Product) {
   // Translations
-  const t = useTranslations("product");
+  const t = useTranslations();
 
   return (
     <div key={product._id} className="relative">
@@ -14,11 +14,11 @@ export default function DisplayProduct(product: Product) {
 
         {/* Image label */}
         {product.quantity > 0 ? (
-          <span className="absolute top-2.5 end-2.5 bg-slate-50 text-xs px-2 rounded-lg">
+          <span className="absolute top-2.5 end-2.5 bg-[#F4F4F5] text-xs px-2 rounded-lg">
             {t("new")}
           </span>
         ) : (
-          <span className="absolute top-2.5 end-2.5 bg-red-700 text-white text-xs px-2 rounded-lg">
+          <span className="absolute top-2.5 end-2.5 bg-[#DC2626] text-white text-xs px-2 rounded-lg">
             {t("out-of-stock")}
           </span>
         )}
@@ -35,18 +35,20 @@ export default function DisplayProduct(product: Product) {
       </div>
 
       {/* Product info */}
-      <p className="mt-5 font-semibold text-lg text-start">{product.title}</p>
+      <p className="mt-5 font-semibold text-lg text-start text-[#741C21] dark:text-[#FFC2D0]">
+        {product.title}
+      </p>
       <div className="flex items-center justify-between">
         <div>
           <span>stars</span>
-          <p className="font-medium">
+          <p className="font-medium text-[#F05454] dark:text-[#FFC2D0]">
             {product.price}.00 EGP{" "}
             <span className="line-through text-gray-400">
               {product.priceAfterDiscount}.00 EGP
             </span>
           </p>
         </div>
-        <span className="w-10 h-10 bg-red-600 rounded-full text-white flex items-center justify-center">
+        <span className="w-10 h-10 bg-[#A6252A] dark:bg-[#CD2E33] rounded-full text-white flex items-center justify-center">
           <ShoppingCart />
         </span>
       </div>

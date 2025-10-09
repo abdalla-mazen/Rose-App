@@ -12,7 +12,7 @@ import { ArrowRight } from "lucide-react";
 
 export default async function BestSelling() {
   // Translations
-  const t = await getTranslations("homepage.bestSelling");
+  const t = await getTranslations("");
   const locale = await getLocale();
   const isRtl = locale === "ar";
 
@@ -22,12 +22,31 @@ export default async function BestSelling() {
   return (
     <div className="flex justify-between items-center w-full mt-10">
       <div className="max-w-[291px]">
-        <h2 className="uppercase font-bold">{t("title")}</h2>
-        <h3 className="text-3xl font-bold">{t("sub-title")}</h3>
-        <p className="font-normal">{t("paragraph")}</p>
+        {/* Title */}
+        <h2 className="uppercase font-bold text-[#FF668B] dark:text-[#D75458]">
+          {t("bestselling-title")}
+        </h2>
 
-        <button className="bg-red-700 font-normal px-5 py-2 mt-10 rounded-xl text-white flex">
-          {t("explore-btn")}{" "}
+        {/* Sub-title */}
+        <h2 className="font-bold text-3xl text-[#FF668B] dark:text-[#FFC2D0]">
+          {t("bestselling-span1-sub-title")}{" "}
+          <span className="text-[#A6252A] dark:text-[#FFC2D0]">
+            {t("bestselling-sub-title")}{" "}
+          </span>
+          <span>{t("bestselling-span2-sub-title")} </span>
+          <span className="text-[#A6252A] dark:text-[#FFC2D0]">
+            {t("bestselling-span3-sub-title")}
+          </span>
+        </h2>
+
+        {/* Paragraph */}
+        <p className="font-normal text-[#757F95] dark:text-[#A1A1AA]">
+          {t("bestselling-paragraph")}
+        </p>
+
+        {/* Explore button */}
+        <button className="bg-[#A6252A] dark:bg-[#FFC2D0] text-white dark:text-[#27272A] font-normal px-5 py-2 mt-10 rounded-xl flex">
+          {t("bestselling-explore-btn")}{" "}
           <span className="ms-2 w-4 h-4">
             <ArrowRight />
           </span>
@@ -54,13 +73,13 @@ export default async function BestSelling() {
         </CarouselContent>
         {isRtl ? (
           <>
-            <CarouselNext className="me-8 bg-red-600 text-white" />
-            <CarouselPrevious className="ms-8 bg-red-600 text-white" />
+            <CarouselNext className="me-8 bg-[#A6252A] dark:bg-[#CD2E33] text-white" />
+            <CarouselPrevious className="ms-8 bg-[#A6252A] dark:bg-[#CD2E33] text-white" />
           </>
         ) : (
           <>
-            <CarouselPrevious className="ms-8 bg-red-600 text-white" />
-            <CarouselNext className="me-8 bg-red-600 text-white" />
+            <CarouselPrevious className="ms-8 bg-[#A6252A] dark:bg-[#CD2E33] text-white" />
+            <CarouselNext className="me-8 bg-[#A6252A] dark:bg-[#CD2E33] text-white" />
           </>
         )}
       </Carousel>
