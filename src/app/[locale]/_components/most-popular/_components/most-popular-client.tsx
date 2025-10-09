@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import Subtitle from "@/components/features/subtitle";
 import { MostPopularApi } from "@/lib/apis/product.api";
 import { useTranslations } from "next-intl";
+import DisplayProduct from "../../display-product";
+import { ArrowRight, MoveRight } from "lucide-react";
 
 // Props type
 type Props = {
@@ -28,6 +30,8 @@ export default function MostPopularClient({
   // Fetch products when selectedOccasion changes Effect
   useEffect(() => {
     if (!selectedOccasion) return;
+
+    // Fetch products for the selection occasion
     const fetchProducts = async () => {
       setLoading(true);
       try {
@@ -42,6 +46,7 @@ export default function MostPopularClient({
     fetchProducts();
   }, [selectedOccasion]);
 
+  // Navigation to all products page by search param(selected occasion)
   function allProducts(occasion: string) {
     if (!occasion) return;
 
@@ -81,65 +86,21 @@ export default function MostPopularClient({
         // Products grid
         <div className="grid grid-cols-4 gap-6 w-full">
           {products.slice(0, 12).map((product) => (
-            <div key={product._id} className="relative">
-              {/* Image */}
-              <div className="group relative overflow-hidden w-full max-h-[270px] rounded-xl">
-                <img src={product.imgCover} alt={product.description} />
-
-                {/* Image label */}
-                {product.quantity > 0 ? (
-                  <span className="absolute top-2.5 end-2.5 bg-slate-50 text-xs px-2 rounded-lg">
-                    {t("homepage.mostPopular.product.new")}
-                  </span>
-                ) : (
-                  <span className="absolute top-2.5 end-2.5 bg-red-700 text-white text-xs px-2 rounded-lg">
-                    {t("homepage.mostPopular.product.out-of-stock")}
-                  </span>
-                )}
-
-                {/* Image overlay */}
-                <div className="absolute top-0 start-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#E6507380] flex items-center justify-center gap-2.5">
-                  <button className="bg-white text-black w-7 h-7 rounded-full">
-                    1
-                  </button>
-                  <button className="bg-white text-black w-7 h-7 rounded-full">
-                    2
-                  </button>
-                </div>
-              </div>
-
-              {/* Product info */}
-              <p className="mt-5 font-semibold text-lg text-start">
-                {product.title}
-              </p>
-              <div className="flex items-center justify-between">
-                <div>
-                  <span>stars</span>
-                  <p className="font-medium">
-                    {product.price} EGP{" "}
-                    <span className="line-through text-gray-400">
-                      {product.priceAfterDiscount} EGP
-                    </span>
-                  </p>
-                </div>
-                <span className="w-10 h-10 bg-red-600 rounded-full text-white flex items-center justify-center">
-                  cart
-                </span>
-              </div>
-            </div>
+            // Display products
+            <DisplayProduct {...product} />
           ))}
         </div>
       )}
 
-      <div className="w-full mt-12 flex justify-end gap-1">
-        <button
-          onClick={() => allProducts(selectedOccasion)}
-          className="text-red-700 font-semibold"
-        >
+      {/* View all products button */}
+      <div className="w-full mt-12 flex justify-end items-center gap-2 text-red-700 font-semibold">
+        <button onClick={() => allProducts(selectedOccasion)}>
           {" "}
           {t("homepage.mostPopular.view-btn")}{" "}
         </button>
-        <span></span>
+        <span>
+          <MoveRight />
+        </span>
       </div>
     </div>
   );

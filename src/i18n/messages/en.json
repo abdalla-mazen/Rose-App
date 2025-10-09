@@ -1,6 +1,10 @@
 {
   "title": "Rose App",
   "loading": "Loading...",
+  "product": {
+    "new": "NEW",
+    "out-of-stock": "OUT OF STOCK"
+  },
   "homepage": {
     "bestSelling": {
       "title": "Best Selling",
@@ -10,11 +14,7 @@
     },
     "mostPopular": {
       "title": "Most Popular",
-      "view-btn": "View More",
-      "product": {
-        "new": "NEW",
-        "out-of-stock": "OUT OF STOCK"
-      }
+      "view-btn": "View More"
     }
   }
 }

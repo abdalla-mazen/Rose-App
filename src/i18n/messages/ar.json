@@ -1,6 +1,10 @@
 {
   "title": "Rose App",
   "loading": "جار التحميل...",
+  "product": {
+    "new": "جديد",
+    "out-of-stock": "غير متوفر"
+  },
   "homepage": {
     "bestSelling": {
       "title": "الأكثر مبيعا",
@@ -10,11 +14,7 @@
     },
     "mostPopular": {
       "title": "الأكثر شيوعا",
-      "view-btn": "عرض المزيد",
-      "product": {
-        "new": "جديد",
-        "out-of-stock": "غير متوفر"
-      }
+      "view-btn": "عرض المزيد"
     }
   }
 }
