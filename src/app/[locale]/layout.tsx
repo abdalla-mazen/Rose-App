@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import localFont from "next/font/local";
 import Providers from "@/components/providers";
+import QueryProvider from "@/components/providers/QueryProvider";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -49,7 +50,9 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <QueryProvider>{children}</QueryProvider>
+        </Providers>
       </body>
     </html>
   );

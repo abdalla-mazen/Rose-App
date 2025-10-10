@@ -1,3 +1,18 @@
 {
-  "title": "Rose App"
+  "title": "Rose App",
+  "notifications": {
+    "title": "الإشعارات",
+    "unreadCount": "({count})",
+    "clearAll": "مسح كل الإشعارات",
+    "markAllRead": "تحديد الكل كمقروء",
+    "loading": "جاري التحميل...",
+    "failedToLoad": "فشل في تحميل الإشعارات",
+    "emptyState": "لا توجد إشعارات للعرض",
+    "notification.orderShipped.title": "تم شحن طلبك",
+    "notification.orderShipped.message": "تم شحن طلبك رقم #{orderId} وسيصل خلال 2-3 أيام عمل.",
+    "markAsRead": "تحديد كمقروء",
+    "marking": "جارٍ التحديد...",
+    "deleteNotification": "حذف الإشعار",
+    "deleting": "جارٍ الحذف..."
+  }
 }
