@@ -1,8 +1,12 @@
 import { useTranslations } from "next-intl";
 import TestimonialSection from "./testimonial-section";
+import { Suspense } from "react";
+import { Loader2 } from "lucide-react";
 
 export default function TestimonialPage() {
+  // Translation
   const t = useTranslations();
+
   return (
     <>
       <section className="flex justify-center w-full gap-10 py-10 dark:bg-zinc-900 ">
@@ -20,7 +24,15 @@ export default function TestimonialPage() {
           </p>
         </div>
       </section>
-      <TestimonialSection />
+      <Suspense
+        fallback={
+          <div className="h-[550px] bg-maroon-50 dark:bg-zinc-700 w-full flex items-center justify-center">
+            <Loader2 className="h-10 w-10 animate-spin text-maroon-700" />
+          </div>
+        }
+      >
+        <TestimonialSection />
+      </Suspense>
     </>
   );
 }

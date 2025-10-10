@@ -8,18 +8,25 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import Image from "next/image";
-import { Testimonial } from "@/lib/types/testimonial";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+
+// function for RTL / LTR classes
+function rtlClass(ltrClass: string, rtlClass: string, locale: string) {
+  return locale === "ar" ? rtlClass : ltrClass;
+}
 
 export function TestemonialCard({
   testimonials,
 }: {
-  testimonials: Testimonial[];
+  testimonials: (Testimonial & { __key: string })[];
 }) {
+  // Translation
   const t = useTranslations();
-
+  //locale
+  const locale = useLocale();
+  // Ref
   const autoplay = React.useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: false })
+    Autoplay({ delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true })
   );
 
   return (
@@ -28,24 +35,30 @@ export function TestemonialCard({
         align: "start",
         loop: true,
         dragFree: true,
+        containScroll: "trimSnaps",
+        direction: locale === "ar" ? "rtl" : "ltr",
       }}
       plugins={[autoplay.current]}
+      dir={locale === "ar" ? "rtl" : "ltr"}
       className="max-w-6xl mx-auto"
       onMouseEnter={() => autoplay.current.stop()}
       onMouseLeave={() => autoplay.current.play()}
       onFocus={() => autoplay.current.stop()}
     >
-      <CarouselContent className="-ml-4">
+      <CarouselContent className="-ml-4" dir={locale === "ar" ? "rtl" : "ltr"}>
         {testimonials.map((item, i) => (
-          <CarouselItem
-            key={i}
-            className="lg:basis-1/3 flex justify-center pl-0"
-          >
-            <div className="relative w-[404px] h-[433px]">
+          <CarouselItem key={`${item._id}-${i}`} className="basis-96 pl-4">
+            <div className="relative w-96 h-[433px]">
               {/* vector */}
-              <div className="absolute w-[120px] h-[120px] top-[44.5px] left-[142.5px] rounded-full border-[3px] border-white overflow-hidden z-10">
+              <div
+                className={`absolute w-28 h-28 top-11 ${rtlClass(
+                  "left-36",
+                  "right-36",
+                  locale
+                )} rounded-full border-4 border-white overflow-hidden z-10`}
+              >
                 <Image
-                  src={item.user.photo}
+                  src={item.user.photo || "/placeholder.svg"}
                   alt={item.user.firstName}
                   width={80}
                   height={80}
@@ -54,7 +67,13 @@ export function TestemonialCard({
               </div>
 
               {/* card content */}
-              <div className="absolute top-[119.5px] left-7 w-[343px] h-[250px] bg-white rounded-3xl shadow-[0px_4px_50.5px_0px_rgba(116,28,33,0.1)] flex flex-col items-center text-center px-5 pt-[55px] pb-5 gap-3">
+              <div
+                className={`absolute top-28 ${rtlClass(
+                  "left-7",
+                  "right-7",
+                  locale
+                )} w-80 h-60 bg-white rounded-3xl shadow-[0px_4px_50.5px_0px_rgba(116,28,33,0.1)] flex flex-col items-center text-center px-5 pt-14 pb-5 gap-3`}
+              >
                 <h3 className="font-sarabun font-semibold leading-[100%] text-zinc-800 text-base">
                   {item.user.firstName} {item.user.lastName}
                 </h3>

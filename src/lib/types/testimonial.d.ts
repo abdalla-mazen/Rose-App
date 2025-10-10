@@ -1,4 +1,4 @@
-export interface Testimonial {
+declare interface Testimonial {
   _id: string;
   user: {
     firstName: string;
@@ -8,9 +8,10 @@ export interface Testimonial {
   rating: number;
   content: string;
   createdAt: string;
+  __key: string;
 }
 
-export interface TestimonialApiResponse {
+declare interface TestimonialApiResponse {
   metadata: {
     currentPage: number;
     totalPages: number;

@@ -1,5 +1,3 @@
-import { TestimonialApiResponse, Testimonial } from "../types/testimonial";
-
 export async function GetTestimonial() {
   const res = await fetch(`https://flower.elevateegy.com/api/v1/testimonials`, {
     method: "GET",
@@ -18,6 +16,11 @@ export async function GetTestimonial() {
   if (testimonials.length === 1) {
     testimonials = Array(6).fill(testimonials[0]);
   }
+  //creating special key
+  const testimonialsWithKeys = testimonials.map((item, index) => ({
+    ...item,
+    __key: `${item._id || "fake"}-${index}`,
+  }));
 
   return testimonials;
 }
