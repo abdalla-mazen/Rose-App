@@ -5,11 +5,11 @@ import { hasLocale } from "next-intl";
 
 export default getRequestConfig(async ({ requestLocale }) => {
   // Variables
-  // const locale = cookies().get("locale")?.value || routing.defaultLocale;
   const requested = await requestLocale;
   const locale = hasLocale(routing.locales, requested)
     ? requested
     : routing.defaultLocale;
+  const numberingSystem = locale === "ar" ? "arab" : "latn";
 
   return {
     locale,
@@ -20,18 +20,24 @@ export default getRequestConfig(async ({ requestLocale }) => {
     formats: {
       dateTime: {
         short: {
-          day: "numeric",
-          month: "short",
+          day: "2-digit",
+          month: "long",
           year: "numeric",
+          numberingSystem,
         },
       },
       number: {
         precise: {
-          maximumFractionDigits: 5,
+          style: "currency",
+          currency: "CURRENCY",
+          currencyDisplay: "name",
+          maximumFractionDigits: 2,
+          numberingSystem,
         },
-        percent: {
+        percentage: {
           style: "percent",
           maximumFractionDigits: 2,
+          numberingSystem,
         },
       },
       list: {
