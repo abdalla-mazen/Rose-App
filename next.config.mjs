@@ -6,6 +6,7 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "flower.elevateegy.com",
+        pathname: "/**",
       },
     ],
   },

@@ -1,5 +1,6 @@
 {
   "title": "Rose App",
+
   "about": "about",
   "about-title": "melivering the <span>Finest</span> Gift Boxes for Your <span>Special</span> Moments",
   "about-paragraph": "Make every moment memorable with our premium gift boxes. Carefully curated and beautifully packaged, each box is filled with handpicked items designed to impress. Whether it's for a birthday, wedding, or a simple “thank you,” our gift boxes are crafted to leave a lasting impression — because thoughtful gifting starts here.",
@@ -14,5 +15,19 @@
   "testimonial-title": "Testimonials",
   "testimonial-subtitle": "Real Words from Happy Customers",
   "testimonial-content": "I've been ordering from this flower shop for years and they never disappoint. The quality and service are exceptional!!",
-  "testimonial-createdAt": "2025-09-12"
+  "testimonial-createdAt": "2025-09-12",
+
+  "loading": "Loading...",
+  "new": "new",
+  "out-of-stock": "out of stock",
+  "stars": "stars",
+  "bestselling-title": "Best Selling",
+  "bestselling-span1-sub-title": "Check Out",
+  "bestselling-sub-title": "What Everyone’s",
+  "bestselling-span2-sub-title": "Buying",
+  "bestselling-span3-sub-title": "Right Now",
+  "bestselling-paragraph": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
+  "bestselling-explore-btn": "Explore gifts",
+  "mostpopular-title": "Most Popular",
+  "mostpopular-view-btn": "View More"
 }
