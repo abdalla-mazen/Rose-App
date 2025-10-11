@@ -1,5 +1,5 @@
+import { ThemeProvider } from "next-themes";
 import React from "react";
-import ReactQueryProvider from "./_components/react-query.provider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
   Locale,
@@ -9,6 +9,8 @@ import {
   useNow,
   useTimeZone,
 } from "next-intl";
+import ReactQueryProvider from "./_components/react-query.provider";
+
 export default function Providers({ children }: { children: React.ReactNode }) {
   // Translation
   const messages = useMessages();
@@ -17,17 +19,24 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   const now = useNow();
 
   return (
-    <ReactQueryProvider>
-      {/* react query dev tools */}
-      <ReactQueryDevtools />
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
       <NextIntlClientProvider
         messages={messages}
         locale={locale}
         timeZone={timezone}
         now={now}
       >
-        {children}
+        <ReactQueryProvider>
+          {/* react query dev tools */}
+          <ReactQueryDevtools />
+          {children}
+        </ReactQueryProvider>
       </NextIntlClientProvider>
-    </ReactQueryProvider>
+    </ThemeProvider>
   );
 }

@@ -58,7 +58,11 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
+    <html
+      lang={locale}
+      dir={locale === "ar" ? "rtl" : "ltr"}
+      suppressHydrationWarning
+    >
       <body
         className={cn(
           geistSans.variable,
