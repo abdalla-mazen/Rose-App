@@ -1,5 +1,5 @@
-import BestSelling from "./_components/best-selling/page";
-import MostPopular from "./_components/most-popular/page";
+import BestSelling from "./_components/best-selling/best-seliing";
+import MostPopular from "./_components/most-popular/most-popular";
 
 export default function Page() {
   return (

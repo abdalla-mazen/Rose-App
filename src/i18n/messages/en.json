@@ -1,8 +1,9 @@
 {
   "title": "Rose App",
   "loading": "Loading...",
-  "new": "NEW",
-  "out-of-stock": "OUT OF STOCK",
+  "new": "new",
+  "out-of-stock": "out of stock",
+  "stars": "stars",
 
   "bestselling-title": "Best Selling",
   "bestselling-span1-sub-title": "Check Out",

@@ -12,7 +12,7 @@ import { ArrowRight } from "lucide-react";
 
 export default async function BestSelling() {
   // Translations
-  const t = await getTranslations("");
+  const t = await getTranslations();
   const locale = await getLocale();
   const isRtl = locale === "ar";
 
