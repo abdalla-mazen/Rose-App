@@ -1,5 +1,5 @@
 import { getRequestConfig } from "next-intl/server";
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 import { routing } from "./routing";
 import { hasLocale } from "next-intl";
 
