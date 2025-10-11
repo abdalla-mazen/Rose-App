@@ -3,7 +3,7 @@ import { FetchOccasions } from "@/lib/apis/occasion.api";
 import { MostPopularApi } from "@/lib/apis/product.api";
 import MostPopularClient from "./_components/most-popular-client";
 
-export default async function MostPopular() {
+export default async function MostPopular({ locale }: { locale: string }) {
   // API Call
   const occasions = await FetchOccasions();
 
@@ -12,5 +12,11 @@ export default async function MostPopular() {
     ? await MostPopularApi(selectedOccasion)
     : [];
 
-  return <MostPopularClient occasions={occasions} products={products} />;
+  return (
+    <MostPopularClient
+      occasions={occasions}
+      products={products}
+      locale={locale}
+    />
+  );
 }

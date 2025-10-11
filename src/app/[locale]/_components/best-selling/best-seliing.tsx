@@ -1,20 +1,11 @@
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "@/components/ui/carousel";
 import { BestSellingApi } from "@/lib/apis/product.api";
-import { getLocale, getTranslations } from "next-intl/server";
-import DisplayProduct from "../display-product";
-import { ArrowRight } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import BestSellingCarousel from "./_components/best-selling-carousel";
 
-export default async function BestSelling() {
+export default async function BestSelling({ locale }: { locale: string }) {
   // Translations
   const t = await getTranslations();
-  const locale = await getLocale();
-  const isRtl = locale === "ar";
 
   // API Call
   const products = await BestSellingApi();
@@ -23,12 +14,12 @@ export default async function BestSelling() {
     <div className="flex justify-between items-center w-full mt-10">
       <div className="max-w-[291px]">
         {/* Title */}
-        <h2 className="uppercase font-bold text-[#FF668B] dark:text-[#D75458]">
+        <h2 className="uppercase tracking-[0.3rem] mb-2.5 font-bold text-[#FF668B] dark:text-[#D75458]">
           {t("bestselling-title")}
         </h2>
 
         {/* Sub-title */}
-        <h2 className="font-bold text-3xl text-[#FF668B] dark:text-[#FFC2D0]">
+        <h2 className="font-bold mb-2 text-3xl text-[#FF668B] dark:text-[#FFC2D0]">
           {t("bestselling-span1-sub-title")}{" "}
           <span className="text-[#A6252A] dark:text-[#FFC2D0]">
             {t("bestselling-sub-title")}{" "}
@@ -48,41 +39,12 @@ export default async function BestSelling() {
         <button className="bg-[#A6252A] dark:bg-[#FFC2D0] text-white dark:text-[#27272A] font-normal px-5 py-2 mt-10 rounded-xl flex">
           {t("bestselling-explore-btn")}{" "}
           <span className="ms-2 w-4 h-4">
-            <ArrowRight />
+            {locale === "ar" ? <ArrowLeft /> : <ArrowRight />}
           </span>
         </button>
       </div>
 
-      <Carousel
-        opts={{
-          align: "start",
-          slidesToScroll: 1,
-        }}
-        className="w-full max-w-[954px]"
-      >
-        <CarouselContent className="-ms-4">
-          {products.map((product) => (
-            <CarouselItem
-              key={product._id}
-              className="ps-4 md:basis-1/2 lg:basis-1/3"
-            >
-              {/* Display products in carousel */}
-              <DisplayProduct {...product} />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        {isRtl ? (
-          <>
-            <CarouselNext className="me-8 bg-[#A6252A] dark:bg-[#CD2E33] text-white" />
-            <CarouselPrevious className="ms-8 bg-[#A6252A] dark:bg-[#CD2E33] text-white" />
-          </>
-        ) : (
-          <>
-            <CarouselPrevious className="ms-8 bg-[#A6252A] dark:bg-[#CD2E33] text-white" />
-            <CarouselNext className="me-8 bg-[#A6252A] dark:bg-[#CD2E33] text-white" />
-          </>
-        )}
-      </Carousel>
+      <BestSellingCarousel products={products} locale={locale} />
     </div>
   );
 }

@@ -5,17 +5,19 @@ import Subtitle from "@/components/shared/subtitle";
 import { MostPopularApi } from "@/lib/apis/product.api";
 import { useTranslations } from "next-intl";
 import DisplayProduct from "../../display-product";
-import { MoveRight } from "lucide-react";
+import { MoveLeft, MoveRight } from "lucide-react";
 
 // Props type
 type Props = {
   occasions: Occasion[];
   products: Product[];
+  locale: string;
 };
 
 export default function MostPopularClient({
   occasions,
   products: initialProducts,
+  locale,
 }: Props) {
   // Translations
   const t = useTranslations();
@@ -99,13 +101,11 @@ export default function MostPopularClient({
         </div>
       )}
 
-      <div className="w-full mt-12 flex justify-end items-center gap-2 text-[#741C21] dark:text-[#FFC2D0] font-semibold">
+      <div className="w-full mt-12 cursor-pointer flex justify-end items-center gap-2 text-[#741C21] dark:text-[#FFC2D0] font-semibold">
         <button onClick={() => allProducts(selectedOccasion)}>
           {t("mostpopular-view-btn")}
         </button>
-        <span>
-          <MoveRight />
-        </span>
+        <span>{locale === "ar" ? <MoveLeft /> : <MoveRight />}</span>
       </div>
     </div>
   );
