@@ -14,10 +14,11 @@ import {
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button";
+
 import InputSearch from "@/components/ui/search-input";
 import { ModeToggle } from "@/components/features/toggle-mode";
 import { NavLink } from "@/components/shared/nav-link";
+import ToggleLocale from "./toggel-locale";
 
 export default function Header() {
   // translations
@@ -79,9 +80,10 @@ export default function Header() {
             ))}
             <ModeToggle />
           </ul>
-          <Button className="bg-transparent text-zinc-700 Bottom navigation bar dark:text-zinc-50 hover:bg-white pe-16 hover:text-zinc-700 shadow-none">
+          {/* <Button className="bg-transparent text-zinc-700 Bottom navigation bar dark:text-zinc-50 hover:bg-white pe-16 hover:text-zinc-700 shadow-none">
             {t("language")}
-          </Button>
+          </Button> */}
+         <ToggleLocale />
         </div>
       </div>
 

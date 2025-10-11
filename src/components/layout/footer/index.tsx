@@ -15,6 +15,7 @@ export default function Footer() {
     { href: "/categories", label: t("categories") },
     { href: "/occasions", label: t("occasions") },
     { href: "/contact", label: t("contact") },
+    { href: "/about", label: t("aboutLink") },
     { href: "/AboutTerms & Conditions", label: t("aboutTerms") },
     { href: "/Privacy Policy", label: t("privacyPolicy") },
     { href: "/FAQs", label: t("faqs") },
@@ -44,7 +45,7 @@ export default function Footer() {
           {/* Discover section with links */}
           <div className="ps-4">
             <h3 className="text-softPink-300 fonst-semibold text-lg">
-              {t("discover")}
+              {t("discoverOur")}
             </h3>
             <ul className="py-1.5">
               {links.map((link) => (
