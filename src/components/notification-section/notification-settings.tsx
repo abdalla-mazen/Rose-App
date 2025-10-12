@@ -7,7 +7,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import { MoreVertical, Check, Trash2, EllipsisVertical } from "lucide-react";
+import { EllipsisVertical, Check, Trash2 } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   deleteNotification,
@@ -17,21 +17,27 @@ import { useTranslations } from "next-intl";
 
 export default function NotificationMenu({ id }: { id: string }) {
   const queryClient = useQueryClient();
-  const t = useTranslations("notifications"); // namespace للترجمات
+  const t = useTranslations("notifications"); // Translations namespace
 
-  // 🟢 Mutation باستخدام الدالة markNotificationRead
+  /**
+   * Mark a specific notification as read
+   */
   const markAsRead = useMutation({
     mutationFn: (ids: string[]) => markNotificationRead(ids),
     onSuccess: () => {
+      // Refresh notifications and unread count after success
       queryClient.invalidateQueries({ queryKey: ["notifications"] });
       queryClient.invalidateQueries({ queryKey: ["unread-count"] });
     },
   });
 
-  // 🟢 Mutation لحذف Notification
+  /**
+   * Delete a specific notification
+   */
   const deleteNotif = useMutation({
     mutationFn: (id: string) => deleteNotification(id),
     onSuccess: () => {
+      // Refresh notifications and unread count after deletion
       queryClient.invalidateQueries({ queryKey: ["notifications"] });
       queryClient.invalidateQueries({ queryKey: ["unread-count"] });
     },
@@ -39,13 +45,16 @@ export default function NotificationMenu({ id }: { id: string }) {
 
   return (
     <DropdownMenu>
+      {/* Three-dots trigger icon */}
       <DropdownMenuTrigger asChild>
-        <div className="cursor-pointer">
+        <div className="cursor-pointer text-gray-500 hover:text-gray-700">
           <EllipsisVertical size={16} />
         </div>
       </DropdownMenuTrigger>
 
+      {/* Dropdown content */}
       <DropdownMenuContent align="end" className="w-48">
+        {/* Mark as read option */}
         <DropdownMenuItem
           onClick={() => markAsRead.mutate([id])}
           disabled={markAsRead.isPending}
@@ -57,6 +66,7 @@ export default function NotificationMenu({ id }: { id: string }) {
 
         <DropdownMenuSeparator />
 
+        {/* Delete notification option */}
         <DropdownMenuItem
           onClick={() => deleteNotif.mutate(id)}
           disabled={deleteNotif.isPending}

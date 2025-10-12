@@ -93,7 +93,7 @@ export default function Notifications() {
           disabled={clearMutation.isPending}
           className="flex items-center gap-1"
         >
-          <BrushCleaning size={14} /> {/* الأيقونة الجديدة */}
+          <BrushCleaning size={14} />
           {t("clearAll")}
         </button>
 
@@ -102,7 +102,7 @@ export default function Notifications() {
           disabled={markAllMutation.isPending}
           className="flex items-center gap-1 hover:text-gray-900"
         >
-          <CheckCheck size={14} /> {/* الأيقونة الجديدة */}
+          <CheckCheck size={14} />
           {markAllMutation.isPending
             ? t("markAllRead") + "..."
             : t("markAllRead")}

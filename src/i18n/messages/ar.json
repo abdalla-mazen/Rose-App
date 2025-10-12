@@ -52,12 +52,15 @@
     "markAllRead": "تحديد الكل كمقروء",
     "loading": "جاري التحميل...",
     "failedToLoad": "فشل في تحميل الإشعارات",
-    "emptyState": "لا توجد إشعارات للعرض",
+    "notificationsEmptyState": "لا توجد إشعارات للعرض",
     "notification.orderShipped.title": "تم شحن طلبك",
     "notification.orderShipped.message": "تم شحن طلبك رقم #{orderId} وسيصل خلال 2-3 أيام عمل.",
     "markAsRead": "تحديد كمقروء",
     "marking": "جارٍ التحديد...",
     "deleteNotification": "حذف الإشعار",
-    "deleting": "جارٍ الحذف..."
+    "deleting": "جارٍ الحذف...",
+    "loadingMore": "جاري تحميل المزيد...",
+    "scrollForMore": "مرر لعرض المزيد...",
+    "noMoreNotifications": "لا توجد إشعارات أخرى"
   }
 }
