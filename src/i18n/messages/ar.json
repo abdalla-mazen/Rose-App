@@ -44,5 +44,23 @@
   "bestselling-paragraph": "لست متأكدًا مما تختار؟ ابدأ بأفضل منتجاتنا مبيعًا، فهذه هي الهدايا التي يعود عملاؤنا إليها باستمرار. سواء كنت تحتفل بعيد ميلاد أو ذكرى سنوية أو حفل زفاف، فإن اختياراتنا المميزة ستترك انطباعًا لا يُنسى.",
   "bestselling-explore-btn": "استكشاف الهدايا",
   "mostpopular-title": "الأكثر شيوعا",
-  "mostpopular-view-btn": "عرض المزيد"
+  "mostpopular-view-btn": "عرض المزيد",
+  "notifications": {
+    "title": "الإشعارات",
+    "unreadCount": "({count})",
+    "clearAll": "مسح كل الإشعارات",
+    "markAllRead": "تحديد الكل كمقروء",
+    "loading": "جاري التحميل...",
+    "failedToLoad": "فشل في تحميل الإشعارات",
+    "notificationsEmptyState": "لا توجد إشعارات للعرض",
+    "notification.orderShipped.title": "تم شحن طلبك",
+    "notification.orderShipped.message": "تم شحن طلبك رقم #{orderId} وسيصل خلال 2-3 أيام عمل.",
+    "markAsRead": "تحديد كمقروء",
+    "marking": "جارٍ التحديد...",
+    "deleteNotification": "حذف الإشعار",
+    "deleting": "جارٍ الحذف...",
+    "loadingMore": "جاري تحميل المزيد...",
+    "scrollForMore": "مرر لعرض المزيد...",
+    "noMoreNotifications": "لا توجد إشعارات أخرى"
+  }
 }

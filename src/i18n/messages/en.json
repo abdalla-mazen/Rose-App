@@ -44,5 +44,23 @@
   "bestselling-paragraph": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
   "bestselling-explore-btn": "Explore gifts",
   "mostpopular-title": "Most Popular",
-  "mostpopular-view-btn": "View More"
+  "mostpopular-view-btn": "View More",
+  "notifications": {
+    "title": "Notifications",
+    "unreadCount": "({count})",
+    "clearAll": "Clear all notifications",
+    "markAllRead": "Mark all as read",
+    "loading": "Loading...",
+    "failedToLoad": "Failed to load notifications",
+    "notificationsEmptyState": "No notifications yet",
+    "notification.orderShipped.title": "Your Order Has Been Shipped",
+    "notification.orderShipped.message": "Your order #{orderId} has been shipped and will arrive in 2-3 business days.",
+    "markAsRead": "Mark as read",
+    "marking": "Marking...",
+    "deleteNotification": "Delete notification",
+    "deleting": "Deleting...",
+    "loadingMore": "Loading more...",
+    "scrollForMore": "Scroll for more...",
+    "noMoreNotifications": "No more notifications"
+  }
 }

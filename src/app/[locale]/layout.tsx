@@ -6,6 +6,7 @@ import { routing } from "@/i18n/routing";
 import localFont from "next/font/local";
 import Providers from "@/components/providers";
 import { cn } from "@/lib/utils";
+import QueryProvider from "@/components/providers/QueryProvider";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -73,7 +74,9 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
           "antialiased"
         )}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <QueryProvider>{children}</QueryProvider>
+        </Providers>
       </body>
     </html>
   );
