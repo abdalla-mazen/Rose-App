@@ -4,17 +4,7 @@ import * as React from "react";
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
 import { cn } from "@/lib/utils";
 
-/** 
- * ScrollArea component (shadcn/ui style)
- * Provides custom scrollbar with smooth transitions.
- */
-"use client"
-
-import * as React from "react"
-import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area"
-
-import { cn } from "@/lib/utils"
-
+/** ScrollArea (shadcn/ui style) */
 const ScrollArea = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>
@@ -30,18 +20,10 @@ const ScrollArea = React.forwardRef<
     <ScrollBar />
     <ScrollAreaPrimitive.Corner />
   </ScrollAreaPrimitive.Root>
-<<<<<<< HEAD
 ));
 ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName;
 
-/**
- * ScrollBar component
- */
-=======
-))
-ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName
-
->>>>>>> 934324491aa16ce81a24726fd4b3f01d2592ac29
+/** ScrollBar */
 const ScrollBar = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>,
   React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>
@@ -61,15 +43,7 @@ const ScrollBar = React.forwardRef<
   >
     <ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 rounded-full bg-border" />
   </ScrollAreaPrimitive.ScrollAreaScrollbar>
-<<<<<<< HEAD
 ));
 ScrollBar.displayName = ScrollAreaPrimitive.ScrollAreaScrollbar.displayName;
 
-/** Exports */
 export { ScrollArea, ScrollBar };
-=======
-))
-ScrollBar.displayName = ScrollAreaPrimitive.ScrollAreaScrollbar.displayName
-
-export { ScrollArea, ScrollBar }
->>>>>>> 934324491aa16ce81a24726fd4b3f01d2592ac29
