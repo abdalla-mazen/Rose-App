@@ -1,5 +1,6 @@
 {
   "title": "Rose App",
+<<<<<<< HEAD
   "searchPlaceholder": "What awesome gift are you looking for?",
   "login": "Login",
   "language": "العربية",
@@ -45,6 +46,8 @@
   "bestselling-explore-btn": "Explore gifts",
   "mostpopular-title": "Most Popular",
   "mostpopular-view-btn": "View More",
+=======
+>>>>>>> 934324491aa16ce81a24726fd4b3f01d2592ac29
   "notifications": {
     "title": "Notifications",
     "unreadCount": "({count})",
