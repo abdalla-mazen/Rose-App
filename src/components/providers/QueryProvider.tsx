@@ -14,7 +14,6 @@ export default function QueryProvider({
   return (
     <QueryClientProvider client={queryClient}>
       {children}
-      {/* devtools اختيارية، بتفيدك وقت التطوير */}
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

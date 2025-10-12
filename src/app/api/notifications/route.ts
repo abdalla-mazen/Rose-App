@@ -1,30 +1,40 @@
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  // const token = cookies().get("token")?.value;
+  try {
+    // Constants (from environment variables)
+    const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
+    const TOKEN = process.env.NOTIFICATIONS_API_TOKEN;
 
-  // if (!token) {
-  //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  // }
+    if (!API_BASE || !TOKEN) {
+      return NextResponse.json(
+        { error: "Missing API configuration" },
+        { status: 500 }
+      );
+    }
 
-  const res = await fetch(
-    "https://flower.elevateegy.com/api/v1/notifications/user",
-    {
+    // 🔹 Fetch notifications from the external API
+    const res = await fetch(`${API_BASE}/user`, {
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjhlNjAzZDQ3ZmVlNjhhNGMyZTlhMzQzIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NjAwNDU5NTd9.NWYfOe0xQOHvvK5O5o4Y7ECECzetuwmL1NYdrXE6gLc`,
+        Authorization: `Bearer ${TOKEN}`,
       },
       cache: "no-store",
-    }
-  );
+    });
 
-  if (!res.ok) {
+    if (!res.ok) {
+      return NextResponse.json(
+        { error: "Failed to fetch notifications" },
+        { status: res.status }
+      );
+    }
+
+    const data = await res.json();
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error("Error fetching notifications:", error);
     return NextResponse.json(
-      { error: "Failed to fetch notifications" },
-      { status: res.status }
+      { error: "Internal Server Error" },
+      { status: 500 }
     );
   }
-
-  const data = await res.json();
-
-  return NextResponse.json(data);
 }
