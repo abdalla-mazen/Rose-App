@@ -15,21 +15,30 @@ import {
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react";
+import { useState } from "react";
 
 export default function PaginationComponent({
-  currentPage,
   totalPages,
-  onPageChange,
+  initialPage,
 }: PaginationProps) {
   //locale
   const locale = useLocale();
-  const isRTL = locale === "ar";
+
+  //state
+  const [currentPage, setCurrentPage] = useState(initialPage);
+
+  //function
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
   //pagination functionality
   const getPageNumber = () => {
     const pages: (number | string)[] = [];
     const startPage = Math.max(currentPage - 2, 1);
-    const endPage = Math.min(currentPage + 1, totalPages);
+    const endPage = Math.min(currentPage + 2, totalPages);
 
     if (startPage > 1) {
       pages.push(1);
@@ -61,36 +70,28 @@ export default function PaginationComponent({
           {/* First page button */}
           <PaginationItem>
             <PaginationLink
-              onClick={() => onPageChange(1)}
+              onClick={() => handlePageChange(1)}
               disabled={currentPage === 1}
               className={cn(
                 "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded[8px] w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
                 currentPage === 1 && "opacity-50"
               )}
             >
-              {isRTL ? (
-                <ChevronsRight className="w-4 h-4" />
-              ) : (
-                <ChevronsLeft className="w-4 h-4" />
-              )}
+              <ChevronsLeft className="w-4 h-4 rtl:rotate-180" />
             </PaginationLink>
           </PaginationItem>
 
           {/* Previous button */}
           <PaginationItem>
             <PaginationLink
-              onClick={() => onPageChange(currentPage - 1)}
+              onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
               className={cn(
                 "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded[8px] w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
                 currentPage === 1 && "opacity-50"
               )}
             >
-              {isRTL ? (
-                <ChevronRight className="w-4 h-4" />
-              ) : (
-                <ChevronLeft className="w-4 h-4" />
-              )}
+              <ChevronLeft className="w-4 h-4 rtl:rotate-180" />
             </PaginationLink>
           </PaginationItem>
 
@@ -99,7 +100,7 @@ export default function PaginationComponent({
             typeof page === "number" ? (
               <PaginationItem key={i}>
                 <PaginationLink
-                  onClick={() => onPageChange(page)}
+                  onClick={() => handlePageChange(page)}
                   isActive={page === currentPage}
                   className={cn(
                     "gap-2 bg-white dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 dark:border-zinc-700 w-8 h-8 dark:text-zinc-50 text-xs",
@@ -126,36 +127,28 @@ export default function PaginationComponent({
           {/* Next button */}
           <PaginationItem>
             <PaginationLink
-              onClick={() => onPageChange(currentPage + 1)}
+              onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
               className={cn(
                 "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded[8px] w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
                 currentPage === totalPages && "opacity-50"
               )}
             >
-              {isRTL ? (
-                <ChevronLeft className="w-4 h-4" />
-              ) : (
-                <ChevronRight className="w-4 h-4" />
-              )}
+              <ChevronRight className="w-4 h-4 rtl:rotate-180" />
             </PaginationLink>
           </PaginationItem>
 
           {/* Last page button */}
           <PaginationItem>
             <PaginationLink
-              onClick={() => onPageChange(totalPages)}
+              onClick={() => handlePageChange(totalPages)}
               disabled={currentPage === totalPages}
               className={cn(
                 "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded[8px] w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
                 currentPage === totalPages && "opacity-50"
               )}
             >
-              {isRTL ? (
-                <ChevronsLeft className="w-4 h-4" />
-              ) : (
-                <ChevronsRight className="w-4 h-4" />
-              )}
+              <ChevronsRight className="w-4 h-4 rtl:rotate-180" />
             </PaginationLink>
           </PaginationItem>
         </PaginationContent>
