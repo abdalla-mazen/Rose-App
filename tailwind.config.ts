@@ -84,7 +84,9 @@ const config: Config = {
           "950": "#590414",
         },
       },
-
+      fontFamily: {
+        edwardian: ['"Edwardian Script ITC"', "cursive"],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
