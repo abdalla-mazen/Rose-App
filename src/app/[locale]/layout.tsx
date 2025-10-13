@@ -1,9 +1,12 @@
-import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Tajawal, Sarabun } from "next/font/google";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import localFont from "next/font/local";
 import Providers from "@/components/providers";
+import { cn } from "@/lib/utils";
+import QueryProvider from "@/components/providers/QueryProvider";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -14,6 +17,17 @@ const geistMono = localFont({
   src: "../fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+});
+const sarabun = Sarabun({
+  subsets: ["latin"],
+  variable: "--font-sarabun",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
+});
+
+const tajawal = Tajawal({
+  subsets: ["arabic"],
+  variable: "--font-tajawal",
+  weight: ["200", "300", "400", "500", "700", "800", "900"],
 });
 
 type Props = {
@@ -45,11 +59,24 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
+    <html
+      lang={locale}
+      dir={locale === "ar" ? "rtl" : "ltr"}
+      suppressHydrationWarning
+    >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={cn(
+          geistSans.variable,
+          geistMono.variable,
+          sarabun.variable,
+          tajawal.variable,
+          locale === "ar" ? "font-tajawal" : "font-sarabun",
+          "antialiased"
+        )}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <QueryProvider>{children}</QueryProvider>
+        </Providers>
       </body>
     </html>
   );
