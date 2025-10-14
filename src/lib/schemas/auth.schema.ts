@@ -1,8 +1,11 @@
 import { useTranslations } from "next-intl";
 import { email, z } from "zod";
 
-export const registerSchema = (t: ReturnType<typeof useTranslations>) =>
-  z
+export const useRegisterSchema = () => {
+  // Translation
+  const t = useTranslations();
+
+  return z
     .object({
       firstName: z.string().nonempty(t("firstname-req")),
       lastName: z.string().nonempty(t("lastname-req")),
@@ -19,5 +22,6 @@ export const registerSchema = (t: ReturnType<typeof useTranslations>) =>
       message: t("confirm-password-mess"),
       path: ["rePassword"],
     });
+};
 
-export type RegisterValues = z.infer<typeof registerSchema>;
+export type RegisterValues = z.infer<ReturnType<typeof useRegisterSchema>>;

@@ -1,6 +1,5 @@
 import AuthBottomLink from "@/components/shared/auth/auth-bottom-link";
 import AuthTitle from "@/components/shared/auth/auth-title";
-import Link from "next/link";
 import React from "react";
 import RegisterForm from "./_components/register-form";
 import { getTranslations } from "next-intl/server";

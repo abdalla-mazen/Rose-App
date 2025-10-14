@@ -100,3 +100,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Fix phone input direction when site is RTL */
+[dir="rtl"] .PhoneInput {
+  direction: ltr !important;
+  text-align: left;
+}
+
+[dir="rtl"] .PhoneInput input {
+  text-align: right !important;
+}

@@ -8,7 +8,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { registerSchema, RegisterValues } from "@/lib/schemas/auth.schema";
+import { useRegisterSchema, RegisterValues } from "@/lib/schemas/auth.schema";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,22 +23,18 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import useRegister from "../_hooks/use-register";
-import { Check, LoaderCircle } from "lucide-react";
 import ErrorFeedback from "@/components/shared/error-feedback";
 import { useTranslations } from "next-intl";
-import z from "zod";
-import toast from "react-hot-toast";
+import { LoaderCircle } from "lucide-react";
 
 export default function RegisterForm() {
   // Translations
   const t = useTranslations();
 
-  const schema = registerSchema(t);
-
-  // Extract type of schema
-  type RegisterValues = z.infer<typeof schema>;
-
   // Hooks
+  const registerSchema = useRegisterSchema();
+  const { error, isPending, register } = useRegister();
+
   const form = useForm<RegisterValues>({
     defaultValues: {
       firstName: "",
@@ -49,26 +45,12 @@ export default function RegisterForm() {
       phone: "",
       gender: "male",
     },
-    resolver: zodResolver(registerSchema(t)),
+    resolver: zodResolver(registerSchema),
   });
-
-  const { error, isPending, register } = useRegister();
 
   // On submit
   const onSubmit: SubmitHandler<RegisterValues> = async (values) => {
     register(values);
-
-    // Toaster
-    toast.custom((toas) => (
-      <div
-        className={`${
-          toas.visible ? "animate-enter" : "animate-leave"
-        } bg-emerald-50 dark:bg-emerald-300 text-zinc-800 border border-emerald-700 text-sm px-11 py-3 shadow-lg flex items-center gap-2`}
-      >
-        <Check className="w-5 h-5 text-green-400" />
-        <span>{t("register-toast")}</span>
-      </div>
-    ));
   };
 
   return (

@@ -13,10 +13,6 @@ export async function registerAction(data: RegisterValues) {
 
     const payload: ApiResponse<AuthResponse> = await response.json();
 
-    if ("error" in payload) {
-      throw new Error(payload.error);
-    }
-
     return payload;
   } catch (error) {
     console.error("Registration error:", error);

@@ -1,4 +1,3 @@
-import ToggleLocale from "@/components/layout/header/toggel-locale";
 import AuthToggleLocale from "@/components/shared/auth/auth-toggle-locale";
 import Image from "next/image";
 import React from "react";
@@ -40,7 +39,6 @@ export default function Layout({ children }: LayoutProps) {
           src="/assets/images/auth/authLayout.png"
           alt="Authentication Layout Image"
           fill
-          className=""
           priority
         />
       </div>
