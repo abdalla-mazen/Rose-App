@@ -40,14 +40,14 @@ export function TestemonialCard({
       }}
       plugins={[autoplay.current]}
       dir={locale === "ar" ? "rtl" : "ltr"}
-      className="max-w-6xl mx-auto"
+      className="mx-auto max-w-6xl"
       onMouseEnter={() => autoplay.current.stop()}
       onMouseLeave={() => autoplay.current.play()}
       onFocus={() => autoplay.current.stop()}
     >
       <CarouselContent className="-ml-4" dir={locale === "ar" ? "rtl" : "ltr"}>
         {testimonials.map((item, i) => (
-          <CarouselItem key={`${item._id}-${i}`} className="basis-96 pl-4">
+          <CarouselItem key={`${item._id}-${i}`} className="pl-4 basis-96">
             <div className="relative w-96 h-[433px]">
               {/* vector */}
               <div
@@ -62,7 +62,7 @@ export function TestemonialCard({
                   alt={item.user.firstName}
                   width={80}
                   height={80}
-                  className="object-cover w-full h-full"
+                  className="w-full h-full object-cover"
                 />
               </div>
 
@@ -74,7 +74,7 @@ export function TestemonialCard({
                   locale
                 )} w-80 h-60 bg-white rounded-3xl shadow-[0px_4px_50.5px_0px_rgba(116,28,33,0.1)] flex flex-col items-center text-center px-5 pt-14 pb-5 gap-3`}
               >
-                <h3 className="font-sarabun font-semibold leading-[100%] text-zinc-800 text-base">
+                <h3 className="font-sarabun font-semibold text-zinc-800 text-base leading-[100%]">
                   {item.user.firstName} {item.user.lastName}
                 </h3>
 
@@ -88,7 +88,7 @@ export function TestemonialCard({
                   {t("testimonial-content")}
                 </p>
 
-                <p className="text-xs text-gray-400">
+                <p className="text-gray-400 text-xs">
                   {new Date(item.createdAt).toLocaleDateString()}
                 </p>
               </div>
