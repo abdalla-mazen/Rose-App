@@ -10,6 +10,7 @@ import {
   useTimeZone,
 } from "next-intl";
 import ReactQueryProvider from "./_components/react-query.provider";
+import ToastProvider from "./_components/toast-provider";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   // Translation
@@ -35,6 +36,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           {/* react query dev tools */}
           <ReactQueryDevtools />
           {children}
+          <ToastProvider />
         </ReactQueryProvider>
       </NextIntlClientProvider>
     </ThemeProvider>
