@@ -61,6 +61,7 @@ export default function PaginationComponent({
   const formatNumber = (num: number) =>
     new Intl.NumberFormat(locale === "ar" ? "ar-EG" : "en-US").format(num);
 
+  //Variables
   const pages = getPageNumber();
 
   return (
@@ -73,7 +74,7 @@ export default function PaginationComponent({
               onClick={() => handlePageChange(1)}
               disabled={currentPage === 1}
               className={cn(
-                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded[8px] w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
+                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded-lg w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
                 currentPage === 1 && "opacity-50"
               )}
             >
@@ -87,7 +88,7 @@ export default function PaginationComponent({
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
               className={cn(
-                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded[8px] w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
+                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded-lg w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
                 currentPage === 1 && "opacity-50"
               )}
             >
@@ -103,9 +104,9 @@ export default function PaginationComponent({
                   onClick={() => handlePageChange(page)}
                   isActive={page === currentPage}
                   className={cn(
-                    "gap-2 bg-white dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 dark:border-zinc-700 w-8 h-8 dark:text-zinc-50 text-xs",
+                    "gap-2 bg-white dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 dark:border-zinc-700 rounded-lg w-8 h-8 dark:text-zinc-50 text-xs",
                     page === currentPage &&
-                      "text-white bg-maroon-600 border-maroon-600 dark:bg-softPink-200 dark:text-zinc-700 dark:border-softPink-200"
+                      "text-white bg-maroon-600 border-maroon-600 dark:bg-softPink-200 dark:text-zinc-700 dark:border-softPink-200 hover:bg-maroon-600 dark:hover:bg-softPink-200"
                   )}
                 >
                   {formatNumber(page)}
@@ -115,7 +116,7 @@ export default function PaginationComponent({
               <PaginationItem key={i}>
                 <div
                   className={cn(
-                    "flex justify-center items-center bg-white dark:bg-zinc-700 border border-zinc-200 dark:border-zinc-700 rounded-[12px] w-8 h-8 text-zinc-400 text-xs select-none"
+                    "flex justify-center items-center bg-white dark:bg-zinc-700 border border-zinc-200 dark:border-zinc-700 rounded-lg w-8 h-8 text-zinc-400 text-xs select-none"
                   )}
                 >
                   …
@@ -130,7 +131,7 @@ export default function PaginationComponent({
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
               className={cn(
-                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded[8px] w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
+                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded-lg w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
                 currentPage === totalPages && "opacity-50"
               )}
             >
@@ -144,7 +145,7 @@ export default function PaginationComponent({
               onClick={() => handlePageChange(totalPages)}
               disabled={currentPage === totalPages}
               className={cn(
-                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded[8px] w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
+                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded-lg w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
                 currentPage === totalPages && "opacity-50"
               )}
             >
