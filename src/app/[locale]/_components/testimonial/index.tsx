@@ -9,25 +9,25 @@ export default function TestimonialPage() {
 
   return (
     <>
-      <section className="flex justify-center gap-10 py-10 w-full">
+      <section className="flex justify-center w-full gap-10 py-10 dark:bg-zinc-900 ">
         {/* header*/}
-        <div className="flex flex-col items-center gap-2 w-2/5 h-16">
-          <h2 className="gap-2 font-sarabun font-medium text-softPink-500 dark:text-maroon-400 text-base uppercase leading-[100%] tracking-wider">
+        <div className=" flex flex-col items-center  w-2/5 h-16 gap-2">
+          <h2 className=" font-sarabun font-medium text-base  leading-[100%] tracking-wider uppercase text-softPink-500 dark:text-maroon-400 gap-2">
             {t("testimonial-title")}
           </h2>
 
-          <p className="z-10 relative h-10 font-sarabun font-bold text-maroon-700 dark:text-softPink-200 text-3xl align-middle leading-[100%] -tracking-normal">
+          <p className=" relative h-10 font-sarabun font-bold text-3xl leading-[100%] -tracking-normal  text-maroon-700 dark:text-softPink-200 align-middle z-10">
             {t("testimonial-subtitle")}
-            <span className="bottom-1 left-0 -z-10 absolute bg-softPink-100 dark:bg-zinc-700 opacity-100 rounded-tr-[20px] rounded-br-[20px] w-[71%] h-4" />
+            <span className="absolute bottom-1 left-0 h-4 w-[71%] bg-softPink-100 dark:bg-zinc-700 rounded-tr-[20px] rounded-br-[20px] opacity-100 -z-10" />
 
-            <span className="bottom-1 left-0 -z-10 absolute bg-softPink-600 dark:bg-softPink-500 opacity-100 w-40 h-0.5" />
+            <span className="absolute bottom-1 left-0  h-0.5 w-40 bg-softPink-600 dark:bg-softPink-500 opacity-100 -z-10" />
           </p>
         </div>
       </section>
       <Suspense
         fallback={
-          <div className="flex justify-center items-center bg-maroon-50 dark:bg-zinc-700 w-full h-[550px]">
-            <Loader2 className="w-10 h-10 text-maroon-700 animate-spin" />
+          <div className="h-[550px] bg-maroon-50 dark:bg-zinc-700 w-full flex items-center justify-center">
+            <Loader2 className="h-10 w-10 animate-spin text-maroon-700" />
           </div>
         }
       >
