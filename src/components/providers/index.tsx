@@ -1,5 +1,4 @@
 import { ThemeProvider } from "next-themes";
-import React from "react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
   Locale,
@@ -10,6 +9,7 @@ import {
   useTimeZone,
 } from "next-intl";
 import ReactQueryProvider from "./_components/react-query.provider";
+import { NextAuthProvider } from "./_components/next-auth.provider";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   // Translation
@@ -25,6 +25,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
+      {/* Next Intl Provider */}
       <NextIntlClientProvider
         messages={messages}
         locale={locale}
@@ -34,7 +35,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         <ReactQueryProvider>
           {/* react query dev tools */}
           <ReactQueryDevtools />
-          {children}
+
+          {/* Next Auth Provider */}
+          <NextAuthProvider>{children}</NextAuthProvider>
         </ReactQueryProvider>
       </NextIntlClientProvider>
     </ThemeProvider>

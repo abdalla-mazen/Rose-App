@@ -3,58 +3,63 @@
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 
-// types
-interface PasswordInputProps {
-  id?: string;
-  name?: string;
+// Extend native input props so react-hook-form can pass value, onChange, onBlur, name, ref
+interface PasswordInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  error?: string;
+  error?: string | boolean;
 }
 /**
  *   <PasswordInput  id="password" name="password" label="Password"  error=" field is required"/>
  */
-export default function PasswordInput({
-  id,
-  name,
-  label,
-  error,
-}: PasswordInputProps) {
-  const [show, setShow] = useState(false);
 
-  return (
-    <div className="space-y-1">
-      {/* label */}
-      {label && (
-        <label htmlFor={id} className="text-sm font-medium text-zinc-400">
-          {label}
-        </label>
-      )}
+const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
+  ({ id, name, label, error, className, ...rest }, ref) => {
+    const [show, setShow] = useState(false);
 
-      {/* input */}
-      <div className="relative">
-        <Input
-          id={id}
-          name={name}
-          placeholder="********"
-          type={show ? "text" : "password"}
-          className={cn(
-            "flex h-12 w-full rounded-[.625rem] border border-zinc-300 bg-transparent px-3 py-1 text-zinc-800 text-sm focus-visible:ring-0 focus-visible:ring-offset-0 transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-zinc-400 focus-visible:outline-none   focus:border-maroon-600 disabled:cursor-not-allowed hover:border-zinc-400 disabled:bg-zinc-100 disabled:text-zinc-400 disabled:opacity-50 md:text-sm",
-            error && "border-red-600 focus-visible:ring-maroon-600",
-            "dark:border-zinc-600 dark:bg-zinc-700 dark:text-white dark:placeholder:text-zinc-400 dark:focus-visible:ring-softPink-400 dark:disabled:bg-zinc-800 dark:disabled:text-zinc-600 dark:disabled:opacity-50"
-          )}
-        />
+    return (
+      <div className="space-y-1">
+        {/* label */}
+        {label && (
+          <label htmlFor={id} className="font-medium text-zinc-400 text-sm">
+            {label}
+          </label>
+        )}
 
-        {/* eye icon */}
-        <button
-          type="button"
-          onClick={() => setShow(!show)}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600"
-        >
-          {show ? <Eye size={20} /> : <EyeOff size={20} />}
-        </button>
+        {/* input */}
+        <div className="relative">
+          <Input
+            ref={ref}
+            id={id}
+            name={name}
+            placeholder="********"
+            type={show ? "text" : "password"}
+            className={cn(
+              "flex bg-transparent disabled:bg-zinc-100 file:bg-transparent disabled:opacity-50 px-3 py-1 border border-zinc-300 hover:border-zinc-400 focus:border-maroon-600 file:border-0 rounded-[.625rem] focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 w-full h-12 file:font-medium text-zinc-800 disabled:text-zinc-400 placeholder:text-zinc-400 file:text-foreground text-sm md:text-sm file:text-sm transition-colors disabled:cursor-not-allowed",
+              error && "border-red-600 focus-visible:ring-maroon-600",
+              "dark:border-zinc-600 dark:bg-zinc-700 dark:text-white dark:placeholder:text-zinc-400 dark:focus-visible:ring-softPink-400 dark:disabled:bg-zinc-800 dark:disabled:text-zinc-600 dark:disabled:opacity-50",
+              className
+            )}
+            {...rest}
+          />
+
+          {/* eye icon */}
+          <button
+            type="button"
+            onClick={() => setShow(!show)}
+            className="top-1/2 ltr:right-3 rtl:left-3 absolute text-gray-600 -translate-y-1/2"
+            aria-label={show ? "Hide password" : "Show password"}
+          >
+            {show ? <Eye size={20} /> : <EyeOff size={20} />}
+          </button>
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
+);
+
+PasswordInput.displayName = "PasswordInput";
+
+export default PasswordInput;

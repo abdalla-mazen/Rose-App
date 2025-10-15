@@ -62,5 +62,10 @@
     "loadingMore": "جاري تحميل المزيد...",
     "scrollForMore": "مرر لعرض المزيد...",
     "noMoreNotifications": "لا توجد إشعارات أخرى"
-  }
+  },
+  "email-label": "الإيميل",
+  "password-label": "كلمة المرور",
+  "forgot-password": "نسيت كلمة المرور؟",
+  "login-button": "تسجيل الدخول",
+  "no-account": "لا تمتلك حساباً بعد؟ <Link>أنشئ حساب الآن</Link>"
 }

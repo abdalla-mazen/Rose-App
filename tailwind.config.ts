@@ -84,7 +84,6 @@ const config: Config = {
           "950": "#590414",
         },
       },
-
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

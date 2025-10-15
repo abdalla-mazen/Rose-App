@@ -62,5 +62,10 @@
     "loadingMore": "Loading more...",
     "scrollForMore": "Scroll for more...",
     "noMoreNotifications": "No more notifications"
-  }
+  },
+  "email-label": "email",
+  "password-label": "Password",
+  "forgot-password": "Forgot your password?",
+  "login-button": "Login",
+  "no-account": "Don't have an account yet? <Link> Create one now </Link>"
 }
