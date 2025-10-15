@@ -1,28 +1,24 @@
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "./input-otp";
+"use client"
 
-export default function OtpInput() {
+import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
 
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp"
+
+export function InputOTPPattern() {
   return (
-    // 6 digits input
-    <InputOTP maxLength={6}>
+    <InputOTP maxLength={6} pattern={REGEXP_ONLY_DIGITS_AND_CHARS}>
       <InputOTPGroup>
         <InputOTPSlot index={0} />
-      </InputOTPGroup>
-      <InputOTPGroup>
         <InputOTPSlot index={1} />
-      </InputOTPGroup>
-      <InputOTPGroup>
         <InputOTPSlot index={2} />
-      </InputOTPGroup>
-      <InputOTPGroup>
         <InputOTPSlot index={3} />
-      </InputOTPGroup>
-      <InputOTPGroup>
         <InputOTPSlot index={4} />
-      </InputOTPGroup>
-      <InputOTPGroup>
         <InputOTPSlot index={5} />
       </InputOTPGroup>
     </InputOTP>
-  );
+  )
 }
