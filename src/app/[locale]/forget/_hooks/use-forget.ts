@@ -20,7 +20,7 @@ export default function useForget() {
       // Handle Success Response to redirect
       if (response?.message === "success") {
         // need update 
-        router.push("/");
+        router.push("/otp");
         console.log(response);
       }
       return response;
