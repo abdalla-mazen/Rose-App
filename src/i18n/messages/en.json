@@ -9,6 +9,7 @@
   "occasions": "Occasions",
   "contact": "Contact",
   "aboutLink": "About",
+  "about": "About",
   "discoverOur": "Discover our website",
   "getCoupon": " Get <span >20%</span> Off Discount Coupon",
   "subscribe": "By subscribing to our newsletter",
@@ -62,5 +63,21 @@
     "loadingMore": "Loading more...",
     "scrollForMore": "Scroll for more...",
     "noMoreNotifications": "No more notifications"
-  }
+  },
+  "foget-title": "Forgot password?",
+  "forget-subtitle": " worry not, we’ll send you instructions to help you reset it.",
+  "forget-text-register": "don’t have an account ?",
+  "forget-text-register-link": "  Create one now!",
+  "operationFailed": "Operation failed — please try again.",
+  "continue": "Continue",
+  "emailLabel": "Email",
+  "create-new-password": "create a new password",
+  "new-password-subtitle": "enter your new password below to reset your account.",
+  "needHelp": "Need help?",
+  "contactUS": "Contact us",
+  "reset-password": "reset password",
+  "password-label": "Password",
+  "confirm-password-label": "Confirm Password",
+  "confirm-toast": "Password reset successfully!",
+  "error-toast": "Something went wrong, please try again!"
 }

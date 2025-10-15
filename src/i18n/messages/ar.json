@@ -62,5 +62,21 @@
     "loadingMore": "جاري تحميل المزيد...",
     "scrollForMore": "مرر لعرض المزيد...",
     "noMoreNotifications": "لا توجد إشعارات أخرى"
-  }
+  },
+  "foget-title": "هل نسيت كلمة المرور؟",
+  "forget-subtitle": "لا تقلق، سنرسل إليك تعليمات لمساعدتك في إعادة تعيينها.",
+  "forget-text-register": "ليس لديك حساب؟",
+  "forget-text-register-link": "أنشئ حسابًا الآن!",
+  "operationFailed": "حدث خطأ — الرجاء المحاولة مرة أخرى.",
+  "continue": "متابعة",
+  "emailLabel": "البريد الألكتروني",
+  "create-new-password": "أنشئ كلمة مرور جديدة",
+  "new-password-subtitle": "أدخل كلمة المرور الجديدة أدناه لإعادة تعيين حسابك.",
+  "needHelp": "هل تحتاج مساعدة؟",
+  "contactUS": "اتصل بنا",
+  "reset-password": "اعادة تعيين كلمة المرور",
+  "password-label": "كلمة المرور",
+  "confirm-password-label": "تاكيد كلمة المرور",
+  "confirm-toast": "تم تغيير كلمة المرور بنجاح!",
+  "error-toast": "حدث خطأ ما الرجاء المحاولة مرة اخرى!"
 }

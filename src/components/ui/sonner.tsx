@@ -25,9 +25,9 @@ const Toaster = ({ ...props }: ToasterProps) => {
             "group-[.toast]:absolute group-[.toast]:bottom-2 group-[.toast]:right-2  group-[.toast]:bg-muted group-[.toast]:text-muted-foreground",
           info: "group-[.toaster]:bg-zinc-100 group-[.toaster]:text-zinc-800 group-[.toaster]:border-zinc-400 dark:group-[.toaster]:bg-zinc-300 dark:group-[.toaster]:text-zinc-800 dark:group-[.toaster]:border-none",
           success:
-            "group-[.toaster]:bg-green-50 group-[.toaster]:text-green-900 group-[.toaster]:border-green-200 dark:group-[.toaster]:bg-emerald-300 dark:group-[.toaster]:text-zinc-300 dark:group-[.toaster]:border-none",
+            "group-[.toaster]:bg-green-50 group-[.toaster]:text-green-900 group-[.toaster]:border-green-200 dark:group-[.toaster]:bg-emerald-300 dark:group-[.toaster]:text-zinc-800 dark:group-[.toaster]:border-none",
           error:
-            "group-[.toaster]:bg-red-50 group-[.toaster]:text-red-900 group-[.toaster]:border-red-200 dark:group-[.toaster]:bg-red-300 dark:group-[.toaster]:text-zinc-300 dark:group-[.toaster]:border-none",
+            "group-[.toaster]:bg-red-50 group-[.toaster]:text-red-900 group-[.toaster]:border-red-200 dark:group-[.toaster]:bg-red-300 dark:group-[.toaster]:text-zinc-800 dark:group-[.toaster]:border-none",
         },
       }}
       {...props}
