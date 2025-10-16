@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  resetPasswordSchema,
   ResetPasswordValues,
+  useResetPasswordSchema,
 } from "@/lib/schemes/auth.schemes";
 import useResetPassword from "../_hooks/use-resetPassword";
 import { Form } from "@/components/ui/form";
@@ -23,13 +23,14 @@ export default function ResetPassword() {
   const { isPending, error, resetPassword } = useResetPassword();
 
   // Form
+  const schema = useResetPasswordSchema();
   const form = useForm<ResetPasswordValues>({
     defaultValues: {
       email: "",
       password: "",
       newPassword: "",
     },
-    resolver: zodResolver(resetPasswordSchema),
+    resolver: zodResolver(schema),
   });
   const { isValid, isSubmitted } = form.formState;
 
@@ -60,7 +61,7 @@ export default function ResetPassword() {
           />
 
           {/* Error Validation */}
-          {(form.formState.errors.password||
+          {(form.formState.errors.password ||
             form.formState.errors.newPassword) && (
             <>
               <div className="relative ">

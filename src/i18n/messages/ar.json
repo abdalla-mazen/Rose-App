@@ -78,5 +78,10 @@
   "password-label": "كلمة المرور",
   "confirm-password-label": "تاكيد كلمة المرور",
   "confirm-toast": "تم تغيير كلمة المرور بنجاح!",
-  "error-toast": "حدث خطأ ما الرجاء المحاولة مرة اخرى!"
+  "error-toast": "حدث خطأ ما الرجاء المحاولة مرة اخرى!",
+  "invalid-email-error": "عنوان البريد الالكتروني غير صالح",
+  "email-required-error": "البريد الالكتروني مطلوب",
+  "invalid-password-error": "كلمة المرور غير صالحة",
+  "password-required-error": "كلمة المرور مطلوبة",
+  "invalid-confirm-password-error": "كلمات المرور غير متطابقة"
 }

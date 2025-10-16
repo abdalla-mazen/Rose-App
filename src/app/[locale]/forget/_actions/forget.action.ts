@@ -1,5 +1,7 @@
 "use server";
 
+import { ForgetPasswordResponse } from "@/lib/types/forget-password";
+
 export async function forgetAction(data: Record<string, FormDataEntryValue>) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API}/auth/forgotPassword`,
@@ -11,7 +13,7 @@ export async function forgetAction(data: Record<string, FormDataEntryValue>) {
       },
     }
   );
-  const payload = await response.json();
-  console.log(process.env.NEXT_PUBLIC_API);
+  const payload:ForgetPasswordResponse = await response.json();
+
   return payload;
 }

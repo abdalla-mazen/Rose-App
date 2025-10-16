@@ -9,8 +9,10 @@ import { useFormContext } from "react-hook-form";
 import { Input } from "../ui/input";
 import { useTranslations } from "next-intl";
 export default function EmailInput() {
-const t = useTranslations()
+  // Translation
+  const t = useTranslations();
 
+  // Form
   const form = useFormContext();
 
   return (
@@ -20,10 +22,12 @@ const t = useTranslations()
         name="email"
         render={({ field }) => (
           <FormItem className="mb-9">
+            {/* Label */}
             <FormLabel className="text-base text-zinc-800  dark:text-zinc-50 ">
-            {t("emailLabel")}
+              {t("emailLabel")}
             </FormLabel>
             <FormControl>
+              {/* Input Field */}
               <Input
                 placeholder="user@example.com"
                 {...field}

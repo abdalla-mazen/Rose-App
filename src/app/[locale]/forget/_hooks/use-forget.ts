@@ -13,15 +13,13 @@ export default function useForget() {
       const response = await forgetAction(values);
 
       // Handle Error
-      if (response?.error) {
+      if ("error" in response) {
         throw new Error(response.error || "Something went wrong");
       }
 
       // Handle Success Response to redirect
       if (response?.message === "success") {
-        // need update 
         router.push("/otp");
-        console.log(response);
       }
       return response;
     },

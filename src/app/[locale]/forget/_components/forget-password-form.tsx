@@ -1,8 +1,11 @@
 "use client";
+
 import React from "react";
 import useForget from "../_hooks/use-forget";
-
-import { forgetSchema, ForgetValues } from "@/lib/schemes/auth.schemes";
+import {
+  ForgetValues,
+  useForgetPasswordSchema,
+} from "@/lib/schemes/auth.schemes";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleX, LoaderCircle } from "lucide-react";
@@ -19,11 +22,12 @@ export default function ForgetPassword() {
   const { isPending, error, forget } = useForget();
 
   // Form
+  const schema = useForgetPasswordSchema();
   const form = useForm<ForgetValues>({
     defaultValues: {
       email: "",
     },
-    resolver: zodResolver(forgetSchema),
+    resolver: zodResolver(schema),
   });
   const { isValid, isSubmitted } = form.formState;
 
@@ -35,7 +39,6 @@ export default function ForgetPassword() {
     forget(values);
     localStorage.setItem("email", values.email);
   };
-
 
   return (
     <div className="  pt-4  pb-9 border-y border-y-zinc-200 dark:border-y-zinc-600">
@@ -61,14 +64,14 @@ export default function ForgetPassword() {
 
           {/* Error from server */}
           {error && (
-            <Alert className="text-center mb-4 dark:text-softPink-300">
+            <Alert className="text-center text-maroon-600 mb-4 border border-maroon-600 dark:border-softPink-300 dark:bg-zinc-800 dark:text-softPink-300">
               <AlertDescription>{error.message}</AlertDescription>
             </Alert>
           )}
 
           {/* submit button */}
           <Button
-            disabled={isPending || (!isValid && isSubmitted)|| !!timer}
+            disabled={isPending || (!isValid && isSubmitted) || !!timer}
             className="w-full  "
             variant={"primary"}
           >

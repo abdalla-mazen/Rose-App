@@ -79,5 +79,10 @@
   "password-label": "Password",
   "confirm-password-label": "Confirm Password",
   "confirm-toast": "Password reset successfully!",
-  "error-toast": "Something went wrong, please try again!"
+  "error-toast": "Something went wrong, please try again!",
+  "invalid-email-error": "Invalid email address.",
+  "email-required-error": "Email is required.",
+  "invalid-password-error": "Invalid password.",
+  "password-required-error": "Password is required.",
+  "invalid-confirm-password-error": "Passwords do not match."
 }

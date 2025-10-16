@@ -1,25 +1,42 @@
+import { useTranslations } from "next-intl";
 import z from "zod";
 
-// Forgot Password Schema
-export const forgetSchema = z.object({
-  email: z.email("Invalid Email").nonempty("Your Email is required"),
-});
-export type ForgetValues = z.infer<typeof forgetSchema>;
+// Forget Schema
+export const useForgetPasswordSchema = () => {
+  // Translation
+  const t = useTranslations();
 
+  // Schema
+  return z.object({
+    email: z
+    .email(t("invalid-email-error"))
+    .nonempty(t("email-required-error")),
+  });
+};
+// type  Forget Schema
+export type ForgetValues = z.infer<ReturnType<typeof useForgetPasswordSchema>>;
 
-export const resetPasswordSchema = z
-  .object({
-    email: z.email(),
+// Reset Password Schema
+export const useResetPasswordSchema = ()=>{
+  // Translation
+  const t = useTranslations();
+
+  // Schema
+  return z.object({
+    email: z
+    .email(t("invalid-email-error"))
+    .nonempty(t("email-required-error")),
     password: z
-      .string("Invalid Password")
-      .nonempty("Your Password is required"),
+      .string(t("invalid-password-error"))
+      .nonempty(t("password-required-error")),
     newPassword: z
-      .string("Invalid Password")
-      .nonempty("Your Password is required"),
+      .string(t("invalid-password-error"))
+      .nonempty(t("password-required-error")),
   })
   .refine((data) => data.password === data.newPassword, {
-    error: "Passwords do not match",
+    error: t("invalid-confirm-password-error"),
     path: ["newPassword"],
   });
-
-export type ResetPasswordValues = z.infer<typeof resetPasswordSchema>;
+}
+// type Reset Password
+export type ResetPasswordValues = z.infer<ReturnType<typeof useResetPasswordSchema>>;
