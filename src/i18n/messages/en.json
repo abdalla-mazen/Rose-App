@@ -76,5 +76,27 @@
     "password": {
       "required": "Please enter your password"
     }
-  }
+  },
+  "firstname": "first name",
+  "lastname": "last name",
+  "email": "email",
+  "phone": "phone",
+  "gender": "gender",
+  "male": "male",
+  "female": "female",
+  "password": "password",
+  "confirm-password": "confirm password",
+  "create-account": "create account",
+  "register-mess": "Already have an account?",
+  "register-link": "login",
+  "firstname-req": "Your first name is required",
+  "lastname-req": "Your last name is required",
+  "email-req": "Your email is required",
+  "phone-req": "Your phone number is required",
+  "phone-mess": "Phone must be at least 10 digits",
+  "password-req": "Your password is required",
+  "confirm-password-req": "Your password is required",
+  "confirm-password-mess": "Your passwords do not match",
+  "password-mess": "Password must be at least 8 characters , at least one special character , one uppercase and lowercase letter",
+  "register-toast": "Account created successfuly"
 }

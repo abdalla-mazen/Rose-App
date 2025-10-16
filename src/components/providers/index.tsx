@@ -9,7 +9,6 @@ import {
   useTimeZone,
 } from "next-intl";
 import ReactQueryProvider from "./_components/react-query.provider";
-import { NextAuthProvider } from "./_components/next-auth.provider";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   // Translation
@@ -35,9 +34,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         <ReactQueryProvider>
           {/* react query dev tools */}
           <ReactQueryDevtools />
-
-          {/* Next Auth Provider */}
-          <NextAuthProvider>{children}</NextAuthProvider>
+          {children}
         </ReactQueryProvider>
       </NextIntlClientProvider>
     </ThemeProvider>

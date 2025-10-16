@@ -34,7 +34,7 @@ const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
       return (
         <RPNInput.default
           ref={ref}
-          className={cn("flex group", className)}
+          className={cn("group flex", className)}
           flagComponent={FlagComponent}
           countrySelectComponent={CountrySelect}
           inputComponent={InputComponent}
@@ -57,7 +57,7 @@ const InputComponent = React.forwardRef<
     ref={ref}
     placeholder="Phone number"
     className={cn(
-      "border border-zinc-300 dark:border-zinc-600  rounded-[0.625rem] rounded-s-none border-s-0 placeholder:text-zinc-400 transition-colors dark:disabled:bg-zinc-800 dark:disabled:text-zinc-600 dark:disabled:opacity-50",
+      "dark:disabled:bg-zinc-800 dark:disabled:opacity-50 border border-s-0 border-zinc-300 dark:border-zinc-600 rounded-[0.625rem] rounded-s-none dark:disabled:text-zinc-600 placeholder:text-zinc-400 transition-colors",
       "group-hover:border-zinc-400 dark:group-hover:border-zinc-500 ",
       " group-focus-within:!border-maroon-600 group-focus-within:ring-0 group-focus-within:ring-maroon-600 dark:group-focus-within:!border-softPink-400 dark:group-focus-within:ring-0 dark:group-focus-within:ring-softPink-400 ",
       className
@@ -100,7 +100,7 @@ const CountrySelect = ({
           type="button"
           disabled={disabled}
           className={cn(
-            "inline-flex items-center gap-2 rounded-e-none rounded-s-lg px-3 py-1 border border-zinc-300 dark:border-zinc-600 transition-colors border-r-0 disabled:bg-zinc-100 disabled:text-zinc-400 disabled:opacity-50  dark:disabled:bg-zinc-800 dark:disabled:text-zinc-600 dark:disabled:opacity-50",
+            "inline-flex items-center gap-2 disabled:bg-zinc-100 dark:disabled:bg-zinc-800 disabled:opacity-50 dark:disabled:opacity-50 px-3 py-1 border border-zinc-300 dark:border-zinc-600 border-r-0 rounded-e-none rounded-s-lg disabled:text-zinc-400 dark:disabled:text-zinc-600 transition-colors",
             "group-hover:border-zinc-400 ",
             "group-focus-within:!border-maroon-600 group-focus-within:ring-0 group-focus-within:ring-maroon-600"
           )}
@@ -109,21 +109,21 @@ const CountrySelect = ({
             country={selectedCountry!}
             countryName={selectedCountry!}
           />
-          <span className="text-sm font-medium min-w-[36px]">
+          <span className="min-w-[36px] font-medium text-sm">
             {selectedCountry
               ? `+${RPNInput.getCountryCallingCode(selectedCountry)}`
               : ""}
           </span>
           <ChevronsUpDown
             className={cn(
-              "size-4 opacity-50",
+              "opacity-50 size-4",
               disabled ? "hidden" : "opacity-100"
             )}
           />
         </button>
       </PopoverTrigger>
 
-      <PopoverContent className="w-[300px] p-0 bg-white">
+      <PopoverContent className="bg-white p-0 w-[300px]">
         <Command>
           <CommandInput
             value={searchValue}
@@ -189,7 +189,7 @@ const CountrySelectOption = ({
     <CommandItem className="gap-2" onSelect={handleSelect}>
       <FlagComponent country={country} countryName={countryName} />
       <span className="flex-1 text-sm">{countryName}</span>
-      <span className="text-sm text-foreground/50">
+      <span className="text-foreground/50 text-sm">
         {`+${RPNInput.getCountryCallingCode(country)}`}
       </span>
       <CheckIcon
