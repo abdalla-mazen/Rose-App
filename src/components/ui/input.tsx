@@ -14,12 +14,11 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
  */
 const TextInput = React.forwardRef<HTMLInputElement, InputProps>(
   ({ type = "text", error, className, ...props }, ref) => {
-
     return (
       <input
         type={type}
         className={cn(
-          "flex h-12 w-full rounded-[.625rem] border border-zinc-300 bg-transparent px-3 py-1 text-zinc-800 text-sm focus-visible:ring-0 focus-visible:ring-offset-0 transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-zinc-400 focus-visible:outline-none   focus:border-maroon-600 disabled:cursor-not-allowed hover:border-zinc-400 disabled:bg-zinc-100 disabled:text-zinc-400 disabled:opacity-50 md:text-sm",
+          "flex bg-transparent disabled:bg-zinc-100 file:bg-transparent disabled:opacity-50 px-3 py-1 border border-zinc-300 hover:border-zinc-400 focus:border-maroon-600 file:border-0 rounded-[.625rem] focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 w-full h-12 file:font-medium text-zinc-800 disabled:text-zinc-400 placeholder:text-zinc-400 file:text-foreground text-sm md:text-sm file:text-sm transition-colors disabled:cursor-not-allowed",
           error && "border-red-600 focus-visible:ring-maroon-600",
           "dark:border-zinc-600 dark:bg-zinc-700 dark:text-white dark:placeholder:text-zinc-400 dark:focus-visible:ring-softPink-400 dark:disabled:bg-zinc-800 dark:disabled:text-zinc-600 dark:disabled:opacity-50",
           className

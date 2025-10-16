@@ -15,7 +15,7 @@ export default function Companies() {
   const t = useTranslations();
 
   return (
-    <section className="flex flex-col items-center gap-10 bg-maroon-50 dark:bg-zinc-700 mx-auto my-32 px-6 py-10 rounded-2xl w-11/12 max-w-7xl h-52">
+    <section className="flex flex-col items-center gap-10 bg-maroon-50 dark:bg-zinc-700 mx-auto my-32 px-6 py-10 rounded-2xl max-w-7xl h-52">
       <p className="font-bold text-maroon-700 dark:text-softPink-200 text-4xl capitalize">
         {t.rich("companies", {
           span: (chunk) => (
