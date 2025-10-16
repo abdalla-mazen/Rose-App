@@ -26,6 +26,7 @@ import useRegister from "../_hooks/use-register";
 import ErrorFeedback from "@/components/shared/error-feedback";
 import { useTranslations } from "next-intl";
 import { LoaderCircle } from "lucide-react";
+import PasswordInput from "@/components/ui/password-input";
 
 export default function RegisterForm() {
   // Translations
@@ -183,7 +184,7 @@ export default function RegisterForm() {
 
               {/* Field */}
               <FormControl>
-                <Input {...field} type="password" placeholder="********" />
+                <PasswordInput {...field} placeholder="********" />
               </FormControl>
 
               {/* Feedback */}
@@ -203,7 +204,7 @@ export default function RegisterForm() {
 
               {/* Field */}
               <FormControl>
-                <Input {...field} type="password" placeholder="********" />
+                <PasswordInput {...field} placeholder="********" />
               </FormControl>
 
               {/* Feedback */}
