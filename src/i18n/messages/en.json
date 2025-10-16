@@ -76,7 +76,6 @@
     "password": {
       "required": "Please enter your password"
     }
-  }
   },
   "firstname": "first name",
   "lastname": "last name",
