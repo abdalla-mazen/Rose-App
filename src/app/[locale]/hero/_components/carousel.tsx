@@ -41,15 +41,16 @@ const slides: Slide[] = [
 export default function ValentineCarousel(): JSX.Element {
   const [current, setCurrent] = useState(0);
 
-  const handleNext = () =>
-    setCurrent((prev) => (prev + 1) % slides.length);
+  const handleNext = () => setCurrent((prev) => (prev + 1) % slides.length);
+
   const handlePrev = () =>
     setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
-    <section className="flex items-center justify-between space-x-8">
-      <CardS/>
-      <Carousel className="w-full rounded-2xl overflow-hidden relative">
+    <section className="flex justify-between items-center space-x-8">
+      <CardS />
+
+      <Carousel className="relative rounded-2xl w-full overflow-hidden">
         <CarouselContent
           className="transition-transform duration-500"
           style={{ transform: `translateX(-${current * 100}%)` }}
@@ -63,13 +64,16 @@ export default function ValentineCarousel(): JSX.Element {
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 rounded-xl bg-black/40 flex flex-col justify-end pl-20 pb-16 text-white">
-                  <h2 className="text-4xl font-bold mb-3 max-w-md">
+
+                <div className="absolute inset-0 flex flex-col justify-end bg-black/40 pb-16 pl-20 rounded-xl text-white">
+                  <h2 className="mb-3 max-w-md font-bold text-4xl">
                     {slide.title}
                   </h2>
-                  <p className="text-lg mb-5 max-w-md opacity-90">
+
+                  <p className="opacity-90 mb-5 max-w-md text-lg">
                     {slide.description}
                   </p>
+
                   <Button className={slide.buttonStyle}>
                     {slide.buttonText}
                   </Button>
@@ -80,7 +84,7 @@ export default function ValentineCarousel(): JSX.Element {
         </CarouselContent>
 
         {/* Dots (top-right corner) */}
-        <div className="absolute top-5 right-6 flex gap-2 z-10">
+        <div className="top-5 right-6 z-10 absolute flex gap-2">
           {slides.map((_, index) => (
             <span
               key={index}
@@ -93,16 +97,17 @@ export default function ValentineCarousel(): JSX.Element {
         </div>
 
         {/* Custom navigation buttons (bottom-right corner) */}
-        <div className="absolute bottom-5 right-6 flex gap-3 z-10">
+        <div className="right-6 bottom-5 z-10 absolute flex gap-3">
           <button
             onClick={handlePrev}
-            className="bg-white/80 hover:bg-white text-[#4a0d0d] rounded-full p-2 shadow-md transition"
+            className="bg-white/80 hover:bg-white shadow-md p-2 rounded-full text-[#4a0d0d] transition"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
+
           <button
             onClick={handleNext}
-            className="bg-white/80 hover:bg-white text-[#4a0d0d] rounded-full p-2 shadow-md transition"
+            className="bg-white/80 hover:bg-white shadow-md p-2 rounded-full text-[#4a0d0d] transition"
           >
             <ChevronRight className="w-5 h-5" />
           </button>

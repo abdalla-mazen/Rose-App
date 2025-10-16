@@ -62,5 +62,19 @@
     "loadingMore": "Loading more...",
     "scrollForMore": "Scroll for more...",
     "noMoreNotifications": "No more notifications"
+  },
+  "email-label": "email",
+  "password-label": "Password",
+  "forgot-password": "Forgot your password?",
+  "login-button": "Login",
+  "no-account": "Don't have an account yet? <Link> Create one now </Link>",
+  "validation": {
+    "email": {
+      "invalid": "Invalid Email Address",
+      "required": "Please enter your email"
+    },
+    "password": {
+      "required": "Please enter your password"
+    }
   }
 }
