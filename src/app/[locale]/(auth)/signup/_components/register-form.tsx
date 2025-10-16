@@ -109,7 +109,7 @@ export default function RegisterForm() {
           name="email"
           control={form.control}
           render={({ field }) => (
-            <FormItem className="py-2">
+            <FormItem className="">
               {/* Label */}
               <FormLabel>{t("email")}</FormLabel>
 
@@ -149,7 +149,7 @@ export default function RegisterForm() {
           name="gender"
           control={form.control}
           render={({ field }) => (
-            <FormItem className="py-2">
+            <FormItem className="">
               {/* Label */}
               <FormLabel>{t("gender")}</FormLabel>
 
@@ -197,7 +197,7 @@ export default function RegisterForm() {
           name="rePassword"
           control={form.control}
           render={({ field }) => (
-            <FormItem className="py-2">
+            <FormItem className="">
               {/* Label */}
               <FormLabel>{t("confirm-password")}</FormLabel>
 
@@ -219,10 +219,10 @@ export default function RegisterForm() {
             isPending || (form.formState.isSubmitted && !form.formState.isValid)
           }
           type="submit"
-          className="bg-maroon-600 my-6 w-full capitalize"
+          className="bg-maroon-600 my-2 w-full capitalize"
         >
           {isPending ? (
-            <LoaderCircle className="mr-2 animate-spin" size={16} />
+            <LoaderCircle className="me-2 animate-spin" size={16} />
           ) : (
             t("create-account")
           )}
