@@ -84,5 +84,40 @@
   "email-required-error": "Email is required.",
   "invalid-password-error": "Invalid password.",
   "password-required-error": "Password is required.",
-  "invalid-confirm-password-error": "Passwords do not match."
+  "invalid-confirm-password-error": "Passwords do not match.",
+  "email-label": "email",
+  "forgot-password": "Forgot your password?",
+  "login-button": "Login",
+  "no-account": "Don't have an account yet? <Link> Create one now </Link>",
+  "validation": {
+    "email": {
+      "invalid": "Invalid Email Address",
+      "required": "Please enter your email"
+    },
+    "password": {
+      "required": "Please enter your password"
+    }
+  },
+  "firstname": "first name",
+  "lastname": "last name",
+  "email": "email",
+  "phone": "phone",
+  "gender": "gender",
+  "male": "male",
+  "female": "female",
+  "password": "password",
+  "confirm-password": "confirm password",
+  "create-account": "create account",
+  "register-mess": "Already have an account?",
+  "register-link": "login",
+  "firstname-req": "Your first name is required",
+  "lastname-req": "Your last name is required",
+  "email-req": "Your email is required",
+  "phone-req": "Your phone number is required",
+  "phone-mess": "Phone must be at least 10 digits",
+  "password-req": "Your password is required",
+  "confirm-password-req": "Your password is required",
+  "confirm-password-mess": "Your passwords do not match",
+  "password-mess": "Password must be at least 8 characters , at least one special character , one uppercase and lowercase letter",
+  "register-toast": "Account created successfuly"
 }

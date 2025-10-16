@@ -1,5 +1,4 @@
 import { ThemeProvider } from "next-themes";
-import React from "react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
   Locale,
@@ -25,6 +24,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
+      {/* Next Intl Provider */}
       <NextIntlClientProvider
         messages={messages}
         locale={locale}

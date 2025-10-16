@@ -10,10 +10,11 @@ import {
 import useResetPassword from "../_hooks/use-resetPassword";
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import PasswordInput from "@/components/ui/password-input";
+
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { CircleX, LoaderCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
+import PasswordInputRHF from "@/components/shared/password-input-RHF";
 
 export default function ResetPassword() {
   // Translation
@@ -52,10 +53,10 @@ export default function ResetPassword() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           {/* Password */}
-          <PasswordInput name="password" label={t("password-label")} />
+          <PasswordInputRHF name="password" label={t("password-label")} />
 
           {/* Confirm Password */}
-          <PasswordInput
+          <PasswordInputRHF
             name="newPassword"
             label={t("confirm-password-label")}
           />

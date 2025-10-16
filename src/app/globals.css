@@ -9,6 +9,14 @@
   }
 }
 
+/* custom font */
+@font-face {
+  font-family: "Edwardian Script ITC";
+  src: url("./fonts/edwardianscriptitc.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* ---------- Base theme tokens ---------- */
 @layer base {
   :root {
@@ -91,4 +99,14 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Fix phone input direction when site is RTL */
+[dir="rtl"] .PhoneInput {
+  direction: ltr !important;
+  text-align: left;
+}
+
+[dir="rtl"] .PhoneInput input {
+  text-align: right !important;
 }
