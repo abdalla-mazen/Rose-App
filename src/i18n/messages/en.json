@@ -62,5 +62,32 @@
     "loadingMore": "Loading more...",
     "scrollForMore": "Scroll for more...",
     "noMoreNotifications": "No more notifications"
+  },
+  "OTP": {
+    "title": "Enter the OTP Code",
+    "sentMessage": "We have sent a 6-digit code to",
+    "edit": "Edit",
+    "resendDisabled": "Send a new code ({seconds}s)",
+    "resend": "Send a new code",
+    "sending": "Sending...",
+    "verify": "Verify OTP",
+    "verifying": "Verifying...",
+    "help": "Need help?",
+    "contact": "Contact us",
+    "toast": {
+      "success": "OTP verified successfully!",
+      "fail": "Failed to verify OTP",
+      "resent": "New code sent to your email"
+    },
+    "errors": {
+      "invalid": "Invalid OTP",
+      "generic": "Something went wrong",
+      "resendFail": "Failed to resend code"
+    },
+    "validation": {
+      "min": "OTP must be 6 digits",
+      "max": "OTP must be 6 digits",
+      "numeric": "OTP must contain only numbers"
+    }
   }
 }
