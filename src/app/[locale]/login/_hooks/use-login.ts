@@ -1,4 +1,4 @@
-import { LoginFormInput } from "@/lib/shemas/auth.schema";
+import { LoginFormInput } from "@/lib/schemes/auth.schema";
 import { useMutation } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
 

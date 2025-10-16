@@ -63,9 +63,18 @@
     "scrollForMore": "مرر لعرض المزيد...",
     "noMoreNotifications": "لا توجد إشعارات أخرى"
   },
-  "email-label": "الإيميل",
+  "email-label": "البريد الإلكتروني",
   "password-label": "كلمة المرور",
   "forgot-password": "نسيت كلمة المرور؟",
   "login-button": "تسجيل الدخول",
-  "no-account": "لا تمتلك حساباً بعد؟ <Link>أنشئ حساب الآن</Link>"
+  "no-account": "لا تمتلك حساباً بعد؟ <Link>أنشئ حساب الآن</Link>",
+  "validation": {
+    "email": {
+      "invalid": "عنوان البريد الإلكتروني غير صالح",
+      "required": "من فضلك أدخل بريدك الإلكتروني"
+    },
+    "password": {
+      "required": "من فضلك أدخل كلمة المرور الخاصة بك"
+    }
+  }
 }

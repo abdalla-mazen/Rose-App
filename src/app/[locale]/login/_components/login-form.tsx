@@ -10,7 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { LoginFormInput, loginFormSchema } from "@/lib/shemas/auth.schema";
+import { LoginFormInput, useLoginFormSchema } from "@/lib/schemes/auth.schema";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import PasswordInput from "@/components/ui/password-input";
@@ -24,6 +24,9 @@ export default function LoginForm() {
   // Translation
   const t = useTranslations();
 
+  // Schema
+  const schema = useLoginFormSchema();
+
   // Form
   const form = useForm<LoginFormInput>({
     mode: "onSubmit",
@@ -32,15 +35,18 @@ export default function LoginForm() {
       email: "",
       password: "",
     },
-    resolver: zodResolver(loginFormSchema),
+    resolver: zodResolver(schema),
   });
 
+  // Hooks
   const { isPending, login, error } = useLogin();
 
+  // Functions
   const onSubmitHandler: SubmitHandler<LoginFormInput> = (values) => {
     login(values);
   };
 
+  // Effect
   useEffect(() => {
     const timerId = setTimeout(() => {
       form.setFocus("email");

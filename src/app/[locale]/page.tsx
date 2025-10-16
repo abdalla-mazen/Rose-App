@@ -6,6 +6,7 @@ import Gallery from "./_components/gallery";
 import BestSelling from "./_components/best-selling/best-seliing";
 import MostPopular from "./_components/most-popular/most-popular";
 import TestimonialPage from "./_components/testimonial";
+import HeroPage from "./hero/page";
 
 export default function Page({ params }: { params: { locale: string } }) {
   // Locale
@@ -15,6 +16,7 @@ export default function Page({ params }: { params: { locale: string } }) {
     <>
       <Header />
       <div className="flex flex-col justify-center items-center mx-auto max-w-7xl">
+        <HeroPage />
         <BestSelling locale={locale} />
         <MostPopular locale={locale} />
         <About />
