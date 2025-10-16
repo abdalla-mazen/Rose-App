@@ -3,7 +3,7 @@ import { routing } from "./i18n/routing";
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
-const authRoutes = ["/login", "/register", "/forgot-password"];
+const authRoutes = ["/login", "/register", "/forgot", "/newpassword" , "/otp"];
 const publicRoutes = ["/", "/product", "/products"];
 
 // middleware.ts
