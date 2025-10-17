@@ -1,68 +1,48 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
-import Image from "next/image";
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
-import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
+import { useMutation } from "@tanstack/react-query";
+import { verifyOtpAction } from "@/lib/actions/otp.action";
 import { createOtpSchema, type OtpSchemaType } from "@/lib/schemas/otpSchema";
 import { useTranslations } from "next-intl";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { verifyOtpAction } from "@/lib/actions/otp.action";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
+import { Button } from "@/components/ui/button";
+import OtpTimer from "./otp-timer";
 
-export default function OTPPage() {
+
+
+  type OtpFormProps = {
+  email: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  timeLeft: number;
+  setTimeLeft: React.Dispatch<React.SetStateAction<number>>;
+};
+export default function OtpForm({ email, setEmail, setTimeLeft }: OtpFormProps) {
   const router = useRouter();
   const { toast } = useToast();
   const t = useTranslations("OTP");
   const otpSchema = createOtpSchema(t);
-  const [email, setEmail] = useState<string | null>(null);
-  const [timeLeft, setTimeLeft] = useState<number>(0);
-  const [isResending, setIsResending] = useState(false);
 
-  const API_URL = process.env.NEXT_PUBLIC_API;
 
-  // Get email & timer from localStorage
-  useEffect(() => {
-    const storedEmail = localStorage.getItem("reset_email");
-    if (!storedEmail) {
-      router.push("/en/forgot-password");
-      return;
-    }
-    setEmail(storedEmail);
+useEffect(() => {
+  const storedEmail = localStorage.getItem("reset_email");
+  if (!storedEmail) {
+    router.push("/en/forgot-password");
+    return;
+  }
+  setEmail(storedEmail);
 
-    const storedTimer = localStorage.getItem("timer");
-    const remainingTime = storedTimer ? parseInt(storedTimer, 10) : 60;
-    setTimeLeft(remainingTime);
-  }, [router]);
+  const storedTimer = localStorage.getItem("timer");
+  const remainingTime = storedTimer ? parseInt(storedTimer, 10) : 60;
+  setTimeLeft(remainingTime);
+}, []);
 
-  // For local testing only (remove later)
-  // useEffect(() => {
-  //   setEmail("test@example.com");
-  //   setTimeLeft(60);
-  // }, []);
-
-  // Countdown timer
-  useEffect(() => {
-    if (timeLeft <= 0) {
-      localStorage.removeItem("timer");
-      return;
-    }
-
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        const newTime = prev - 1;
-        localStorage.setItem("timer", newTime.toString());
-        return newTime;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [timeLeft]);
 
   const form = useForm<OtpSchemaType>({
     resolver: zodResolver(otpSchema),
@@ -89,34 +69,6 @@ export default function OTPPage() {
     },
   });
 
-
-  const handleResend = async () => {
-    if (!email) return;
-    setIsResending(true);
-    try {
-      const res = await fetch(`${API_URL}/auth/forgotPasswords`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
-      const result = await res.json();
-      if (!res.ok) throw new Error(result.message || "Failed to resend code");
-
-      toast({ title: "New code sent to your email" });
-      setTimeLeft(60);
-      localStorage.setItem("timer", "60");
-    } catch (err: any) {
-      toast({
-        variant: "destructive",
-        title: "Failed to resend OTP",
-        description: err.message,
-      });
-    } finally {
-      setIsResending(false);
-    }
-  };
-
   const onSubmit = (data: OtpSchemaType) => {
     if (!email) return;
     verifyMutation.mutate({ otp: data.otp, email });
@@ -125,104 +77,61 @@ export default function OTPPage() {
   if (!email) return null;
 
   return (
-    <div className="flex justify-center items-center bg-background px-4 min-h-screen text-foreground">
-      <div className="flex flex-col justify-between items-center gap-10 p-6 w-[406px] min-h-[526px]">
-        <Image src="/images/auth-top.png" alt="OTP Illustration" width={280} height={45} />
+    <div className="w-full">
+      <h1 className="font-semibold text-2xl">Enter the OTP Code</h1>
 
-        <div className="w-full">
-          <h1 className="font-semibold text-2xl">Enter the OTP Code</h1>
-
-          <div className="text-sm mb-9 flex items-center gap-2 flex-wrap">
-            <span>
-              We have sent a 6-digit code to <span>{email}</span>
-            </span>
-            <button
-              onClick={() => router.push("/en/forgot-password")}
-              className="text-blue-700 text-sm underline"
-            >
-              Edit
-            </button>
-            <div className="relative w-full after:content-[''] after:block after:w-full after:h-[1px] after:bg-zinc-200 after:mt-2" />
-          </div>
-
-          {/* Form Section */}
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-4 flex flex-col items-center"
-            >
-              <FormField
-                control={form.control}
-                name="otp"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <InputOTP
-                        maxLength={6}
-                        pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
-                        value={field.value}
-                        onChange={field.onChange}
-                      >
-                        <InputOTPGroup className="gap-2">
-                          {[...Array(6)].map((_, i) => (
-                            <InputOTPSlot key={i} index={i} />
-                          ))}
-                        </InputOTPGroup>
-                      </InputOTP>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <div className="flex justify-end w-full">
-                {timeLeft > 0 ? (
-                  <Button
-                    type="button"
-                    variant="link"
-                    disabled
-                    className="text-md font-medium no-underline"
-                  >
-                    Send a new code ({timeLeft}s)
-                  </Button>
-                ) : (
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    onClick={handleResend}
-                    disabled={isResending}
-                  >
-                    {isResending ? "Sending..." : "Send a new code"}
-                  </Button>
-                )}
-              </div>
-
-              <Button
-                type="submit"
-                className="bg-red-800 text-white hover:bg-red-800 w-full"
-                disabled={verifyMutation.isPending}
-              >
-                {verifyMutation.isPending ? "Verifying..." : "Verify OTP"}
-              </Button>
-
-              <div className="relative w-full after:content-[''] after:block after:w-full after:h-[1px] after:bg-zinc-200 after:mt-4" />
-            </form>
-          </Form>
-        </div>
-
-        <div className="text-sm font-medium text-center">
-          Need help?{" "}
-          <button
-            onClick={() => router.push("/en/contact")}
-            className="text-red-800 no-underline"
-          >
-            Contact us
-          </button>
-        </div>
-
-        <Image src="/images/auth-b.png" alt="OTP Illustration" width={280} height={45} />
+      <div className="text-sm mb-9 flex items-center gap-2 flex-wrap">
+        <span>
+          We have sent a 6-digit code to <span>{email}</span>
+        </span>
+        <button
+          onClick={() => router.push("/en/forgot-password")}
+          className="text-blue-700 text-sm underline"
+        >
+          Edit
+        </button>
+        <div className="relative w-full after:block after:h-[1px] after:bg-zinc-200" />
       </div>
-    </div>
 
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 flex flex-col items-center">
+          <FormField
+            control={form.control}
+            name="otp"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <InputOTP
+                    maxLength={6}
+                    pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
+                    value={field.value}
+                    onChange={field.onChange}
+                  >
+                    <InputOTPGroup className="gap-2">
+                      {[...Array(6)].map((_, i) => (
+                        <InputOTPSlot key={i} index={i} />
+                      ))}
+                    </InputOTPGroup>
+                  </InputOTP>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <OtpTimer email={email} />
+
+          <Button
+            type="submit"
+            className="bg-red-800 text-white hover:bg-red-800 w-full"
+            disabled={verifyMutation.isPending}
+          >
+            {verifyMutation.isPending ? "Verifying..." : "Verify OTP"}
+          </Button>
+                  <div className="relative w-full after:block after:h-[1px] after:bg-zinc-200 after:mt-4" />
+
+        </form>
+      </Form>
+    </div>
   );
 }

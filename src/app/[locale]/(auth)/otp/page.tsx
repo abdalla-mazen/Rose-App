@@ -1,12 +1,5 @@
-import OtpForm from "./_components/otpform";
+import OtpContainer from "./_components/otp-container";
 
-export default function OTPPage() {
-  return (
-    <div className="flex justify-center items-center text-foreground">
-      <div >
-        {/* form section */}
-        <OtpForm />
-      </div>
-    </div>
-  );
+export default function Page() {
+  return <OtpContainer />;
 }
