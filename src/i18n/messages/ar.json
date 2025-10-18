@@ -90,4 +90,61 @@
       "numeric": "يجب أن يحتوي الرمز على أرقام فقط"
     }
   }
+  "foget-title": "هل نسيت كلمة المرور؟",
+  "forget-subtitle": "لا تقلق، سنرسل إليك تعليمات لمساعدتك في إعادة تعيينها.",
+  "forget-text-register": "ليس لديك حساب؟",
+  "forget-text-register-link": "أنشئ حسابًا الآن!",
+  "operationFailed": "حدث خطأ — الرجاء المحاولة مرة أخرى.",
+  "continue": "متابعة",
+  "emailLabel": "البريد الألكتروني",
+  "create-new-password": "أنشئ كلمة مرور جديدة",
+  "new-password-subtitle": "أدخل كلمة المرور الجديدة أدناه لإعادة تعيين حسابك.",
+  "needHelp": "هل تحتاج مساعدة؟",
+  "contactUS": "اتصل بنا",
+  "reset-password": "اعادة تعيين كلمة المرور",
+  "password-label": "كلمة المرور",
+  "confirm-password-label": "تاكيد كلمة المرور",
+  "confirm-toast": "تم تغيير كلمة المرور بنجاح!",
+  "error-toast": "حدث خطأ ما الرجاء المحاولة مرة اخرى!",
+  "invalid-email-error": "عنوان البريد الالكتروني غير صالح",
+  "email-required-error": "البريد الالكتروني مطلوب",
+  "invalid-password-error": "كلمة المرور غير صالحة",
+  "password-required-error": "كلمة المرور مطلوبة",
+  "invalid-confirm-password-error": "كلمات المرور غير متطابقة",
+  "email-label": "البريد الإلكتروني",
+  "forgot-password": "نسيت كلمة المرور؟",
+  "login-button": "تسجيل الدخول",
+  "no-account": "لا تمتلك حساباً بعد؟ <Link>أنشئ حساب الآن</Link>",
+  "validation": {
+    "email": {
+      "invalid": "عنوان البريد الإلكتروني غير صالح",
+      "required": "من فضلك أدخل بريدك الإلكتروني"
+    },
+    "password": {
+      "required": "من فضلك أدخل كلمة المرور الخاصة بك"
+    }
+  },
+
+  "firstname": "الاسم الاول",
+  "lastname": "الاسم الاخير",
+  "email": "البريد الالكتروني",
+  "phone": "رقم الموبايل",
+  "gender": "النوع",
+  "male": "ذكر",
+  "female": "انثي",
+  "password": "كلمة المرور",
+  "confirm-password": "تأكيد كلمة المرور",
+  "create-account": "انشاء حساب",
+  "register-mess": "هل لديك حساب بالفعل ؟",
+  "register-link": "تسجيل دخول",
+  "firstname-req": "الاسم الأول مطلوب",
+  "lastname-req": "الاسم الاخير مطلوب",
+  "email-req": "البريد الالكتروني مطلوب",
+  "phone-req": "رقم الموبايل مطلوب",
+  "phone-mess": "يجب أن يتكون رقم الهاتف من 10 أرقام على الأقل",
+  "password-req": "كلمة المرور مطلوبة",
+  "confirm-password-req": "يرجى تأكيد كلمة المرور الخاصة بك",
+  "confirm-password-mess": "كلمات المرور الخاصة بك لا تتطابق",
+  "password-mess": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل، وحرف خاص واحد على الأقل، وحرف كبير وحرف صغير واحد على الأقل",
+  "register-toast": "تم انشاء الحساب بنجاح"
 }
