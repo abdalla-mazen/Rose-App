@@ -64,6 +64,33 @@
     "scrollForMore": "Scroll for more...",
     "noMoreNotifications": "No more notifications"
   },
+  "OTP": {
+    "title": "Enter the verification code",
+    "sentMessage": "We have sent a 6-digit code to",
+    "edit": "Edit",
+    "resendDisabled": "Send a new code in ({seconds}) seconds",
+    "resend": "Send a new code",
+    "sending": "Sending...",
+    "verify": "Verify code",
+    "verifying": "Verifying...",
+    "help": "Need help?",
+    "contact": "Contact us",
+    "toast": {
+      "success": "Code verified successfully!",
+      "fail": "Failed to verify the code",
+      "resent": "A new code has been sent to your email"
+    },
+    "errors": {
+      "invalid": "Invalid code",
+      "generic": "Something went wrong",
+      "resendFail": "Failed to resend the code"
+    },
+    "validation": {
+      "min": "Code must be 6 digits",
+      "max": "Code must be 6 digits",
+      "numeric": "Code must contain only numbers"
+    }
+  }
   "foget-title": "Forgot password?",
   "forget-subtitle": " worry not, we’ll send you instructions to help you reset it.",
   "forget-text-register": "don’t have an account ?",
