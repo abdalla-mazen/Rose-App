@@ -1,14 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { useResendOtp } from "@/hooks/use-resend-otp";
 
 export default function OtpTimer({ email }: { email: string }) {
   const { toast } = useToast();
+  const { resend, isPending } = useResendOtp();
   const [timeLeft, setTimeLeft] = useState(0);
-  const [isResending, setIsResending] = useState(false);
-  const API_URL = process.env.NEXT_PUBLIC_API;
 
   useEffect(() => {
     const storedTimer = localStorage.getItem("timer");
@@ -31,45 +31,42 @@ export default function OtpTimer({ email }: { email: string }) {
     return () => clearInterval(timer);
   }, [timeLeft]);
 
-  const handleResend = async () => {
-    setIsResending(true);
-    try {
-      const res = await fetch(`${API_URL}/auth/forgotPasswords`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-      const result = await res.json();
-      if (!res.ok) throw new Error(result.message || "Failed to resend code");
-
-      toast({ title: "New code sent to your email" });
-      setTimeLeft(60);
-      localStorage.setItem("timer", "60");
-    } catch (err: any) {
-      toast({
-        variant: "destructive",
-        title: "Failed to resend OTP",
-        description: err.message,
-      });
-    } finally {
-      setIsResending(false);
-    }
+  const handleResend = () => {
+    resend(email, {
+      onSuccess: (res: any) => {
+        toast({ title: res.message });
+        setTimeLeft(60);
+        localStorage.setItem("timer", "60");
+      },
+      onError: (err: any) => {
+        toast({
+          variant: "destructive",
+          title: "Failed to resend OTP",
+          description: err.message || "Something went wrong",
+        });
+      },
+    });
   };
 
   return (
     <div className="flex justify-end w-full">
       {timeLeft > 0 ? (
-        <Button type="button" variant="link" disabled className="text-md font-medium no-underline">
-          Send a new code ({timeLeft}seconds)
+        <Button
+          type="button"
+          variant="link"
+          disabled
+          className="text-md font-medium no-underline"
+        >
+          Send a new code ({timeLeft} seconds)
         </Button>
       ) : (
         <Button
           type="button"
           variant="ghost"
           onClick={handleResend}
-          disabled={isResending}
+          disabled={isPending}
         >
-          {isResending ? "Sending..." : "Send a new code"}
+          {isPending ? "Sending..." : "Send a new code"}
         </Button>
       )}
     </div>

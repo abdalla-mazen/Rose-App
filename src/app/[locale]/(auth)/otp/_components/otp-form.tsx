@@ -15,8 +15,6 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp
 import { Button } from "@/components/ui/button";
 import OtpTimer from "./otp-timer";
 
-
-
   type OtpFormProps = {
   email: string;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
@@ -28,7 +26,6 @@ export default function OtpForm({ email, setEmail, setTimeLeft }: OtpFormProps) 
   const { toast } = useToast();
   const t = useTranslations("OTP");
   const otpSchema = createOtpSchema(t);
-
 
 useEffect(() => {
   const storedEmail = localStorage.getItem("reset_email");
@@ -42,7 +39,6 @@ useEffect(() => {
   const remainingTime = storedTimer ? parseInt(storedTimer, 10) : 60;
   setTimeLeft(remainingTime);
 }, []);
-
 
   const form = useForm<OtpSchemaType>({
     resolver: zodResolver(otpSchema),
