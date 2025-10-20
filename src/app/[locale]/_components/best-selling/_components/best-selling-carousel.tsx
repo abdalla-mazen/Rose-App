@@ -39,13 +39,13 @@ export default function BestSellingCarousel({ products, locale }: Props) {
 
       {locale === "ar" ? (
         <>
-          <CarouselNext className="me-8 bg-[#A6252A] dark:bg-[#CD2E33] text-white" />
-          <CarouselPrevious className="ms-8 bg-[#A6252A] dark:bg-[#CD2E33] text-white" />
+          <CarouselNext className="bg-[#A6252A] dark:bg-[#CD2E33] me-8 text-white" />
+          <CarouselPrevious className="bg-[#A6252A] dark:bg-[#CD2E33] ms-8 text-white" />
         </>
       ) : (
         <>
-          <CarouselPrevious className="ms-8 bg-[#A6252A] dark:bg-[#CD2E33] text-white" />
-          <CarouselNext className="me-8 bg-[#A6252A] dark:bg-[#CD2E33] text-white" />
+          <CarouselPrevious className="bg-[#A6252A] dark:bg-[#CD2E33] ms-8 text-white" />
+          <CarouselNext className="bg-[#A6252A] dark:bg-[#CD2E33] me-8 text-white" />
         </>
       )}
     </Carousel>

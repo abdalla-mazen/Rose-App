@@ -11,15 +11,15 @@ export default async function BestSelling({ locale }: { locale: string }) {
   const products = await BestSellingApi();
 
   return (
-    <div className="flex justify-between items-center w-full mt-10">
+    <div className="flex justify-between items-center mt-10 w-full">
       <div className="max-w-[291px]">
         {/* Title */}
-        <h2 className="uppercase tracking-[0.3rem] mb-2.5 font-bold text-[#FF668B] dark:text-[#D75458]">
+        <h2 className="mb-2.5 font-bold text-[#FF668B] dark:text-[#D75458] uppercase tracking-[0.3rem]">
           {t("bestselling-title")}
         </h2>
 
         {/* Sub-title */}
-        <h2 className="font-bold mb-2 text-3xl text-[#FF668B] dark:text-[#FFC2D0]">
+        <h2 className="mb-2 font-bold text-[#FF668B] dark:text-[#FFC2D0] text-3xl">
           {t("bestselling-span1-sub-title")}{" "}
           <span className="text-[#A6252A] dark:text-[#FFC2D0]">
             {t("bestselling-sub-title")}{" "}
@@ -36,7 +36,7 @@ export default async function BestSelling({ locale }: { locale: string }) {
         </p>
 
         {/* Explore button */}
-        <button className="bg-[#A6252A] dark:bg-[#FFC2D0] text-white dark:text-[#27272A] font-normal px-5 py-2 mt-10 rounded-xl flex">
+        <button className="flex bg-[#A6252A] dark:bg-[#FFC2D0] mt-10 px-5 py-2 rounded-xl font-normal text-white dark:text-[#27272A]">
           {t("bestselling-explore-btn")}{" "}
           <span className="ms-2 w-4 h-4">
             {locale === "ar" ? <ArrowLeft /> : <ArrowRight />}

@@ -1,7 +1,6 @@
 "use server";
 
 import { RegisterValues } from "@/lib/schemas/auth.schema";
-import { AuthResponse } from "@/lib/types/auth";
 
 export async function registerAction(data: RegisterValues) {
   try {
@@ -11,7 +10,7 @@ export async function registerAction(data: RegisterValues) {
       body: JSON.stringify(data),
     });
 
-    const payload: ApiResponse<AuthResponse> = await response.json();
+    const payload: ApiResponse<UserData> = await response.json();
 
     return payload;
   } catch (error) {
