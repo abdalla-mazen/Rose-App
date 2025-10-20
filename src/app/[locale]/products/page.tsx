@@ -7,13 +7,7 @@ export default async function Page() {
 
   return (
     <div className="flex justify-center items-center mx-auto max-w-[1440px]">
-      {/* <h1>Products Page</h1> */}
-
-      <div className="grid grid-cols-3">
-        {products.map((prod) => (
-          <DisplayProduct key={prod._id} {...prod} />
-        ))}
-      </div>
+      <h1>Products Page</h1>
     </div>
   );
 }
