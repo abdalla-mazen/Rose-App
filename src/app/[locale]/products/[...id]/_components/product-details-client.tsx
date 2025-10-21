@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { HeartPlus, Package, ShoppingCart, Star } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import useAddToCart from "../_hooks/use-add-to-cart";
 
@@ -25,11 +25,13 @@ export default function ProductDetails({ product }: Props) {
   // Hooks
   const [mainImage, setMainImage] = useState(product.imgCover);
   const { addToCart, error, isPending } = useAddToCart();
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  // Check if user is logged in
-  const loggedIn =
-    typeof window !== "undefined" &&
-    localStorage.getItem("isLoggedIn") === "true";
+  // Check if user is logged in effect
+  useEffect(() => {
+    const isLogged = localStorage.getItem("isLoggedIn") === "true";
+    setLoggedIn(isLogged);
+  }, []);
 
   // Add to cart as a guest functions
   const getCartAsGuest = () => {
@@ -82,7 +84,7 @@ export default function ProductDetails({ product }: Props) {
           alt={product.title}
           width={605}
           height={401}
-          className="rounded-lg max-h-[401px]"
+          className="border rounded-xl max-h-[401px] object-contain"
         />
 
         {/* Thumbnails */}
@@ -101,8 +103,10 @@ export default function ProductDetails({ product }: Props) {
             />
 
             {/* Overlay */}
-            {mainImage !== product.imgCover && (
-              <div className="absolute inset-0 bg-[#0000004D] opacity-50 hover:border-2 hover:border-maroon-600 rounded-lg transition-border duration-100"></div>
+            {mainImage === product.imgCover ? (
+              <div className="absolute inset-0 opacity-50 border-2 border-maroon-600 rounded-lg transition-border duration-100"></div>
+            ) : (
+              <div className="absolute inset-0 bg-[#0000004D] hover:bg-[#0000001A] opacity-50 rounded-lg transition-bg duration-100"></div>
             )}
           </div>
 
@@ -122,8 +126,10 @@ export default function ProductDetails({ product }: Props) {
               />
 
               {/* Overlay */}
-              {mainImage !== image && (
-                <div className="absolute inset-0 bg-[#0000004D] opacity-50 hover:border-2 hover:border-maroon-600 rounded-lg transition-border duration-100"></div>
+              {mainImage === image ? (
+                <div className="absolute inset-0 opacity-50 border-2 border-maroon-600 rounded-lg transition-border duration-100"></div>
+              ) : (
+                <div className="absolute inset-0 bg-[#0000004D] hover:bg-[#0000001A] opacity-50 rounded-lg transition-bg duration-100"></div>
               )}
             </div>
           ))}

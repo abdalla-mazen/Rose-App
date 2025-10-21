@@ -1,18 +1,15 @@
 import { ProductByIdApi } from "@/lib/apis/product.api";
 import React, { Suspense } from "react";
 import ProductDetailsServer from "./_components/product-details-server";
-import ProductLoader from "./_components/product-loader";
+import ProductDetailsSkeleton from "@/components/skeletons/product-details.skeleton";
 
 export default async function Page({ params }: { params: { id: string } }) {
   // Get ID from params
   const { id } = params;
 
-  // Product by ID API Call
-  const product = await ProductByIdApi(id);
-
   return (
-    <Suspense fallback={<ProductLoader />}>
-      <ProductDetailsServer product={product.product} />
+    <Suspense fallback={<ProductDetailsSkeleton />}>
+      <ProductDetailsServer id={id} />
     </Suspense>
   );
 }

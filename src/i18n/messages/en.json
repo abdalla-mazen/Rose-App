@@ -153,6 +153,7 @@
   "Ratings": "Ratings",
   "added-to-cart-successfully-as-a-guest": " Added to cart successfully as a guest!",
   "added-to-cart-successfully-as-a-logged-in-user": " Added to cart successfully as a logged-in user!",
+  "added-to-cart-error": "Failed to add to cart",
   "merge-cart": "Cart merged successfully!",
   "merge-cart-error": "Failed to merge cart"
 }
