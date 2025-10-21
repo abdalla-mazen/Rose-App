@@ -1,9 +1,12 @@
-import React from "react";
+import { FiltersSidebar } from "./_components";
 
 export default function Page() {
   return (
-    <div className="flex flex-col items-center justify-center mx-auto max-w-[1440px]">
-      <h1>Products Page</h1>
-    </div>
+    <main className="flex p-10">
+      <FiltersSidebar />
+      <div className="flex-1 flex items-center justify-center text-gray-500">
+        Product cards 
+      </div>
+    </main>
   );
 }
