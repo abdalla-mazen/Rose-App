@@ -94,6 +94,10 @@ const config: Config = {
       },
        width: {
         406: "406px",
+        954: "954px",
+      },
+       height: {
+        272: "272px",
       },
     },
   },

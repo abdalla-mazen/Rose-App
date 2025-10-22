@@ -90,7 +90,7 @@
       "max": "Code must be 6 digits",
       "numeric": "Code must contain only numbers"
     }
-  }
+  },
   "foget-title": "Forgot password?",
   "forget-subtitle": " worry not, we’ll send you instructions to help you reset it.",
   "forget-text-register": "don’t have an account ?",
@@ -146,5 +146,9 @@
   "confirm-password-req": "Your password is required",
   "confirm-password-mess": "Your passwords do not match",
   "password-mess": "Password must be at least 8 characters , at least one special character , one uppercase and lowercase letter",
-  "register-toast": "Account created successfuly"
+  "register-toast": "Account created successfuly",
+  "add-wishlist": "Add to wishlist",
+  "product-image": "product image",
+ "out-of-stock ": "Out of stock",
+ "hot":"Hot"
 }

@@ -16,4 +16,5 @@ declare type Product = {
   rateCount: number;
   favoriteId: string | null;
   isInWishlist: boolean;
+  _id: string;
 } & DatabaseProperties;
