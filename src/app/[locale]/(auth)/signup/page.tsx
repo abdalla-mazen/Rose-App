@@ -19,7 +19,7 @@ export default async function Page() {
       {/* Register meassage , login link */}
       <AuthBottomLink
         message={t("register-mess")}
-        linkHref="/signin"
+        linkHref="/login"
         linkText={t("register-link")}
       />
     </main>

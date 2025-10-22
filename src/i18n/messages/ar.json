@@ -89,7 +89,7 @@
       "max": "يجب أن يتكون الرمز من 6 أرقام",
       "numeric": "يجب أن يحتوي الرمز على أرقام فقط"
     }
-  }
+  },
   "foget-title": "هل نسيت كلمة المرور؟",
   "forget-subtitle": "لا تقلق، سنرسل إليك تعليمات لمساعدتك في إعادة تعيينها.",
   "forget-text-register": "ليس لديك حساب؟",
@@ -124,7 +124,6 @@
       "required": "من فضلك أدخل كلمة المرور الخاصة بك"
     }
   },
-
   "firstname": "الاسم الاول",
   "lastname": "الاسم الاخير",
   "email": "البريد الالكتروني",
@@ -146,5 +145,22 @@
   "confirm-password-req": "يرجى تأكيد كلمة المرور الخاصة بك",
   "confirm-password-mess": "كلمات المرور الخاصة بك لا تتطابق",
   "password-mess": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل، وحرف خاص واحد على الأقل، وحرف كبير وحرف صغير واحد على الأقل",
-  "register-toast": "تم انشاء الحساب بنجاح"
+  "register-toast": "تم انشاء الحساب بنجاح",
+  "related-products": "<span> <span1>المنتجات</span1> ذات </span> الصلة",
+  "product-reviews": "<span> <span1>تقييمات</span1>  </span> العملاء",
+  "general-rating": "التقييم العام",
+  "rating": "تقييم",
+  "your-rating": "تقييمك",
+  "review-title": "عنوان التقييم",
+  "review-title-placeholder": "أدخل عنوان تقييمك",
+  "review-comment": "تقييمك",
+  "review-comment-placeholder": "شاركنا أفكارك...",
+  "add-review": "أضف تقييم",
+  "submitting": "جاري الإرسال...",
+  "add-review-overlay": "من فضلك سجل الدخول لتقييم المنتج",
+  "title-is-required": "العنوان مطلوب",
+  "title-constraints": "العنوان لا يقل عن ثلاثة أحرف",
+  "comment-is-required": "التعليق مطلوب",
+  "comment-constraints": "التعليق لا يقل عن عشرة أحرف",
+  "validating-rating": "من فضلك أضف تقييم قبل الأرسال"
 }

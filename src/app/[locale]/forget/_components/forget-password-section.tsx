@@ -8,15 +8,15 @@ export default function ForgetPasswordSection() {
   const t = useTranslations();
 
   return (
-    <section className="w-406 flex justify-center flex-col items-center py-10 mx-10  dark:bg-zinc-800">
-      <div className=" flex flex-col">
+    <section className="flex flex-col justify-center items-center dark:bg-zinc-800 mx-10 py-10 w-406">
+      <div className="flex flex-col">
         {/* Headline */}
-        <h1 className="font-semibold text-2xl text-zinc-800 dark:text-zinc-50 capitalize ">
+        <h1 className="font-semibold text-zinc-800 dark:text-zinc-50 text-2xl capitalize">
           {t("foget-title")}
         </h1>
 
         {/* Subtitle */}
-        <p className="mt-1 text-zinc-800 font-normal dark:text-zinc-50 [&::first-letter]:uppercase mb-6  ">
+        <p className="mt-1 mb-6 font-normal text-zinc-800 dark:text-zinc-50 [&::first-letter]:uppercase">
           {t("forget-subtitle")}
         </p>
 
@@ -24,11 +24,11 @@ export default function ForgetPasswordSection() {
         <ForgetPassword />
 
         {/* Register link */}
-        <span className="mt-5  text-zinc-800 text-sm [&::first-letter]:uppercase text-center  dark:text-zinc-50">
+        <span className="mt-5 text-zinc-800 dark:text-zinc-50 text-sm text-center [&::first-letter]:uppercase">
           {t("forget-text-register")}{" "}
           <Link
-            href="/register"
-            className="text-maroon-700 font-bold dark:text-softPink-300"
+            href="/signup"
+            className="font-bold text-maroon-700 dark:text-softPink-300"
           >
             {t("forget-text-register-link")}
           </Link>

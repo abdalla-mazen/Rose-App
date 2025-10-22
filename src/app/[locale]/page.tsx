@@ -3,7 +3,7 @@ import Header from "@/components/layout/header";
 import About from "./_components/about";
 import Companies from "./_components/companies";
 import Gallery from "./_components/gallery";
-import BestSelling from "./_components/best-selling/best-seliing";
+import BestSelling from "./_components/best-seliing";
 import MostPopular from "./_components/most-popular/most-popular";
 import TestimonialPage from "./_components/testimonial";
 import HeroPage from "./hero/page";

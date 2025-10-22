@@ -17,3 +17,37 @@ declare type Product = {
   favoriteId: string | null;
   isInWishlist: boolean;
 } & DatabaseProperties;
+
+declare type Review = {
+  _id: string;
+  product: {
+    _id: string;
+    title: string;
+    imgCover: string;
+    id: string;
+  };
+  user: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    photo: string;
+  };
+  rating: number;
+  title: string;
+  comment: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
+
+declare type ReviewsResponse = {
+  reviews: Review[];
+};
+
+declare type SendReview = {
+  product: string;
+  rating: number;
+  title: string;
+  comment: string;
+};

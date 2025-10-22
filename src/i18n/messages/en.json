@@ -90,7 +90,7 @@
       "max": "Code must be 6 digits",
       "numeric": "Code must contain only numbers"
     }
-  }
+  },
   "foget-title": "Forgot password?",
   "forget-subtitle": " worry not, we’ll send you instructions to help you reset it.",
   "forget-text-register": "don’t have an account ?",
@@ -146,5 +146,22 @@
   "confirm-password-req": "Your password is required",
   "confirm-password-mess": "Your passwords do not match",
   "password-mess": "Password must be at least 8 characters , at least one special character , one uppercase and lowercase letter",
-  "register-toast": "Account created successfuly"
+  "register-toast": "Account created successfuly",
+  "related-products": "<span><span1>Related</span1></span> products",
+  "product-reviews": "<span><span1>product</span1></span> reviews",
+  "general-rating": "general rating",
+  "rating": "rating",
+  "your-rating": "your rating",
+  "review-title": "review title",
+  "review-title-placeholder": "Enter your review title",
+  "review-comment": "Review Comment",
+  "review-comment-placeholder": "Share your thoughts about this product...",
+  "add-review": "Add review",
+  "submitting": "Submitting",
+  "add-review-overlay": "  Please login to be able to review the product",
+  "title-is-required": "Title is required",
+  "title-constraints": "Title must be at least 3 characters",
+  "comment-is-required": "Comment is required",
+  "comment-constraints": "Comment must be at least 10 characters",
+  "validating-rating": "Please select a rating before submitting your review"
 }

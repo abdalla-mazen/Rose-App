@@ -29,3 +29,25 @@ export async function MostPopularApi(occasion: string) {
 
   return payload.products;
 }
+
+// Add product review
+export async function addProductReview(data: SendReview) {
+  const response = await fetch(
+    `${process.env.NEXTAUTH_URL}/api/add-product-review`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to submit the review");
+  }
+
+  const payload = await response.json();
+
+  return payload;
+}

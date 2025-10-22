@@ -96,7 +96,7 @@ export default function LoginForm() {
         <div className="flex flex-col items-center space-y-6 pt-2">
           <div className="w-full rtl:text-start text-end">
             <Link
-              href="/forgot-password"
+              href="/forget"
               className="text-maroon-700 dark:text-softPink-300 text-sm hover:underline"
             >
               {t("forgot-password")}
@@ -125,7 +125,7 @@ export default function LoginForm() {
             {t.rich("no-account", {
               Link: (chunks) => (
                 <Link
-                  href="/register"
+                  href="/signup"
                   className="font-medium text-maroon-700 dark:text-softPink-300 text-sm hover:underline"
                 >
                   {chunks}
