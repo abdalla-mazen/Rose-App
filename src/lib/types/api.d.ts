@@ -6,6 +6,7 @@ declare type DatabaseProperties = {
 };
 
 declare type ErrorResponse = {
+  message: string;
   error: string;
 };
 

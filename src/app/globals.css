@@ -110,3 +110,12 @@
 [dir="rtl"] .PhoneInput input {
   text-align: right !important;
 }
+
+/* hide native scrollbar but keep scrolling  */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}

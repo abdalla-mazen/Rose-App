@@ -17,3 +17,14 @@ declare type Product = {
   favoriteId: string | null;
   isInWishlist: boolean;
 } & DatabaseProperties;
+
+declare type ProductsResponse = {
+  products: Product[];
+};
+
+declare type Filters = {
+  category?: string;
+  rating?: number;
+  occasion?: string;
+  price?: string;
+};

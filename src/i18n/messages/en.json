@@ -90,7 +90,7 @@
       "max": "Code must be 6 digits",
       "numeric": "Code must contain only numbers"
     }
-  }
+  },
   "foget-title": "Forgot password?",
   "forget-subtitle": " worry not, we’ll send you instructions to help you reset it.",
   "forget-text-register": "don’t have an account ?",
@@ -146,5 +146,23 @@
   "confirm-password-req": "Your password is required",
   "confirm-password-mess": "Your passwords do not match",
   "password-mess": "Password must be at least 8 characters , at least one special character , one uppercase and lowercase letter",
-  "register-toast": "Account created successfuly"
+  "register-toast": "Account created successfuly",
+
+  "category": "category",
+  "reset": "reset",
+  "rating": "rating",
+  "flowers": "Flowers",
+  "gifts": "Gifts",
+  "cards": "Cards",
+  "Jewellery": "Jewellery",
+  "perfumes": "Perfumes",
+  "watches": "Watches",
+  "chocolate": "Chocolate",
+  "cakes": "Cakes",
+  "Plants": "Plants",
+  "Candles & Diffusers": "Candles & Diffusers",
+  "BoxGifts": "Box Gifts",
+  "Gaming": "Gaming",
+  "Electronics": "Electronics",
+  "reset-all": "reset all"
 }
