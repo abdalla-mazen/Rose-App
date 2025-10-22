@@ -15,17 +15,10 @@ export default function FiltersSidebar() {
   const hasPriceFilters =
     currentFilters.minPrice !== undefined ||
     currentFilters.maxPrice !== undefined;
-  const hasAnyFilters = hasOccasionFilters || hasPriceFilters;
 
   return (
     <aside className="w-1/4 border-r border-zinc-100 pr-6 flex flex-col justify-between min-h-screen bg-white">
       <div>
-        {/* Header with Clear All button */}
-        {hasAnyFilters && (
-          <div className="flex items-center justify-end mb-4 pb-3 border-b border-zinc-100">
-          </div>
-        )}
-
         <FilterSection
           title={t("occasions")}
           onReset={resetOccasions}

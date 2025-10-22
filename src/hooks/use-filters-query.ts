@@ -2,13 +2,11 @@
 
 import { useQuery } from "@tanstack/react-query";
 
-const API_BASE = process.env.NEXT_PUBLIC_API;
-
-//  Fetch all available filters (occasions, price range, etc.)
+// Local route handler fetch
 async function fetchFilters() {
-  const res = await fetch(`${API_BASE}/search/filters`, {
+  const res = await fetch("/api/filters", {
     headers: { "Content-Type": "application/json" },
-    cache: "no-store", // disable caching (always fresh)
+    cache: "no-store",
   });
 
   if (!res.ok) {
@@ -17,12 +15,12 @@ async function fetchFilters() {
 
   return res.json();
 }
-// Custom React Query hook to get filters data
 
+// Custom hook for filters
 export function useFiltersQuery() {
   return useQuery({
     queryKey: ["filters"],
     queryFn: fetchFilters,
-    staleTime: 1000 * 60 * 10, // cache for 10 minutes
+    staleTime: 10 * 60 * 1000, // cache for 10 mins
   });
 }

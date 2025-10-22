@@ -1,9 +1,8 @@
 //useFilters hooks
-
 "use client";
-
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { ProductFilters } from "@/lib/types/filters";
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useCallback, useMemo } from "react";
 
 export function useFilters() {
@@ -81,9 +80,12 @@ export function useFilters() {
   }, [updateFilters]);
 
   // Reset price filters
-  const resetPriceRange = useCallback(() => {
-    updateFilters({ minPrice: undefined, maxPrice: undefined });
-  }, [updateFilters]);
+  function resetPriceRange() {
+    updateFilters({
+      minPrice: undefined,
+      maxPrice: undefined,
+    });
+  }
 
   // Reset all filters
   const resetAllFilters = useCallback(() => {
