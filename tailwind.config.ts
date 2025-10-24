@@ -92,12 +92,17 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-       width: {
+      width: {
         406: "406px",
         954: "954px",
       },
-       height: {
+      height: {
         272: "272px",
+      },
+      spacing: {
+        "wheel-left": "7.3px",
+        "wheel-right": "4.3px",
+        "wheel-bottom": "2px",
       },
     },
   },

@@ -24,7 +24,6 @@ export default function CardProduct({ product }: { product: Product }) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="flex mt-2.5 mx-2.5 justify-between">
-          {/* <HeartButton /> */}
           <HeartButton _id={product._id} />
 
           {/* Badges */}
@@ -63,7 +62,7 @@ export default function CardProduct({ product }: { product: Product }) {
             {[...Array(4)].map((_, i) => (
               <Star
                 key={i}
-                className={`w-3 h-3 ${i < Math.round(product.rateAvg) ? "text-yellow-400 fill-yellow-400" : "text-gray-300"}`}
+                className={`w-3 h-3 ${i < Math.round(product.rateAvg) ? "text-yellow-400 fill-yellow-400" : "text-yellow-400"}`}
               />
             ))}
           </div>
@@ -86,7 +85,11 @@ export default function CardProduct({ product }: { product: Product }) {
           </div>
         </div>
         <span className="w-10 h-10 bg-maroon-600 dark:bg-maroon-500 rounded-full text-white flex items-center justify-center">
-          <ShoppingCart size={24} />
+          <div className="relative ">
+            <ShoppingCart size={24} />
+            <span className="absolute bottom-wheel-bottom right-wheel-right w-[0.094rem] h-[0.094rem] bg-maroon-500 rounded-full"></span>
+            <span className="absolute bottom-wheel-bottom left-wheel-left w-[0.094rem] h-[0.094rem] bg-maroon-500 rounded-full"></span>
+          </div>
         </span>
       </div>
     </div>
