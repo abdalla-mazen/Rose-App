@@ -18,3 +18,5 @@ declare type Product = {
   isInWishlist: boolean;
   _id: string;
 } & DatabaseProperties;
+
+type ProductByIdResponse = ApiResponse<{ product: Product }>;

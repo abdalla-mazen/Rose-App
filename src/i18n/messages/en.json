@@ -35,7 +35,7 @@
   "testimonial-createdAt": "2025-09-12",
   "loading": "Loading...",
   "new": "new",
-  "out-of-stock": "out of stock",
+  "out-of-stock": "Out of stock",
   "stars": "stars",
   "bestselling-title": "Best Selling",
   "bestselling-span1-sub-title": "Check Out",
@@ -150,5 +150,14 @@
   "add-wishlist": "Add to wishlist",
   "product-image": "product image",
  "out-of-stock ": "Out of stock",
- "hot":"Hot"
+ "hot":"Hot",
+  "add-to-cart": "Add to Cart",
+  "left-in-stock": "Left in stock",
+  "Rating": "Rating",
+  "Ratings": "Ratings",
+  "added-to-cart-successfully-as-a-guest": " Added to cart successfully as a guest!",
+  "added-to-cart-successfully-as-a-logged-in-user": " Added to cart successfully as a logged-in user!",
+  "added-to-cart-error": "Failed to add to cart",
+  "merge-cart": "Cart merged successfully!",
+  "merge-cart-error": "Failed to merge cart"
 }

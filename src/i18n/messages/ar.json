@@ -150,5 +150,14 @@
   "add-wishlist": "أضف إلى المفضلة",
 "product-image": "صورة المنتج",
 "out-of-stock ": "نفذ",
-"hot":"الأكثر مبيعًا"
+"hot":"الأكثر مبيعًا",
+  "add-to-cart": "أضف إلى السلة",
+  "left-in-stock": "متبقي في المخزون",
+  "Rating": "تقييم",
+  "Ratings": "تقييمات",
+  "added-to-cart-successfully-as-a-guest": "تمت إضافة المنتج إلى السلة بنجاح كزائر!",
+  "added-to-cart-successfully-as-a-logged-in-user": "تمت إضافة المنتج إلى السلة بنجاح كمستخدم مسجل!",
+  "added-to-cart-error": "فشل في إضافة المنتج إلى السلة",
+  "merge-cart": "تم دمج السلة بنجاح!",
+  "merge-cart-error": "حدث خطأ أثناء دمج السلة"
 }
