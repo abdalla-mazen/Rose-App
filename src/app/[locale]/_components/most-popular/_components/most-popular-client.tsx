@@ -12,20 +12,15 @@ type Props = {
   occasions: Occasion[];
   products: Product[];
   locale: string;
+  product: Product;
 };
 
-export default function MostPopularClient({
-  occasions,
-  products: initialProducts,
-  locale,
-}: Props) {
+export default function MostPopularClient({ occasions, products: initialProducts, locale }: Props) {
   // Translations
   const t = useTranslations();
 
   // Hooks
-  const [selectedOccasion, setSelectedOccasion] = useState<string>(
-    occasions[0]?._id || ""
-  );
+  const [selectedOccasion, setSelectedOccasion] = useState<string>(occasions[0]?._id || "");
   const [products, setProducts] = useState<any[]>(initialProducts);
   const [loading, setLoading] = useState(false);
 
@@ -50,14 +45,15 @@ export default function MostPopularClient({
   // Navigation to all products page by search param(selected occasion)
   function allProducts(occasion: string) {
     if (!occasion) return;
+
     const redirectUrl = new URL(`${location.origin}/products`);
     redirectUrl.searchParams.set("occasion", occasion);
     location.href = redirectUrl.toString();
   }
 
   return (
-    <div className="flex flex-col items-center justify-center w-full my-40">
-      <div className="flex items-center justify-between w-full mb-6">
+    <div className="flex flex-col justify-center items-center my-40 w-full">
+      <div className="flex justify-between items-center mb-6 w-full">
         <Subtitle title={t("mostpopular-title")} />
 
         <ul className="flex gap-6">
@@ -79,32 +75,30 @@ export default function MostPopularClient({
 
       {/* Skeleton loader*/}
       {loading ? (
-        <div className="grid grid-cols-4 gap-6 w-full">
+        <div className="gap-6 grid grid-cols-4 w-full">
           {Array.from({ length: 4 }).map((_, i) => (
             <div
               key={i}
-              className="animate-pulse bg-white dark:bg-[#1E1E1E] rounded-2xl shadow-md overflow-hidden"
+              className="bg-white dark:bg-[#1E1E1E] shadow-md rounded-2xl overflow-hidden animate-pulse"
             >
-              <div className="h-56 bg-gray-200 dark:bg-gray-700"></div>
-              <div className="p-4 space-y-3">
-                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
-                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+              <div className="bg-gray-200 dark:bg-gray-700 h-56"></div>
+              <div className="space-y-3 p-4">
+                <div className="bg-gray-200 dark:bg-gray-700 rounded w-3/4 h-4"></div>
+                <div className="bg-gray-200 dark:bg-gray-700 rounded w-1/2 h-4"></div>
               </div>
             </div>
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-4 gap-6 w-full">
+        <div className="gap-6 grid grid-cols-4 w-full">
           {products.slice(0, 12).map((product) => (
             <DisplayProduct key={product._id} {...product} />
           ))}
         </div>
       )}
 
-      <div className="w-full mt-12 cursor-pointer flex justify-end items-center gap-2 text-[#741C21] dark:text-[#FFC2D0] font-semibold">
-        <button onClick={() => allProducts(selectedOccasion)}>
-          {t("mostpopular-view-btn")}
-        </button>
+      <div className="flex justify-end items-center gap-2 mt-12 w-full font-semibold text-[#741C21] dark:text-[#FFC2D0] cursor-pointer">
+        <button onClick={() => allProducts(selectedOccasion)}>{t("mostpopular-view-btn")}</button>
         <span>{locale === "ar" ? <MoveLeft /> : <MoveRight />}</span>
       </div>
     </div>

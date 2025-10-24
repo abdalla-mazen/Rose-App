@@ -1,4 +1,3 @@
-import { ProductByIdApi } from "@/lib/apis/product.api";
 import React, { Suspense } from "react";
 import ProductDetailsServer from "./_components/product-details-server";
 import ProductDetailsSkeleton from "@/components/skeletons/product-details.skeleton";

@@ -50,11 +50,13 @@ export default function useLogin() {
           localStorage.setItem("isLoggedIn", "true");
 
           // Merge guest cart
-          await mergeGuestCartAfterLogin();
-          toast.success(t("merge-cart"), {
-            position: "top-center",
-            duration: 2000,
-          });
+          if (localStorage.getItem("cart")) {
+            await mergeGuestCartAfterLogin();
+            toast.success(t("merge-cart"), {
+              position: "top-center",
+              duration: 2000,
+            });
+          }
 
           const url = new URL(response.url);
           const callbackUrl = url.searchParams.get("callbackUrl") || "/";

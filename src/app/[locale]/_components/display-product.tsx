@@ -1,23 +1,77 @@
+"use client";
+
 import { Eye, Heart, ShoppingCart } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import useAddToCart from "../products/[...id]/_hooks/use-add-to-cart";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { useWishlist } from "@/hooks/use-wishlist";
+
+type AddToCartFields = {
+  product: string;
+  quantity: number;
+};
 
 export default function DisplayProduct(product: Product) {
   // Translations
   const t = useTranslations();
   const format = useFormatter();
 
+  // Hooks
+  const [loggedIn, setLoggedIn] = useState(false);
+  const { addToCart, error: addToCartError, isPending: isAddingToCart } = useAddToCart();
+  const { addToWishList, error: addToWishListError, isPending: isAddingToWishList } = useWishlist();
+
+  // Check if user is logged in effect
+  useEffect(() => {
+    const isLogged = localStorage.getItem("isLoggedIn") === "true";
+    setLoggedIn(isLogged);
+  }, []);
+
+  // Add to cart as a guest functions
+  const getCartAsGuest = () => {
+    const cart = localStorage.getItem("cart");
+    return cart ? JSON.parse(cart) : [];
+  };
+
+  const addToCartAsGuest = (product: Product) => {
+    const cart = getCartAsGuest();
+    const existing = cart.find((item: Product) => item._id === product._id);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    toast.success(t("added-to-cart-successfully-as-a-guest"), {
+      position: "bottom-right",
+      duration: 2000,
+    });
+  };
+
+  // Logged in user functions
+  const submitAddToCart = ({ product, quantity }: AddToCartFields) => {
+    addToCart({ product, quantity });
+  };
+
+  // Button handler if logged in or guest
+  const handleAddToCart = () => {
+    if (loggedIn) {
+      submitAddToCart({ product: product._id, quantity: 1 });
+    } else {
+      addToCartAsGuest(product);
+    }
+  };
+
   return (
     <div key={product._id} className="relative">
       {/* Image */}
       <div className="group relative rounded-xl w-full h-[270px] overflow-hidden">
-        <Image
-          src={product.imgCover}
-          alt={product.description || "product image"}
-          fill
-        />
+        <Image src={product.imgCover} alt={product.description || "product image"} fill />
 
         {/* Image label */}
         {product.quantity > 0 ? (
@@ -32,15 +86,18 @@ export default function DisplayProduct(product: Product) {
 
         {/* Image overlay */}
         <div className="top-0 absolute flex justify-center items-center gap-2.5 bg-[#E6507380] opacity-0 group-hover:opacity-100 w-full h-full text-red-600 transition-opacity duration-300 start-0">
-          <button className="flex justify-center items-center bg-white rounded-full w-7 h-7">
-            <Heart className="w-5 h-5" />
-          </button>
-          <Link
-            href={`/products/${product._id}`}
-            className="flex justify-center items-center bg-white rounded-full w-7 h-7"
+          <Button
+            disabled={product.quantity <= 0 || isAddingToWishList}
+            onClick={() => addToWishList(product._id)}
+            className="flex justify-center items-center bg-white hover:bg-gray-200 rounded-full w-7 h-8 text-maroon-600"
           >
-            <Eye className="w-5 h-5" />
-          </Link>
+            <Heart className="w-5 h-5" />
+          </Button>
+          <Button className="flex justify-center items-center bg-white hover:bg-gray-200 rounded-full w-7 h-8 text-maroon-600">
+            <Link href={`/products/${product._id}`}>
+              <Eye className="w-5 h-5" />
+            </Link>
+          </Button>
         </div>
       </div>
 
@@ -72,9 +129,15 @@ export default function DisplayProduct(product: Product) {
             )}
           </p>
         </div>
-        <span className="flex justify-center items-center bg-[#A6252A] dark:bg-[#CD2E33] rounded-full w-10 h-10 text-white">
+
+        {/* Add to cart button */}
+        <Button
+          disabled={product.quantity <= 0 || isAddingToCart}
+          className="flex justify-center items-center bg-[#A6252A] dark:bg-[#CD2E33] rounded-full w-10 h-10 text-white"
+          onClick={handleAddToCart}
+        >
           <ShoppingCart />
-        </span>
+        </Button>
       </div>
     </div>
   );
