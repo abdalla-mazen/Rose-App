@@ -148,6 +148,7 @@
   "password-mess": "Password must be at least 8 characters , at least one special character , one uppercase and lowercase letter",
   "register-toast": "Account created successfuly",
   "related-products": "<span><span1>Related</span1></span> products",
+  "related-products-error": "something went wrong!",
   "product-reviews": "<span><span1>product</span1></span> reviews",
   "general-rating": "general rating",
   "rating": "rating",

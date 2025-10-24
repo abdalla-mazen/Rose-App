@@ -147,6 +147,7 @@
   "password-mess": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل، وحرف خاص واحد على الأقل، وحرف كبير وحرف صغير واحد على الأقل",
   "register-toast": "تم انشاء الحساب بنجاح",
   "related-products": "<span> <span1>المنتجات</span1> ذات </span> الصلة",
+  "related-products-error": "حدث خطأ ما",
   "product-reviews": "<span> <span1>تقييمات</span1>  </span> العملاء",
   "general-rating": "التقييم العام",
   "rating": "تقييم",

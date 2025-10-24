@@ -1,5 +1,3 @@
-"use client";
-
 import { LucideStar } from "lucide-react";
 import { useProductReviews } from "../hooks/use-get-product-reviews";
 import Image from "next/image";

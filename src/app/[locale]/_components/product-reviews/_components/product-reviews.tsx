@@ -10,9 +10,11 @@ export default function ProductReviews({ productId }: { productId: string }) {
   // Translation
   const t = useTranslations();
 
+  // Data
   const { data } = useProductReviews(productId);
   const productReviews = data?.reviews ?? [];
 
+  // Average rating
   const averageRating = productReviews.length
     ? productReviews.reduce((acc: number, r: Review) => acc + r.rating, 0) /
       productReviews.length
@@ -31,7 +33,7 @@ export default function ProductReviews({ productId }: { productId: string }) {
               </span>
             ),
             span1: (chunk) => (
-              <span className="after:block after:bg-softPink-600 dark:after:bg-softPink-500 after:w-1/2 after:h-[2px] after:content-[''] after:translate-y-1">
+              <span className="after:block after:bg-softPink-600 dark:after:bg-softPink-500 after:w-1/2 after:h-[2px] after:content-['']">
                 {chunk}
               </span>
             ),
@@ -67,12 +69,12 @@ export default function ProductReviews({ productId }: { productId: string }) {
       {/* Bottom */}
       <div className="flex items-center gap-5 border-zinc-200 border-t">
         {/* Left */}
-        <div className="px-5 border-e max-h-96 overflow-y-auto">
+        <div className="px-5 max-h-96 overflow-y-auto -translate-y-12">
           <ReviewCard productId={productId} />
         </div>
 
         {/* Right: Review form */}
-        <div className="min-w-[30rem]">
+        <div className="mt-4 ps-10 border-s border-zinc-200 min-w-[30rem]">
           <ReviewForm productId={productId} />
         </div>
       </div>

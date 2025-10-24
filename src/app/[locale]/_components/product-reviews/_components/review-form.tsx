@@ -33,8 +33,10 @@ export default function ReviewForm({ productId }: { productId: string }) {
   // Check authentication
   const { data: session } = useSession();
 
+  // Scheme
   const scheme = useProductReviewScheme();
 
+  // Mutation
   const reviewMutation = useSendProductReview();
 
   // Form
@@ -60,6 +62,7 @@ export default function ReviewForm({ productId }: { productId: string }) {
       return;
     }
 
+    // Data
     const reviewData = {
       product: productId[0],
       rating: ratingChange,

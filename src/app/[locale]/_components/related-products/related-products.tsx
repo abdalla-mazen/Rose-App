@@ -21,8 +21,8 @@ export default function RelatedProducts({ productId }: { productId: string }) {
 
   if (error) {
     return (
-      <div className="mt-6 text-maroon-700 text-4xl text-center">
-        Something went wrong
+      <div className="mt-6 text-maroon-700 text-4xl text-center capitalize">
+        {t("related-products-error")}
       </div>
     );
   }
