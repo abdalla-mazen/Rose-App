@@ -16,6 +16,7 @@ declare type Product = {
   rateCount: number;
   favoriteId: string | null;
   isInWishlist: boolean;
+  _id: string;
 } & DatabaseProperties;
 
 type ProductByIdResponse = ApiResponse<{ product: Product }>;
