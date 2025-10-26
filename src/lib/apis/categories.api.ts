@@ -1,7 +1,5 @@
 export async function getCategoriesApi(page = 1) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/categories?page=${page}&limit=10`
-  );
+  const res = await fetch(`/api/categories?page=${page}`);
 
   const payload: ApiResponse<PaginatedResponse<CategoriesResponse>> =
     await res.json();

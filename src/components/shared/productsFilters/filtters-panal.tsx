@@ -2,8 +2,8 @@
 
 import { FormProvider } from "react-hook-form";
 import { useFiltersForm } from "@/hooks/use-filters-form";
-import { CategoryFilter } from "@/components/shared/productsFilters/CategoryFilter";
-import { RatingFilter } from "@/components/shared/productsFilters/RatingFilter";
+import { CategoryFilter } from "@/components/shared/productsFilters/category-filter";
+import { RatingFilter } from "@/components/shared/productsFilters/rating-filter";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { RotateCcw } from "lucide-react";
@@ -33,7 +33,7 @@ export function ProductsFiltersPanel() {
 
   return (
     <FormProvider {...form}>
-      <form className="top-52 left-20 bg-white dark:bg-zinc-900 shadow-sm pr-6 border-zinc-100 border-r">
+      <form className="top-52 left-20 bg-transparent shadow-sm pr-6 border-zinc-100 border-r">
         {/* Category Section */}
         <CategoryFilter />
 
@@ -47,7 +47,7 @@ export function ProductsFiltersPanel() {
               type="button"
               onClick={handleResetAll}
               className={cn(
-                "gap-2 bg-maroon-50 hover:bg-maroon-100 dark:bg-zinc-700 dark:hover:bg-zinc-600 px-4 py-3 rounded-xl w-full h-10 font-semibold text-maroon-600 dark:text-softPink-300 text-sm"
+                "gap-2 bg-maroon-50 hover:bg-maroon-100 dark:bg-zinc-800 dark:hover:bg-zinc-600 px-4 py-3 rounded-xl w-full h-10 font-semibold text-maroon-600 dark:text-softPink-300 text-sm"
               )}
             >
               <RotateCcw />

@@ -22,7 +22,7 @@ export function RatingFilter() {
   };
 
   return (
-    <div className="gap-2 dark:bg-zinc-700 pt-2 pb-5 w-full h-20 capitalize">
+    <div className="gap-2 bg-transparent pt-2 pb-5 w-full h-20 capitalize">
       {/* header + Reset button */}
       <div className="flex justify-between items-center mb-2">
         <h4 className="font-semibold text-zinc-800 dark:text-zinc-50 text-lg">
@@ -55,7 +55,7 @@ export function RatingFilter() {
                 "w-6 h-6 transition-colors",
                 starValue <= selectedRating
                   ? "fill-yellow-400 text-yellow-400"
-                  : "fill-none text-muted-foreground hover:text-yellow-400"
+                  : "fill-none stroke-yellow-400 text-muted-foreground hover:text-yellow-400"
               )}
             />
           </button>
