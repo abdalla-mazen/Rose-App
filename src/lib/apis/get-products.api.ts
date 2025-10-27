@@ -21,14 +21,13 @@ export async function GetProductsApi({
 
   // Add filters if exist
   if (category) url.searchParams.append("category", category);
-  if (rating) url.searchParams.append("rating", rating.toString());
+  if (rating) url.searchParams.append("rateAvg", rating.toString());
   if (occasion) url.searchParams.append("occasion", occasion);
   if (price) url.searchParams.append("price", price);
 
   // Fetch data
   const response = await fetch(url.toString());
-  const payload: ApiResponse<PaginatedResponse<ProductsResponse>> =
-    await response.json();
+  const payload: ApiResponse<PaginatedResponse<ProductsResponse>> = await response.json();
 
   // Handle error
   if ("error" in payload) {

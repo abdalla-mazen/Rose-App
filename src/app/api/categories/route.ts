@@ -6,10 +6,9 @@ export async function GET(request: Request) {
   const page = searchParams.get("page") || "1";
 
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API}/categories?page=${page}&limit=10`,
-      { cache: "no-store" }
-    );
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/categories?page=${page}&limit=10`, {
+      cache: "force-cache",
+    });
 
     if (!res.ok) {
       throw new Error("Failed to fetch categories");
@@ -20,7 +19,7 @@ export async function GET(request: Request) {
   } catch (error: any) {
     return NextResponse.json(
       { error: "Error fetching categories", message: error.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

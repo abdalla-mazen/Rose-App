@@ -23,10 +23,4 @@ declare type ProductsResponse = {
   products: Product[];
 };
 
-declare type Filters = {
-  category?: string;
-  rating?: number;
-  occasion?: string;
-  price?: string;
-};
 type ProductByIdResponse = ApiResponse<{ product: Product }>;

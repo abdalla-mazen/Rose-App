@@ -4,10 +4,7 @@ import { useRouter, usePathname } from "@/i18n/navigation";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  ProductFiltersValues,
-  ProductFiltersSchema,
-} from "@/lib/schemas/productsFilters.schema";
+import { ProductFiltersValues, ProductFiltersSchema } from "@/lib/schemas/products-filters.schema";
 import { useEffect } from "react";
 
 export function useFiltersForm(defaultValues?: ProductFiltersValues) {
@@ -19,7 +16,9 @@ export function useFiltersForm(defaultValues?: ProductFiltersValues) {
   // Current URL values
   const currentValues: ProductFiltersValues = {
     category: searchParams.get("category") || "",
-    rating: searchParams.get("rating") || "",
+    rating: searchParams.get("rateAvg") || "",
+    occasion: searchParams.get("occasion") || "",
+    price: searchParams.get("price") || "",
   };
 
   // schema
@@ -35,7 +34,7 @@ export function useFiltersForm(defaultValues?: ProductFiltersValues) {
     if (values.category) params.set("category", values.category);
     if (values.rating) params.set("rating", values.rating);
 
-    // replace بدل push عشان ما يزيدش history
+    // replace the URL without adding a new entry to the history
     router.replace(`${pathname}?${params.toString()}`);
   };
 

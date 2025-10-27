@@ -1,10 +1,10 @@
 import { Suspense } from "react";
 import Header from "@/components/layout/header";
-import { ProductsFiltersPanel } from "@/components/shared/productsFilters/filtters-panal";
 import ProductsSkeletons from "@/components/skeletons/products-skeletons/products.skeletons";
 import ProductsList from "./_components/product-list";
 import PaginationComponent from "@/components/shared/custom-pagination";
 import { GetProductsApi } from "@/lib/apis/get-products.api";
+import { ProductsFiltersPanel } from "./_components/products-sidebar/filtters-panal";
 
 export default async function ProductsPage({
   searchParams,
@@ -43,7 +43,7 @@ export default async function ProductsPage({
     <>
       <Header />
 
-      <div className="gap-6 grid grid-cols-1 md:grid-cols-[250px_1fr] mx-auto py-8 container">
+      <div className="gap-6 grid grid-cols-1 md:grid-cols-[250px_1fr] mx-auto py-8 max-w-[90%] container">
         {/* Filters Panel */}
         <ProductsFiltersPanel />
 
@@ -54,11 +54,7 @@ export default async function ProductsPage({
           </Suspense>
 
           {/* Pagination */}
-          <PaginationComponent
-            totalPages={totalPages}
-            initialPage={page}
-            currentPage={page}
-          />
+          <PaginationComponent totalPages={totalPages} initialPage={page} currentPage={page} />
         </section>
       </div>
     </>
