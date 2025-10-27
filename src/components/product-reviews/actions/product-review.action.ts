@@ -16,7 +16,7 @@ export async function productReview(data: SendReview) {
   }
 
   // Fetch
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/reviews`, {
+  const response = await fetch(`${process.env.API}/reviews`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,

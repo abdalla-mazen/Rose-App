@@ -1,6 +1,6 @@
 export async function getProductReviews(productId: string) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/products/${productId}/reviews`
+    `${process.env.API}/products/${productId}/reviews`
   );
 
   if (!response.ok) {

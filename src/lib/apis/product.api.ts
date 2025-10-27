@@ -1,8 +1,6 @@
 // Fetch products API in best selling component
 export async function BestSellingApi() {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/products?sort=-sold`
-  );
+  const response = await fetch(`${process.env.API}/products?sort=-sold`);
 
   const payload: ApiResponse<PaginatedResponse<{ products: Product[] }>> =
     await response.json();
@@ -17,7 +15,7 @@ export async function BestSellingApi() {
 // Fetch products by occasions API in most popular component
 export async function MostPopularApi(occasion: string) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/products?occasion=${occasion}&sort=-sold`
+    `${process.env.API}/products?occasion=${occasion}&sort=-sold`
   );
 
   const payload: ApiResponse<PaginatedResponse<{ products: Product[] }>> =

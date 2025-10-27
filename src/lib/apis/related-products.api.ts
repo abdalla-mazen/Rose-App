@@ -1,6 +1,6 @@
 export async function getRelatedProducts(productId: string) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/related/category/${productId}`
+    `${process.env.API}/related/category/${productId}`
   );
 
   if (!response.ok) {
