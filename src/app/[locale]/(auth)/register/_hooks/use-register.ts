@@ -14,7 +14,7 @@ export default function useRegister() {
       }
 
       // return response;
-      location.href = "/signin";
+      location.href = "/login";
 
       return response;
     },

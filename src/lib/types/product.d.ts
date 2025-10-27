@@ -16,6 +16,7 @@ declare type Product = {
   rateCount: number;
   favoriteId: string | null;
   isInWishlist: boolean;
+  _id: string;
 } & DatabaseProperties;
 
 declare type ProductsResponse = {
@@ -28,3 +29,4 @@ declare type Filters = {
   occasion?: string;
   price?: string;
 };
+type ProductByIdResponse = ApiResponse<{ product: Product }>;
