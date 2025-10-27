@@ -1,6 +1,7 @@
 import { Eye, Heart, ShoppingCart } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function DisplayProduct(product: Product) {
@@ -35,10 +36,12 @@ export default function DisplayProduct(product: Product) {
             <Heart className="w-5 h-5" />
             {}
           </button>
-          <button className="flex justify-center items-center bg-white rounded-full w-7 h-7">
+          <Link
+            href={`/products/${product._id}`}
+            className="flex justify-center items-center bg-white rounded-full w-7 h-7"
+          >
             <Eye className="w-5 h-5" />
-            {}
-          </button>
+          </Link>
         </div>
       </div>
 

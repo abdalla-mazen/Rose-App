@@ -16,6 +16,7 @@ declare type Product = {
   rateCount: number;
   favoriteId: string | null;
   isInWishlist: boolean;
+  _id: string;
 } & DatabaseProperties;
 
 declare type Review = {
@@ -51,3 +52,4 @@ declare type SendReview = {
   title: string;
   comment: string;
 };
+type ProductByIdResponse = ApiResponse<{ product: Product }>;
