@@ -3,6 +3,9 @@
     "src/i18n",
     "src/i18n/messages"
   ],
+  "cSpell.words": [
+    "NEXTAUTH"
+  ],
   "i18n-ally.keystyle": "nested",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,

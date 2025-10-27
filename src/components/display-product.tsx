@@ -10,7 +10,7 @@ export default function DisplayProduct(product: Product) {
   const format = useFormatter();
 
   return (
-    <div key={product._id} className="relative">
+    <div key={product._id} className="relative max-w-[19rem]">
       {/* Image */}
       <div className="group relative rounded-xl w-full h-[270px] overflow-hidden">
         <Image
@@ -34,6 +34,7 @@ export default function DisplayProduct(product: Product) {
         <div className="top-0 absolute flex justify-center items-center gap-2.5 bg-[#E6507380] opacity-0 group-hover:opacity-100 w-full h-full text-red-600 transition-opacity duration-300 start-0">
           <button className="flex justify-center items-center bg-white rounded-full w-7 h-7">
             <Heart className="w-5 h-5" />
+            {}
           </button>
           <Link
             href={`/products/${product._id}`}
