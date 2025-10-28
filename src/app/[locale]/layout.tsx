@@ -1,11 +1,16 @@
-import { hasLocale } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
 import { Tajawal, Sarabun } from "next/font/google";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import localFont from "next/font/local";
 import Providers from "@/components/providers";
 import { cn } from "@/lib/utils";
+import { Toaster } from "sonner";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -48,7 +53,10 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export default function LocaleLayout({ children, params: { locale } }: Props) {
+export default async function LocaleLayout({
+  children,
+  params: { locale },
+}: Props) {
   // Ensure that the incoming `locale` is valid
   if (!hasLocale(routing.locales, locale)) {
     notFound();
@@ -56,6 +64,8 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
 
   // Enable static rendering
   setRequestLocale(locale);
+
+  const messages = await getMessages({ locale });
 
   return (
     <html
@@ -73,7 +83,12 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
           "antialiased"
         )}
       >
-        <Providers>{children}</Providers>
+        <NextIntlClientProvider messages={messages} locale={locale}>
+          <Providers>
+            {children}
+            <Toaster />
+          </Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

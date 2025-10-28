@@ -7,7 +7,7 @@ import {
 } from "../types/notifications";
 
 // Constants (from environment variables)
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE!;
+const API_BASE = process.env.API!;
 const TOKEN = process.env.NOTIFICATIONS_API_TOKEN!;
 
 // Generic API helper
