@@ -1,7 +1,7 @@
 import { BestSellingApi } from "@/lib/apis/product.api";
 import { getTranslations } from "next-intl/server";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import BestSellingCarousel from "./_components/best-selling-carousel";
+import ProductsCarousel from "../../../components/shared/products-carousel";
 
 export default async function BestSelling({ locale }: { locale: string }) {
   // Translations
@@ -44,7 +44,10 @@ export default async function BestSelling({ locale }: { locale: string }) {
         </button>
       </div>
 
-      <BestSellingCarousel products={products} locale={locale} />
+      <div className="max-w-[954px]">
+        {" "}
+        <ProductsCarousel products={products} />
+      </div>
     </div>
   );
 }

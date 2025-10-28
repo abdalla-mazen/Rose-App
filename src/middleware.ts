@@ -3,8 +3,8 @@ import { routing } from "./i18n/routing";
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
-const authRoutes = ["/login", "/register", "/forgot", "/newpassword" , "/otp"];
-const publicRoutes = ["/", "/product", "/products"];
+const authRoutes = ["/login", "/signup", "/forget", "/newpassword", "/otp"];
+const publicRoutes = ["/", "/product", "/products", "/cart", "/wishlist"];
 
 // middleware.ts
 export default async function middleware(request: NextRequest) {
@@ -24,7 +24,11 @@ export default async function middleware(request: NextRequest) {
 
   // Check route types
   const isAuthRoute = authRoutes.includes(pathnameWithoutLocale);
-  const isPublicRoute = publicRoutes.includes(pathnameWithoutLocale);
+  const isPublicRoute = publicRoutes.some(
+    (route) =>
+      pathnameWithoutLocale === route ||
+      pathnameWithoutLocale.startsWith(`${route}/`)
+  );
   const isProtectedRoute = !isPublicRoute && !isAuthRoute;
 
   // Scenario 1: Authenticated user trying to access auth pages

@@ -1,6 +1,6 @@
 "use server";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE!;
+const API_BASE = process.env.API!;
 
 type VerifyOtpResponse = {
   success: boolean;

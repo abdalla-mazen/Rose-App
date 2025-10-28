@@ -1,13 +1,15 @@
 "use server";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE!;
+const API_BASE = process.env.API!;
 
 type ResendOtpResponse = {
   success: boolean;
   message?: string;
 };
 
-export async function resendOtpAction(email: string): Promise<ResendOtpResponse> {
+export async function resendOtpAction(
+  email: string
+): Promise<ResendOtpResponse> {
   if (!email) return { success: false, message: "Email is required" };
 
   try {
