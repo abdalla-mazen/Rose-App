@@ -61,15 +61,19 @@ export default async function Header() {
     <>
       {/* Top header section */}
       <div className="flex flex-grow items-center dark:bg-zinc-800 dark:text-zinc-50">
+      <div className="flex flex-grow items-center dark:bg-zinc-800 dark:text-zinc-50">
         <Image
           src="/assets/images/logo.png"
           width={85}
           height={80}
           alt="logo of the website"
           className="ms-9 me-4 mt-1"
+          className="ms-9 me-4 mt-1"
         />
         <div className="flex-1 items-center">
+        <div className="flex-1 items-center">
           <InputSearch
+            className="me-4 h-12"
             className="me-4 h-12"
             id="search"
             name="search"
@@ -95,14 +99,17 @@ export default async function Header() {
             <ModeToggle />
           </ul>
           {/* <Button className="bg-transparent hover:bg-white shadow-none pe-16 text-zinc-700 hover:text-zinc-700 dark:text-zinc-50 Bottom navigation bar">
+          {/* <Button className="bg-transparent hover:bg-white shadow-none pe-16 text-zinc-700 hover:text-zinc-700 dark:text-zinc-50 Bottom navigation bar">
             {t("language")}
           </Button> */}
+          <ToggleLocale />
           <ToggleLocale />
         </div>
       </div>
 
       {/* Bottom navigation bar */}
       <div className="dark:bg-softPink-200">
+        <ul className="flex justify-center items-center gap-3 bg-maroon-700 dark:bg-softPink-200 px-4 py-3.5 border-x border-zinc-200 text-zinc-50">
         <ul className="flex justify-center items-center gap-3 bg-maroon-700 dark:bg-softPink-200 px-4 py-3.5 border-x border-zinc-200 text-zinc-50">
           {links.map((item, index) => (
             <li key={index} className="mx-2">

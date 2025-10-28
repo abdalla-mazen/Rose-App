@@ -118,7 +118,7 @@ export default function LoginForm() {
             {t.rich("no-account", {
               Link: (chunks) => (
                 <Link
-                  href="/register"
+                  href="/signup"
                   className="font-medium text-maroon-700 dark:text-softPink-300 text-sm hover:underline"
                 >
                   {chunks}
