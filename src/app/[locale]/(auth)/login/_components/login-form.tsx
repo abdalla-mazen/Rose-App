@@ -64,9 +64,7 @@ export default function LoginForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-medium text-sm capitalize">
-                {t("email-label")}
-              </FormLabel>
+              <FormLabel className="font-medium text-sm capitalize">{t("email-label")}</FormLabel>
               <FormControl>
                 <Input type="email" placeholder="user@example.com" {...field} />
               </FormControl>
@@ -81,9 +79,7 @@ export default function LoginForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-medium text-sm">
-                {t("password-label")}
-              </FormLabel>
+              <FormLabel className="font-medium text-sm">{t("password-label")}</FormLabel>
               <FormControl>
                 <PasswordInput {...field} />
               </FormControl>
@@ -111,10 +107,7 @@ export default function LoginForm() {
             type="submit"
             variant="primary"
             loading={isPending}
-            disabled={
-              isPending ||
-              (form.formState.isSubmitted && !form.formState.isValid)
-            }
+            disabled={isPending || (form.formState.isSubmitted && !form.formState.isValid)}
             className="w-full"
           >
             {t("login-button")}

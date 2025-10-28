@@ -23,10 +23,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import useRegister from "../_hooks/use-register";
-import ErrorFeedback from "@/components/shared/error-feedback";
 import { useTranslations } from "next-intl";
 import { LoaderCircle } from "lucide-react";
 import PasswordInput from "@/components/ui/password-input";
+import ErrorMessage from "@/components/shared/error-message";
 
 export default function RegisterForm() {
   // Translations
@@ -213,7 +213,7 @@ export default function RegisterForm() {
           )}
         />
 
-        {error && <ErrorFeedback message={error.message} />}
+        {error && <ErrorMessage message={error.message} />}
 
         <Button
           disabled={

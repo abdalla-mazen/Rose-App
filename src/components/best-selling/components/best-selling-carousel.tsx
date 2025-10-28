@@ -1,5 +1,6 @@
 "use client";
 
+import DisplayProduct from "@/components/display-product";
 import {
   Carousel,
   CarouselContent,
@@ -8,7 +9,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import React from "react";
-import DisplayProduct from "../../display-product";
 
 type Props = {
   products: Product[];
@@ -27,10 +27,7 @@ export default function BestSellingCarousel({ products, locale }: Props) {
     >
       <CarouselContent className="-ms-4">
         {products.map((product) => (
-          <CarouselItem
-            key={product._id}
-            className="ps-4 md:basis-1/2 lg:basis-1/3"
-          >
+          <CarouselItem key={product._id} className="ps-4 md:basis-1/2 lg:basis-1/3">
             {/* Display products in carousel */}
             <DisplayProduct {...product} />
           </CarouselItem>

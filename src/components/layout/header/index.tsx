@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import {
   Bell,
@@ -14,17 +12,27 @@ import {
   User,
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
 import InputSearch from "@/components/ui/search-input";
 import { ModeToggle } from "@/components/features/toggle-mode";
 import { NavLink } from "@/components/shared/nav-link";
 import ToggleLocale from "./toggel-locale";
-import { useSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/auth";
+import { getTranslations } from "next-intl/server";
+import UserDropdown from "./user-dropdown";
+import { AccountProfile } from "@/lib/types/account-profile";
 
-export default function Header() {
+export default async function Header() {
   // translations
-  const t = useTranslations();
-  const { data, status } = useSession();
+  const t = await getTranslations();
+
+  // User session
+  const session = await getServerSession(authOptions);
+
+  // Assign type to session
+  const accountSettings: AccountProfile | null = session?.user
+    ? (session.user as AccountProfile)
+    : null;
 
   // icons and links
   const icons = [
@@ -53,15 +61,19 @@ export default function Header() {
     <>
       {/* Top header section */}
       <div className="flex flex-grow items-center dark:bg-zinc-800 dark:text-zinc-50">
+      <div className="flex flex-grow items-center dark:bg-zinc-800 dark:text-zinc-50">
         <Image
           src="/assets/images/logo.png"
           width={85}
           height={80}
           alt="logo of the website"
           className="ms-9 me-4 mt-1"
+          className="ms-9 me-4 mt-1"
         />
         <div className="flex-1 items-center">
+        <div className="flex-1 items-center">
           <InputSearch
+            className="me-4 h-12"
             className="me-4 h-12"
             id="search"
             name="search"
@@ -71,10 +83,13 @@ export default function Header() {
 
         {/* User actions */}
         <div className="flex items-center gap-3">
-          <Link href="/login" className="flex items-center px-4 py-4">
-            <User size={20} />{" "}
-            {status === "authenticated" ? data.user.firstName : t("login")}
-          </Link>
+          {session ? (
+            <UserDropdown session={accountSettings} />
+          ) : (
+            <Link href="/login" className="flex items-center px-4 py-4">
+              <User size={20} /> {t("login")}
+            </Link>
+          )}
           <ul className="flex items-center gap-3 px-4 py-3.5 border-x border-zinc-200">
             {icons.map((item, index) => (
               <li key={index}>
@@ -84,14 +99,17 @@ export default function Header() {
             <ModeToggle />
           </ul>
           {/* <Button className="bg-transparent hover:bg-white shadow-none pe-16 text-zinc-700 hover:text-zinc-700 dark:text-zinc-50 Bottom navigation bar">
+          {/* <Button className="bg-transparent hover:bg-white shadow-none pe-16 text-zinc-700 hover:text-zinc-700 dark:text-zinc-50 Bottom navigation bar">
             {t("language")}
           </Button> */}
+          <ToggleLocale />
           <ToggleLocale />
         </div>
       </div>
 
       {/* Bottom navigation bar */}
       <div className="dark:bg-softPink-200">
+        <ul className="flex justify-center items-center gap-3 bg-maroon-700 dark:bg-softPink-200 px-4 py-3.5 border-x border-zinc-200 text-zinc-50">
         <ul className="flex justify-center items-center gap-3 bg-maroon-700 dark:bg-softPink-200 px-4 py-3.5 border-x border-zinc-200 text-zinc-50">
           {links.map((item, index) => (
             <li key={index} className="mx-2">
