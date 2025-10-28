@@ -159,5 +159,20 @@
   "added-to-cart-successfully-as-a-logged-in-user": " Added to cart successfully as a logged-in user!",
   "added-to-cart-error": "Failed to add to cart",
   "merge-cart": "Cart merged successfully!",
-  "merge-cart-error": "Failed to merge cart"
+  "merge-cart-error": "Failed to merge cart",
+  "update-profile": "update profile",
+  "my-account": "my account",
+  "change-password": "change password",
+  "logout": "logout",
+  "delete-my-account": "delete my account",
+  "save-changes": "save changes",
+  "old-password": "old password",
+  "new-password": "new password",
+  "confirm-new-password": "confirm new password",
+  "change-password-success": "Your password has been updated.",
+  "hello": "hello",
+  "my-profile": "my profile",
+  "my-addresses": "my addresses",
+  "my-orders": "my orders",
+  "dashboard": "dashboard"
 }

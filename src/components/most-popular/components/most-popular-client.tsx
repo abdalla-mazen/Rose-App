@@ -12,7 +12,7 @@ type Props = {
   occasions: Occasion[];
   products: Product[];
   locale: string;
-  product: Product;
+  // product: Product;
 };
 
 export default function MostPopularClient({ occasions, products: initialProducts, locale }: Props) {

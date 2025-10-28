@@ -5,10 +5,10 @@ import { useFormatter, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import useAddToCart from "../products/[...id]/_hooks/use-add-to-cart";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useWishlist } from "@/hooks/use-wishlist";
+import useAddToCart from "@/app/[locale]/products/[...id]/_hooks/use-add-to-cart";
 
 type AddToCartFields = {
   product: string;
@@ -68,7 +68,7 @@ export default function DisplayProduct(product: Product) {
   };
 
   return (
-    <div key={product._id} className="relative">
+    <div key={product._id} className="relative max-w-[19rem]">
       {/* Image */}
       <div className="group relative rounded-xl w-full h-[270px] overflow-hidden">
         <Image src={product.imgCover} alt={product.description || "product image"} fill />
@@ -91,7 +91,11 @@ export default function DisplayProduct(product: Product) {
             onClick={() => addToWishList(product._id)}
             className="flex justify-center items-center bg-white hover:bg-gray-200 rounded-full w-7 h-8 text-maroon-600"
           >
+            {/* <button className="flex justify-center items-center bg-white rounded-full w-7 h-7"> */}
             <Heart className="w-5 h-5" />
+            {/* {} */}
+            {/* </button> */}
+            {/* <Heart className="w-5 h-5" /> */}
           </Button>
           <Button className="flex justify-center items-center bg-white hover:bg-gray-200 rounded-full w-7 h-8 text-maroon-600">
             <Link href={`/products/${product._id}`}>

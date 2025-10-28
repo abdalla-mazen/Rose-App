@@ -1,7 +1,7 @@
 // Fetch products API in best selling component
 export async function BestSellingApi() {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/products?sort=-sold`,
+    `${process.env.API}/products?sort=-sold`,
     {
       cache: "no-store",
     }
@@ -20,7 +20,7 @@ export async function BestSellingApi() {
 // Fetch products by occasions API in most popular component
 export async function MostPopularApi(occasion: string) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/products?occasion=${occasion}&sort=-sold`,
+    `${process.env.API}/products?occasion=${occasion}&sort=-sold`,
     {
       cache: "no-store",
     }
@@ -39,7 +39,7 @@ export async function MostPopularApi(occasion: string) {
 // Fetch product by ID API in product details page
 export async function ProductByIdApi(id: string) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/products/${id}`,
+    `${process.env.API}/products/${id}`,
     {
       cache: "no-store",
     }
