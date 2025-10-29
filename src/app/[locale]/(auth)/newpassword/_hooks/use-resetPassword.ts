@@ -1,4 +1,4 @@
-import { ResetPasswordValues } from "@/lib/schemes/auth.schemes";
+import { ResetPasswordValues } from "@/lib/schemas/forget.schema";
 import { useMutation } from "@tanstack/react-query";
 import { newPassword } from "../_actions/new-password.action";
 import { useRouter } from "@/i18n/navigation";
@@ -18,7 +18,7 @@ export default function useResetPassword() {
       const response = await newPassword(values);
       // Handle Error
       if (response?.error) {
-         toast?.error(t("error-toast"));
+        toast?.error(t("error-toast"));
         throw new Error(response.error || t("operationFailed"));
       }
 

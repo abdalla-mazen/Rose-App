@@ -136,6 +136,8 @@
   "create-account": "انشاء حساب",
   "register-mess": "هل لديك حساب بالفعل ؟",
   "register-link": "تسجيل دخول",
+  "login-mess": "ليس لديك حساب حتى الآن؟",
+  "login-link": "قم بإنشاء حساب الآن!",
   "firstname-req": "الاسم الأول مطلوب",
   "lastname-req": "الاسم الاخير مطلوب",
   "email-req": "البريد الالكتروني مطلوب",

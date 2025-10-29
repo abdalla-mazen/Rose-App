@@ -15,10 +15,7 @@ import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
 import RatingStarts from "./rating-stars";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  ProductReviewScheme,
-  useProductReviewScheme,
-} from "@/lib/schemes/product-review.scheme";
+import { ProductReviewScheme, useProductReviewScheme } from "@/lib/schemas/product-review.schema";
 import { useSendProductReview } from "../hooks/use-send-product-review";
 
 export default function ReviewForm({ productId }: { productId: string }) {
@@ -89,10 +86,7 @@ export default function ReviewForm({ productId }: { productId: string }) {
         <RatingStarts onRatingChange={onRatingChange} />
 
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 w-full"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
             {/* Title form field */}
             <FormField
               control={form.control}
@@ -103,11 +97,7 @@ export default function ReviewForm({ productId }: { productId: string }) {
                     {t("review-title")}
                   </FormLabel>
                   <FormControl>
-                    <Input
-                      type="text"
-                      placeholder={t("review-title-placeholder")}
-                      {...field}
-                    />
+                    <Input type="text" placeholder={t("review-title-placeholder")} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -124,10 +114,7 @@ export default function ReviewForm({ productId }: { productId: string }) {
                     {t("review-comment")}
                   </FormLabel>
                   <FormControl>
-                    <Textarea
-                      placeholder={t("review-comment-placeholder")}
-                      {...field}
-                    />
+                    <Textarea placeholder={t("review-comment-placeholder")} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -58,7 +58,7 @@ export default function RegisterForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="text-zinc-600 text-start"
+        className="text-zinc-600 dark:text-zinc-50 text-start"
       >
         <div className="flex gap-5">
           <div className="w-1/2">
@@ -136,7 +136,7 @@ export default function RegisterForm() {
 
               {/* Field */}
               <FormControl>
-                <PhoneInput {...field} placeholder="01005493046" />
+                <PhoneInput defaultCountry="EG" {...field} placeholder="01005493046" />
               </FormControl>
 
               {/* Feedback */}
@@ -216,11 +216,9 @@ export default function RegisterForm() {
         {error && <ErrorMessage message={error.message} />}
 
         <Button
-          disabled={
-            isPending || (form.formState.isSubmitted && !form.formState.isValid)
-          }
+          disabled={isPending || (form.formState.isSubmitted && !form.formState.isValid)}
           type="submit"
-          className="bg-maroon-600 my-2 w-full capitalize"
+          className="bg-maroon-600 dark:bg-softPink-300 my-2 w-full dark:text-zinc-800 capitalize"
         >
           {isPending ? (
             <LoaderCircle className="me-2 animate-spin" size={16} />

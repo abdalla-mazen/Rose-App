@@ -137,6 +137,8 @@
   "create-account": "create account",
   "register-mess": "Already have an account?",
   "register-link": "login",
+  "login-mess": "Don’t have an account yet?",
+  "login-link": "Create one now!",
   "firstname-req": "Your first name is required",
   "lastname-req": "Your last name is required",
   "email-req": "Your email is required",
@@ -162,7 +164,11 @@
   "filtering": "Filtering",
   "filters": "Filters",
   "resetAll": "Clear All",
-  "priceRange": "Price Range"
-
-
+  "priceRange": "Price Range",
+  "added-to-cart-successfully-as-a-guest": "The product has been successfully added to the cart as a guest!",
+  "added-to-cart-successfully-as-a-logged-in-user": "The product has been successfully added to the cart as a registered user!",
+  "added-to-cart-error": "Failed to add product to cart",
+  "merge-cart": "The basket has been successfully merged!",
+  "merge-cart-error": "An error occurred while merging the basket.",
+  "add-to-cart": "add to cart"
 }

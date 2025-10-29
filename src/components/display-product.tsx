@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useWishlist } from "@/hooks/use-wishlist";
-import useAddToCart from "@/app/[locale]/products/[...id]/_hooks/use-add-to-cart";
+import useAddToCart from "@/hooks/use-add-to-cart";
 
 type AddToCartFields = {
   product: string;

@@ -6,8 +6,8 @@ import { useFormatter, useTranslations } from "next-intl";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
-import useAddToCart from "../_hooks/use-add-to-cart";
 import { useWishlist } from "@/hooks/use-wishlist";
+import useAddToCart from "@/hooks/use-add-to-cart";
 
 type Props = {
   product: Product;
@@ -195,7 +195,7 @@ export default function ProductDetails({ product }: Props) {
           {/* Add to cart button */}
           <Button
             disabled={product.quantity <= 0 || isAddingToCart}
-            className="bg-maroon-600 dark:bg-softPink-300 font-medium"
+            className="bg-maroon-600 dark:bg-softPink-300 font-medium capitalize"
             onClick={handleAddToCart}
           >
             <ShoppingCart className="w-6 h-6" />

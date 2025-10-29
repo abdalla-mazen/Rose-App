@@ -20,9 +20,16 @@ type Props = {
 };
 
 export default function UserDropdown({ session }: Props) {
+  // Translations
   const t = useTranslations();
   const locale = useLocale();
   const isArabic = locale === "ar";
+
+  // Logout function
+  function logout() {
+    localStorage.removeItem("isLoggedIn");
+    signOut();
+  }
 
   return (
     <DropdownMenu>
@@ -70,11 +77,7 @@ export default function UserDropdown({ session }: Props) {
         <DropdownMenuSeparator className="dark:bg-zinc-600" />
 
         <DropdownMenuItem
-          onClick={() =>
-            signOut({
-              callbackUrl: "/login",
-            })
-          }
+          onClick={logout}
           className={`capitalize ${isArabic ? "flex-row-reverse text-right" : ""}`}
         >
           <LogOut className={`${isArabic ? "ml-2" : "mr-2"}`} /> {t("logout")}

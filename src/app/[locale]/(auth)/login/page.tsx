@@ -1,9 +1,22 @@
+import AuthTitle from "@/components/shared/auth/auth-title";
 import LoginForm from "./_components/login-form";
+import AuthBottomLink from "@/components/shared/auth/auth-bottom-link";
+import { getTranslations } from "next-intl/server";
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  // Translations
+  const t = await getTranslations();
+
   return (
-    <div className="mt-10 p-4 max-w-[25.5rem]">
+    <main>
+      {/* Login title */}
+      <AuthTitle title="Welcome back!" />
+
+      {/* Login form (client component) */}
       <LoginForm />
-    </div>
+
+      {/* Login meassage , login link */}
+      <AuthBottomLink message={t("login-mess")} linkHref="/register" linkText={t("login-link")} />
+    </main>
   );
 }

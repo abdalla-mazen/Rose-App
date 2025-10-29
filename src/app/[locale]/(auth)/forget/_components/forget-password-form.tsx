@@ -2,10 +2,7 @@
 
 import React from "react";
 import useForget from "../_hooks/use-forget";
-import {
-  ForgetValues,
-  useForgetPasswordSchema,
-} from "@/lib/schemes/auth.schemes";
+import { ForgetValues, useForgetPasswordSchema } from "@/lib/schemas/forget.schema";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleX, LoaderCircle } from "lucide-react";
@@ -41,7 +38,7 @@ export default function ForgetPassword() {
   };
 
   return (
-    <div className="  pt-4  pb-9 border-y border-y-zinc-200 dark:border-y-zinc-600">
+    <div className="pt-4 pb-9 border-y border-y-zinc-200 dark:border-y-zinc-600">
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           {/* Email field */}
@@ -51,11 +48,11 @@ export default function ForgetPassword() {
           {form.formState.errors.email && (
             <>
               {/* Error validation */}
-              <div className="relative ">
-                <CircleX className="absolute bg-white dark:bg-zinc-800 rounded-full w-fit -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 text-maroon-600 dark:text-softPink-300" />
+              <div className="relative">
+                <CircleX className="left-1/2 z-10 absolute bg-white dark:bg-zinc-800 rounded-full w-fit text-maroon-600 dark:text-softPink-300 -translate-x-1/2 -translate-y-1/2" />
               </div>
-              <Alert className="text-center mb-4 border-maroon-600 dark:border-softPink-300 dark:bg-zinc-800  ">
-                <AlertDescription className="text-zinc-700 dark:text-zinc-50 ">
+              <Alert className="dark:bg-zinc-800 mb-4 border-maroon-600 dark:border-softPink-300 text-center">
+                <AlertDescription className="text-zinc-700 dark:text-zinc-50">
                   {t("operationFailed")}
                 </AlertDescription>
               </Alert>
@@ -64,7 +61,7 @@ export default function ForgetPassword() {
 
           {/* Error from server */}
           {error && (
-            <Alert className="text-center text-maroon-600 mb-4 border border-maroon-600 dark:border-softPink-300 dark:bg-zinc-800 dark:text-softPink-300">
+            <Alert className="dark:bg-zinc-800 mb-4 border border-maroon-600 dark:border-softPink-300 text-maroon-600 dark:text-softPink-300 text-center">
               <AlertDescription>{error.message}</AlertDescription>
             </Alert>
           )}
@@ -72,7 +69,7 @@ export default function ForgetPassword() {
           {/* submit button */}
           <Button
             disabled={isPending || (!isValid && isSubmitted) || !!timer}
-            className="w-full  "
+            className="w-full"
             variant={"primary"}
           >
             {isPending ? (

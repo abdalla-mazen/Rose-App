@@ -6,6 +6,7 @@ import { MostPopularApi } from "@/lib/apis/product.api";
 import { useTranslations } from "next-intl";
 import DisplayProduct from "../../display-product";
 import { MoveLeft, MoveRight } from "lucide-react";
+import CardProduct from "@/app/[locale]/products/_components/card-product";
 
 // Props type
 type Props = {
@@ -63,8 +64,8 @@ export default function MostPopularClient({ occasions, products: initialProducts
               onClick={() => setSelectedOccasion(occasion._id)}
               className={`cursor-pointer transition font-medium ${
                 selectedOccasion === occasion._id
-                  ? "text-[#A6252A]"
-                  : "text-[#3F3F46] hover:text-[#A6252A]"
+                  ? "text-maroon-600 dark:text-softPink-200"
+                  : "dark:text-zinc-400 text-zinc-700 dark:hover:text-softPink-200 hover:text-maroon-600"
               }`}
             >
               {occasion.name}
@@ -92,12 +93,12 @@ export default function MostPopularClient({ occasions, products: initialProducts
       ) : (
         <div className="gap-6 grid grid-cols-4 w-full">
           {products.slice(0, 12).map((product) => (
-            <DisplayProduct key={product._id} {...product} />
+            <CardProduct key={product._id} product={product} />
           ))}
         </div>
       )}
 
-      <div className="flex justify-end items-center gap-2 mt-12 w-full font-semibold text-[#741C21] dark:text-[#FFC2D0] cursor-pointer">
+      <div className="flex justify-end items-center gap-2 mt-12 w-full font-semibold text-maroon-600 dark:text-softPink-200 cursor-pointer">
         <button onClick={() => allProducts(selectedOccasion)}>{t("mostpopular-view-btn")}</button>
         <span>{locale === "ar" ? <MoveLeft /> : <MoveRight />}</span>
       </div>

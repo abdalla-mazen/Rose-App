@@ -10,7 +10,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { LoginFormInput, useLoginFormSchema } from "@/lib/schemes/auth.schema";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import PasswordInput from "@/components/ui/password-input";
@@ -19,6 +18,7 @@ import { Link } from "@/i18n/navigation";
 import useLogin from "../_hooks/use-login";
 import ErrorMessage from "@/components/shared/error-message";
 import { useTranslations } from "next-intl";
+import { LoginFormInput, useLoginFormSchema } from "@/lib/schemas/auth.schema";
 
 export default function LoginForm() {
   // Translation
@@ -57,7 +57,10 @@ export default function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmitHandler)} className="space-y-4">
+      <form
+        onSubmit={form.handleSubmit(onSubmitHandler)}
+        className="space-y-4 text-zinc-600 dark:text-zinc-50"
+      >
         {/* Email form field */}
         <FormField
           control={form.control}
@@ -114,18 +117,18 @@ export default function LoginForm() {
           </Button>
 
           {/* Register */}
-          <p>
+          {/* <p>
             {t.rich("no-account", {
               Link: (chunks) => (
                 <Link
-                  href="/signup"
+                  href="/register"
                   className="font-medium text-maroon-700 dark:text-softPink-300 text-sm hover:underline"
                 >
                   {chunks}
                 </Link>
               ),
             })}
-          </p>
+          </p> */}
         </div>
       </form>
     </Form>

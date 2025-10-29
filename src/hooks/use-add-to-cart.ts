@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import { AddToCartAction } from "../_actions/add-to-cart.action";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import { AddToCartAction } from "@/lib/actions/add-to-cart.action";
 
 // Types
 type AddToCartFields = {
@@ -30,7 +30,7 @@ export default function useAddToCart() {
     onSuccess: () => {
       toast.success(t("added-to-cart-successfully-as-a-logged-in-user"), {
         position: "bottom-right",
-        duration: 1000,
+        duration: 1500,
       });
     },
 
@@ -38,7 +38,7 @@ export default function useAddToCart() {
     onError: (error: Error) => {
       toast.error(error.message || t("added-to-cart-error"), {
         position: "bottom-right",
-        duration: 1000,
+        duration: 1500,
       });
     },
   });

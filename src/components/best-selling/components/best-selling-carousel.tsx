@@ -1,5 +1,6 @@
 "use client";
 
+import CardProduct from "@/app/[locale]/products/_components/card-product";
 import DisplayProduct from "@/components/display-product";
 import {
   Carousel,
@@ -29,7 +30,7 @@ export default function BestSellingCarousel({ products, locale }: Props) {
         {products.map((product) => (
           <CarouselItem key={product._id} className="ps-4 md:basis-1/2 lg:basis-1/3">
             {/* Display products in carousel */}
-            <DisplayProduct {...product} />
+            <CardProduct product={product} />
           </CarouselItem>
         ))}
       </CarouselContent>

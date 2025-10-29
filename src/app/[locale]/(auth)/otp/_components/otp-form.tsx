@@ -8,14 +8,14 @@ import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { verifyOtpAction } from "@/lib/actions/otp.action";
-import { createOtpSchema, type OtpSchemaType } from "@/lib/schemas/otpSchema";
+import { createOtpSchema, type OtpSchemaType } from "@/lib/schemas/otp.schema";
 import { useTranslations } from "next-intl";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { Button } from "@/components/ui/button";
 import OtpTimer from "./otp-timer";
 
-  type OtpFormProps = {
+type OtpFormProps = {
   email: string;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   timeLeft: number;
@@ -27,18 +27,18 @@ export default function OtpForm({ email, setEmail, setTimeLeft }: OtpFormProps) 
   const t = useTranslations("OTP");
   const otpSchema = createOtpSchema(t);
 
-useEffect(() => {
-  const storedEmail = localStorage.getItem("reset_email");
-  if (!storedEmail) {
-    router.push("/en/forgot-password");
-    return;
-  }
-  setEmail(storedEmail);
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("reset_email");
+    if (!storedEmail) {
+      router.push("/en/forgot-password");
+      return;
+    }
+    setEmail(storedEmail);
 
-  const storedTimer = localStorage.getItem("timer");
-  const remainingTime = storedTimer ? parseInt(storedTimer, 10) : 60;
-  setTimeLeft(remainingTime);
-}, []);
+    const storedTimer = localStorage.getItem("timer");
+    const remainingTime = storedTimer ? parseInt(storedTimer, 10) : 60;
+    setTimeLeft(remainingTime);
+  }, []);
 
   const form = useForm<OtpSchemaType>({
     resolver: zodResolver(otpSchema),
@@ -76,7 +76,7 @@ useEffect(() => {
     <div className="w-full">
       <h1 className="font-semibold text-2xl">Enter the OTP Code</h1>
 
-      <div className="text-sm mb-9 flex items-center gap-2 flex-wrap">
+      <div className="flex flex-wrap items-center gap-2 mb-9 text-sm">
         <span>
           We have sent a 6-digit code to <span>{email}</span>
         </span>
@@ -86,11 +86,14 @@ useEffect(() => {
         >
           Edit
         </button>
-        <div className="relative w-full after:block after:h-[1px] after:bg-zinc-200" />
+        <div className="after:block relative after:bg-zinc-200 w-full after:h-[1px]" />
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 flex flex-col items-center">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col items-center space-y-4"
+        >
           <FormField
             control={form.control}
             name="otp"
@@ -119,13 +122,12 @@ useEffect(() => {
 
           <Button
             type="submit"
-            className="bg-red-800 text-white hover:bg-red-800 w-full"
+            className="bg-red-800 hover:bg-red-800 w-full text-white"
             disabled={verifyMutation.isPending}
           >
             {verifyMutation.isPending ? "Verifying..." : "Verify OTP"}
           </Button>
-                  <div className="relative w-full after:block after:h-[1px] after:bg-zinc-200 after:mt-4" />
-
+          <div className="after:block relative after:bg-zinc-200 after:mt-4 w-full after:h-[1px]" />
         </form>
       </Form>
     </div>
