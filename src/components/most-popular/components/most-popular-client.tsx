@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import Subtitle from "@/components/shared/subtitle";
 import { MostPopularApi } from "@/lib/apis/product.api";
 import { useTranslations } from "next-intl";
-import DisplayProduct from "../../display-product";
 import { MoveLeft, MoveRight } from "lucide-react";
 import CardProduct from "@/app/[locale]/products/_components/card-product";
 
@@ -33,6 +32,8 @@ export default function MostPopularClient({ occasions, products: initialProducts
       setLoading(true);
       try {
         const prods = await MostPopularApi(selectedOccasion);
+        console.log(prods);
+
         setProducts(prods);
       } catch (err) {
         console.error(err);

@@ -1,7 +1,6 @@
 "use client";
 
 import CardProduct from "@/app/[locale]/products/_components/card-product";
-import DisplayProduct from "@/components/display-product";
 import {
   Carousel,
   CarouselContent,
@@ -28,7 +27,7 @@ export default function BestSellingCarousel({ products, locale }: Props) {
     >
       <CarouselContent className="-ms-4">
         {products.map((product) => (
-          <CarouselItem key={product._id} className="ps-4 md:basis-1/2 lg:basis-1/3">
+          <CarouselItem key={product._id} className="ps-4 basis-1/3">
             {/* Display products in carousel */}
             <CardProduct product={product} />
           </CarouselItem>
@@ -37,13 +36,13 @@ export default function BestSellingCarousel({ products, locale }: Props) {
 
       {locale === "ar" ? (
         <>
-          <CarouselNext className="bg-[#A6252A] dark:bg-[#CD2E33] me-8 text-white" />
-          <CarouselPrevious className="bg-[#A6252A] dark:bg-[#CD2E33] ms-8 text-white" />
+          <CarouselNext className="bg-maroon-600 dark:bg-maroon-500 me-8 text-white" />
+          <CarouselPrevious className="bg-maroon-600 dark:bg-maroon-500 ms-8 text-white" />
         </>
       ) : (
         <>
-          <CarouselPrevious className="bg-[#A6252A] dark:bg-[#CD2E33] ms-8 text-white" />
-          <CarouselNext className="bg-[#A6252A] dark:bg-[#CD2E33] me-8 text-white" />
+          <CarouselPrevious className="bg-maroon-600 dark:bg-maroon-500 ms-8 text-white" />
+          <CarouselNext className="bg-maroon-600 dark:bg-maroon-500 me-8 text-white" />
         </>
       )}
     </Carousel>

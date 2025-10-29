@@ -12,7 +12,6 @@ import {
 import React from "react";
 import { useLocale } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
-import DisplayProduct from "../display-product";
 import CardProduct from "@/app/[locale]/products/_components/card-product";
 
 type Props = {
@@ -45,7 +44,6 @@ export default function ProductsCarousel({ products = [] }: Props) {
         {products.map((product) => (
           <CarouselItem key={product._id} className="ps-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
             {/* Display products in carousel */}
-            {/* <DisplayProduct {...product} /> */}
             <CardProduct product={product} />
           </CarouselItem>
         ))}
