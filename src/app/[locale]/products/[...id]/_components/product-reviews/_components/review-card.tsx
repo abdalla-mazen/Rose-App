@@ -15,11 +15,7 @@ export default function ReviewCard({ productId }: { productId: string }) {
 
   // Handle error state
   if (error) {
-    return (
-      <div className="mt-6 text-maroon-700 text-4xl text-center">
-        Something went wrong
-      </div>
-    );
+    return <div className="mt-6 text-maroon-700 text-4xl text-center">Something went wrong</div>;
   }
 
   return (
@@ -49,25 +45,18 @@ export default function ReviewCard({ productId }: { productId: string }) {
 
             <div className="flex items-center gap-1 my-2.5">
               <div className="flex items-center gap-0.5 my-2.5">
-                {Array.from({ length: productReview.rating }).map(
-                  (_, index) => (
-                    <span key={index}>
-                      <LucideStar
-                        size={20}
-                        className="fill-yellow-500 border-none text-yellow-500"
-                      />
-                    </span>
-                  )
-                )}
+                {Array.from({ length: productReview.rating }).map((_, index) => (
+                  <span key={index}>
+                    <LucideStar size={20} className="fill-yellow-500 border-none text-yellow-500" />
+                  </span>
+                ))}
               </div>
             </div>
           </div>
 
           {/* Content */}
           <div>
-            <span className="font-semibold text-base">
-              {productReview.title}
-            </span>
+            <span className="font-semibold text-base">{productReview.title}</span>
             <p>{productReview.comment}</p>
           </div>
         </>

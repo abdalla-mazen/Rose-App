@@ -1,11 +1,7 @@
 import { BestSellingApi } from "@/lib/apis/product.api";
 import { getTranslations } from "next-intl/server";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-<<<<<<<< HEAD:src/components/best-selling/best-seliing.tsx
-import ProductsCarousel from "../shared/products-carousel";
-========
-import ProductsCarousel from "../../../components/shared/products-carousel";
->>>>>>>> cf1eaf384df1e5264fbc3901678feb4463467d0a:src/components/best-seliing.tsx
+import ProductsCarousel from "./shared/products-carousel";
 
 export default async function BestSelling({ locale }: { locale: string }) {
   // Translations
