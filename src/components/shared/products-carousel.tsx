@@ -10,9 +10,9 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import React from "react";
-import DisplayProduct from "../../app/[locale]/_components/display-product";
 import { useLocale } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
+import DisplayProduct from "../display-product";
 
 type Props = {
   products?: Product[];

@@ -1,9 +1,9 @@
 "use client";
 
-import ProductsCarousel from "@/components/shared/products-carousel";
-import { useRelatedProducts } from "./hooks/use-related-products";
 import { useTranslations } from "next-intl";
+import { useRelatedProducts } from "./hooks/use-related-products";
 import RelatedProductsSkeleton from "./_skeleton/related-products.skeleton";
+import ProductsCarousel from "@/components/shared/products-carousel";
 
 export default function RelatedProducts({ productId }: { productId: string }) {
   // Translation

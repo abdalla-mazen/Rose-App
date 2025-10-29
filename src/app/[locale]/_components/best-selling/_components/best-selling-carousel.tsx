@@ -1,5 +1,6 @@
 "use client";
 
+import DisplayProduct from "@/components/display-product";
 import {
   Carousel,
   CarouselContent,
@@ -8,7 +9,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import React from "react";
-import DisplayProduct from "../../display-product";
 
 type Props = {
   products: Product[];

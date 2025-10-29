@@ -20,17 +20,23 @@ import { ModeToggle } from "@/components/features/toggle-mode";
 import { NavLink } from "@/components/shared/nav-link";
 import ToggleLocale from "./toggel-locale";
 import { useSession } from "next-auth/react";
+import { useState } from "react";
+import Notifications from "@/components/notification-section/notifications";
 
 export default function Header() {
   // translations
   const t = useTranslations();
   const { data, status } = useSession();
 
+  // State
+
+  const [notificationClicked, setNotificationClicked] = useState(false)
+
   // icons and links
   const icons = [
-    { href: "/wishlist", icon: <Heart size={24} /> },
-    { href: "/cart", icon: <ShoppingCart size={24} /> },
-    { href: "/wishlist", icon: <Bell size={24} /> },
+    {id:1, href: "/wishlist", icon: <Heart size={24} /> ,  },
+    { id:2,href: "/cart", icon: <ShoppingCart size={24} /> },
+    { id:3,href: "/", icon: <Bell size={24} /> },
   ];
   const links = [
     { href: "/", label: t("home"), icon: <House size={20} /> },
@@ -76,16 +82,19 @@ export default function Header() {
             {status === "authenticated" ? data.user.firstName : t("login")}
           </Link>
           <ul className="flex items-center gap-3 px-4 py-3.5 border-x border-zinc-200">
-            {icons.map((item, index) => (
-              <li key={index}>
-                <Link href={item.href}>{item.icon}</Link>
+            {icons.map((item) => (
+              <li className="relative" key={item.id}>
+                <Link onClick={()=> item.id === 3 ? setNotificationClicked(prev=> !prev):setNotificationClicked(prev=>prev)}  href={item.href}>{item.icon}</Link>
               </li>
-            ))}
+            ))
+            }
+
+      {notificationClicked &&   <Notifications />}
+
+
             <ModeToggle />
           </ul>
-          {/* <Button className="bg-transparent hover:bg-white shadow-none pe-16 text-zinc-700 hover:text-zinc-700 dark:text-zinc-50 Bottom navigation bar">
-            {t("language")}
-          </Button> */}
+      
           <ToggleLocale />
         </div>
       </div>

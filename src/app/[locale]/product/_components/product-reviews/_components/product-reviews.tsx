@@ -16,8 +16,7 @@ export default function ProductReviews({ productId }: { productId: string }) {
 
   // Average rating
   const averageRating = productReviews.length
-    ? productReviews.reduce((acc: number, r: Review) => acc + r.rating, 0) /
-      productReviews.length
+    ? productReviews.reduce((acc: number, r: Review) => acc + r.rating, 0) / productReviews.length
     : 0;
 
   return (
@@ -56,10 +55,7 @@ export default function ProductReviews({ productId }: { productId: string }) {
           <div className="flex items-center my-2">
             {Array.from({ length: 4 }).map((_, index) => (
               <span key={index}>
-                <LucideStar
-                  size={20}
-                  className="fill-yellow-500 border-none text-yellow-500"
-                />
+                <LucideStar size={20} className="fill-yellow-500 border-none text-yellow-500" />
               </span>
             ))}
           </div>
