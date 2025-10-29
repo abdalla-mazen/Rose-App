@@ -2,7 +2,7 @@ import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 
 import HeroPage from "./hero/page";
-import BestSelling from "@/components/best-selling/best-seliing";
+import BestSelling from "@/components/best-seliing";
 import MostPopular from "@/components/most-popular/most-popular";
 import About from "@/components/about";
 import Gallery from "@/components/gallery";

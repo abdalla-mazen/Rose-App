@@ -17,7 +17,6 @@ export interface ActionResponse {
 export interface clearResponse {
   message?: string;
   deletedCount?: number;
-  success: boolean;
 }
 
 export interface UnreadCountResponse {

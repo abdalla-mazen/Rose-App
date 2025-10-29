@@ -1,5 +1,5 @@
-import ProductReviews from "@/components/product-reviews/_components/product-reviews";
-import RelatedProducts from "@/components/related-products/related-products";
+import ProductReviews from "../../products/[...id]/_components/product-reviews/_components/product-reviews";
+import RelatedProducts from "../../products/[...id]/_components/related-products/related-products";
 
 export default function RelatedProductsPage({ params }: { params: { id: string } }) {
   const productId = params.id;

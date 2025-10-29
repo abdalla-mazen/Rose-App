@@ -16,12 +16,11 @@ export default function ProductReviews({ productId }: { productId: string }) {
 
   // Average rating
   const averageRating = productReviews.length
-    ? productReviews.reduce((acc: number, r: Review) => acc + r.rating, 0) /
-      productReviews.length
+    ? productReviews.reduce((acc: number, r: Review) => acc + r.rating, 0) / productReviews.length
     : 0;
 
   return (
-    <main className="mx-auto max-w-7xl">
+    <main className="mx-auto mt-12 max-w-7xl">
       {/* Top */}
       <div>
         {/* Title */}
@@ -56,10 +55,7 @@ export default function ProductReviews({ productId }: { productId: string }) {
           <div className="flex items-center my-2">
             {Array.from({ length: 4 }).map((_, index) => (
               <span key={index}>
-                <LucideStar
-                  size={20}
-                  className="fill-yellow-500 border-none text-yellow-500"
-                />
+                <LucideStar size={20} className="fill-yellow-500 border-none text-yellow-500" />
               </span>
             ))}
           </div>
