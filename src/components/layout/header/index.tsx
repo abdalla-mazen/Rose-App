@@ -1,16 +1,5 @@
 import Image from "next/image";
-import {
-  Bell,
-  ClipboardList,
-  Gift,
-  Headset,
-  Heart,
-  House,
-  Info,
-  PartyPopper,
-  ShoppingCart,
-  User,
-} from "lucide-react";
+import { ClipboardList, Gift, Headset, House, Info, PartyPopper, User } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import InputSearch from "@/components/ui/search-input";
 import { ModeToggle } from "@/components/features/toggle-mode";
@@ -21,8 +10,7 @@ import { authOptions } from "@/auth";
 import { getTranslations } from "next-intl/server";
 import UserDropdown from "./user-dropdown";
 import { AccountProfile } from "@/lib/types/account-profile";
-// import { useState } from "react";
-// import Notifications from "@/components/notification-section/notifications";
+import ToggleNotification from "./toggle-notification";
 
 export default async function Header() {
   // translations
@@ -36,15 +24,7 @@ export default async function Header() {
     ? (session.user as AccountProfile)
     : null;
 
-  // State
-  // const [notificationClicked, setNotificationClicked] = useState(false);
-
-  // icons and links
-  const icons = [
-    { id: 1, href: "/wishlist", icon: <Heart size={24} /> },
-    { id: 2, href: "/cart", icon: <ShoppingCart size={24} /> },
-    { id: 3, href: "/", icon: <Bell size={24} /> },
-  ];
+  //  links
   const links = [
     { href: "/", label: t("home"), icon: <House size={20} /> },
     { href: "/products", label: t("products"), icon: <Gift size={20} /> },
@@ -92,22 +72,7 @@ export default async function Header() {
             </Link>
           )}
           <ul className="flex items-center gap-3 px-4 py-3.5 border-x border-zinc-200">
-            {icons.map((item) => (
-              <li className="relative" key={item.id}>
-                <Link
-                  // onClick={() =>
-                  //   item.id === 3
-                  //     ? setNotificationClicked((prev) => !prev)
-                  //     : setNotificationClicked((prev) => prev)
-                  // }
-                  href={item.href}
-                >
-                  {item.icon}
-                </Link>
-              </li>
-            ))}
-
-            {/* {notificationClicked && <Notifications />} */}
+            <ToggleNotification />
 
             <ModeToggle />
           </ul>

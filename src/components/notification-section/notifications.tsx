@@ -21,11 +21,9 @@ export default function Notifications() {
 
   // 📨 Fetch notifications
   const { notifications, isNotificationsLoading, isNotificationsError } = useNotifications();
-  console.log("notifications", notifications);
 
   // 🔹 Fetch unread notifications count
   const { unreadCount, isUnreadCountLoading } = useUnreadCount();
-  console.log("unreadCount", unreadCount);
 
   // 🧹 Clear all notifications
   const clearMutation = useMutation({
@@ -48,11 +46,11 @@ export default function Notifications() {
   return (
     <Card className="top-14 right-5 z-30 absolute shadow-md border-none rounded-2xl w-[360px]">
       {/* Header */}
-      <CardHeader className="bg-[#741C21] px-4 py-3 rounded-t-2xl text-white">
+      <CardHeader className="bg-[#741C21] dark:bg-softPink-200 px-4 py-3 rounded-t-2xl text-white dark:text-zinc-800">
         <div className="flex justify-between items-center">
           <h2 className="font-bold text-2xl tracking-tight">
             {t("title")}{" "}
-            <span className="font-semibold text-white">
+            <span className="font-semibold">
               {isUnreadCountLoading ? "..." : t("unreadCount", { count: unreadCount })}
             </span>
           </h2>
@@ -60,7 +58,7 @@ export default function Notifications() {
       </CardHeader>
 
       {/* Actions Bar */}
-      <div className="flex justify-between items-center bg-white px-4 py-2 border-b text-zinc-800 text-sm">
+      <div className="flex justify-between items-center bg-white dark:bg-zinc-600 px-4 py-2 border-zinc-300 dark:border-zinc-400 border-b text-zinc-800 dark:text-zinc-500 text-sm">
         <button
           onClick={() => clearMutation.mutate()}
           disabled={notifications?.length === 0 || clearMutation.isPending}
@@ -76,7 +74,7 @@ export default function Notifications() {
         <button
           onClick={() => markAllMutation.mutate()}
           disabled={notifications?.length === 0 || markAllMutation.isPending}
-          className={cn("flex items-center gap-1 hover:text-zinc-900", {
+          className={cn("flex items-center gap-1", {
             "cursor-not-allowed text-zinc-400":
               isNotificationsLoading || notifications?.length === 0,
           })}
@@ -87,7 +85,7 @@ export default function Notifications() {
       </div>
 
       {/* Notifications content */}
-      <CardContent className="p-0 min-h-60">
+      <CardContent className="dark:bg-zinc-600 p-0 min-h-60 dark:text-zinc-400">
         {isNotificationsLoading ? (
           <p className="text-gray-500 text-center translate-y-20">{t("loading")}</p>
         ) : isNotificationsError ? (

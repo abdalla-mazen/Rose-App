@@ -4,7 +4,6 @@ import Image from "next/image";
 import ReviewCardSkeleton from "../_skeletons/review-card.skeleton";
 
 export default function ReviewCard({ productId }: { productId: string }) {
-  console.log("productId-=================================", productId[0]);
   // Hooks
   const { data, error, isLoading } = useProductReviews(productId);
   const productReviews = data?.reviews;
