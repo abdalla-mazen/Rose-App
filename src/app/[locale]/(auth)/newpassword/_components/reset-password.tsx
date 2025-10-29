@@ -3,10 +3,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  ResetPasswordValues,
-  useResetPasswordSchema,
-} from "@/lib/schemes/auth.schemes";
+import { ResetPasswordValues, useResetPasswordSchema } from "@/lib/schemas/forget.schema";
 import useResetPassword from "../_hooks/use-resetPassword";
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
@@ -49,27 +46,23 @@ export default function ResetPassword() {
   }, [form]);
 
   return (
-    <div className="w-full max-w-md mx-auto space-y-6">
+    <div className="space-y-6 mx-auto w-full max-w-md">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           {/* Password */}
           <PasswordInputRHF name="password" label={t("password-label")} />
 
           {/* Confirm Password */}
-          <PasswordInputRHF
-            name="newPassword"
-            label={t("confirm-password-label")}
-          />
+          <PasswordInputRHF name="newPassword" label={t("confirm-password-label")} />
 
           {/* Error Validation */}
-          {(form.formState.errors.password ||
-            form.formState.errors.newPassword) && (
+          {(form.formState.errors.password || form.formState.errors.newPassword) && (
             <>
-              <div className="relative ">
-                <CircleX className="absolute bg-white dark:bg-zinc-800 rounded-full w-fit -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 text-maroon-600 dark:text-softPink-300" />
+              <div className="relative">
+                <CircleX className="left-1/2 z-10 absolute bg-white dark:bg-zinc-800 rounded-full w-fit text-maroon-600 dark:text-softPink-300 -translate-x-1/2 -translate-y-1/2" />
               </div>
-              <Alert className="text-center mb-4 border-maroon-600 dark:border-softPink-300 dark:bg-zinc-800  ">
-                <AlertDescription className="text-zinc-700 dark:text-zinc-50 ">
+              <Alert className="dark:bg-zinc-800 mb-4 border-maroon-600 dark:border-softPink-300 text-center">
+                <AlertDescription className="text-zinc-700 dark:text-zinc-50">
                   {t("operationFailed")}
                 </AlertDescription>
               </Alert>
@@ -78,7 +71,7 @@ export default function ResetPassword() {
 
           {/* Error from server */}
           {error && (
-            <Alert className="text-center mb-4 dark:text-softPink-300">
+            <Alert className="mb-4 dark:text-softPink-300 text-center">
               <AlertDescription>{error.message}</AlertDescription>
             </Alert>
           )}
@@ -90,11 +83,7 @@ export default function ResetPassword() {
             disabled={isPending || (!isValid && isSubmitted)}
             variant={"primary"}
           >
-            {isPending ? (
-              <LoaderCircle className="animate-spin" />
-            ) : (
-              t("reset-password")
-            )}
+            {isPending ? <LoaderCircle className="animate-spin" /> : t("reset-password")}
           </Button>
         </form>
       </Form>

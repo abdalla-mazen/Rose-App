@@ -1,9 +1,9 @@
-import { LoginFormInput } from "@/lib/schemes/auth.schema";
 import { useMutation } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
-import { AddToCartAction } from "@/app/[locale]/products/[...id]/_actions/add-to-cart.action";
+import { AddToCartAction } from "@/lib/actions/add-to-cart.action";
+import { LoginFormInput } from "@/lib/schemas/auth.schema";
 
 export default function useLogin() {
   // Translations

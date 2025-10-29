@@ -9,7 +9,7 @@ export default async function Page() {
   const t = await getTranslations();
 
   return (
-    <main className="text-center">
+    <main>
       {/* Register title */}
       <AuthTitle title="Become part of our family!" />
 

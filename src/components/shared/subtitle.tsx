@@ -2,13 +2,7 @@ import React from "react";
 
 export default function Subtitle({ title }: { title: string }) {
   return (
-    <h2
-      className="relative text-4xl font-bold text-[#741C21] dark:text-[#FFC2D0]
-            before:content-[''] before:absolute before:-bottom-0.5 before:start-0
-            before:w-1/3 before:h-[2px] before:bg-[#E65073] dark:before:bg-[#3F3F46]
-            after:content-[''] after:absolute after:bottom-0 after:start-0
-            after:w-3/4 after:h-[40%] after:bg-[#fbcfd7] dark:after:bg-[#FF668B] after:-z-10 after:rounded-r-md"
-    >
+    <h2 className="before:-bottom-0.5 after:bottom-0 after:-z-10 before:absolute after:absolute relative before:bg-softPink-600 after:bg-softPink-100 dark:before:bg-softPink-500 dark:after:bg-zinc-700 after:rounded-r-md before:w-1/3 after:w-3/4 before:h-[2px] after:h-[40%] font-bold text-maroon-600 dark:text-softPink-200 text-4xl before:content-[''] after:content-[''] before:start-0 after:start-0">
       {title}
     </h2>
   );

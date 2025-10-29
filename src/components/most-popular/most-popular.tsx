@@ -1,4 +1,3 @@
-import Subtitle from "@/components/shared/subtitle";
 import { FetchOccasions } from "@/lib/apis/occasion.api";
 import { MostPopularApi } from "@/lib/apis/product.api";
 import MostPopularClient from "./components/most-popular-client";

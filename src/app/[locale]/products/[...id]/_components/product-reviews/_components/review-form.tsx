@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
 import RatingStarts from "./rating-stars";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ProductReviewScheme, useProductReviewScheme } from "@/lib/schemes/product-review.scheme";
+import { ProductReviewScheme, useProductReviewScheme } from "@/lib/schemas/product-review.schema";
 import { useSendProductReview } from "../hooks/use-send-product-review";
 
 export default function ReviewForm({ productId }: { productId: string }) {

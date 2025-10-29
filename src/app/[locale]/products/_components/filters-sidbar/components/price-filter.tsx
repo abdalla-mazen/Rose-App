@@ -9,10 +9,7 @@ import { useTranslations } from "next-intl";
 import { useFilters } from "@/hooks/use-filters";
 import { filtersApi } from "@/lib/apis/filter-products.api";
 import { useDebounce } from "@/hooks/use-debounce";
-import {
-  PriceFilterFormData,
-  priceFilterSchema,
-} from "@/lib/schemas/price-schema";
+import { PriceFilterFormData, priceFilterSchema } from "@/lib/schemas/price.schema";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -61,15 +58,10 @@ export default function PriceFilter() {
 
   // Update filters when user stops typing
   useEffect(() => {
-    const minVal =
-      typeof debouncedMinPrice === "number" ? debouncedMinPrice : undefined;
-    const maxVal =
-      typeof debouncedMaxPrice === "number" ? debouncedMaxPrice : undefined;
+    const minVal = typeof debouncedMinPrice === "number" ? debouncedMinPrice : undefined;
+    const maxVal = typeof debouncedMaxPrice === "number" ? debouncedMaxPrice : undefined;
 
-    if (
-      minVal !== currentFilters.minPrice ||
-      maxVal !== currentFilters.maxPrice
-    ) {
+    if (minVal !== currentFilters.minPrice || maxVal !== currentFilters.maxPrice) {
       updateFilters({
         minPrice: minVal,
         maxPrice: maxVal,
@@ -81,8 +73,8 @@ export default function PriceFilter() {
   if (isLoading) {
     return (
       <div className="flex gap-2 w-full">
-        <Skeleton className="h-9 w-full rounded-lg" />
-        <Skeleton className="h-9 w-full rounded-lg" />
+        <Skeleton className="rounded-lg w-full h-9" />
+        <Skeleton className="rounded-lg w-full h-9" />
       </div>
     );
   }
@@ -99,7 +91,7 @@ export default function PriceFilter() {
               setValue("maxPrice", "");
               updateFilters({ minPrice: undefined, maxPrice: undefined });
             }}
-            className="flex items-center gap-1 text-sm text-red-600 hover:text-red-700"
+            className="flex items-center gap-1 text-red-600 hover:text-red-700 text-sm"
           >
             <X className="w-4 h-4" />
             {t("Reset")}
@@ -117,21 +109,17 @@ export default function PriceFilter() {
             min={priceRange?.min}
             max={priceRange?.max}
             className={cn(
-              "border rounded-lg w-full px-2 py-1 text-sm focus:outline-none focus:ring-2 transition-all",
+              "px-2 py-1 border rounded-lg focus:outline-none focus:ring-2 w-full text-sm transition-all",
               errors.minPrice
                 ? "border-red-500 focus:ring-red-200"
-                : "border-gray-300 focus:ring-red-200"
+                : "border-gray-300 focus:ring-red-200",
             )}
             aria-label={t("minimumPrice")}
             aria-invalid={!!errors.minPrice}
             aria-describedby={errors.minPrice ? "min-price-error" : undefined}
           />
           {errors.minPrice && (
-            <p
-              id="min-price-error"
-              className="text-xs text-red-600 mt-1"
-              role="alert"
-            >
+            <p id="min-price-error" className="mt-1 text-red-600 text-xs" role="alert">
               {errors.minPrice.message}
             </p>
           )}
@@ -146,21 +134,17 @@ export default function PriceFilter() {
             min={priceRange?.min}
             max={priceRange?.max}
             className={cn(
-              "border rounded-lg w-full px-2 py-1 text-sm focus:outline-none focus:ring-2 transition-all",
+              "px-2 py-1 border rounded-lg focus:outline-none focus:ring-2 w-full text-sm transition-all",
               errors.maxPrice
                 ? "border-red-500 focus:ring-red-200"
-                : "border-gray-300 focus:ring-red-200"
+                : "border-gray-300 focus:ring-red-200",
             )}
             aria-label={t("maximumPrice")}
             aria-invalid={!!errors.maxPrice}
             aria-describedby={errors.maxPrice ? "max-price-error" : undefined}
           />
           {errors.maxPrice && (
-            <p
-              id="max-price-error"
-              className="text-xs text-red-600 mt-1"
-              role="alert"
-            >
+            <p id="max-price-error" className="mt-1 text-red-600 text-xs" role="alert">
               {errors.maxPrice.message}
             </p>
           )}

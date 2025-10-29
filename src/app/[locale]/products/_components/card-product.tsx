@@ -1,9 +1,21 @@
+"use client";
+
 import HeartButton from "@/components/shared/heart-button";
 import { ProductBadge } from "@/lib/utils/product-badge.util";
 import { ShoppingCart, Star } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import Image from "next/image";
-import React from "react";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import { useWishlist } from "@/hooks/use-wishlist";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import useAddToCart from "@/hooks/use-add-to-cart";
+
+type AddToCartFields = {
+  product: string;
+  quantity: number;
+};
 
 export default function CardProduct({ product }: { product: Product }) {
   // Translations
@@ -12,6 +24,53 @@ export default function CardProduct({ product }: { product: Product }) {
 
   // Variables
   const badges = ProductBadge(product);
+
+  // Hooks
+  const [loggedIn, setLoggedIn] = useState(false);
+  const { addToCart, error: addToCartError, isPending: isAddingToCart } = useAddToCart();
+  const { addToWishList, error: addToWishListError, isPending: isAddingToWishList } = useWishlist();
+
+  // Check if user is logged in effect
+  useEffect(() => {
+    const isLogged = localStorage.getItem("isLoggedIn") === "true";
+    setLoggedIn(isLogged);
+  }, []);
+
+  // Add to cart as a guest functions
+  const getCartAsGuest = () => {
+    const cart = localStorage.getItem("cart");
+    return cart ? JSON.parse(cart) : [];
+  };
+
+  const addToCartAsGuest = (product: Product) => {
+    const cart = getCartAsGuest();
+    const existing = cart.find((item: Product) => item._id === product._id);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    toast.success(t("added-to-cart-successfully-as-a-guest"), {
+      position: "bottom-right",
+      duration: 2000,
+    });
+  };
+
+  // Logged in user functions
+  const submitAddToCart = ({ product, quantity }: AddToCartFields) => {
+    addToCart({ product, quantity });
+  };
+
+  // Button handler if logged in or guest
+  const handleAddToCart = () => {
+    if (loggedIn) {
+      submitAddToCart({ product: product._id, quantity: 1 });
+    } else {
+      addToCartAsGuest(product);
+    }
+  };
 
   return (
     <div key={product._id} className="relative">
@@ -24,7 +83,9 @@ export default function CardProduct({ product }: { product: Product }) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="flex justify-between mx-2.5 mt-2.5">
-          <HeartButton _id={product._id} />
+          <div onClick={() => addToWishList(product._id)}>
+            <HeartButton _id={product._id} />
+          </div>
 
           {/* Badges */}
           <div className="relative">
@@ -49,11 +110,14 @@ export default function CardProduct({ product }: { product: Product }) {
       </div>
 
       {/* Product header */}
-      <p className="mt-5 font-semibold text-maroon-700 dark:text-softPink-200 text-lg text-start">
+      <Link
+        href={`/products/${product._id}`}
+        className="mt-5 font-semibold text-maroon-700 dark:text-softPink-200 text-lg text-start"
+      >
         {product.title.split(" ").length > 5
           ? `${product.title.split(" ").slice(0, 4).join(" ")} ...`
           : product.title}
-      </p>
+      </Link>
 
       {/* Product footer */}
       <div className="flex justify-between items-center">
@@ -85,10 +149,26 @@ export default function CardProduct({ product }: { product: Product }) {
           </div>
         </div>
         <span className="flex justify-center items-center bg-maroon-600 dark:bg-maroon-500 rounded-full w-10 h-10 text-white">
-          <div className="relative">
+          {/* <div className="relative cursor-pointer" onClick={handleAddToCart}>
             <ShoppingCart size={24} />
             <span className="right-wheel-right bottom-wheel-bottom absolute bg-maroon-500 rounded-full w-[0.094rem] h-[0.094rem]"></span>
             <span className="bottom-wheel-bottom left-wheel-left absolute bg-maroon-500 rounded-full w-[0.094rem] h-[0.094rem]"></span>
+          </div> */}
+
+          {/* Add to cart error */}
+          {addToCartError && toast.error(addToCartError.message)}
+
+          {/* Add to wishlist error */}
+          {addToWishListError && toast.error(addToWishListError.message)}
+
+          <div className="relative">
+            <Button
+              disabled={product.quantity <= 0 || isAddingToCart}
+              className="flex justify-center items-center bg-[#A6252A] dark:bg-[#CD2E33] rounded-full w-10 h-10 text-white"
+              onClick={handleAddToCart}
+            >
+              <ShoppingCart />
+            </Button>
           </div>
         </span>
       </div>

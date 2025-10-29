@@ -1,7 +1,6 @@
-
 import { useMutation } from "@tanstack/react-query";
 import { forgetAction } from "../_actions/forget.action";
-import { ForgetValues } from "@/lib/schemes/auth.schemes";
+import { ForgetValues } from "@/lib/schemas/forget.schema";
 import { useRouter } from "next/navigation";
 export default function useForget() {
   const router = useRouter();
