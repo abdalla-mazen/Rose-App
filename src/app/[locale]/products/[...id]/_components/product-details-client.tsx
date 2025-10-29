@@ -1,12 +1,13 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { HeartPlus, Package, ShoppingCart, Star } from "lucide-react";
+import { HeartPlus, LoaderCircle, Package, ShoppingCart, Star } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import useAddToCart from "../_hooks/use-add-to-cart";
+import { useWishlist } from "@/hooks/use-wishlist";
 
 type Props = {
   product: Product;
@@ -24,8 +25,9 @@ export default function ProductDetails({ product }: Props) {
 
   // Hooks
   const [mainImage, setMainImage] = useState(product.imgCover);
-  const { addToCart, error, isPending } = useAddToCart();
   const [loggedIn, setLoggedIn] = useState(false);
+  const { addToCart, error: addToCartError, isPending: isAddingToCart } = useAddToCart();
+  const { addToWishList, error: addToWishListError, isPending: isAddingToWishList } = useWishlist();
 
   // Check if user is logged in effect
   useEffect(() => {
@@ -71,11 +73,6 @@ export default function ProductDetails({ product }: Props) {
 
   return (
     <div className="flex gap-16 mx-auto mt-5 max-w-7xl h-[523px] text-zinc-800 dark:text-zinc-50">
-      {error && (
-        <p className="mb-2 text-red-600">
-          Error adding to cart: {error.message}
-        </p>
-      )}
       {/* Gallery */}
       <div>
         {/* Main image */}
@@ -90,10 +87,7 @@ export default function ProductDetails({ product }: Props) {
         {/* Thumbnails */}
         <div className="flex justify-center items-center gap-2.5 mt-2.5 max-h-[111px]">
           {/* Main image in thumbnails */}
-          <div
-            className="relative cursor-pointer"
-            onClick={() => setMainImage(product.imgCover)}
-          >
+          <div className="relative cursor-pointer" onClick={() => setMainImage(product.imgCover)}>
             <Image
               src={product.imgCover}
               alt="Image cover"
@@ -144,9 +138,7 @@ export default function ProductDetails({ product }: Props) {
         <div className="flex gap-4 mt-2">
           {/* Product price */}
           <h2 className="font-bold text-3xl">
-            <span className="text-zinc-300 dark:text-zinc-500 line-through">
-              {product.price}
-            </span>{" "}
+            <span className="text-zinc-300 dark:text-zinc-500 line-through">{product.price}</span>{" "}
             {product.priceAfterDiscount && (
               <span>
                 {format.number(product.priceAfterDiscount, {
@@ -173,8 +165,7 @@ export default function ProductDetails({ product }: Props) {
 
         {/* Product rating */}
         <p className="flex items-center gap-2 my-4 py-4 border-zinc-100 dark:border-zinc-700 border-t border-b">
-          <Star className="fill-yellow-600 stroke-none w-5 h-5" /> {t("Rating")}
-          : {product.rateAvg}
+          <Star className="fill-yellow-600 stroke-none w-5 h-5" /> {t("Rating")}: {product.rateAvg}
           /5{" "}
           <span className="text-blue-600">
             ({product.rateCount} {t("Ratings")})
@@ -190,22 +181,32 @@ export default function ProductDetails({ product }: Props) {
         <div className="flex items-center gap-2.5">
           {/* Add to wishlist button */}
           <Button
-            disabled={product.quantity <= 0}
+            disabled={product.quantity <= 0 || isAddingToWishList}
             className="bg-zinc-100 hover:bg-zinc-300 dark:bg-zinc-800 dark:border dark:border-zinc-500 w-11 h-11 text-black dark:text-white"
+            onClick={() => addToWishList(product._id)}
           >
-            <HeartPlus className="w-6 h-6" />
+            {isAddingToWishList ? (
+              <LoaderCircle className="w-6 h-6 animate-spin" />
+            ) : (
+              <HeartPlus className="w-6 h-6" />
+            )}
           </Button>
 
           {/* Add to cart button */}
           <Button
-            disabled={product.quantity <= 0}
+            disabled={product.quantity <= 0 || isAddingToCart}
             className="bg-maroon-600 dark:bg-softPink-300 font-medium"
             onClick={handleAddToCart}
           >
             <ShoppingCart className="w-6 h-6" />
-            {t("add-to-cart")}
+            {t("add-to-cart")} {isAddingToCart && <LoaderCircle className="w-6 h-6 animate-spin" />}
           </Button>
         </div>
+
+        {/* Error messages */}
+        {addToWishListError || addToCartError ? (
+          <p className="text-red-500">{addToWishListError?.message || addToCartError?.message}</p>
+        ) : null}
       </div>
     </div>
   );

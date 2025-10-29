@@ -42,10 +42,7 @@ export default function ProductsCarousel({ products = [] }: Props) {
     >
       <CarouselContent className="-ms-4">
         {products.map((product) => (
-          <CarouselItem
-            key={product._id}
-            className="ps-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
-          >
+          <CarouselItem key={product._id} className="ps-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
             {/* Display products in carousel */}
             <DisplayProduct {...product} />
           </CarouselItem>
@@ -57,26 +54,21 @@ export default function ProductsCarousel({ products = [] }: Props) {
           <CarouselNext
             className={cn(
               "bg-[#A6252A] dark:bg-[#CD2E33] text-white",
-              isProduct ? "-translate-x-8" : "me-8"
+              isProduct ? "-translate-x-8" : "me-8",
             )}
           />
           <CarouselPrevious
             className={cn(
               "bg-[#A6252A] dark:bg-[#CD2E33] text-white",
-              isProduct ? "translate-x-8" : "ms-8"
+              isProduct ? "translate-x-8" : "ms-8",
             )}
           />
         </>
       ) : (
         <>
-          <CarouselPrevious
-            className={cn("bg-[#A6252A] dark:bg-[#CD2E33] ms-8 text-white")}
-          />
+          <CarouselPrevious className={cn("bg-[#A6252A] dark:bg-[#CD2E33] ms-8 text-white")} />
           <CarouselNext
-            className={cn(
-              "bg-[#A6252A] dark:bg-[#CD2E33] text-white",
-              isProduct ? "me-9" : "me-8"
-            )}
+            className={cn("bg-[#A6252A] dark:bg-[#CD2E33] text-white", isProduct ? "me-9" : "me-8")}
           />
         </>
       )}

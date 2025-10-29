@@ -27,10 +27,7 @@ export default function BestSellingCarousel({ products, locale }: Props) {
     >
       <CarouselContent className="-ms-4">
         {products.map((product) => (
-          <CarouselItem
-            key={product._id}
-            className="ps-4 md:basis-1/2 lg:basis-1/3"
-          >
+          <CarouselItem key={product._id} className="ps-4 md:basis-1/2 lg:basis-1/3">
             {/* Display products in carousel */}
             <DisplayProduct {...product} />
           </CarouselItem>

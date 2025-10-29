@@ -1,9 +1,9 @@
 import { LoginFormInput } from "@/lib/schemes/auth.schema";
 import { useMutation } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
-import { AddToCartAction } from "../../products/[...id]/_actions/add-to-cart.action";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import { AddToCartAction } from "@/app/[locale]/products/[...id]/_actions/add-to-cart.action";
 
 export default function useLogin() {
   // Translations
@@ -50,11 +50,13 @@ export default function useLogin() {
           localStorage.setItem("isLoggedIn", "true");
 
           // Merge guest cart
-          await mergeGuestCartAfterLogin();
-          toast.success(t("merge-cart"), {
-            position: "top-center",
-            duration: 2000,
-          });
+          if (localStorage.getItem("cart")) {
+            await mergeGuestCartAfterLogin();
+            toast.success(t("merge-cart"), {
+              position: "top-center",
+              duration: 2000,
+            });
+          }
 
           const url = new URL(response.url);
           const callbackUrl = url.searchParams.get("callbackUrl") || "/";

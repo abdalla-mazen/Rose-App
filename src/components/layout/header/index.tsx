@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import {
   Bell,
@@ -14,29 +12,38 @@ import {
   User,
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
 import InputSearch from "@/components/ui/search-input";
 import { ModeToggle } from "@/components/features/toggle-mode";
 import { NavLink } from "@/components/shared/nav-link";
 import ToggleLocale from "./toggel-locale";
-import { useSession } from "next-auth/react";
-import { useState } from "react";
-import Notifications from "@/components/notification-section/notifications";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/auth";
+import { getTranslations } from "next-intl/server";
+import UserDropdown from "./user-dropdown";
+import { AccountProfile } from "@/lib/types/account-profile";
+// import { useState } from "react";
+// import Notifications from "@/components/notification-section/notifications";
 
-export default function Header() {
+export default async function Header() {
   // translations
-  const t = useTranslations();
-  const { data, status } = useSession();
+  const t = await getTranslations();
+
+  // User session
+  const session = await getServerSession(authOptions);
+
+  // Assign type to session
+  const accountSettings: AccountProfile | null = session?.user
+    ? (session.user as AccountProfile)
+    : null;
 
   // State
-
-  const [notificationClicked, setNotificationClicked] = useState(false)
+  // const [notificationClicked, setNotificationClicked] = useState(false);
 
   // icons and links
   const icons = [
-    {id:1, href: "/wishlist", icon: <Heart size={24} /> ,  },
-    { id:2,href: "/cart", icon: <ShoppingCart size={24} /> },
-    { id:3,href: "/", icon: <Bell size={24} /> },
+    { id: 1, href: "/wishlist", icon: <Heart size={24} /> },
+    { id: 2, href: "/cart", icon: <ShoppingCart size={24} /> },
+    { id: 3, href: "/", icon: <Bell size={24} /> },
   ];
   const links = [
     { href: "/", label: t("home"), icon: <House size={20} /> },
@@ -77,24 +84,34 @@ export default function Header() {
 
         {/* User actions */}
         <div className="flex items-center gap-3">
-          <Link href="/login" className="flex items-center px-4 py-4">
-            <User size={20} />{" "}
-            {status === "authenticated" ? data.user.firstName : t("login")}
-          </Link>
+          {session ? (
+            <UserDropdown session={accountSettings} />
+          ) : (
+            <Link href="/login" className="flex items-center px-4 py-4">
+              <User size={20} /> {t("login")}
+            </Link>
+          )}
           <ul className="flex items-center gap-3 px-4 py-3.5 border-x border-zinc-200">
             {icons.map((item) => (
               <li className="relative" key={item.id}>
-                <Link onClick={()=> item.id === 3 ? setNotificationClicked(prev=> !prev):setNotificationClicked(prev=>prev)}  href={item.href}>{item.icon}</Link>
+                <Link
+                  // onClick={() =>
+                  //   item.id === 3
+                  //     ? setNotificationClicked((prev) => !prev)
+                  //     : setNotificationClicked((prev) => prev)
+                  // }
+                  href={item.href}
+                >
+                  {item.icon}
+                </Link>
               </li>
-            ))
-            }
+            ))}
 
-      {notificationClicked &&   <Notifications />}
-
+            {/* {notificationClicked && <Notifications />} */}
 
             <ModeToggle />
           </ul>
-      
+
           <ToggleLocale />
         </div>
       </div>

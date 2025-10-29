@@ -16,18 +16,18 @@ export default function CardProduct({ product }: { product: Product }) {
   return (
     <div key={product._id} className="relative">
       {/* Image */}
-      <div className=" relative overflow-hidden w-full h-272 rounded-xl ">
+      <div className="relative rounded-xl w-full h-272 overflow-hidden">
         <Image
           src={product.imgCover!}
           alt={product.description || t("product-image")}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        <div className="flex mt-2.5 mx-2.5 justify-between">
+        <div className="flex justify-between mx-2.5 mt-2.5">
           <HeartButton _id={product._id} />
 
           {/* Badges */}
-          <div className=" relative ">
+          <div className="relative">
             {badges.map((badge, i) => (
               <span
                 key={i}
@@ -49,14 +49,14 @@ export default function CardProduct({ product }: { product: Product }) {
       </div>
 
       {/* Product header */}
-      <p className="mt-5 font-semibold text-lg text-start text-maroon-700 dark:text-softPink-200">
+      <p className="mt-5 font-semibold text-maroon-700 dark:text-softPink-200 text-lg text-start">
         {product.title.split(" ").length > 5
           ? `${product.title.split(" ").slice(0, 4).join(" ")} ...`
           : product.title}
       </p>
 
       {/* Product footer */}
-      <div className=" flex items-center justify-between">
+      <div className="flex justify-between items-center">
         <div>
           <div className="flex mt-1.5">
             {[...Array(4)].map((_, i) => (
@@ -66,15 +66,15 @@ export default function CardProduct({ product }: { product: Product }) {
               />
             ))}
           </div>
-          <div className="flex items-center justify-between ">
-            <p className="font-medium text-maroon-700  dark:text-softPink-200 mt-2">
+          <div className="flex justify-between items-center">
+            <p className="mt-2 font-medium text-maroon-700 dark:text-softPink-200">
               {format.number(product.price, {
                 style: "currency",
                 currency: "EGP",
               })}{" "}
               {/* Price after discount if available */}
               {product.priceAfterDiscount && (
-                <span className="line-through text-zinc-400">
+                <span className="text-zinc-400 line-through">
                   {format.number(product.priceAfterDiscount, {
                     style: "currency",
                     currency: "EGP",
@@ -84,11 +84,11 @@ export default function CardProduct({ product }: { product: Product }) {
             </p>
           </div>
         </div>
-        <span className="w-10 h-10 bg-maroon-600 dark:bg-maroon-500 rounded-full text-white flex items-center justify-center">
-          <div className="relative ">
+        <span className="flex justify-center items-center bg-maroon-600 dark:bg-maroon-500 rounded-full w-10 h-10 text-white">
+          <div className="relative">
             <ShoppingCart size={24} />
-            <span className="absolute bottom-wheel-bottom right-wheel-right w-[0.094rem] h-[0.094rem] bg-maroon-500 rounded-full"></span>
-            <span className="absolute bottom-wheel-bottom left-wheel-left w-[0.094rem] h-[0.094rem] bg-maroon-500 rounded-full"></span>
+            <span className="right-wheel-right bottom-wheel-bottom absolute bg-maroon-500 rounded-full w-[0.094rem] h-[0.094rem]"></span>
+            <span className="bottom-wheel-bottom left-wheel-left absolute bg-maroon-500 rounded-full w-[0.094rem] h-[0.094rem]"></span>
           </div>
         </span>
       </div>

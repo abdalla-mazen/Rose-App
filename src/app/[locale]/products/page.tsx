@@ -1,3 +1,4 @@
+import { FiltersSidebar } from "./_components";
 import { GetProductsApi } from "@/lib/apis/get-products.api";
 import { Suspense } from "react";
 import ProductsSkeletons from "@/components/skeletons/products-skeletons/products.skeletons";
@@ -17,6 +18,11 @@ export default async function Page({
   const totalPages = metadata?.totalPages ?? 1;
 
   return (
+    <main className="flex p-10">
+      <FiltersSidebar />
+      <div className="flex-1 flex items-center justify-center text-gray-500">
+        Product cards 
+      </div>
     <main className="p-6 w-954">
       {/* Show products with loading skeleton */}
       <Suspense fallback={<ProductsSkeletons />}>

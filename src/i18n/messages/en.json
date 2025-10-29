@@ -149,7 +149,6 @@
   "register-toast": "Account created successfuly",
   "related-products": "<span><span1>Related</span1></span> products",
   "related-products-error": "something went wrong!",
-
   "product-reviews": "<span><span1>product</span1></span> reviews",
   "general-rating": "general rating",
   "rating": "rating",
@@ -178,5 +177,21 @@
   "added-to-cart-successfully-as-a-logged-in-user": " Added to cart successfully as a logged-in user!",
   "added-to-cart-error": "Failed to add to cart",
   "merge-cart": "Cart merged successfully!",
-  "merge-cart-error": "Failed to merge cart"
+  "merge-cart-error": "Failed to merge cart",
+  "selected": "selected",
+  "notSelected": "not selected",
+  "reset": "Reset",
+  "resetOccasions": "Reset occasions",
+  "resetPrice": "Reset price filter",
+  "errorLoading": "Failed to load occasions",
+  "noOccasions": "No occasions available",
+  "range": "Range",
+  "from": "From",
+  "to": "To",
+  "minimumPrice": "Minimum price",
+  "maximumPrice": "Maximum price",
+  "filtering": "Filtering",
+  "filters": "Filters",
+  "resetAll": "Clear All",
+  "priceRange": "Price Range"
 }

@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { email, z } from "zod";
+import { z } from "zod";
 
 export const useRegisterSchema = () => {
   // Translation
