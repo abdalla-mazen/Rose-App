@@ -26,7 +26,7 @@ export default function OccasionFilter() {
 
   const allOccasions = occasionsPages?.pages.flatMap((p) => p.occasions) || [];
 
-  // Loading state
+  // Loading (Skeleton)
   if (isLoading) {
     return (
       <div className="grid grid-cols-2 gap-2 max-h-[400px] overflow-y-auto pr-2">
