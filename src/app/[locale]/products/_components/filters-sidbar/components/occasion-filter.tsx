@@ -84,8 +84,10 @@ export default function OccasionFilter() {
               <button
                 key={occ._id}
                 onClick={() => toggleOccasion(occ._id)}
-                className={`relative h-[80px] rounded-xl overflow-hidden group transition-all ${isSelected ? "ring-2 ring-red-600" : ""
-                  }`}
+                className={cn(
+                  "relative h-[80px] rounded-xl overflow-hidden group transition-all",
+                  isSelected && "ring-2 ring-red-600"
+                )}
               >
                 {/* Occasion image */}
                 <Image
@@ -95,12 +97,12 @@ export default function OccasionFilter() {
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                   sizes="(max-width: 768px) 50vw, 200px"
                 />
-                {/* Overlay effect (red if selected) */}
+                {/* Overlay effect */}
                 <div
-                  className={`absolute inset-0 ${isSelected
-                    ? "bg-red-600/40"
-                    : "bg-black/30 group-hover:bg-black/40"
-                    } transition-colors`}
+                  className={cn(
+                    "absolute inset-0 transition-colors",
+                    isSelected ? "bg-red-600/40" : "bg-black/30 group-hover:bg-black/40"
+                  )}
                 />
                 {/* Occasion name label */}
                 <span className="absolute inset-0 flex items-center justify-center text-white font-medium text-center px-1">
