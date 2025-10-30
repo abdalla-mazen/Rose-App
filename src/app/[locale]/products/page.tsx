@@ -1,4 +1,4 @@
-import { FiltersSidebar } from "./_components";
+import FiltersSidebar from "./_components/filters-sidbar/filters-sidebar";
 
 export default function Page() {
   return (
