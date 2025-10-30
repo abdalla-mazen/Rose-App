@@ -9,7 +9,7 @@ export default function TestimonialPage() {
 
   return (
     <>
-      <section className="flex justify-center gap-10 dark:bg-zinc-900 py-10 w-full">
+      <section className="flex justify-center gap-10 dark:bg-transparent py-10 w-full">
         {/* header*/}
         <div className="flex flex-col items-center gap-2 w-2/5 h-16">
           <h2 className="gap-2 font-sarabun font-medium text-softPink-500 dark:text-maroon-400 text-base uppercase leading-[100%] tracking-wider">

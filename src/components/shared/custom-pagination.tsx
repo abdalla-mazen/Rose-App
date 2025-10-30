@@ -10,28 +10,23 @@ import {
   PaginationLink,
 } from "@/components/ui/pagination";
 import { cn } from "@/lib/utils";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
 type Props = PaginationProps & {
   currentPage: number;
 };
 
-export default function PaginationComponent({
-  totalPages,
-  initialPage,
-  currentPage,
-}: Props) {
+export default function PaginationComponent({ totalPages, initialPage, currentPage }: Props) {
+  // locale
   const locale = useLocale();
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  // state
   const [internalPage, setInternalPage] = useState(initialPage);
 
+  // function
   useEffect(() => {
     setInternalPage(currentPage);
   }, [currentPage]);
@@ -49,6 +44,7 @@ export default function PaginationComponent({
     }
   };
 
+  // pagination functionality
   const getPageNumber = () => {
     const pages: (number | string)[] = [];
     const startPage = Math.max(internalPage - 2, 1);
@@ -68,6 +64,7 @@ export default function PaginationComponent({
     return pages;
   };
 
+  // format
   const formatNumber = (num: number) =>
     new Intl.NumberFormat(locale === "ar" ? "ar-EG" : "en-US").format(num);
 
@@ -77,26 +74,35 @@ export default function PaginationComponent({
     <div className="flex justify-center items-center mt-6">
       <Pagination>
         <PaginationContent className="flex items-center gap-1 w-80 h-8">
+          {/* First page button */}
           <PaginationItem>
             <PaginationLink
               onClick={() => handlePageChange(1)}
               disabled={internalPage === 1}
-              className={cn("...", internalPage === 1 && "opacity-50")}
+              className={cn(
+                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded-[8px] w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
+                internalPage === 1 && "opacity-50",
+              )}
             >
               <ChevronsLeft className="w-4 h-4 rtl:rotate-180" />
             </PaginationLink>
           </PaginationItem>
 
+          {/* Previous button */}
           <PaginationItem>
             <PaginationLink
               onClick={() => handlePageChange(internalPage - 1)}
               disabled={internalPage === 1}
-              className={cn("...", internalPage === 1 && "opacity-50")}
+              className={cn(
+                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded-[8px] w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
+                internalPage === 1 && "opacity-50",
+              )}
             >
               <ChevronLeft className="w-4 h-4 rtl:rotate-180" />
             </PaginationLink>
           </PaginationItem>
 
+          {/* Page numbers */}
           {pages.map((page, i) =>
             typeof page === "number" ? (
               <PaginationItem key={i}>
@@ -104,9 +110,9 @@ export default function PaginationComponent({
                   onClick={() => handlePageChange(page)}
                   isActive={page === internalPage}
                   className={cn(
-                    "gap-2 bg-white dark:bg-zinc-700 p-2 border-[1px] rounded-lg w-8 h-8 text-xs",
+                    "gap-2 bg-white dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 dark:border-zinc-700 rounded-[8px] w-8 h-8 dark:text-zinc-50 text-xs",
                     page === internalPage &&
-                      "text-white bg-maroon-600 border-maroon-600"
+                      "text-white bg-maroon-600 border-maroon-600 dark:bg-softPink-200 dark:text-zinc-700 dark:border-softPink-200",
                   )}
                 >
                   {formatNumber(page)}
@@ -114,28 +120,36 @@ export default function PaginationComponent({
               </PaginationItem>
             ) : (
               <PaginationItem key={i}>
-                <div className="flex justify-center items-center bg-white dark:bg-zinc-700 border rounded-lg w-8 h-8 text-zinc-400 text-xs select-none">
+                <div className="flex justify-center items-center bg-white dark:bg-zinc-700 border border-zinc-200 dark:border-zinc-700 rounded-[12px] w-8 h-8 text-zinc-400 text-xs select-none">
                   …
                 </div>
               </PaginationItem>
-            )
+            ),
           )}
 
+          {/* Next button */}
           <PaginationItem>
             <PaginationLink
               onClick={() => handlePageChange(internalPage + 1)}
               disabled={internalPage === totalPages}
-              className={cn("...", internalPage === totalPages && "opacity-50")}
+              className={cn(
+                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded-[8px] w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
+                internalPage === totalPages && "opacity-50",
+              )}
             >
               <ChevronRight className="w-4 h-4 rtl:rotate-180" />
             </PaginationLink>
           </PaginationItem>
 
+          {/* Last page button */}
           <PaginationItem>
             <PaginationLink
               onClick={() => handlePageChange(totalPages)}
               disabled={internalPage === totalPages}
-              className={cn("...", internalPage === totalPages && "opacity-50")}
+              className={cn(
+                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded-[8px] w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
+                internalPage === totalPages && "opacity-50",
+              )}
             >
               <ChevronsRight className="w-4 h-4 rtl:rotate-180" />
             </PaginationLink>
