@@ -12,47 +12,52 @@ import {
 } from "@/components/ui/carousel";
 import CardS from "./card";
 import { cn } from "@/lib/utils";
-
-// Slide data
-const slides = [
-  {
-    image: "/images/choco.png",
-    title: "Say It with Flowers",
-    description: "Elegant gifts for every special moment.",
-    buttonText: "I'm buying!",
-    buttonStyle:
-      "bg-[#fbeaea] text-[#4a0d0d] hover:bg-[#fbeaea] hover:text-[#4a0d0d] rounded-full px-6 py-2 w-fit",
-  },
-  {
-    image: "/images/choco.png",
-    title: "Sweet Surprises Await",
-    description: "Beautiful roses and chocolates for your love.",
-    buttonText: "I'm buying!",
-    buttonStyle:
-      "bg-[#fbeaea] text-[#4a0d0d] hover:bg-[#fbeaea] hover:text-[#4a0d0d] rounded-full px-6 py-2 w-fit",
-  },
-];
+import { useTranslations } from "next-intl";
 
 export default function ValentineCarousel() {
+  const t = useTranslations();
+
+  // Slides
+  const slides = [
+    {
+      image: "/images/choco.png",
+      title: t("valentine-carousel-title-1"),
+      description: t("valentine-carousel-description-1"),
+      buttonText: t("valentine-carousel-button-text"),
+      buttonStyle:
+        "bg-[#fbeaea] text-[#4a0d0d] hover:bg-[#fbeaea] hover:text-[#4a0d0d] rounded-full px-6 py-2 w-fit",
+    },
+    {
+      image: "/images/choco.png",
+      title: t("valentine-carousel-title-2"),
+      description: t("valentine-carousel-description-2"),
+      buttonText: t("valentine-carousel-button-text"),
+      buttonStyle:
+        "bg-[#fbeaea] text-[#4a0d0d] hover:bg-[#fbeaea] hover:text-[#4a0d0d] rounded-full px-6 py-2 w-fit",
+    },
+  ];
+
   return (
-    <section dir="ltr" className="flex space-x-8 m-10 w-full">
+    <section className="flex gap-8 m-10 w-full">
       {/* Side card */}
       <CardS />
 
-      {/* Main carousel */}
+      {/* Carousel */}
       <Carousel
         className="w-full h-[420px] rounded-2xl overflow-hidden"
         plugins={[
           Autoplay({
-            delay: 3000, // Auto delay
+            delay: 30000, // 30s
           }),
         ]}
       >
         <CarouselContent>
-          {/* Slides */}
           {slides.map((slide, index) => (
             <CarouselItem key={index}>
-              <div className="relative w-full h-[420px]">
+              <div
+                dir={t("valentine-carousel-dir")}
+                className="relative w-full h-[420px]"
+              >
                 <Image
                   src={slide.image}
                   alt={slide.title}
@@ -60,17 +65,17 @@ export default function ValentineCarousel() {
                   className="object-cover"
                 />
 
-                {/* Overlay text and button */}
-                <div dir="auto" className="absolute inset-0 flex flex-col justify-end bg-black/40 pb-16 pl-20 rounded-xl text-white">
-                  <h2 className="mb-3 max-w-md font-bold text-4xl">
+                {/* Text & Button */}
+                <div className="absolute inset-0 flex flex-col justify-end bg-black/40 pb-16 pr-20 rounded-xl text-white space-y-6">
+                  <h2 className="max-w-md font-bold text-4xl leading-snug">
                     {slide.title}
                   </h2>
 
-                  <p className="opacity-90 mb-5 max-w-md text-lg">
+                  <p className="opacity-90 max-w-md text-lg leading-relaxed">
                     {slide.description}
                   </p>
 
-                  <Button className={cn(slide.buttonStyle, "rounded-[10px] pb-4")}>
+                  <Button className={cn(slide.buttonStyle, "rounded-[10px]")}>
                     {slide.buttonText}
                   </Button>
                 </div>
@@ -79,7 +84,7 @@ export default function ValentineCarousel() {
           ))}
         </CarouselContent>
 
-        {/* Navigation buttons */}
+        {/* Nav buttons */}
         <CarouselPrevious className="left-6 bottom-5 absolute bg-white/80 text-[#4a0d0d]" />
         <CarouselNext className="right-6 bottom-5 absolute bg-white/80 text-[#4a0d0d]" />
       </Carousel>
