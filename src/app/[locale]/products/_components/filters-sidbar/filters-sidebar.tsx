@@ -8,7 +8,7 @@ import PriceFilter from "./components/price-filter";
 
 export default function FiltersSidebar() {
   const t = useTranslations();
-  const { resetOccasions, resetPriceRange, currentFilters } =
+  const { resetOccasions, currentFilters } =
     useFilters();
 
   const hasOccasionFilters =
@@ -30,7 +30,6 @@ export default function FiltersSidebar() {
 
         <FilterSection
           title={t("priceRange")}
-          onReset={resetPriceRange}
           hasActiveFilters={hasPriceFilters}
         >
           <PriceFilter />

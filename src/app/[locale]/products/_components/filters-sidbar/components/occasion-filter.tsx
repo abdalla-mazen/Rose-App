@@ -7,6 +7,7 @@ import { useOccasionsInfinite } from "@/hooks/use-occasions-infinite";
 import { useFilters } from "@/hooks/use-filters";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 export default function OccasionFilter() {
   //Translations
@@ -19,7 +20,6 @@ export default function OccasionFilter() {
     occasionsPages,
     fetchNextPage,
     hasNextPage,
-    isFetchingNextPage,
     isLoading,
     error,
   } = useOccasionsInfinite(true);
@@ -81,12 +81,13 @@ export default function OccasionFilter() {
           {allOccasions.map((occ) => {
             const isSelected = selectedOccasions.includes(occ._id);
             return (
-              <button
+              <Button
                 key={occ._id}
                 onClick={() => toggleOccasion(occ._id)}
+                variant="ghost"
                 className={cn(
-                  "relative h-[80px] rounded-xl overflow-hidden group transition-all",
-                  isSelected && "ring-2 ring-red-600"
+                  "relative h-[80px] w-full rounded-xl overflow-hidden group transition-all p-0",
+                  isSelected ? "ring-2 ring-red-600" : "",
                 )}
               >
                 {/* Occasion image */}
@@ -97,6 +98,7 @@ export default function OccasionFilter() {
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                   sizes="(max-width: 768px) 50vw, 200px"
                 />
+
                 {/* Overlay effect */}
                 <div
                   className={cn(
@@ -104,11 +106,12 @@ export default function OccasionFilter() {
                     isSelected ? "bg-red-600/40" : "bg-black/30 group-hover:bg-black/40"
                   )}
                 />
+
                 {/* Occasion name label */}
                 <span className="absolute inset-0 flex items-center justify-center text-white font-medium text-center px-1">
                   {occ.name}
                 </span>
-              </button>
+              </Button>
             );
           })}
         </div>
