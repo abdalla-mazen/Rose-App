@@ -1,6 +1,6 @@
 "use client";
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { BrushCleaning, CheckCheck } from "lucide-react";
 import NotificationsEmptyState from "./notifications-empty-state";
@@ -8,49 +8,22 @@ import NotificationItem from "./notification-item";
 import {
   clearAllNotifications,
   markAllNotificationsRead,
-} from "@/lib/actions/notifications.actions";
+} from "@/components/notification-section/actions/notifications.actions";
 import { useTranslations } from "next-intl";
+import { Notification } from "@/lib/types/notifications";
+import { useUnreadCount } from "./hooks/use-unread-cout";
+import { useNotifications } from "./hooks/use-notifications";
+import { cn } from "@/lib/utils";
 
 export default function Notifications() {
   const queryClient = useQueryClient();
   const t = useTranslations("notifications");
 
   // 📨 Fetch notifications
-  const {
-    data: notifications = [],
-    isLoading: isNotificationsLoading,
-    isError: isNotificationsError,
-    refetch: refetchNotifications,
-  } = useQuery({
-    queryKey: ["notifications"],
-    refetchInterval: 10_000,
-    refetchOnWindowFocus: false,
-    queryFn: async () => {
-      const res = await fetch("/api/notifications", { cache: "no-store" });
-      if (!res.ok) throw new Error(t("failedToLoad"));
-      const data = await res.json();
-      return Array.isArray(data?.notifications) ? data.notifications : [];
-    },
-  });
+  const { notifications, isNotificationsLoading, isNotificationsError } = useNotifications();
 
   // 🔹 Fetch unread notifications count
-  const {
-    data: unreadCount = 0,
-    isLoading: isUnreadCountLoading,
-    refetch: refetchUnreadCount,
-  } = useQuery({
-    queryKey: ["unread-count"],
-    refetchInterval: 10_000,
-    refetchOnWindowFocus: false,
-    queryFn: async () => {
-      const res = await fetch("/api/notifications/unread-count", {
-        cache: "no-store",
-      });
-      if (!res.ok) throw new Error(t("failedToLoad"));
-      const data = await res.json();
-      return typeof data?.unreadCount === "number" ? data.unreadCount : 0;
-    },
-  });
+  const { unreadCount, isUnreadCountLoading } = useUnreadCount();
 
   // 🧹 Clear all notifications
   const clearMutation = useMutation({
@@ -71,27 +44,28 @@ export default function Notifications() {
   });
 
   return (
-    <Card className="w-[360px] rounded-2xl shadow-md border overflow-hidden">
+    <Card className="top-14 right-5 z-30 absolute shadow-md border-none rounded-2xl w-[360px]">
       {/* Header */}
-      <CardHeader className="bg-[#741C21] text-white px-4 py-3">
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold tracking-tight">
+      <CardHeader className="bg-[#741C21] dark:bg-softPink-200 px-4 py-3 rounded-t-2xl text-white dark:text-zinc-800">
+        <div className="flex justify-between items-center">
+          <h2 className="font-bold text-2xl tracking-tight">
             {t("title")}{" "}
-            <span className="font-semibold text-white">
-              {isUnreadCountLoading
-                ? "..."
-                : t("unreadCount", { count: unreadCount })}
+            <span className="font-semibold">
+              {isUnreadCountLoading ? "..." : t("unreadCount", { count: unreadCount })}
             </span>
           </h2>
         </div>
       </CardHeader>
 
       {/* Actions Bar */}
-      <div className="flex items-center justify-between bg-white text-sm text-gray-700 px-4 py-2 border-b">
+      <div className="flex justify-between items-center bg-white dark:bg-zinc-600 px-4 py-2 border-zinc-300 dark:border-zinc-400 border-b text-zinc-800 dark:text-zinc-500 text-sm">
         <button
           onClick={() => clearMutation.mutate()}
-          disabled={clearMutation.isPending}
-          className="flex items-center gap-1"
+          disabled={notifications?.length === 0 || clearMutation.isPending}
+          className={cn("flex items-center gap-1", {
+            "cursor-not-allowed text-zinc-400":
+              isNotificationsLoading || notifications?.length === 0,
+          })}
         >
           <BrushCleaning size={14} />
           {t("clearAll")}
@@ -99,32 +73,33 @@ export default function Notifications() {
 
         <button
           onClick={() => markAllMutation.mutate()}
-          disabled={markAllMutation.isPending}
-          className="flex items-center gap-1 hover:text-gray-900"
+          disabled={notifications?.length === 0 || markAllMutation.isPending}
+          className={cn("flex items-center gap-1", {
+            "cursor-not-allowed text-zinc-400":
+              isNotificationsLoading || notifications?.length === 0,
+          })}
         >
           <CheckCheck size={14} />
-          {markAllMutation.isPending
-            ? t("markAllRead") + "..."
-            : t("markAllRead")}
+          {markAllMutation.isPending ? t("markAllRead") + "..." : t("markAllRead")}
         </button>
       </div>
 
       {/* Notifications content */}
-      <CardContent className="p-0">
+      <CardContent className="dark:bg-zinc-600 p-0 min-h-60 dark:text-zinc-400">
         {isNotificationsLoading ? (
-          <p className="text-center py-6 text-gray-500">{t("loading")}</p>
+          <p className="text-gray-500 text-center translate-y-20">{t("loading")}</p>
         ) : isNotificationsError ? (
-          <p className="text-center py-6 text-red-500">{t("failedToLoad")}</p>
-        ) : notifications.length === 0 ? (
+          <p className="py-6 text-red-500 text-center">{t("failedToLoad")}</p>
+        ) : notifications?.length === 0 ? (
           <NotificationsEmptyState />
         ) : (
           <div className="divide-y divide-gray-200">
-            {notifications.map((n: any) => (
+            {notifications?.map((n: Notification) => (
               <NotificationItem
-                key={n._id}
-                id={n._id}
+                key={n.id}
+                id={n.id}
                 title={n.title}
-                message={n.body}
+                message={n.message}
                 isRead={n.isRead}
               />
             ))}

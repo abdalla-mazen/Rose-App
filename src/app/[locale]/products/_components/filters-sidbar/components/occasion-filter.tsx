@@ -31,7 +31,7 @@ export default function OccasionFilter() {
     return (
       <div className="grid grid-cols-2 gap-2 max-h-[400px] overflow-y-auto pr-2">
         {Array.from({ length: 6 }).map((_, i) => (
-          <Skeleton key={i} className="h-[80px] rounded-xl bg-zinc-300" />
+          <Skeleton key={i} className="bg-zinc-300 rounded-xl h-[80px]" />
         ))}
       </div>
     );

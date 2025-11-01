@@ -2,6 +2,7 @@
 
 import type { PaginationProps } from "@/lib/types/pagination";
 import { useLocale } from "next-intl";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   Pagination,
   PaginationContent,
@@ -9,59 +10,64 @@ import {
   PaginationLink,
 } from "@/components/ui/pagination";
 import { cn } from "@/lib/utils";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
-} from "lucide-react";
-import { useState } from "react";
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
-export default function PaginationComponent({
-  totalPages,
-  initialPage,
-}: PaginationProps) {
-  //locale
+type Props = PaginationProps & {
+  currentPage: number;
+};
+
+export default function PaginationComponent({ totalPages, initialPage, currentPage }: Props) {
+  // locale
   const locale = useLocale();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  //state
-  const [currentPage, setCurrentPage] = useState(initialPage);
+  // state
+  const [internalPage, setInternalPage] = useState(initialPage);
 
-  //function
+  // function
+  useEffect(() => {
+    setInternalPage(currentPage);
+  }, [currentPage]);
+
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
+      setInternalPage(page);
+
+      // Create new search params with updated page
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("page", page.toString());
+
+      // Navigate to new page
+      router.push(`?${params.toString()}`);
     }
   };
 
-  //pagination functionality
+  // pagination functionality
   const getPageNumber = () => {
     const pages: (number | string)[] = [];
-    const startPage = Math.max(currentPage - 2, 1);
-    const endPage = Math.min(currentPage + 2, totalPages);
+    const startPage = Math.max(internalPage - 2, 1);
+    const endPage = Math.min(internalPage + 2, totalPages);
 
     if (startPage > 1) {
       pages.push(1);
       if (startPage > 2) pages.push("...");
     }
 
-    for (let i = startPage; i <= endPage; i++) {
-      pages.push(i);
-    }
+    for (let i = startPage; i <= endPage; i++) pages.push(i);
 
     if (endPage < totalPages) {
       if (endPage < totalPages - 1) pages.push("...");
       pages.push(totalPages);
     }
-
     return pages;
   };
 
-  //format
+  // format
   const formatNumber = (num: number) =>
     new Intl.NumberFormat(locale === "ar" ? "ar-EG" : "en-US").format(num);
 
-  //Variables
   const pages = getPageNumber();
 
   return (
@@ -72,10 +78,10 @@ export default function PaginationComponent({
           <PaginationItem>
             <PaginationLink
               onClick={() => handlePageChange(1)}
-              disabled={currentPage === 1}
+              disabled={internalPage === 1}
               className={cn(
-                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded-lg w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
-                currentPage === 1 && "opacity-50"
+                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded-[8px] w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
+                internalPage === 1 && "opacity-50",
               )}
             >
               <ChevronsLeft className="w-4 h-4 rtl:rotate-180" />
@@ -85,11 +91,11 @@ export default function PaginationComponent({
           {/* Previous button */}
           <PaginationItem>
             <PaginationLink
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
+              onClick={() => handlePageChange(internalPage - 1)}
+              disabled={internalPage === 1}
               className={cn(
-                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded-lg w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
-                currentPage === 1 && "opacity-50"
+                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded-[8px] w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
+                internalPage === 1 && "opacity-50",
               )}
             >
               <ChevronLeft className="w-4 h-4 rtl:rotate-180" />
@@ -102,11 +108,11 @@ export default function PaginationComponent({
               <PaginationItem key={i}>
                 <PaginationLink
                   onClick={() => handlePageChange(page)}
-                  isActive={page === currentPage}
+                  isActive={page === internalPage}
                   className={cn(
-                    "gap-2 bg-white dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 dark:border-zinc-700 rounded-lg w-8 h-8 dark:text-zinc-50 text-xs",
-                    page === currentPage &&
-                      "text-white bg-maroon-600 border-maroon-600 dark:bg-softPink-200 dark:text-zinc-700 dark:border-softPink-200 hover:bg-maroon-600 dark:hover:bg-softPink-200"
+                    "gap-2 bg-white dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 dark:border-zinc-700 rounded-[8px] w-8 h-8 dark:text-zinc-50 text-xs",
+                    page === internalPage &&
+                      "text-white bg-maroon-600 border-maroon-600 dark:bg-softPink-200 dark:text-zinc-700 dark:border-softPink-200",
                   )}
                 >
                   {formatNumber(page)}
@@ -114,25 +120,21 @@ export default function PaginationComponent({
               </PaginationItem>
             ) : (
               <PaginationItem key={i}>
-                <div
-                  className={cn(
-                    "flex justify-center items-center bg-white dark:bg-zinc-700 border border-zinc-200 dark:border-zinc-700 rounded-lg w-8 h-8 text-zinc-400 text-xs select-none"
-                  )}
-                >
+                <div className="flex justify-center items-center bg-white dark:bg-zinc-700 border border-zinc-200 dark:border-zinc-700 rounded-[12px] w-8 h-8 text-zinc-400 text-xs select-none">
                   …
                 </div>
               </PaginationItem>
-            )
+            ),
           )}
 
           {/* Next button */}
           <PaginationItem>
             <PaginationLink
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
+              onClick={() => handlePageChange(internalPage + 1)}
+              disabled={internalPage === totalPages}
               className={cn(
-                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded-lg w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
-                currentPage === totalPages && "opacity-50"
+                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded-[8px] w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
+                internalPage === totalPages && "opacity-50",
               )}
             >
               <ChevronRight className="w-4 h-4 rtl:rotate-180" />
@@ -143,10 +145,10 @@ export default function PaginationComponent({
           <PaginationItem>
             <PaginationLink
               onClick={() => handlePageChange(totalPages)}
-              disabled={currentPage === totalPages}
+              disabled={internalPage === totalPages}
               className={cn(
-                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded-lg w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
-                currentPage === totalPages && "opacity-50"
+                "gap-2 bg-white disabled:bg-zinc-100 dark:bg-zinc-700 p-2 border-[1px] border-zinc-100 disabled:border-zinc-300 dark:border-zinc-700 rounded-[8px] w-8 h-8 text-zinc-800 disabled:text-zinc-400 dark:text-zinc-50 text-xs",
+                internalPage === totalPages && "opacity-50",
               )}
             >
               <ChevronsRight className="w-4 h-4 rtl:rotate-180" />
