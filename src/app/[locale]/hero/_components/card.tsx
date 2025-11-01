@@ -2,12 +2,14 @@
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function CardS() {
   const t = useTranslations();
+  const locale = useLocale();
+  const isRTL = locale === "ar";
 
   return (
     <div>
@@ -37,8 +39,13 @@ export default function CardS() {
           </h3>
 
           {/* Button */}
-          <Button className="bg-red-50 text-red-800 font-semibold hover:bg-red-50 rounded-xl px-5 mt-5 w-fit">
-            {t("gift-card-button-text")} <ArrowRight className="ml-2 w-4 h-4" />
+          <Button className="bg-red-50 text-red-800 font-semibold hover:bg-red-50 rounded-xl px-5 mt-5 w-fit flex items-center">
+            {t("gift-card-button-text")}
+            {isRTL ? (
+              <ArrowLeft className="mr-2 w-4 h-4" />
+            ) : (
+              <ArrowRight className="ml-2 w-4 h-4" />
+            )}
           </Button>
         </div>
       </Card>

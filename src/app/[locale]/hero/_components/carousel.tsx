@@ -12,10 +12,12 @@ import {
 } from "@/components/ui/carousel";
 import CardS from "./card";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function ValentineCarousel() {
   const t = useTranslations();
+  const locale = useLocale();
+  const isRTL = locale === "ar";
 
   // Slides
   const slides = [
@@ -38,7 +40,10 @@ export default function ValentineCarousel() {
   ];
 
   return (
-    <section className="flex gap-8 m-10 w-full">
+    <section
+      dir={isRTL ? "rtl" : "ltr"}
+      className="flex gap-8 m-10 w-full"
+    >
       {/* Side card */}
       <CardS />
 
@@ -54,10 +59,7 @@ export default function ValentineCarousel() {
         <CarouselContent>
           {slides.map((slide, index) => (
             <CarouselItem key={index}>
-              <div
-                dir={t("valentine-carousel-dir")}
-                className="relative w-full h-[420px]"
-              >
+              <div className="relative w-full h-[420px]">
                 <Image
                   src={slide.image}
                   alt={slide.title}
@@ -66,7 +68,12 @@ export default function ValentineCarousel() {
                 />
 
                 {/* Text & Button */}
-                <div className="absolute inset-0 flex flex-col justify-end bg-black/40 pb-16 pr-20 rounded-xl text-white space-y-6">
+                <div
+                  className={cn(
+                    "absolute inset-0 flex flex-col justify-end bg-black/40 pb-16 text-white space-y-6 rounded-xl",
+                    isRTL ? "pr-20 text-right" : "pl-20 text-left"
+                  )}
+                >
                   <h2 className="max-w-md font-bold text-4xl leading-snug">
                     {slide.title}
                   </h2>
