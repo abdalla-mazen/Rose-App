@@ -4,18 +4,22 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useResendOtp } from "@/hooks/use-resend-otp";
+import { useTranslations } from "next-intl";
 
 export default function OtpTimer({ email }: { email: string }) {
   const { toast } = useToast();
   const { resend, isPending } = useResendOtp();
+  const t = useTranslations("OTP"); // ✅ Translation hook
   const [timeLeft, setTimeLeft] = useState(0);
 
+  // Load timer from localStorage
   useEffect(() => {
     const storedTimer = localStorage.getItem("timer");
     const remaining = storedTimer ? parseInt(storedTimer, 10) : 60;
     setTimeLeft(remaining);
   }, []);
 
+  // Countdown logic
   useEffect(() => {
     if (timeLeft <= 0) {
       localStorage.removeItem("timer");
@@ -31,18 +35,19 @@ export default function OtpTimer({ email }: { email: string }) {
     return () => clearInterval(timer);
   }, [timeLeft]);
 
+  // Resend OTP handler
   const handleResend = () => {
     resend(email, {
       onSuccess: (res: any) => {
-        toast({ title: res.message });
+        toast({ title: t("otp-resend-success") });
         setTimeLeft(60);
         localStorage.setItem("timer", "60");
       },
       onError: (err: any) => {
         toast({
           variant: "destructive",
-          title: "Failed to resend OTP",
-          description: err.message || "Something went wrong",
+          title: t("otp-resend-failed"),
+          description: err.message || t("otp-resend-error"),
         });
       },
     });
@@ -51,22 +56,24 @@ export default function OtpTimer({ email }: { email: string }) {
   return (
     <div className="flex justify-end w-full">
       {timeLeft > 0 ? (
+        // Timer countdown
         <Button
           type="button"
           variant="link"
           disabled
           className="text-md font-medium no-underline"
         >
-          Send a new code ({timeLeft} seconds)
+          {t("otp-resend-wait", { seconds: timeLeft })}
         </Button>
       ) : (
+        // Resend button
         <Button
           type="button"
           variant="ghost"
           onClick={handleResend}
           disabled={isPending}
         >
-          {isPending ? "Sending..." : "Send a new code"}
+          {isPending ? t("otp-resend-sending") : t("otp-resend")}
         </Button>
       )}
     </div>
