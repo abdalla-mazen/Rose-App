@@ -54,7 +54,7 @@ export default function MostPopularClient({ occasions, products: initialProducts
   }
 
   return (
-    <div className="flex flex-col justify-center items-center my-40 w-full">
+    <div className="flex flex-col justify-center items-center mt-40 w-full">
       <div className="flex justify-between items-center mb-6 w-full">
         <Subtitle title={t("mostpopular-title")} />
 
