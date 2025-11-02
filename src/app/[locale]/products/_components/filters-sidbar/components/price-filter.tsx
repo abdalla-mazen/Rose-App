@@ -8,11 +8,11 @@ import { useTranslations } from "next-intl";
 import { useFilters } from "@/hooks/use-filters";
 import { filtersApi } from "@/lib/apis/filter-products.api";
 import { useDebounce } from "@/hooks/use-debounce";
-import { PriceFilterFormData, priceFilterSchema } from "@/lib/schemas/price-schema";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 import FilterSection from "../filter-section";
+import { PriceFilterFormData, priceFilterSchema } from "@/lib/schemas/price.schema";
 
 export default function PriceFilter() {
   const t = useTranslations("filters");
@@ -28,7 +28,12 @@ export default function PriceFilter() {
   const priceRange = data?.filters.priceRange;
 
   // Form setup with Zod validation
-  const { register, watch, formState: { errors }, setValue } = useForm<PriceFilterFormData>({
+  const {
+    register,
+    watch,
+    formState: { errors },
+    setValue,
+  } = useForm<PriceFilterFormData>({
     resolver: zodResolver(priceFilterSchema),
     defaultValues: {
       minPrice: currentFilters.minPrice || "",
@@ -65,8 +70,8 @@ export default function PriceFilter() {
     return (
       <FilterSection title="">
         <div className="flex gap-2 w-full">
-          <Skeleton className="h-9 w-full rounded-lg" />
-          <Skeleton className="h-9 w-full rounded-lg" />
+          <Skeleton className="rounded-lg w-full h-9" />
+          <Skeleton className="rounded-lg w-full h-9" />
         </div>
       </FilterSection>
     );
@@ -92,11 +97,17 @@ export default function PriceFilter() {
             min={priceRange?.min}
             max={priceRange?.max}
             className={cn(
-              "border rounded-lg w-full px-2 py-1 text-sm focus:outline-none focus:ring-2 transition-all",
-              errors.minPrice ? "border-red-500 focus:ring-red-200" : "border-gray-300 focus:ring-red-200"
+              "px-2 py-1 border rounded-lg focus:outline-none focus:ring-2 w-full text-sm transition-all",
+              errors.minPrice
+                ? "border-red-500 focus:ring-red-200"
+                : "border-gray-300 focus:ring-red-200",
             )}
           />
-          {errors.minPrice && <p className="text-xs text-red-600 mt-1" role="alert">{errors.minPrice.message}</p>}
+          {errors.minPrice && (
+            <p className="mt-1 text-red-600 text-xs" role="alert">
+              {errors.minPrice.message}
+            </p>
+          )}
         </div>
 
         {/* Max price input */}
@@ -107,11 +118,17 @@ export default function PriceFilter() {
             min={priceRange?.min}
             max={priceRange?.max}
             className={cn(
-              "border rounded-lg w-full px-2 py-1 text-sm focus:outline-none focus:ring-2 transition-all",
-              errors.maxPrice ? "border-red-500 focus:ring-red-200" : "border-gray-300 focus:ring-red-200"
+              "px-2 py-1 border rounded-lg focus:outline-none focus:ring-2 w-full text-sm transition-all",
+              errors.maxPrice
+                ? "border-red-500 focus:ring-red-200"
+                : "border-gray-300 focus:ring-red-200",
             )}
           />
-          {errors.maxPrice && <p className="text-xs text-red-600 mt-1" role="alert">{errors.maxPrice.message}</p>}
+          {errors.maxPrice && (
+            <p className="mt-1 text-red-600 text-xs" role="alert">
+              {errors.maxPrice.message}
+            </p>
+          )}
         </div>
       </div>
     </FilterSection>
