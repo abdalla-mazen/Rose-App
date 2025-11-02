@@ -2,12 +2,13 @@
 
 import { useTranslations } from "next-intl";
 import { useFilters } from "@/hooks/use-filters";
-import { PriceFilter, OccasionFilter } from "./components";
 import FilterSection from "./filter-section";
+import OccasionFilter from "./components/occasion-filter";
+import PriceFilter from "./components/price-filter";
 
 export default function FiltersSidebar() {
   const t = useTranslations();
-  const { resetOccasions, resetPriceRange, currentFilters } =
+  const { resetOccasions, currentFilters } =
     useFilters();
 
   const hasOccasionFilters =
@@ -29,7 +30,6 @@ export default function FiltersSidebar() {
 
         <FilterSection
           title={t("priceRange")}
-          onReset={resetPriceRange}
           hasActiveFilters={hasPriceFilters}
         >
           <PriceFilter />

@@ -1,17 +1,4 @@
-import { FiltersSidebar } from "./_components";
-import { GetProductsApi } from "@/lib/apis/get-products.api";
-import { Suspense } from "react";
-import ProductsSkeletons from "@/components/skeletons/products-skeletons/products.skeletons";
-import ProductsList from "./_components/product-list";
-import PaginationComponent from "@/components/shared/custom-pagination";
-
-export default async function Page({ searchParams }: { searchParams: { page?: string } }) {
-  // Variables
-  const page = Number(searchParams.page) || 1;
-  const limit = 12;
-  const res = await GetProductsApi({ page, limit });
-  const { products, metadata } = res;
-  const totalPages = metadata?.totalPages ?? 1;
+import FiltersSidebar from "./_components/filters-sidbar/filters-sidebar";
 
   return (
     <main className="flex p-10">
