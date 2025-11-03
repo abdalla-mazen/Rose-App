@@ -96,11 +96,12 @@ export default function AccountChangePassword() {
         {/* Error message */}
         {error && <ErrorMessage message={error.message} />}
 
+        {/* Change password button */}
         <div className="flex justify-end">
           <Button
             type="submit"
             disabled={isPending}
-            className="bg-maroon-600 mt-20 rounded-xl w-56"
+            className="bg-maroon-600 mt-20 rounded-xl w-56 capitalize"
           >
             {t("change-password")} {isPending && <LoaderCircle className="animate-spin" />}
           </Button>

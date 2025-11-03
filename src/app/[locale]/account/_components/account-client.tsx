@@ -23,7 +23,7 @@ export default function AccountClient({ session }: props) {
   return (
     <div className="flex gap-9 w-full">
       {/* Sidebar */}
-      <div className="flex flex-col justify-between bg-zinc-50 p-4 rounded-lg w-[300px] min-h-[720px]">
+      <div className="flex flex-col justify-between bg-zinc-50 dark:bg-zinc-900 p-4 rounded-lg w-[300px] min-h-[720px]">
         {/* Components */}
         <div>
           <ul>
@@ -31,8 +31,8 @@ export default function AccountClient({ session }: props) {
               onClick={() => setActiveTab("profile")}
               className={`flex items-center capitalize rounded-lg gap-3 px-5 py-3 font-medium cursor-pointer ${cn(
                 activeTab === "profile"
-                  ? "bg-zinc-800 text-zinc-50 rounded-lg"
-                  : "hover:bg-zinc-100 transition-bg duration-100",
+                  ? "bg-zinc-800 dark:bg-zinc-700 text-zinc-50 rounded-lg"
+                  : "hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-bg duration-100",
               )}`}
             >
               <UserRoundPen className="w-6 h-6" /> {t("my-account")}
@@ -41,8 +41,8 @@ export default function AccountClient({ session }: props) {
               onClick={() => setActiveTab("changepassword")}
               className={`flex capitalize cursor-pointer items-center rounded-lg gap-3 px-5 py-3 mt-2.5 font-medium ${cn(
                 activeTab === "changepassword"
-                  ? "bg-zinc-800 text-zinc-50 rounded-lg"
-                  : "hover:bg-zinc-100 transition-bg duration-100",
+                  ? "bg-zinc-800 dark:bg-zinc-700 text-zinc-50 rounded-lg"
+                  : "hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-bg duration-100",
               )}`}
             >
               <Lock className="w-6 h-6" /> {t("change-password")}
@@ -66,8 +66,10 @@ export default function AccountClient({ session }: props) {
       </div>
 
       <div className="flex-1">
+        {/* Edit profile Component */}
         {activeTab === "profile" && <AccountEditProfile session={session} />}
 
+        {/* Change password component */}
         {activeTab === "changepassword" && <AccountChangePassword />}
       </div>
     </div>

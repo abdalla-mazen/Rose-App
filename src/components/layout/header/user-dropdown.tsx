@@ -46,7 +46,7 @@ export default function UserDropdown({ session }: Props) {
       <DropdownMenuContent
         className={`w-56 font-medium text-sm ${isArabic ? "text-right" : "text-left"} dark:bg-zinc-700`}
       >
-        <DropdownMenuLabel className="text-maroon-700 dark:text-softPink-200">
+        <DropdownMenuLabel className="text-maroon-700 dark:text-softPink-200 capitalize">
           {session?.firstName} {session?.lastName}
         </DropdownMenuLabel>
 
