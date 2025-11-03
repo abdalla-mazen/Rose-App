@@ -12,14 +12,13 @@ import {
 import { ChevronDown, LogOut, MapPinHouse, ScrollText, Settings, User } from "lucide-react";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
-import { AccountProfile } from "@/lib/types/account-profile";
 import { useTranslations, useLocale } from "next-intl";
 
 type Props = {
-  session: AccountProfile | null;
+  userData: UserData;
 };
 
-export default function UserDropdown({ session }: Props) {
+export default function UserDropdown({ userData }: Props) {
   // Translations
   const t = useTranslations();
   const locale = useLocale();
@@ -38,7 +37,7 @@ export default function UserDropdown({ session }: Props) {
           {t("hello")}
         </span>
         <div className="flex items-center gap-2 text-zinc-500">
-          <span className="text-maroon-700 dark:text-softPink-200">{session?.firstName}</span>
+          <span className="text-maroon-700 dark:text-softPink-200">{userData?.firstName}</span>
           <ChevronDown className="w-4 h-4" />
         </div>
       </DropdownMenuTrigger>
@@ -47,7 +46,7 @@ export default function UserDropdown({ session }: Props) {
         className={`w-56 font-medium text-sm ${isArabic ? "text-right" : "text-left"} dark:bg-zinc-700`}
       >
         <DropdownMenuLabel className="text-maroon-700 dark:text-softPink-200 capitalize">
-          {session?.firstName} {session?.lastName}
+          {userData?.firstName} {userData?.lastName}
         </DropdownMenuLabel>
 
         <DropdownMenuSeparator className="dark:bg-zinc-600" />

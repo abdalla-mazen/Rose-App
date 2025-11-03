@@ -4,12 +4,13 @@ import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { DeleteMyAccountAction, EditProfileAction } from "../_actions/edit-profile.action";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export function useEditprofile() {
   // Translations
   const t = useTranslations();
+  const router = useRouter();
 
   const { isPending, error, mutate } = useMutation({
     mutationFn: async (data: AccountEditprofileFields) => {
@@ -23,6 +24,9 @@ export function useEditprofile() {
         position: "bottom-right",
         duration: 1500,
       });
+
+      // Refresh page to change name in dropdown menu if name is chnaged
+      router.refresh();
     },
   });
 

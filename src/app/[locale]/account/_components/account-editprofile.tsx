@@ -12,7 +12,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { accountProfileSchema, AccountProfileValues } from "@/lib/schemas/account.schema";
-import { AccountProfile } from "@/lib/types/account-profile";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CloudUpload, LoaderCircle, Trash } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -32,32 +31,27 @@ import {
 import { useDeleteMyAccount, useEditprofile } from "../_hooks/use-editprofile";
 import { toast } from "sonner";
 
-type props = {
-  session: AccountProfile | null;
+type Props = {
+  userData: UserData;
 };
 
-export default function AccountEditProfile({ session }: props) {
-  // If no session
-  if (!session) {
-    return <div>No user data available</div>;
-  }
-
+export default function AccountEditProfile({ userData }: Props) {
   // Translations
   const t = useTranslations();
 
   // Hooks
   const [preview, setPreview] = useState(
-    session.photo || "/assets/images/account/default-profile.png",
+    userData.photo || "/assets/images/account/default-profile.png",
   );
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const form = useForm<AccountProfileValues>({
     defaultValues: {
-      firstName: session.firstName || "",
-      lastName: session.lastName || "",
-      email: session.email || "",
-      phone: session.phone || "",
-      gender: session.gender,
+      firstName: userData.firstName || "",
+      lastName: userData.lastName || "",
+      email: userData.email || "",
+      phone: userData.phone || "",
+      gender: userData.gender,
     },
     resolver: zodResolver(accountProfileSchema),
   });

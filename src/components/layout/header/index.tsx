@@ -9,8 +9,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
 import { getTranslations } from "next-intl/server";
 import UserDropdown from "./user-dropdown";
-import { AccountProfile } from "@/lib/types/account-profile";
 import ToggleNotification from "./toggle-notification";
+import { GetUserDataApi } from "@/lib/apis/get-user-data.api";
 
 export default async function Header() {
   // translations
@@ -19,10 +19,8 @@ export default async function Header() {
   // User session
   const session = await getServerSession(authOptions);
 
-  // Assign type to session
-  const accountSettings: AccountProfile | null = session?.user
-    ? (session.user as AccountProfile)
-    : null;
+  // Get user data
+  const userData = await GetUserDataApi();
 
   //  links
   const links = [
@@ -65,7 +63,7 @@ export default async function Header() {
         {/* User actions */}
         <div className="flex items-center gap-3">
           {session ? (
-            <UserDropdown session={accountSettings} />
+            <UserDropdown userData={userData} />
           ) : (
             <Link href="/login" className="flex items-center px-4 py-4">
               <User size={20} /> {t("login")}

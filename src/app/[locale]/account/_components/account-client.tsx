@@ -4,16 +4,16 @@ import { Lock, LogOut, UserRoundPen } from "lucide-react";
 import React, { useState } from "react";
 import AccountChangePassword from "./account-changepassword";
 import { cn } from "@/lib/utils";
-import { AccountProfile } from "@/lib/types/account-profile";
 import AccountEditProfile from "./account-editprofile";
 import { useTranslations } from "next-intl";
 import { signOut } from "next-auth/react";
 
-type props = {
-  session: AccountProfile | null;
+type Props = {
+  // session: AccountProfile | null;
+  userData: UserData;
 };
 
-export default function AccountClient({ session }: props) {
+export default function AccountClient({ userData }: Props) {
   // Translations
   const t = useTranslations();
 
@@ -67,7 +67,7 @@ export default function AccountClient({ session }: props) {
 
       <div className="flex-1">
         {/* Edit profile Component */}
-        {activeTab === "profile" && <AccountEditProfile session={session} />}
+        {activeTab === "profile" && <AccountEditProfile userData={userData} />}
 
         {/* Change password component */}
         {activeTab === "changepassword" && <AccountChangePassword />}
