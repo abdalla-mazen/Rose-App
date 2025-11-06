@@ -2,8 +2,9 @@
 
 import { JSON_HEADER } from "@/lib/constants/shared.constant";
 import getToken from "@/lib/utils/get-token";
+import { revalidateTag } from "next/cache";
 
-export async function EditProfileAction(data: AccountEditprofileFields) {
+export async function editProfileAction(data: AccountEditprofileFields) {
   try {
     // Get token
     const token = await getToken();
@@ -19,6 +20,9 @@ export async function EditProfileAction(data: AccountEditprofileFields) {
 
     const payload = await response.json();
 
+    // ✅ Revalidate user profile data everywhere it’s used
+    revalidateTag("user-profile");
+
     return payload;
   } catch (error) {
     console.error("Edit profile error:", error);
@@ -29,7 +33,7 @@ export async function EditProfileAction(data: AccountEditprofileFields) {
   }
 }
 
-export async function DeleteMyAccountAction() {
+export async function deleteMyAccountAction() {
   try {
     // Get token
     const token = await getToken();

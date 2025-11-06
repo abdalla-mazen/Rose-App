@@ -3,9 +3,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { DeleteMyAccountAction, EditProfileAction } from "../_actions/edit-profile.action";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { deleteMyAccountAction, editProfileAction } from "../_actions/edit-profile.action";
 
 export function useEditprofile() {
   // Translations
@@ -14,7 +14,7 @@ export function useEditprofile() {
 
   const { isPending, error, mutate } = useMutation({
     mutationFn: async (data: AccountEditprofileFields) => {
-      const response = await EditProfileAction(data);
+      const response = await editProfileAction(data);
 
       if ("error" in response) {
         throw new Error(response.error);
@@ -24,9 +24,6 @@ export function useEditprofile() {
         position: "bottom-right",
         duration: 1500,
       });
-
-      // Refresh page to change name in dropdown menu if name is chnaged
-      router.refresh();
     },
   });
 
@@ -39,7 +36,7 @@ export function useDeleteMyAccount() {
 
   const { isPending, error, mutate } = useMutation({
     mutationFn: async () => {
-      const response = await DeleteMyAccountAction();
+      const response = await deleteMyAccountAction();
 
       if ("error" in response) {
         throw new Error(response.error);

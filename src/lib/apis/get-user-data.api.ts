@@ -6,8 +6,12 @@ export async function GetUserDataApi() {
   // Get token
   const token = await getToken();
 
+  // If token is not exist
+  if (!token) return null;
+
   const response = await fetch(`${process.env.API}/auth/profile-data`, {
     cache: "no-store",
+    next: { tags: ["user-profile"] },
     headers: {
       ...JSON_HEADER,
       Authorization: `Bearer ${token?.accessToken}`,

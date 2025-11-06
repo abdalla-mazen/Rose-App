@@ -9,8 +9,7 @@ import { useTranslations } from "next-intl";
 import { signOut } from "next-auth/react";
 
 type Props = {
-  // session: AccountProfile | null;
-  userData: UserData;
+  userData: UserData | null;
 };
 
 export default function AccountClient({ userData }: Props) {

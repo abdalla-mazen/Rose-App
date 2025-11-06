@@ -13,9 +13,10 @@ import { ChevronDown, LogOut, MapPinHouse, ScrollText, Settings, User } from "lu
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { useTranslations, useLocale } from "next-intl";
+import { cn } from "@/lib/utils";
 
 type Props = {
-  userData: UserData;
+  userData: UserData | null;
 };
 
 export default function UserDropdown({ userData }: Props) {
@@ -32,7 +33,7 @@ export default function UserDropdown({ userData }: Props) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="relative mx-6 focus:outline-none w-16 font-medium">
+      <DropdownMenuTrigger className="relative mx-6 focus:outline-none w-22 font-medium">
         <span className="block bottom-4 absolute text-zinc-500 text-xs text-start">
           {t("hello")}
         </span>
@@ -43,7 +44,10 @@ export default function UserDropdown({ userData }: Props) {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className={`w-56 font-medium text-sm ${isArabic ? "text-right" : "text-left"} dark:bg-zinc-700`}
+        className={cn(
+          "dark:bg-zinc-700 w-56 font-medium text-sm",
+          isArabic ? "text-right" : "text-left",
+        )}
       >
         <DropdownMenuLabel className="text-maroon-700 dark:text-softPink-200 capitalize">
           {userData?.firstName} {userData?.lastName}
@@ -52,34 +56,32 @@ export default function UserDropdown({ userData }: Props) {
         <DropdownMenuSeparator className="dark:bg-zinc-600" />
 
         <Link href="/account">
-          <DropdownMenuItem
-            className={`capitalize ${isArabic ? "flex-row-reverse text-right" : ""}`}
-          >
-            <User className={`${isArabic ? "ml-2" : "mr-2"}`} /> {t("my-profile")}
+          <DropdownMenuItem className={cn("capitalize", isArabic && "flex-row-reverse text-right")}>
+            <User className={cn(isArabic ? "ml-2" : "mr-2")} /> {t("my-profile")}
           </DropdownMenuItem>
         </Link>
 
-        <DropdownMenuItem className={`capitalize ${isArabic ? "flex-row-reverse text-right" : ""}`}>
-          <MapPinHouse className={`${isArabic ? "ml-2" : "mr-2"}`} /> {t("my-addresses")}
+        <DropdownMenuItem className={cn("capitalize", isArabic && "flex-row-reverse text-right")}>
+          <MapPinHouse className={cn(isArabic ? "ml-2" : "mr-2")} /> {t("my-addresses")}
         </DropdownMenuItem>
 
-        <DropdownMenuItem className={`capitalize ${isArabic ? "flex-row-reverse text-right" : ""}`}>
-          <ScrollText className={`${isArabic ? "ml-2" : "mr-2"}`} /> {t("my-orders")}
+        <DropdownMenuItem className={cn("capitalize", isArabic && "flex-row-reverse text-right")}>
+          <ScrollText className={cn(isArabic ? "ml-2" : "mr-2")} /> {t("my-orders")}
         </DropdownMenuItem>
 
         <DropdownMenuSeparator className="dark:bg-zinc-600" />
 
-        <DropdownMenuItem className={`capitalize ${isArabic ? "flex-row-reverse text-right" : ""}`}>
-          <Settings className={`${isArabic ? "ml-2" : "mr-2"}`} /> {t("dashboard")}
+        <DropdownMenuItem className={cn("capitalize", isArabic && "flex-row-reverse text-right")}>
+          <Settings className={cn(isArabic ? "ml-2" : "mr-2")} /> {t("dashboard")}
         </DropdownMenuItem>
 
         <DropdownMenuSeparator className="dark:bg-zinc-600" />
 
         <DropdownMenuItem
           onClick={logout}
-          className={`capitalize ${isArabic ? "flex-row-reverse text-right" : ""}`}
+          className={cn("capitalize", isArabic && "flex-row-reverse text-right")}
         >
-          <LogOut className={`${isArabic ? "ml-2" : "mr-2"}`} /> {t("logout")}
+          <LogOut className={cn(isArabic ? "ml-2" : "mr-2")} /> {t("logout")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
