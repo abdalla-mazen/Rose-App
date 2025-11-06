@@ -1,3 +1,5 @@
+@import "leaflet/dist/leaflet.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -110,5 +112,3 @@
 [dir="rtl"] .PhoneInput input {
   text-align: right !important;
 }
-
-
