@@ -8,11 +8,9 @@ export async function getUserAddresses() {
 
     const payload = await res.json();
 
-    console.log(payload);
-
     return payload;
   } catch (error) {
-    console.error("getUserAddresses error:", error);
+    void error;
     return { message: "Unexpected error occurred", code: 500 };
   }
 }

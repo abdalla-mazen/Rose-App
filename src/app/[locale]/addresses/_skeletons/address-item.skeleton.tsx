@@ -16,8 +16,7 @@ export default function AddressItemSkeleton() {
 
           {/* Phone number */}
           <div className="flex justify-between items-center bg-zinc-500">
-            <Skeleton className="bg-zinc-500 mr-1 w-5 h-5 text-zinc-800" />
-            <Skeleton className="bg-zinc-500 font-medium text-zinc-600 text-lg" />
+            <Skeleton className="bg-zinc-500 mr-1 w-16 h-5 text-zinc-800" />
           </div>
         </div>
 

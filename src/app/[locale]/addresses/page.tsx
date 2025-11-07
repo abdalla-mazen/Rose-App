@@ -1,10 +1,14 @@
-import React from "react";
+"use client";
+
 import AddressesModal from "./_components/address-modal";
+import { AddressesProvider } from "./_providers/addresses.provider";
 
 export default function AddressesPage() {
   return (
     <div>
-      <AddressesModal />
+      <AddressesProvider>
+        <AddressesModal />
+      </AddressesProvider>
     </div>
   );
 }

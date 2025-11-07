@@ -1,9 +1,19 @@
 import { MapPin, PenLine, Phone, Trash2 } from "lucide-react";
-import React from "react";
 import DeleteAddressModal from "./delete-address-modal";
 import { DialogTrigger } from "@/components/ui/dialog";
+import { useAddresses } from "./address-modal";
 
 export default function AddressItem({ address }: { address: { [key: string]: string } }) {
+  // Context
+  const { setSelectedEditedAddressID, setStep } = useAddresses();
+
+  const handleEditClick = () => {
+    setSelectedEditedAddressID(address?._id);
+    setStep(2);
+
+    console.log("Setting address ID:", address?._id);
+  };
+
   return (
     <li className="relative mx-auto pt-6 pr-9 pb-5 pl-4 border border-zinc-300 hover:border-maroon-600 rounded-lg w-11/12 min-h-32">
       <div>
@@ -12,6 +22,7 @@ export default function AddressItem({ address }: { address: { [key: string]: str
           {address.street}
         </span>
 
+        {/* Map pin and city */}
         <div className="flex justify-between items-center">
           {/* Map pin */}
           <div className="flex justify-between items-center gap-1.5">
@@ -37,7 +48,10 @@ export default function AddressItem({ address }: { address: { [key: string]: str
 
         {/* Edit and delete buttons */}
         <div className="top-5 -right-4 absolute flex flex-col items-center gap-4">
-          <span className="flex justify-center items-center bg-zinc-50 border border-zinc-400 rounded-full w-9 h-9 cursor-pointer">
+          <span
+            onClick={handleEditClick}
+            className="flex justify-center items-center bg-zinc-50 border border-zinc-400 rounded-full w-9 h-9 cursor-pointer"
+          >
             <PenLine className="w-4 h-4" />
           </span>
 

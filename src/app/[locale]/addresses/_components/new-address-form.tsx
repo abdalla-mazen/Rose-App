@@ -18,11 +18,14 @@ import StepsProgress from "../../../../components/shared/steps-progress";
 import { AddNewAddressScheme, useAddNewAddressScheme } from "@/lib/schemas/new-address.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import AddressMap from "./address-map";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAddNewAddress } from "../_hooks/use-add-new-address";
 import { useSession } from "next-auth/react";
+import { useEditUserAddress } from "../_hooks/use-edit-user-address";
 
-export default function NewAddressForm({ setStep }: { setStep: (val: number) => void }) {
+// Types
+type NewAddressFormProps = { setStep: (val: number) => void; editingAddress?: userAddress };
+export default function NewAddressForm({ setStep, editingAddress }: NewAddressFormProps) {
   // Translations
   const t = useTranslations();
 
@@ -45,8 +48,33 @@ export default function NewAddressForm({ setStep }: { setStep: (val: number) => 
     resolver: zodResolver(scheme),
   });
 
+  // Effects - Pre-fill form when editingAddress changes
+  useEffect(() => {
+    if (editingAddress) {
+      form.reset({
+        city: editingAddress.city ?? "",
+        address: editingAddress.street ?? "",
+        phone: editingAddress.phone ?? "",
+      });
+      setSelectedCoords({
+        lat: +editingAddress.lat,
+        lng: +editingAddress.long,
+      });
+    } else {
+      // Reset form when not editing
+      form.reset({
+        city: "",
+        address: "",
+        phone: "",
+      });
+      setSelectedCoords(null);
+      setLocalStep(1);
+    }
+  }, [editingAddress, form]);
+
   // Initialize mutation without payload - we'll pass data when calling mutate
   const addAddressMutation = useAddNewAddress();
+  const editAddressMutation = useEditUserAddress();
 
   // Get user name from the session
   const { data } = useSession();
@@ -68,7 +96,7 @@ export default function NewAddressForm({ setStep }: { setStep: (val: number) => 
       // Get current form values
       const formValues = form.getValues();
 
-      const addAddressPayload: userAddress = {
+      const AddressPayload: userAddress = {
         street: formValues.address,
         city: formValues.city,
         phone: formValues.phone,
@@ -77,8 +105,12 @@ export default function NewAddressForm({ setStep }: { setStep: (val: number) => 
         username: data!.user.firstName, // Make sure this gets populated if needed
       };
 
-      // Call mutation with the payload
-      await addAddressMutation.mutateAsync(addAddressPayload);
+      if (editingAddress) {
+        await editAddressMutation.mutateAsync({ ...AddressPayload, _id: editingAddress._id });
+      } else {
+        // Call mutation with the payload
+        await addAddressMutation.mutateAsync(AddressPayload);
+      }
 
       // Only proceed if mutation was successful
       setStep(1);

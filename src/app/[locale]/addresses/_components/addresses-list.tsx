@@ -1,20 +1,23 @@
-import { useUserAddresses } from "../_hooks/use-user-addresses";
 import AddressItem from "./address-item";
 import AddressItemSkeleton from "../_skeletons/address-item.skeleton";
+import { useContext } from "react";
+import { AddressesContext } from "../_providers/addresses.provider";
 
 export default function AddressesList() {
   // Data
-  const { data, isLoading } = useUserAddresses();
+  const addressesContext = useContext(AddressesContext);
 
   // Loading state
-  if (isLoading) {
+  if (addressesContext?.isLoading) {
     return <AddressItemSkeleton />;
   }
+
+  // console.log(addressesContext?.data);
 
   return (
     <ul className="space-y-9 pt-4 h-80 overflow-x-hidden overflow-y-auto">
       {/* Mapping over the addresses */}
-      {data?.addresses.map((address: userAddress) => (
+      {addressesContext?.data?.addresses.map((address: userAddress) => (
         <AddressItem address={address} key={address._id} />
       ))}
     </ul>
