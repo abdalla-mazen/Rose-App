@@ -12,8 +12,6 @@ export default function AddressesList() {
     return <AddressItemSkeleton />;
   }
 
-  // console.log(addressesContext?.data);
-
   return (
     <ul className="space-y-9 pt-4 h-80 overflow-x-hidden overflow-y-auto">
       {/* Mapping over the addresses */}

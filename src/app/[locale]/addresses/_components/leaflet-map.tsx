@@ -45,12 +45,16 @@ export default function LeafletMap({
 
   // States
   // Selected position (shared between geolocation and click)
-  const [selected, setSelected] = useState<Coordinates | null>(null);
+  const [selected, setSelected] = useState<Coordinates | null>(initialCenter ?? null);
 
   // Variables
   const fallbackCenter: Coordinates = { lat: 30.0444, lng: 31.2357 };
-  const mapInitialCenter = initialCenter ?? fallbackCenter;
-  const center: LatLngExpression = selected ?? mapInitialCenter;
+  const center: LatLngExpression = selected ?? initialCenter ?? fallbackCenter;
+  useEffect(() => {
+    if (initialCenter) {
+      setSelected(initialCenter);
+    }
+  }, [initialCenter]);
 
   // Ref
   const mapRef = useRef<L.Map | null>(null);

@@ -1,10 +1,9 @@
 "use server";
 
-import { AUTHORIZATION_HEADER } from "@/lib/constants/shared.constant";
+import { AUTHORIZATION_HEADER, JSON_HEADER } from "@/lib/constants/shared.constant";
 import { userToken } from "@/lib/utils/get-token";
 
 export async function editAddress(data: userAddress) {
-  console.log("data-ID--------------:", data._id);
   try {
     // Get Token
     const token = await userToken();
@@ -13,29 +12,37 @@ export async function editAddress(data: userAddress) {
     if (!token) {
       return "unauthorized user";
     }
+    const { _id, ...addressPayload } = data;
+
+    if (!_id) {
+      return {
+        success: false,
+        message: "Address id is required",
+        code: 400,
+      };
+    }
 
     // Response
-    const res = await fetch(`${process.env.API}/addresses/${data._id}`, {
+    const res = await fetch(`${process.env.API}/addresses/${_id}`, {
       method: "PATCH",
       headers: {
+        ...JSON_HEADER,
         ...AUTHORIZATION_HEADER(token),
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(addressPayload),
     });
 
     // Check if there is a problem in the response
     if (!res.ok) {
-      return { message: "Something went wrong", code: res.status };
+      const errorText = await res.text();
+      return { message: "Something went wrong", code: res.status, error: errorText };
     }
 
     // Parse the json
     const payload = await res.json();
 
-    console.log("payload----------------:", payload);
-
     return payload;
   } catch (error) {
-    console.log("error------------------:", error);
     return error;
   }
 }

@@ -10,8 +10,6 @@ export default function AddressItem({ address }: { address: { [key: string]: str
   const handleEditClick = () => {
     setSelectedEditedAddressID(address?._id);
     setStep(2);
-
-    console.log("Setting address ID:", address?._id);
   };
 
   return (
