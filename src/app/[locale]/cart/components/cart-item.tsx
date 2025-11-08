@@ -1,14 +1,15 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Minus, Plus, X } from 'lucide-react';
 import { CartItem as CartItemType } from '@/lib/types/cart';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 interface CartItemProps {
-  item: CartItemType; // Single cart item data
-  onUpdateQuantity: (productId: string, quantity: number) => void; // Update item quantity
-  onRemove: (productId: string) => void; // Remove item from cart
+  item: CartItemType;
+  onUpdateQuantity: (productId: string, quantity: number) => void;
+  onRemove: (productId: string) => void;
 }
 
 export const CartItem: React.FC<CartItemProps> = ({ 
@@ -16,16 +17,15 @@ export const CartItem: React.FC<CartItemProps> = ({
   onUpdateQuantity, 
   onRemove 
 }) => {
-  const [quantity, setQuantity] = useState(item.quantity || 1); // Local quantity state
+  const t = useTranslations();
+  const [quantity, setQuantity] = useState(item.quantity || 1);
 
-  // Handle quantity update
   const handleQuantityChange = (newQuantity: number) => {
     if (newQuantity < 1) return;
     setQuantity(newQuantity);
     onUpdateQuantity(item.product._id, newQuantity);
   };
 
-  // Handle manual input change
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value) || 1;
     handleQuantityChange(value);
@@ -54,9 +54,13 @@ export const CartItem: React.FC<CartItemProps> = ({
             <div>
               <h3 className="font-semibold text-gray-900 mb-1">{product.title}</h3>
               <div className="flex items-center gap-2">
-                <span className="text-sm text-yellow-600">★ Rating {product.ratingsAverage}</span>
+                <span className="text-sm text-yellow-600">
+                  ★ {t('rating')} {product.ratingsAverage}
+                </span>
                 {product.ratingsQuantity && (
-                  <span className="text-sm text-gray-500">({product.ratingsQuantity} ratings)</span>
+                  <span className="text-sm text-gray-500">
+                    ({product.ratingsQuantity} {t('ratings')})
+                  </span>
                 )}
               </div>
             </div>
@@ -65,7 +69,7 @@ export const CartItem: React.FC<CartItemProps> = ({
             <button
               onClick={() => onRemove(product._id)}
               className="text-red-600 hover:bg-red-50 p-2 rounded-lg transition"
-              title="Remove"
+              title={t('remove')}
             >
               <X size={20} />
             </button>
@@ -77,11 +81,11 @@ export const CartItem: React.FC<CartItemProps> = ({
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-xl font-bold text-gray-900">
-                  {price.toFixed(2)} EGP
+                  {price.toFixed(2)} {t('currency')}
                 </span>
                 {hasDiscount && (
                   <span className="text-sm text-gray-400 line-through">
-                    {product.price.toFixed(2)} EGP
+                    {product.price.toFixed(2)} {t('currency')}
                   </span>
                 )}
               </div>
@@ -89,7 +93,6 @@ export const CartItem: React.FC<CartItemProps> = ({
 
             {/* Quantity controls */}
             <div className="flex items-center gap-2">
-              {/* Decrease button */}
               <button
                 onClick={() => handleQuantityChange(quantity - 1)}
                 className="w-8 h-8 flex items-center justify-center rounded-full bg-red-50 text-red-600 hover:bg-red-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
@@ -98,7 +101,6 @@ export const CartItem: React.FC<CartItemProps> = ({
                 <Minus size={16} />
               </button>
               
-              {/* Quantity input */}
               <input
                 type="number"
                 value={quantity}
@@ -107,7 +109,6 @@ export const CartItem: React.FC<CartItemProps> = ({
                 className="w-16 text-center border border-gray-300 rounded-lg py-1 focus:outline-none focus:ring-2 focus:ring-red-500"
               />
               
-              {/* Increase button */}
               <button
                 onClick={() => handleQuantityChange(quantity + 1)}
                 className="w-8 h-8 flex items-center justify-center rounded-full bg-red-50 text-red-600 hover:bg-red-100 transition"
@@ -122,7 +123,7 @@ export const CartItem: React.FC<CartItemProps> = ({
             onClick={() => onRemove(product._id)}
             className="mt-3 px-4 py-1 bg-red-600 text-white text-sm rounded-full hover:bg-red-700 transition"
           >
-            Remove
+            {t('remove')}
           </button>
         </div>
       </div>

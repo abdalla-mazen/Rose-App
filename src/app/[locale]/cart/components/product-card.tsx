@@ -1,17 +1,21 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 import { Product } from '@/lib/types/cart';
+import { useTranslations } from 'next-intl';
 
 interface ProductCardProps {
-  product: Product;                 // Product data
-  onAddToCart?: (product: Product) => void; // Optional add to cart handler
+  product: Product;
+  onAddToCart?: (product: Product) => void;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ 
   product, 
   onAddToCart 
 }) => {
-  // Determine price and discount
+  const t = useTranslations();
+
   const price = product.priceAfterDiscount || product.price;
   const hasDiscount = product.priceAfterDiscount && product.priceAfterDiscount < product.price;
   const discountPercent = hasDiscount 
@@ -25,7 +29,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Discount badge */}
         {hasDiscount && (
           <span className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full z-10">
-            {discountPercent}% OFF
+            {discountPercent}% {t('off')}
           </span>
         )}
         <Image
@@ -50,11 +54,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Price and discount */}
         <div className="flex items-center gap-2">
           <span className="text-lg font-bold text-red-600">
-            {price.toFixed(2)} EGP
+            {price.toFixed(2)} {t('currency')}
           </span>
           {hasDiscount && (
             <span className="text-sm text-gray-400 line-through">
-              {product.price.toFixed(2)} EGP
+              {product.price.toFixed(2)} {t('currency')}
             </span>
           )}
         </div>
@@ -64,7 +68,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           onClick={() => onAddToCart?.(product)}
           className="w-full mt-3 px-4 py-2 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition"
         >
-          Add to Cart
+          {t('add-to-cart')}
         </button>
       </div>
     </div>
