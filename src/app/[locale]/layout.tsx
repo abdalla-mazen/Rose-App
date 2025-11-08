@@ -1,5 +1,5 @@
 import { hasLocale } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getMessages, getNow, getTimeZone, setRequestLocale } from "next-intl/server";
 import { Tajawal, Sarabun } from "next/font/google";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
@@ -22,7 +22,6 @@ const sarabun = Sarabun({
   variable: "--font-sarabun",
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
 });
-
 const tajawal = Tajawal({
   subsets: ["arabic"],
   variable: "--font-tajawal",
@@ -34,13 +33,10 @@ type Props = {
   params: { locale: string };
 };
 
-export async function generateMetadata({
-  params: { locale },
-}: Pick<Props, "params">) {
-  const t = await getTranslations({ locale });
-
+export async function generateMetadata({ params: { locale } }: Pick<Props, "params">) {
+  const messages = await getMessages({ locale });
   return {
-    title: t("title"),
+    title: messages.title ?? "App",
   };
 }
 
@@ -48,14 +44,17 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export default function LocaleLayout({ children, params: { locale } }: Props) {
-  // Ensure that the incoming `locale` is valid
+export default async function LocaleLayout({ children, params: { locale } }: Props) {
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
 
-  // Enable static rendering
   setRequestLocale(locale);
+
+  // 👇 نجيب البيانات من السيرفر
+  const messages = await getMessages({ locale });
+  const timezone = await getTimeZone();
+  const now = await getNow();
 
   return (
     <html
@@ -73,7 +72,10 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
           "antialiased"
         )}
       >
-        <Providers>{children}</Providers>
+        {/* Providers */}
+        <Providers locale={locale} messages={messages} timezone={timezone} now={now}>
+          {children}
+        </Providers>
       </body>
     </html>
   );

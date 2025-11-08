@@ -1,42 +1,49 @@
+"use client";
+
 import { ThemeProvider } from "next-themes";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
   Locale,
   NextIntlClientProvider,
-  useLocale,
-  useMessages,
-  useNow,
-  useTimeZone,
 } from "next-intl";
+import { SessionProvider } from "next-auth/react";
 import ReactQueryProvider from "./_components/react-query.provider";
 
-export default function Providers({ children }: { children: React.ReactNode }) {
-  // Translation
-  const messages = useMessages();
-  const locale = useLocale() as Locale;
-  const timezone = useTimeZone();
-  const now = useNow();
+type ProvidersProps = {
+  children: React.ReactNode;
+  locale: Locale;
+  messages: Record<string, any>;
+  timezone: string;
+  now: Date;
+};
 
+export default function Providers({
+  children,
+  locale,
+  messages,
+  timezone,
+  now,
+}: ProvidersProps) {
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
-      {/* Next Intl Provider */}
-      <NextIntlClientProvider
-        messages={messages}
-        locale={locale}
-        timeZone={timezone}
-        now={now}
+    <SessionProvider>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
       >
-        <ReactQueryProvider>
-          {/* react query dev tools */}
-          <ReactQueryDevtools />
-          {children}
-        </ReactQueryProvider>
-      </NextIntlClientProvider>
-    </ThemeProvider>
+        <NextIntlClientProvider
+          messages={messages}
+          locale={locale}
+          timeZone={timezone}
+          now={now}
+        >
+          <ReactQueryProvider>
+            <ReactQueryDevtools />
+            {children}
+          </ReactQueryProvider>
+        </NextIntlClientProvider>
+      </ThemeProvider>
+    </SessionProvider>
   );
 }
