@@ -1,35 +1,44 @@
+"use client";
+
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-
-const occasions = [
-  {
-    tag: "Wedding",
-    title: "Celebrate Her Forever with a Gift She’ll Always Remember",
-    image: "/images/flower.png",
-  },
-  {
-    tag: "Engagement",
-    title: "Honor the Beginning of a Beautiful Journey Together",
-    image: "/images/notebook.png",
-  },
-  {
-    tag: "Anniversary",
-    title: "Mark Every Year of Love with a Meaningful Surprise",
-    image: "/images/anniversary.png",
-  },
-];
+import { useTranslations } from "next-intl";
 
 export default function Occasion() {
+  const t = useTranslations(); // translation 
+
+  // Occasion cards data
+  const occasions = [
+    {
+      tag: t("occasion-wedding-tag"),
+      title: t("occasion-wedding-title"),
+      image: "/images/flower.png",
+    },
+    {
+      tag: t("occasion-engagement-tag"),
+      title: t("occasion-engagement-title"),
+      image: "/images/notebook.png",
+    },
+    {
+      tag: t("occasion-anniversary-tag"),
+      title: t("occasion-anniversary-title"),
+      image: "/images/anniversary.png",
+    },
+  ];
+
   return (
+    // Wrapper section
     <section className="w-full flex justify-center">
-      <div className="w-full px-20">
+      <div className="w-full mb-10">
+        {/* Grid layout for occasion cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {occasions.map((item) => (
             <Card
               key={item.tag}
               className="relative rounded-2xl overflow-hidden border-none shadow-md group"
             >
+              {/* Image */}
               <div className="relative w-full aspect-[4/3]">
                 <Image
                   src={item.image}
@@ -39,8 +48,10 @@ export default function Occasion() {
                 />
               </div>
 
+              {/* Dark overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-2xl" />
 
+              {/* Text content */}
               <CardContent className="absolute bottom-0 left-0 right-0 p-6 flex flex-col gap-2 text-white">
                 <Badge
                   variant="secondary"
