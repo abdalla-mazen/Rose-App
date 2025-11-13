@@ -1,6 +1,6 @@
 // Hooks
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addNewAddress } from "../_actions/add-new-address";
+import { addNewAddress } from "../_actions/add-new-address.action";
 
 export function useAddNewAddress() {
   // Query client

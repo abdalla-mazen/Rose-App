@@ -203,6 +203,7 @@
   "dashboard": "dashboard",
   "logout": "logout",
   "add-new-address": "add a new address",
+  "update-your-address": "update your address",
   "add-new-address-city-constraint": "the city must be at least one character",
   "add-new-address-address-constraint": "the address must be at least 10 characters",
   "city": "city",

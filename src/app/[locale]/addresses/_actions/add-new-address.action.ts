@@ -1,6 +1,6 @@
 "use server";
 
-import { AUTHORIZATION_HEADER } from "@/lib/constants/shared.constant";
+import { AUTHORIZATION_HEADER, JSON_HEADER } from "@/lib/constants/shared.constant";
 import { userToken } from "@/lib/utils/get-token";
 
 export async function addNewAddress(data: userAddress) {
@@ -17,7 +17,7 @@ export async function addNewAddress(data: userAddress) {
     const res = await fetch(`${process.env.API}/addresses`, {
       method: "PATCH",
       headers: {
-        "Content-Type": "application/json",
+        ...JSON_HEADER,
         ...AUTHORIZATION_HEADER(token),
       },
       body: JSON.stringify(data),

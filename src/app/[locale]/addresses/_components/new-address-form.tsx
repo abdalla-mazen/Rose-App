@@ -126,7 +126,7 @@ export default function NewAddressForm({ setStep, editingAddress }: NewAddressFo
       {localStep === 1 && (
         <div>
           <h2 className="mb-6 font-bold text-zinc-800 text-3xl capitalize">
-            {t("add-new-address")}
+            {editingAddress ? t("update-your-address") : t("add-new-address")}
           </h2>
 
           <div className="mb-4">
@@ -194,7 +194,11 @@ export default function NewAddressForm({ setStep, editingAddress }: NewAddressFo
               <Button
                 variant="primary"
                 type="submit"
-                disabled={!form.formState.isValid || form.formState.isSubmitting}
+                disabled={
+                  (!form.formState.isValid && !editingAddress) ||
+                  form.formState.isSubmitting ||
+                  !form.formState.isValid
+                }
                 className="mt-8 capitalize"
               >
                 {t("next")}

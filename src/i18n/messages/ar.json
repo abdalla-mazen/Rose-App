@@ -195,6 +195,7 @@
   "my-orders": "طلباتي",
   "dashboard": "لوحة القيادة",
   "add-new-address": "أضف عنوان جديد",
+  "update-your-address": "قم بتحديث عنوانك",
   "add-new-address-city-constraint": "المدينة لا تقل عن حرف واحد",
   "add-new-address-address-constraint": "العنوان يجب أن لا يقل عن عشرة أحرف",
   "city": "المدينة",

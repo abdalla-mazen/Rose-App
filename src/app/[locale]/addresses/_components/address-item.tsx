@@ -25,7 +25,7 @@ export default function AddressItem({ address }: { address: { [key: string]: str
           {/* Map pin */}
           <div className="flex justify-between items-center gap-1.5">
             <span className="flex justify-center items-center bg-emerald-500 rounded-full w-8 h-8 text-white">
-              <MapPin className="" />
+              <MapPin />
             </span>
 
             {/* City */}
