@@ -215,5 +215,27 @@
   "my-addresses": "my addreesse",
   "my-orders": "my orders",
   "dashboard": "dashboard",
-  "logout": "logout"
+  "logout": "logout",
+  "address-header": "Shipping Address",
+   "addAddress": "Please add an address",
+    "back": "Back",
+  "paymentMethod": "Payment Method",
+  "processing": "Processing...",
+  "next": "Next",
+   "cash_name": "Cash on Delivery",
+  "cash_description": "You’ll pay in cash when your order is delivered.",
+  "credit_name": "Credit Card",
+  "credit_description": "You’ll be securely redirected to Stripe to complete your payment.",
+   "select_payment_method": "Please select a payment method",
+  "invalid_payment_method": "Invalid payment method",
+  "select_address": "Please select an address",
+  "unexpected_error": "Unexpected error occurred",
+  "summary": "Summary",
+  "no_coupons": "No coupons applied",
+  "subtotal": "Subtotal",
+  "discount": "Discount",
+  "total": "Total",
+  "checkout": "Checkout",
+  "apply_coupon": "Apply coupon "
+  
 }

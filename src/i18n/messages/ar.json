@@ -207,5 +207,27 @@
   "my-profile": "ملفي الشخصي",
   "my-addresses": "عناويني",
   "my-orders": "طلباتي",
-  "dashboard": "لوحة القيادة"
+  "dashboard": "لوحة القيادة",
+    "address-header": "عنوان الشحن",
+  "addAddress": "يرجى إضافة عنوان",
+    "back": "رجوع",
+  "paymentMethod": "طريقة الدفع",
+  "processing": "جارٍ المعالجة...",
+  "next": "التالي",
+  "cash_name": "الدفع عند الاستلام",
+  "cash_description": "ستدفع نقدًا عند توصيل طلبك.",
+  "credit_name": "بطاقة ائتمان",
+  "credit_description": "سيتم توجيهك بأمان إلى Stripe لإتمام الدفع.",
+   "select_payment_method": "يرجى اختيار طريقة الدفع",
+  "invalid_payment_method": "طريقة الدفع غير صالحة",
+  "select_address": "يرجى اختيار عنوان",
+  "unexpected_error": "حدث خطأ غير متوقع",
+"summary": "ملخص الطلب",
+  "no_coupons": "لا توجد كوبونات مفعلة",
+  "subtotal": "المجموع الجزئي",
+  "discount": "الخصم",
+  "total": "الإجمالي",
+  "checkout": "الدفع",
+  "apply_coupon": "تطبيق كوبون"
+
 }
