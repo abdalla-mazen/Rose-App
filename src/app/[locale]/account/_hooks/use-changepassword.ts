@@ -12,7 +12,7 @@ export default function useChangePassword() {
 
   // Hooks
   const { isPending, error, mutate } = useMutation({
-    mutationFn: async (data: AccountChangepasswordValues) => {
+    mutationFn: async (data: AccountChangepasswordFields) => {
       const response = await changePasswordAction(data);
 
       if ("error" in response) {

@@ -8,7 +8,7 @@ export const accountProfileSchema = z.object({
     .string()
     .min(10, "Phone must be at least 10 digits")
     .nonempty("Your phone number is required"),
-  gender: z.string(),
+  gender: z.string().optional(),
 });
 
 export const accountChangepasswordSchema = z
