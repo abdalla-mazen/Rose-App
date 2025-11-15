@@ -19,3 +19,11 @@ export default async function getToken() {
     return null;
   }
 }
+
+// User Token
+export async function userToken() {
+  const jwt = await getToken();
+  const token = jwt?.accessToken;
+
+  return token;
+}
