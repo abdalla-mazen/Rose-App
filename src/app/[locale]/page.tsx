@@ -1,6 +1,3 @@
-import Footer from "@/components/layout/footer";
-import Header from "@/components/layout/header";
-
 import Services from "./hero/_components/service";
 import Occasion from "./hero/_components/occasion";
 import ValentineCarousel from "./hero/_components/carousel";
@@ -16,8 +13,6 @@ export default function Page({ params }: { params: { locale: string } }) {
   const locale = params.locale;
 
   return (
-    <>
-      <Header />
       <div className="flex flex-col justify-center items-center mx-auto max-w-7xl">
         <ValentineCarousel />
         <Occasion />
@@ -29,7 +24,5 @@ export default function Page({ params }: { params: { locale: string } }) {
         <TestimonialPage />
         <Companies />
       </div>
-      <Footer />
-    </>
   );
 }

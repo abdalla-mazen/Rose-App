@@ -31,12 +31,14 @@ import {
 import { useDeleteMyAccount, useEditprofile } from "../_hooks/use-editprofile";
 import { toast } from "sonner";
 import { uploadPhotoAction } from "../_actions/upload-photo.action";
+import { Link } from "@/i18n/navigation";
 
 type Props = {
   userData: UserData | null;
+  showButtonChangePassword?: boolean;
 };
 
-export default function AccountEditProfile({ userData }: Props) {
+export default function AccountEditProfile({ userData, showButtonChangePassword }: Props) {
   // Translations
   const t = useTranslations();
 
@@ -79,42 +81,6 @@ export default function AccountEditProfile({ userData }: Props) {
       toast.error(result.message || t("photo-error"), { position: "bottom-right", duration: 1500 });
     }
   };
-
-  // const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = e.target.files?.[0];
-  //   if (!file) return;
-
-  //   // Display photo before upload
-  //   const localPreview = URL.createObjectURL(file);
-  //   setPreview(localPreview);
-
-  //   const formData = new FormData();
-  //   formData.append("photo", file);
-
-  //   try {
-  //     const res = await fetch("/api/upload-photo", {
-  //       method: "PUT",
-  //       body: formData,
-  //     });
-
-  //     const data = await res.json();
-
-  //     if (!res.ok) {
-  //       throw new Error(data.message || "Upload failed");
-  //     }
-
-  //     toast.success(t("photo-success"), {
-  //       position: "bottom-right",
-  //       duration: 1500,
-  //     });
-  //   } catch (err) {
-  //     console.error("Upload error:", err);
-  //     toast.error(t("photo-error"), {
-  //       position: "bottom-right",
-  //       duration: 1500,
-  //     });
-  //   }
-  // };
 
   const onSubmit: SubmitHandler<AccountProfileValues> = async (data) => {
     const { gender, ...filteredData } = data;
@@ -267,56 +233,68 @@ export default function AccountEditProfile({ userData }: Props) {
         {deleteMyAccountError && <ErrorMessage message={deleteMyAccountError.message} />}
 
         <div className="flex justify-between mt-20">
-          {/* Delete account modal */}
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="ghost" className="w-56 text-maroon-500 capitalize">
-                {t("delete-my-account")}
-              </Button>
-            </DialogTrigger>
+          <div className="flex gap-4">
+            {/* Delete account modal */}
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="ghost" className="w-32 p-0 text-maroon-500 capitalize">
+                  {t("delete-my-account")}
+                </Button>
+              </DialogTrigger>
 
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle className="flex justify-center items-center bg-[#2E2E300D] dark:bg-zinc-400 m-auto rounded-full w-28 h-28">
-                  <div className="flex justify-center items-center bg-[#2E2E3026] dark:bg-zinc-600 rounded-full w-16 h-16">
-                    <Trash className="w-7 h-7 dark:text-black" />
-                  </div>
-                </DialogTitle>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle className="flex justify-center items-center bg-[#2E2E300D] dark:bg-zinc-400 m-auto rounded-full w-28 h-28">
+                    <div className="flex justify-center items-center bg-[#2E2E3026] dark:bg-zinc-600 rounded-full w-16 h-16">
+                      <Trash className="w-7 h-7 dark:text-black" />
+                    </div>
+                  </DialogTitle>
 
-                <DialogDescription className="pt-7">
-                  <h1 className="font-semibold text-[#2E2E30] dark:text-zinc-50 text-xl text-center">
-                    {t("delete-account-confirm")}
-                  </h1>
-                  <p className="mt-3 text-maroon-500 text-center">
-                    {t("delete-account-paragraph")}
-                  </p>
-                </DialogDescription>
+                  <DialogDescription className="pt-7">
+                    <h1 className="font-semibold text-[#2E2E30] dark:text-zinc-50 text-xl text-center">
+                      {t("delete-account-confirm")}
+                    </h1>
+                    <p className="mt-3 text-maroon-500 text-center">
+                      {t("delete-account-paragraph")}
+                    </p>
+                  </DialogDescription>
 
-                <div className="flex gap-2.5 pt-12">
-                  {/* Cancel button*/}
-                  <DialogClose asChild>
+                  <div className="flex gap-2.5 pt-12">
+                    {/* Cancel button*/}
+                    <DialogClose asChild>
+                      <Button
+                        type="button"
+                        className="bg-zinc-50 hover:bg-zinc-200 border  border-zinc-300 font-medium text-zinc-800"
+                      >
+                        {t("nope")}
+                      </Button>
+                    </DialogClose>
+
+                    {/* Delete button */}
                     <Button
                       type="button"
-                      className="bg-zinc-50 hover:bg-zinc-200 border border-zinc-300 font-medium text-zinc-800"
+                      disabled={deleteMyAccountPending}
+                      className="bg-red-600 hover:bg-red-700 w-full dark:text-zinc-50 capitalize"
+                      onClick={() => deleteMyAccount()}
                     >
-                      {t("nope")}
+                      {t("yes-delete")}
+                      {deleteMyAccountPending && <LoaderCircle className="animate-spin" />}
                     </Button>
-                  </DialogClose>
+                  </div>
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
 
-                  {/* Delete button */}
-                  <Button
-                    type="button"
-                    disabled={deleteMyAccountPending}
-                    className="bg-red-600 hover:bg-red-700 w-full dark:text-zinc-50 capitalize"
-                    onClick={() => deleteMyAccount()}
-                  >
-                    {t("yes-delete")}
-                    {deleteMyAccountPending && <LoaderCircle className="animate-spin" />}
-                  </Button>
-                </div>
-              </DialogHeader>
-            </DialogContent>
-          </Dialog>
+            {/* change password button */}
+            {showButtonChangePassword && (
+              <Button
+                type="button"
+                className=" hover:bg-maroon-700 rounded-xl  bg-transparent  w-32 p-0 hover:text-zinc-50 dark:text-white text-zinc-800 capitalize"
+              >
+                <Link href="/changepassword">{t("change-password")}</Link>
+              </Button>
+            )}
+          </div>
 
           {/* Save changes button */}
           <Button
