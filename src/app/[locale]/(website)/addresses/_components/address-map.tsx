@@ -1,6 +1,6 @@
 "use client";
 
-import StepsProgress from "../../../../components/shared/steps-progress";
+import StepsProgress from "../../../../../components/shared/steps-progress";
 import dynamic from "next/dynamic";
 import { ArrowLeft } from "lucide-react";
 import { useTranslations } from "next-intl";

@@ -12,7 +12,7 @@ import {
 import React from "react";
 import { useLocale } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
-import CardProduct from "@/app/[locale]/products/_components/card-product";
+import CardProduct from "@/app/[locale]/(website)/products/_components/card-product";
 
 type Props = {
   products?: Product[];

@@ -80,42 +80,6 @@ export default function AccountEditProfile({ userData }: Props) {
     }
   };
 
-  // const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = e.target.files?.[0];
-  //   if (!file) return;
-
-  //   // Display photo before upload
-  //   const localPreview = URL.createObjectURL(file);
-  //   setPreview(localPreview);
-
-  //   const formData = new FormData();
-  //   formData.append("photo", file);
-
-  //   try {
-  //     const res = await fetch("/api/upload-photo", {
-  //       method: "PUT",
-  //       body: formData,
-  //     });
-
-  //     const data = await res.json();
-
-  //     if (!res.ok) {
-  //       throw new Error(data.message || "Upload failed");
-  //     }
-
-  //     toast.success(t("photo-success"), {
-  //       position: "bottom-right",
-  //       duration: 1500,
-  //     });
-  //   } catch (err) {
-  //     console.error("Upload error:", err);
-  //     toast.error(t("photo-error"), {
-  //       position: "bottom-right",
-  //       duration: 1500,
-  //     });
-  //   }
-  // };
-
   const onSubmit: SubmitHandler<AccountProfileValues> = async (data) => {
     const { gender, ...filteredData } = data;
     editProfile(filteredData);
