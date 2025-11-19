@@ -23,7 +23,7 @@ export interface CheckoutPayload {
 }
 
 interface PaymentStepProps {
-  selectedAddress: ShippingAddress  | null;
+  selectedAddress: ShippingAddress | null;
   onBack: () => void;
   onNext?: () => void;
 }
@@ -86,27 +86,26 @@ export default function PaymentStep({ selectedAddress, onBack, onNext }: Payment
       }
 
       // Create the payload to be sent
+      const { _id, username, ...addressWithoutId } = selectedAddress ?? {};
       const payload: AddressPayload = {
         shippingAddress: {
-          street: selectedAddress?.street,
-          phone: selectedAddress?.phone,
-          city: selectedAddress?.city,
-          lat: selectedAddress?.lat,
-          long: selectedAddress?.long,
-          _id: selectedAddress?._id || "",
+          ...addressWithoutId,
         },
       };
-
       let result;
 
       // Handle payment type
       if (model.id === "cash") {
         result = await cashPayment(payload);
+        console.log(result);
       } else if (model.id === "credit") {
         result = await applyCreditPaymentAction(payload);
       }
 
       if (result?.message === "success") {
+        console.log(result);
+        console.log("Successfully applied payment");
+
         // Redirect to stripe
         if (result.session?.url) {
           window.location.href = result.session.url;

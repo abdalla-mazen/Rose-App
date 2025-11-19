@@ -1,5 +1,5 @@
 export interface ShippingAddress {
-  _id: string;
+  _id?: string;
   street: string;
   phone: string;
   city: string;
