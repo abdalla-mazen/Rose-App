@@ -14,7 +14,7 @@ import { PhoneInput } from "@/components/ui/phone-input";
 import { Textarea } from "@/components/ui/textarea";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
-import StepsProgress from "../../../../components/shared/steps-progress";
+import StepsProgress from "../../../../../components/shared/steps-progress";
 import { AddNewAddressScheme, useAddNewAddressScheme } from "@/lib/schemas/new-address.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import AddressMap from "./address-map";

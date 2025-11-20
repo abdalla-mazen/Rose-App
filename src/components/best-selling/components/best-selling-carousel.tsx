@@ -1,6 +1,6 @@
 "use client";
 
-import CardProduct from "@/app/[locale]/products/_components/card-product";
+import CardProduct from "@/app/[locale]/(website)/products/_components/card-product";
 import {
   Carousel,
   CarouselContent,

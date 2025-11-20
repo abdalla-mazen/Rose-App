@@ -5,7 +5,7 @@ import Subtitle from "@/components/shared/subtitle";
 import { MostPopularApi } from "@/lib/apis/product.api";
 import { useTranslations } from "next-intl";
 import { MoveLeft, MoveRight } from "lucide-react";
-import CardProduct from "@/app/[locale]/products/_components/card-product";
+import CardProduct from "@/app/[locale]/(website)/products/_components/card-product";
 
 // Props type
 type Props = {

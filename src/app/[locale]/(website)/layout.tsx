@@ -1,9 +1,5 @@
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import {
-  getMessages,
-  getTranslations,
-  setRequestLocale,
-} from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { Tajawal, Sarabun } from "next/font/google";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
@@ -13,12 +9,12 @@ import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
 
 const geistSans = localFont({
-  src: "../fonts/GeistVF.woff",
+  src: "../../fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
 const geistMono = localFont({
-  src: "../fonts/GeistMonoVF.woff",
+  src: "../../fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
 });
@@ -39,9 +35,7 @@ type Props = {
   params: { locale: string };
 };
 
-export async function generateMetadata({
-  params: { locale },
-}: Pick<Props, "params">) {
+export async function generateMetadata({ params: { locale } }: Pick<Props, "params">) {
   const t = await getTranslations({ locale });
 
   return {
@@ -53,10 +47,7 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export default async function LocaleLayout({
-  children,
-  params: { locale },
-}: Props) {
+export default async function LocaleLayout({ children, params: { locale } }: Props) {
   // Ensure that the incoming `locale` is valid
   if (!hasLocale(routing.locales, locale)) {
     notFound();
@@ -68,11 +59,7 @@ export default async function LocaleLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <html
-      lang={locale}
-      dir={locale === "ar" ? "rtl" : "ltr"}
-      suppressHydrationWarning
-    >
+    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} suppressHydrationWarning>
       <body
         className={cn(
           geistSans.variable,
@@ -80,7 +67,7 @@ export default async function LocaleLayout({
           sarabun.variable,
           tajawal.variable,
           locale === "ar" ? "font-tajawal" : "font-sarabun",
-          "antialiased"
+          "antialiased",
         )}
       >
         <NextIntlClientProvider messages={messages} locale={locale}>

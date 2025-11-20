@@ -1,15 +1,14 @@
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
-
-import Services from "./hero/_components/service";
-import Occasion from "./hero/_components/occasion";
-import ValentineCarousel from "./hero/_components/carousel";
 import TestimonialPage from "@/components/testimonial";
 import BestSelling from "@/components/best-seliing";
 import MostPopular from "@/components/most-popular/most-popular";
 import About from "@/components/about";
 import Gallery from "@/components/gallery";
 import Companies from "@/components/companies";
+import ValentineCarousel from "./hero/_components/carousel";
+import Occasion from "./hero/_components/occasion";
+import Services from "./hero/_components/service";
 
 export default function Page({ params }: { params: { locale: string } }) {
   // Locale
