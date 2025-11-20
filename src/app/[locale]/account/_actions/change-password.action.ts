@@ -3,7 +3,7 @@
 import { JSON_HEADER } from "@/lib/constants/shared.constant";
 import getToken from "@/lib/utils/get-token";
 
-export async function changePasswordAction(data: AccountChangepasswordValues) {
+export async function changePasswordAction(data: AccountChangepasswordFields) {
   try {
     const token = await getToken();
 
