@@ -11,6 +11,20 @@ export default async function ProductsStatistics() {
   // Fetch products statistics dashboard
   const products = await ProductsStatisticsDashboardApi();
 
+  // Get top product background function
+  function getTopProductBackground(index: number) {
+    switch (index) {
+      case 0:
+        return "font-medium bg-[linear-gradient(90deg,rgba(223,172,22,0.25)_0%,rgba(223,172,22,0.1)_100%)]";
+      case 1:
+        return "font-medium bg-[linear-gradient(90deg,rgba(117,127,149,0.25)_0%,rgba(117,127,149,0.1)_100%)]";
+      case 2:
+        return "font-medium bg-[linear-gradient(90deg,rgba(145,68,0,0.25)_0%,rgba(145,68,0,0.1)_100%)]";
+      default:
+        return "bg-zinc-100";
+    }
+  }
+
   return (
     <div className="flex gap-6 max-w-[1096px]">
       {/* Top selling products */}
@@ -21,15 +35,8 @@ export default async function ProductsStatistics() {
         {products?.topSellingProducts.map((topProd, index) => (
           <div
             className={cn(
-              `flex justify-between my-2.5 px-2.5 py-1 rounded-md ${
-                index === 0
-                  ? "font-medium bg-[linear-gradient(90deg,rgba(223,172,22,0.25)_0%,rgba(223,172,22,0.1)_100%)]"
-                  : index === 1
-                    ? "font-medium bg-[linear-gradient(90deg,rgba(117,127,149,0.25)_0%,rgba(117,127,149,0.1)_100%)]"
-                    : index === 2
-                      ? "font-medium bg-[linear-gradient(90deg,rgba(145,68,0,0.25)_0%,rgba(145,68,0,0.1)_100%)]"
-                      : "bg-zinc-100"
-              }`,
+              `flex justify-between my-2.5 px-2.5 py-1 rounded-md
+               ${getTopProductBackground(index)}`,
             )}
           >
             <h3>
