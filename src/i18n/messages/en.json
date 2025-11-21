@@ -269,5 +269,8 @@
   "photo-success": "Your photo is uploaded successfully",
   "photo-error": "An error occured when uploading photo",
   "upload-photo": "upload photo",
-  "upload-photo-paragraph": "You can upload a .jpg, .png, or .gif photo with max size of 5MB."
+  "upload-photo-paragraph": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
+  "top-selling-products": "top selling products",
+  "low-stock-products": "low stock products",
+  "sales": "sales"
 }

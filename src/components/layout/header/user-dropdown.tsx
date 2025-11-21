@@ -72,7 +72,13 @@ export default function UserDropdown({ userData }: Props) {
         <DropdownMenuSeparator className="dark:bg-zinc-600" />
 
         <DropdownMenuItem className={cn("capitalize", isArabic && "flex-row-reverse text-right")}>
-          <Settings className={cn(isArabic ? "ml-2" : "mr-2")} /> {t("dashboard")}
+          <Link
+            href="/dashboard"
+            className={cn("flex items-center", isArabic && "flex-row-reverse")}
+          >
+            <Settings className={cn(isArabic ? "ml-2" : "mr-2")} />
+            {t("dashboard")}
+          </Link>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator className="dark:bg-zinc-600" />
