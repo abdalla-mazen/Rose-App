@@ -13,16 +13,16 @@ export default function Page({ params }: { params: { locale: string } }) {
   const locale = params.locale;
 
   return (
-      <div className="flex flex-col justify-center items-center mx-auto max-w-7xl">
-        <ValentineCarousel />
-        <Occasion />
-        <Services />
-        <BestSelling locale={locale} />
-        <MostPopular locale={locale} />
-        <About />
-        <Gallery />
-        <TestimonialPage />
-        <Companies />
-      </div>
+    <div className="flex flex-col justify-center items-center mx-auto max-w-7xl">
+      <ValentineCarousel />
+      <Occasion />
+      <Services />
+      <BestSelling locale={locale} />
+      <MostPopular locale={locale} />
+      <About />
+      <Gallery />
+      <TestimonialPage />
+      <Companies />
+    </div>
   );
 }
