@@ -1,7 +1,13 @@
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+// Dashboard Layout
+
+import DashboardClientLayout from "./_components/dashboard-client-layout";
+
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html>
+      <body>
+        <DashboardClientLayout>{children}</DashboardClientLayout>
+      </body>
     </html>
   );
 }
