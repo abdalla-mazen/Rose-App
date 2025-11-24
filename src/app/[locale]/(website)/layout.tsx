@@ -7,6 +7,8 @@ import localFont from "next/font/local";
 import Providers from "@/components/providers";
 import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
+import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
 
 const geistSans = localFont({
   src: "../../fonts/GeistVF.woff",
@@ -72,7 +74,9 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
       >
         <NextIntlClientProvider messages={messages} locale={locale}>
           <Providers>
+            <Header />
             {children}
+            <Footer />
             <Toaster />
           </Providers>
         </NextIntlClientProvider>
