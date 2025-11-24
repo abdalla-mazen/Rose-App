@@ -15,6 +15,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import DropdownBtns from "./dropdown-btns";
 import { cn } from "@/lib/utils";
+import getUniqueColor from "@/lib/utils/get-user-uniqe-bg";
 
 // Links array
 const LINKS = [
@@ -122,7 +123,10 @@ export default function DashboardAside() {
             height={54}
           />
         ) : (
-          <div className="flex justify-center items-center rounded-full w-12 h-12 font-semibold text-white">
+          <div
+            className="flex justify-center items-center rounded-full w-12 h-12 font-semibold text-white"
+            style={{ background: getUniqueColor(displayName || "U") }}
+          >
             {displayName?.[0]}
           </div>
         )}
