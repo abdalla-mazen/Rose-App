@@ -15,6 +15,12 @@ interface CategoryData {
   productCount: number;
 }
 
+interface occaData {
+  id: string;
+  name: string;
+  productCount: number;
+}
+
 // Utility function to format currency
 const formatCurrency = (amount: number): string => {
   return new Intl.NumberFormat('en-EG', {
