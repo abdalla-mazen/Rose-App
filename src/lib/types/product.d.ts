@@ -5,6 +5,7 @@ declare type Product = {
   imgCover: string;
   images: string[];
   price: number;
+  discount?: number;
   priceAfterDiscount: number;
   quantity: number;
   category: string;
@@ -17,6 +18,25 @@ declare type Product = {
   favoriteId: string | null;
   isInWishlist: boolean;
   _id: string;
+} & DatabaseProperties;
+
+declare type AddUpdateProduct = {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  imgCover: string;
+  images: string[];
+  price: number;
+  priceAfterDiscount: number;
+  discount: number;
+  rateAvg: number;
+  rateCount: number;
+  quantity: number;
+  category: string;
+  occasion: string;
+  isSuperAdmin: boolean;
+  __v: number;
 } & DatabaseProperties;
 
 declare type Review = {
