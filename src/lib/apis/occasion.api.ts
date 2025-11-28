@@ -1,3 +1,5 @@
+import { Occasion } from "../types/occasion";
+
 export async function FetchOccasions() {
   const response = await fetch(`${process.env.API}/occasions`);
 
