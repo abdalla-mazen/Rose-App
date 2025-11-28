@@ -14,5 +14,6 @@ export default async function deleteOccasionAction(id: string) {
   });
 
   const payload = await response.json();
+
   return payload;
 }

@@ -12,8 +12,9 @@ import {
 } from "@/components/ui/table";
 import { Pencil, Trash2, Search } from "lucide-react";
 import useDeleteOccasions from "../_hooks/use-delete-occasions";
-import Link from "next/link";
 import { Occasion } from "@/lib/types/occasion";
+import Link from "next/link";
+
 
 interface Props {
   data: Occasion[];
@@ -34,7 +35,7 @@ export default function TableOccasions({ data }: Props) {
   const { deleteOccasion } = useDeleteOccasions();
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 w-full ">
       {/* Search Input */}
       <div className="relative ">
         <Search
@@ -50,7 +51,7 @@ export default function TableOccasions({ data }: Props) {
         />
       </div>
 
-      <div className="overflow-hidden rounded-xl  ">
+      <div className="overflow-hidden rounded-xl ">
         {/* Table */}
         <Table className="px-5">
           <TableHeader>

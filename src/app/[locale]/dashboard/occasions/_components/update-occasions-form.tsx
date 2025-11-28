@@ -12,6 +12,7 @@ import { CircleX, LoaderCircle, Image } from "lucide-react";
 import { Occasion } from "@/lib/types/occasion";
 import useUpdateOccasions from "../_hooks/use-update-occasions";
 
+
 export type ImageFile = `${string}.${"jpg" | "jpeg" | "png" | "gif"}`;
 interface occasions {
   name: string;
@@ -37,7 +38,6 @@ export default function UpdateOccasionsForm({ data }: { data: Occasion }) {
   const onSubmit: SubmitHandler<occasions> = async (values) => {
     const formData = new FormData();
     formData.append("name", values.name);
-
     if (values.image) {
       formData.append("image", values.image);
     }
@@ -46,7 +46,7 @@ export default function UpdateOccasionsForm({ data }: { data: Occasion }) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-3/5  ">
         {/* Name Field */}
         <FormField
           control={form.control}
@@ -54,7 +54,7 @@ export default function UpdateOccasionsForm({ data }: { data: Occasion }) {
           render={({ field }) => (
             <div>
               <FormLabel className="text-sm font-medium text-zinc-800 dark:text-zinc-100">
-                Occasion Name
+                Occasion Name <span className="text-red-600">*</span>
               </FormLabel>
               <FormControl>
                 <Input placeholder={data?.name ?? "Loading..."} {...field} />
@@ -65,7 +65,7 @@ export default function UpdateOccasionsForm({ data }: { data: Occasion }) {
         />
 
         <div className="flex justify-end w-full">
-          <Button className="bg-white border border-black/10 text-blue-600 w-48 justify-start gap-2">
+          <Button className="bg-white border border-black/10 text-blue-600 w-48 justify-start gap-2 mb-32">
             <Image />
             View occasion image
           </Button>
@@ -94,7 +94,7 @@ export default function UpdateOccasionsForm({ data }: { data: Occasion }) {
         {/* Submit button */}
         <Button
           type="submit"
-          className="w-full text-sm font-semibold"
+          className="w-full text-sm font-semibold "
           disabled={isPending || (!isValid && isSubmitted)}
           variant={"primary"}
         >

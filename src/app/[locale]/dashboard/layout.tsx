@@ -1,17 +1,13 @@
-import Providers from "@/components/providers";
+// Dashboard Layout
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  
+import DashboardClientLayout from "./_components/dashboard-client-layout";
+
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>
-        
-<Providers>
-
-        {children}
-</Providers>
-      
-        </body>
+    <html>
+      <body className="bg-zinc-50">
+        <DashboardClientLayout >{children}</DashboardClientLayout>
+      </body>
     </html>
   );
 }

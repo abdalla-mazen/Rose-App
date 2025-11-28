@@ -18,5 +18,6 @@ export default async function updateOccasionsAction({ formData, id }: UpdateOcca
   });
 
   const payload = await response.json();
+
   return payload;
 }

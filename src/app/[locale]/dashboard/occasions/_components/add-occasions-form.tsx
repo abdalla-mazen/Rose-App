@@ -13,7 +13,6 @@ import { CircleX, LoaderCircle } from "lucide-react";
 import useAddOccasions from "../_hooks/use-occasions";
 import { occasions } from "../_actions/add-occasions.action";
 
-
 export default function AddOccasionsForm() {
   // Mutations
   const { error, isPending, addOccasion } = useAddOccasions();
@@ -38,12 +37,12 @@ export default function AddOccasionsForm() {
     if (values.image) {
       formData.append("image", values.image);
     }
-    addOccasion(formData  as unknown as occasions);
+    addOccasion(formData as unknown as occasions);
   };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4  w-3/5">
         {/* Name Field */}
         <FormField
           control={form.control}
@@ -51,7 +50,7 @@ export default function AddOccasionsForm() {
           render={({ field }) => (
             <div>
               <FormLabel className="text-sm font-medium text-zinc-800 dark:text-zinc-100">
-                Occasion Name
+                Occasion Name <span className="text-maroon-600 dark:text-softPink-300">*</span>
               </FormLabel>
               <FormControl>
                 <Input placeholder="Enter occasion name" {...field} />
@@ -66,9 +65,11 @@ export default function AddOccasionsForm() {
           control={form.control}
           name="image"
           render={({ field: { onChange, ...field } }) => (
-            <div>
+            <div className="pb-32">
+              <FormLabel className="text-sm font-medium text-zinc-800 dark:text-zinc-100">
+                Occasion image <span className="text-maroon-600 dark:text-softPink-300">*</span>
+              </FormLabel>
               <FileInput
-                label="Occasion image *"
                 buttonText="Choose File"
                 onChange={(e) => {
                   const file = e.target.files?.[0];
@@ -105,7 +106,7 @@ export default function AddOccasionsForm() {
         {/* Submit button */}
         <Button
           type="submit"
-          className="w-full"
+          className="w-full "
           disabled={isPending || (!isValid && isSubmitted)}
           variant={"primary"}
         >

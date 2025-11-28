@@ -10,7 +10,7 @@ import {
 } from "next-intl";
 import ReactQueryProvider from "./_components/react-query.provider";
 import { NextAuthProvider } from "./_components/next-auth.provider";
-import RootLayout from "./_components/navbar-footer.provider";
+// import RootLayout from "./_components/navbar-footer.provider";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   // Translation
@@ -27,7 +27,8 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           <ReactQueryProvider>
             {/* react query dev tools */}
             <ReactQueryDevtools />
-            <RootLayout>{children}</RootLayout>
+            {/* <RootLayout>{children}</RootLayout> */}
+            {children}
           </ReactQueryProvider>
         </NextIntlClientProvider>
       </ThemeProvider>

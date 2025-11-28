@@ -9,10 +9,14 @@ export default async function page({ params }: { params: { id: string } }) {
   return (
     <div>
       {/* Header */}
-      <h1 className="text-2xl font-semibold text-zinc-800">Update Occasion {data.occasion.name}</h1>
+      <h1 className="text-2xl font-semibold text-zinc-800 py-7">
+        Update Occasion: {data.occasion.name}
+      </h1>
 
       {/* Form */}
-      <UpdateOccasionsForm data={data.occasion} />
+      <div className=" py-6   bg-white  rounded-lg   ps-6 ">
+        <UpdateOccasionsForm data={data.occasion} />
+      </div>
     </div>
   );
 }

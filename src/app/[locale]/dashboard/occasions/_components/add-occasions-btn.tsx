@@ -9,7 +9,7 @@ export default function AddOccasionsBtn() {
 
   return (
     <Button variant={"primary"} className="w-52">
-      <Plus />
+      <Plus className="text-white" />
       <Link href={"/dashboard/occasions/add-occasions"}>Add a new occasion</Link>
     </Button>
   );
