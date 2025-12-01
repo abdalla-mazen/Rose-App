@@ -81,7 +81,7 @@ export default function UpdateProductForm({ product, categories, occasions }: Pr
               <FormItem>
                 {/* Label */}
                 <FormLabel>
-                  Title <span className="text-red-600">*</span>
+                  <span className="required">Title</span>
                 </FormLabel>
 
                 {/* Field */}
@@ -103,7 +103,7 @@ export default function UpdateProductForm({ product, categories, occasions }: Pr
               <FormItem className="my-4">
                 {/* Label */}
                 <FormLabel>
-                  Description <span className="text-red-600">*</span>
+                  <span className="required">Description</span>
                 </FormLabel>
 
                 {/* Field */}
@@ -127,7 +127,7 @@ export default function UpdateProductForm({ product, categories, occasions }: Pr
                 <FormItem className="w-1/3">
                   {/* Label */}
                   <FormLabel>
-                    Price <span className="text-red-600">*</span>
+                    <span className="required">Price</span>
                   </FormLabel>
 
                   {/* Field */}
@@ -198,7 +198,7 @@ export default function UpdateProductForm({ product, categories, occasions }: Pr
               <FormItem className="my-4">
                 {/* Label */}
                 <FormLabel>
-                  Quantity <span className="text-red-600">*</span>
+                  <span className="required">Quantity</span>
                 </FormLabel>
 
                 {/* Field */}
@@ -225,7 +225,7 @@ export default function UpdateProductForm({ product, categories, occasions }: Pr
               <FormItem className="my-4">
                 {/* Label */}
                 <FormLabel>
-                  Category <span className="text-red-600">*</span>
+                  <span className="required">Category</span>
                 </FormLabel>
 
                 {/* Field */}
@@ -258,7 +258,7 @@ export default function UpdateProductForm({ product, categories, occasions }: Pr
               <FormItem className="mb-4">
                 {/* Label */}
                 <FormLabel>
-                  Occasion <span className="text-red-600">*</span>
+                  <span className="required">Occasion</span>
                 </FormLabel>
 
                 {/* Field */}

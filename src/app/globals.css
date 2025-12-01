@@ -112,3 +112,10 @@
 [dir="rtl"] .PhoneInput input {
   text-align: right !important;
 }
+
+/* global.css or a module.css */
+.required::after {
+  content: "*"; /* automatically add the asterisk */
+  color: #dc2626; /* Tailwind red-600 color */
+  margin-left: 0.25rem; /* small space after the label */
+}

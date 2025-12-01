@@ -1,19 +1,18 @@
-import { ProductByIdApi } from "@/lib/apis/product.api";
 import React from "react";
 import UpdateProductForm from "./update-product-form";
-import { FetchOccasions } from "@/lib/apis/occasion.api";
-import { FetchCategories } from "@/lib/apis/categories.api";
 
-export default async function DashboardProductsDetailsServer({ id }: { id: string }) {
-  // Product by ID API Call
-  const { product } = await ProductByIdApi(id);
+// Props
+type Props = {
+  product: Product;
+  categories: Category[];
+  occasions: Occasion[];
+};
 
-  // Fetch occasions
-  const occasions = await FetchOccasions();
-
-  // Fetch categories
-  const categories = await FetchCategories();
-
+export default async function DashboardProductsDetailsServer({
+  categories,
+  occasions,
+  product,
+}: Props) {
   return (
     <div className="p-7">
       {/* Add product title */}

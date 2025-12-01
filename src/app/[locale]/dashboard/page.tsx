@@ -2,9 +2,5 @@ import ProductsStatisticsWrapper from "@/components/products-statistics/products
 import React from "react";
 
 export default async function page() {
-  return (
-    <div className="bg-zinc-50">
-      <ProductsStatisticsWrapper />
-    </div>
-  );
+  return <div className="bg-zinc-50">{/* <ProductsStatisticsWrapper /> */}</div>;
 }
