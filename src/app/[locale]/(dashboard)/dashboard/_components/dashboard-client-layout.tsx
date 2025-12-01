@@ -11,7 +11,7 @@ export default function DashboardClientLayout({ children }: { children: React.Re
         <DashboardAside />
 
         {/* Main Content */}
-        <div className="w-[1200px] ltr:translate-x-80 rtl:-translate-x-80">
+        <div className="w-[1200px] ltr:translate-x-72 rtl:-translate-x-80">
           <Breadcrumb />
 
           <main>{children}</main>

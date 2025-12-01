@@ -26,7 +26,7 @@ export default async function ProductsStatistics() {
   }
 
   return (
-    <div className="flex gap-6 max-w-[1096px]">
+    <div className="flex gap-6 pl-10 max-w-[1096px]">
       {/* Top selling products */}
       <div className="bg-white p-6 rounded-lg w-full">
         {/* Top selling products header */}
