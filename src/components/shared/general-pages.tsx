@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -23,6 +24,9 @@ export default function GeneralPages({
   button,
   className,
 }: GeneralPagesProps) {
+  // Translation
+  const t = useTranslations();
+
   return (
     <div className="flex flex-col justify-center items-center space-y-1.5 translate-y-24">
       <Image src={src} alt={alt} width={width} height={height} />
@@ -52,7 +56,7 @@ export default function GeneralPages({
             href="/"
             className="mt-4 px-4 pt-2 border border-zinc-300 rounded-lg w-44 h-10 text-zinc-800 text-center"
           >
-            Go to Homepage
+            {t("go-to-homepage")}
           </Link>
         </div>
       )}

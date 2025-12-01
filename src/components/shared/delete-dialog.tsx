@@ -11,6 +11,9 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Trash } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { toast } from "sonner";
 
 // Props Type
 type DialogProps = {
@@ -18,17 +21,44 @@ type DialogProps = {
   trigger: React.ReactNode;
   itemId: string;
   deleteHook: () => {
-    mutate: (variables?: unknown) => void;
+    mutate: (
+      itemId: string,
+      options?: {
+        onSuccess?: () => void;
+        onError?: (error: Error) => void;
+      },
+    ) => void;
     isPending: boolean;
+    isError?: boolean;
+    error?: Error;
   };
 };
 
 export default function DeleteDialog({ deletedItem, trigger, itemId, deleteHook }: DialogProps) {
+  // Translation
+  const t = useTranslations();
+
+  // State
+  const [open, setOpen] = useState(false);
+
   // Mutation
   const { mutate, isPending } = deleteHook();
 
+  // Handle delete
+  const handleDelete = () => {
+    mutate(itemId, {
+      onSuccess: () => {
+        toast.success(t("deleted-successfully"));
+        setOpen(false);
+      },
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    });
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       {/* Dialog trigger */}
       {trigger}
 
@@ -53,7 +83,8 @@ export default function DeleteDialog({ deletedItem, trigger, itemId, deleteHook 
 
         {/* Description */}
         <DialogDescription className="font-semibold text-zinc-800 text-xl text-center">
-          Are you sure you want to delete this {deletedItem} ?
+          {t("delete-dialog-confirm")}
+          {deletedItem} ?
         </DialogDescription>
 
         {/* Footer */}
@@ -66,17 +97,15 @@ export default function DeleteDialog({ deletedItem, trigger, itemId, deleteHook 
           </DialogClose>
 
           {/* Deleting */}
-          <DialogClose asChild>
-            <Button
-              type="button"
-              variant="primary"
-              onClick={() => mutate(itemId)}
-              className="bg-red-600 text-white capitalize"
-              disabled={isPending}
-            >
-              {isPending ? "deleting" : "confirm"}
-            </Button>
-          </DialogClose>
+          <Button
+            type="button"
+            variant="primary"
+            onClick={handleDelete}
+            className="bg-red-600 text-white capitalize"
+            disabled={isPending}
+          >
+            {isPending ? t("deleting") : t("confirm")}
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
