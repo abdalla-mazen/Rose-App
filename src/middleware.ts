@@ -4,7 +4,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
 const authRoutes = ["/login", "/register", "/forget", "/newpassword", "/otp"];
-const publicRoutes = ["/", "/product", "/products", "/cart", "/wishlist"];
+const publicRoutes = ["/", "/product", "/products", "/cart", "/wishlist", "/not-authorized"];
+const protectedRoutes = ["/dashboard"];
 
 // middleware.ts
 export default async function middleware(request: NextRequest) {
@@ -27,21 +28,28 @@ export default async function middleware(request: NextRequest) {
   const isPublicRoute = publicRoutes.some(
     (route) => pathnameWithoutLocale === route || pathnameWithoutLocale.startsWith(`${route}/`),
   );
-  const isProtectedRoute = !isPublicRoute && !isAuthRoute;
+  const isProtectedRoute =
+    protectedRoutes.includes(pathnameWithoutLocale) || (!isPublicRoute && !isAuthRoute);
 
   // Scenario 1: Authenticated user trying to access auth pages
   if (isAuthRoute && token) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  // Scenario 2: Unauthenticated user trying to access protected routes
+  // Scenario 2: Unauthenticated user trying to access dashboard
+  if (protectedRoutes.includes(pathnameWithoutLocale) && !token) {
+    const notAuthorizedUrl = new URL("/not-authorized", request.url);
+    return NextResponse.redirect(notAuthorizedUrl);
+  }
+
+  // Scenario 3: Unauthenticated user trying to access protected routes
   if (isProtectedRoute && !token) {
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(loginUrl);
   }
 
-  // Scenario 3: Allow public routes and apply i18n middleware
+  // Scenario 4: Allow public routes and apply i18n middleware
   return createMiddleware(routing)(request);
 }
 

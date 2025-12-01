@@ -36,6 +36,7 @@ export default function DashboardBreadcrumb() {
             {pathArray.length >= 2 && <BreadcrumbSeparator />}
             {pathArray.slice(1).map((link, index) => {
               const href = "/" + pathArray.slice(1, index + 1).join("/");
+              const transformedLink = link.split("-").join(" ");
               const isLast = index === pathArray.slice(1).length - 1;
               return (
                 <Fragment key={index}>
@@ -43,11 +44,11 @@ export default function DashboardBreadcrumb() {
                     {!isLast ? (
                       <BreadcrumbLink asChild>
                         <Link href={href} className="capitalize">
-                          {link}
+                          {transformedLink}
                         </Link>
                       </BreadcrumbLink>
                     ) : (
-                      <BreadcrumbPage className="capitalize">{link}</BreadcrumbPage>
+                      <BreadcrumbPage className="capitalize">{transformedLink}</BreadcrumbPage>
                     )}
                   </BreadcrumbItem>
                   {!isLast && <BreadcrumbSeparator />}
