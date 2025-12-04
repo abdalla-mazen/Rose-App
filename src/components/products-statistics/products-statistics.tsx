@@ -34,6 +34,7 @@ export default async function ProductsStatistics() {
 
         {products?.topSellingProducts.map((topProd, index) => (
           <div
+            key={topProd._id}
             className={cn(
               `flex justify-between my-2.5 px-2.5 py-1 rounded-md
                ${getTopProductBackground(index)}`,
@@ -67,7 +68,9 @@ export default async function ProductsStatistics() {
         <h1 className="mb-6 font-semibold text-2xl capitalize">{t("low-stock-products")}</h1>
 
         {products?.lowStockProducts.map((lowProd) => (
-          <div className="flex justify-between my-2.5 py-1 border-b">
+          <div
+          key={lowProd._id}
+          className="flex justify-between my-2.5 py-1 border-b">
             {/* Product title */}
             <h3>{lowProd.title.split(" ").slice(0, 5).join(" ")}... </h3>
 

@@ -282,5 +282,23 @@
   "something-went-wrong-secondary": "Something unexpected happened, please refresh the page or try again shortly.",
   "not-authorized-primary": "You are not authorized to access this page.",
   "not-authorized-secondary": "If you think this is wrong, please contact the support.",
-  "go-to-homepage": "Go to Homepage"
+  "go-to-homepage": "Go to Homepage",
+  "all-occasions": "All Occasions",
+"search": "Search",
+"name": "Name",
+"actions-buttons": "actions buttons",
+"edit": "Edit",
+"delete": "Delete",
+"no-data": "No data",
+"add-a-new-occasion": "Add a new occasion",
+"add-new-occasion": "Add new occasion",
+"occasion-name": "Occasion name",
+ "enter-occasion-name": "Enter occasion name",
+"occasion-image": "Occasion image",
+"faied-to-add-occasion": "Failed to add occasion",
+"View-occasion-image": "View occasion image",
+"update-Occasion": "Update Occasion",
+"submit": "Submit",
+"name-required-error": "Name is required"
+
 }
