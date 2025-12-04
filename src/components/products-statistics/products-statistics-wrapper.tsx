@@ -6,7 +6,7 @@ export default function ProductsStatisticsWrapper() {
   return (
     // Suspense when products is loading
     <Suspense fallback={<ProductStatisticsSkeleton />}>
-      <ProductsStatistics />
+      {/* <ProductsStatistics /> */}
     </Suspense>
   );
 }

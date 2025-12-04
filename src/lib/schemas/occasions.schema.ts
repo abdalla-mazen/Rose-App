@@ -1,9 +1,15 @@
-import  z  from "zod";
+import { useTranslations } from "next-intl";
+import z from "zod";
 
-export const OccasionsSchema = () =>{
-return z.object({
-name: z.string().nonempty("Name is required"),
- image: z.any()
-})
-}
-export type Occasions = z.infer<typeof OccasionsSchema>
+export const useOccasionsSchema = () => {
+  const t = useTranslations();
+
+  return z.object({
+    name: z.string().nonempty(t("name-required-error")),
+    image: z.any(),
+  });
+};
+
+export type Occasions = z.infer<
+  ReturnType<typeof useOccasionsSchema>
+>;

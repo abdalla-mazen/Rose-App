@@ -20,6 +20,7 @@ export async function ProductsStatisticsDashboardApi() {
   const payload: ApiResponse<{ statistics: productStatistics }> = await response.json();
 
   if ("error" in payload) {
+    console.error(payload.error);
     throw new Error(payload.error);
   }
 
