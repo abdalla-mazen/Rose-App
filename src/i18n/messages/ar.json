@@ -286,5 +286,21 @@
   "select-occasion": "اختر المناسبة",
   "add-product": "إضافة المنتج",
   "view-product-cover": "عرض غلاف المنتج",
-  "view-product-gallery": "عرض معرض المنتجات"
+  "view-product-gallery": "عرض معرض المنتجات",
+  "all-occasions": "جميع المناسبات",
+  "search": "بحث",
+  "name": "اسم",
+  "actions-buttons": " ازرار العملية",
+  "edit": "تعديل",
+  "delete": "حذف",
+  "no-data": "لا يوجد بيانات",
+  "add-a-new-occasion": "اضافة مناسبة جديدة",
+  "add-new-occasion": "اضافة مناسبة جديدة",
+  "enter-occasion-name": "ادخل اسم المناسبة",
+  "occasion-image": "صورة المناسبة",
+  "faied-to-add-occasion": "فشل في اضافة المناسبة",
+  "View-occasion-image": "عرض صورة المناسبة",
+  "update-Occasion": "تحديث المناسبة",
+  "submit": "ارسال",
+  "name-required-error": "اسم مطلوب"
 }

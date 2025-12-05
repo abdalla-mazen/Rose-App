@@ -26,6 +26,7 @@ import useAddProduct from "../_hooks/use-add-product";
 import ErrorMessage from "@/components/shared/error-message";
 import { addProductSchema, AddProductValues } from "@/lib/schemas/add-update-product.schema";
 import { useTranslations } from "next-intl";
+import { Occasion } from "@/lib/types/occasion";
 
 // Props
 type Props = {

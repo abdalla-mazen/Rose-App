@@ -16,7 +16,7 @@ interface FileInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
   (
     {
-      label = "Label",
+      label = "",
       placeholder = "No file chosen",
       error = false,
       buttonText = "Upload file",

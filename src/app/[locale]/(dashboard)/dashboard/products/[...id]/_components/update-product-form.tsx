@@ -29,6 +29,7 @@ import useUpdateProduct from "../_hooks/use-update-product";
 import { useTranslations } from "next-intl";
 import ImagesDialog from "@/components/shared/images-dialog";
 import { DialogTrigger } from "@/components/ui/dialog";
+import { Occasion } from "@/lib/types/occasion";
 
 // Props
 type Props = {

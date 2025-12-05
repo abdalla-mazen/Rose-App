@@ -1,4 +1,4 @@
-declare type Occasion = {
+export declare type Occasion = {
   name: string;
   slug: string;
   image: string;
