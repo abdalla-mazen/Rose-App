@@ -6,7 +6,7 @@ export default async function page() {
   return (
     <div className="bg-zinc-50">
       <OrderRevenueCharts />
-      <ProductsStatisticsWrapper />
+      {/* <ProductsStatisticsWrapper /> */}
     </div>
   );
 }
