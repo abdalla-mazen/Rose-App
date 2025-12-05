@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { string, z } from "zod";
 
 export const addProductSchema = z.object({
   title: z.string().nonempty("Product title is required"),
@@ -22,6 +22,8 @@ export const updateProductSchema = z.object({
   quantity: z.number().int("Product quantity is required"),
   category: z.string().nonempty("Please select a category for the product"),
   occasion: z.string().optional(),
+  imgCover: z.string(),
+  images: z.array(z.string()),
 });
 
 export type AddProductValues = z.infer<typeof addProductSchema>;

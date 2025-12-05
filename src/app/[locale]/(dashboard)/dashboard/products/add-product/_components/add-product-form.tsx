@@ -25,6 +25,7 @@ import { LoaderCircle, Upload } from "lucide-react";
 import useAddProduct from "../_hooks/use-add-product";
 import ErrorMessage from "@/components/shared/error-message";
 import { addProductSchema, AddProductValues } from "@/lib/schemas/add-update-product.schema";
+import { useTranslations } from "next-intl";
 
 // Props
 type Props = {
@@ -33,6 +34,9 @@ type Props = {
 };
 
 export default function AddProductForm({ occasions, categories }: Props) {
+  // Translations
+  const t = useTranslations();
+
   // Hooks
   const { error, isPending, addProduct } = useAddProduct();
 
@@ -102,12 +106,12 @@ export default function AddProductForm({ occasions, categories }: Props) {
                 {/* Label */}
                 <FormLabel>
                   {" "}
-                  <span className="required">Title</span>
+                  <span className="required">{t("title")}</span>
                 </FormLabel>
 
                 {/* Field */}
                 <FormControl>
-                  <Input {...field} placeholder="Enter product title" />
+                  <Input {...field} placeholder={t("Enter-product-title")} />
                 </FormControl>
 
                 {/* Feedback */}
@@ -124,7 +128,7 @@ export default function AddProductForm({ occasions, categories }: Props) {
               <FormItem className="my-4">
                 {/* Label */}
                 <FormLabel>
-                  <span className="required">Description</span>
+                  <span className="required">{t("description")}</span>
                 </FormLabel>
 
                 {/* Field */}
@@ -152,12 +156,12 @@ export default function AddProductForm({ occasions, categories }: Props) {
                 <FormItem className="w-1/3">
                   {/* Label */}
                   <FormLabel>
-                    <span className="required">Price</span>
+                    <span className="required">{t("price")}</span>
                   </FormLabel>
 
                   {/* Field */}
                   <FormControl>
-                    <Input {...field} type="number" placeholder="Example: 5000" />
+                    <Input {...field} type="number" placeholder="5000" />
                   </FormControl>
 
                   {/* Feedback */}
@@ -173,11 +177,11 @@ export default function AddProductForm({ occasions, categories }: Props) {
               render={({ field }) => (
                 <FormItem className="w-1/3">
                   {/* Label */}
-                  <FormLabel>Discount</FormLabel>
+                  <FormLabel>{t("discount")}</FormLabel>
 
                   {/* Field */}
                   <FormControl>
-                    <Input type="number" {...field} placeholder="Example: 5" />
+                    <Input type="number" {...field} placeholder="5" />
                   </FormControl>
 
                   {/* Feedback */}
@@ -193,11 +197,11 @@ export default function AddProductForm({ occasions, categories }: Props) {
               render={({ field }) => (
                 <FormItem className="w-1/3">
                   {/* Label */}
-                  <FormLabel>Price after discount</FormLabel>
+                  <FormLabel>{t("price-after-discount")}</FormLabel>
 
                   {/* Field */}
                   <FormControl>
-                    <Input type="number" disabled {...field} placeholder="Example: 4995" />
+                    <Input type="number" disabled {...field} placeholder="4995" />
                   </FormControl>
 
                   {/* Feedback */}
@@ -215,12 +219,12 @@ export default function AddProductForm({ occasions, categories }: Props) {
               <FormItem className="my-4">
                 {/* Label */}
                 <FormLabel>
-                  <span className="required">Quantity</span>
+                  <span className="required">{t("quantity")}</span>
                 </FormLabel>
 
                 {/* Field */}
                 <FormControl>
-                  <Input type="number" {...field} placeholder="Example: 200" />
+                  <Input type="number" {...field} placeholder="200" />
                 </FormControl>
 
                 {/* Feedback */}
@@ -238,21 +242,11 @@ export default function AddProductForm({ occasions, categories }: Props) {
               render={({ field }) => (
                 <FormItem className="w-1/2">
                   <FormLabel>
-                    <span className="required">Product cover image</span>
+                    <span className="required">{t("product-cover-image")}</span>
                   </FormLabel>
 
                   <FormControl>
                     <div className="border rounded-lg p-2 flex items-center justify-between">
-                      {/* {field.value.length > 0 ? (
-                        <img
-                          src={URL.createObjectURL(field.value[0])} // ✅ field.value[0] هو File
-                          alt="Cover preview"
-                          className="w-full h-40 object-cover rounded-md mb-3"
-                        />
-                      ) : (
-                        <p className="text-gray-500 text-sm mb-2">No image uploaded</p>
-                      )} */}
-
                       {field.value.length > 0 ? (
                         typeof field.value[0] === "string" ? (
                           <img
@@ -268,7 +262,7 @@ export default function AddProductForm({ occasions, categories }: Props) {
                           />
                         )
                       ) : (
-                        <p className="text-gray-500 text-sm mb-2">No image uploaded</p>
+                        <p className="text-gray-500 text-sm mb-2">{t("no-image-uploaded")}</p>
                       )}
 
                       <Input
@@ -288,7 +282,7 @@ export default function AddProductForm({ occasions, categories }: Props) {
                         htmlFor="imgCoverInput"
                         className="cursor-pointer text-sm text-maroon-500 flex items-center gap-2"
                       >
-                        <Upload className="w-4 h-4" /> Upload file
+                        <Upload className="w-4 h-4" /> {t("upload-file")}
                       </FormLabel>
                     </div>
                   </FormControl>
@@ -308,21 +302,13 @@ export default function AddProductForm({ occasions, categories }: Props) {
                 return (
                   <FormItem className="w-1/2">
                     <FormLabel>
-                      Product gallery <span className="text-red-600">*</span>
+                      {t("product-gallery")} <span className="text-red-600">*</span>
                     </FormLabel>
 
                     <FormControl>
                       <div className="border rounded-lg p-2">
                         {/* Preview Grid */}
                         <div className="grid grid-cols-3 gap-2 mb-2">
-                          {/* {galleryFiles.map((file, index) => (
-                            <img
-                              key={index}
-                              src={URL.createObjectURL(file)} // فقط للعرض
-                              className="w-full h-20 object-cover rounded-md"
-                            />
-                          ))} */}
-
                           {galleryFiles.map((file, index) => (
                             <img
                               key={index}
@@ -349,7 +335,7 @@ export default function AddProductForm({ occasions, categories }: Props) {
                           className="cursor-pointer text-sm text-maroon-500 flex items-center justify-end gap-2"
                         >
                           <Upload className="w-4 h-4" />
-                          Upload file
+                          {t("upload-file")}
                         </FormLabel>
                       </div>
                     </FormControl>
@@ -369,14 +355,14 @@ export default function AddProductForm({ occasions, categories }: Props) {
               <FormItem className="my-4">
                 {/* Label */}
                 <FormLabel>
-                  <span className="required">Category</span>
+                  <span className="required">{t("category")}</span>
                 </FormLabel>
 
                 {/* Field */}
                 <FormControl>
                   <Select onValueChange={field.onChange} value={field.value}>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select category" />
+                      <SelectValue placeholder={t("select-category")} />
                     </SelectTrigger>
                     <SelectContent>
                       {categories.map((cat) => (
@@ -400,14 +386,14 @@ export default function AddProductForm({ occasions, categories }: Props) {
               <FormItem className="mb-4">
                 {/* Label */}
                 <FormLabel>
-                  <span className="required">Occasion</span>
+                  <span className="required">{t("occasion")}</span>
                 </FormLabel>
 
                 {/* Field */}
                 <FormControl>
                   <Select onValueChange={field.onChange} value={field.value}>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select occasion" />
+                      <SelectValue placeholder={t("select-occasion")} />
                     </SelectTrigger>
                     <SelectContent>
                       {occasions.map((occ) => (
@@ -427,7 +413,8 @@ export default function AddProductForm({ occasions, categories }: Props) {
           {error && <ErrorMessage message={error.message} />}
 
           <Button type="submit" disabled={isPending} variant="primary" className="capitalize mt-24">
-            add product {isPending && <LoaderCircle className="me-2 animate-spin" size={16} />}
+            {t("add-product")}{" "}
+            {isPending && <LoaderCircle className="me-2 animate-spin" size={16} />}
           </Button>
         </form>
       </Form>

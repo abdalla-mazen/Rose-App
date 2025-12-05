@@ -26,6 +26,9 @@ import {
 import { updateProductSchema, UpdateProductValues } from "@/lib/schemas/add-update-product.schema";
 import { useEffect } from "react";
 import useUpdateProduct from "../_hooks/use-update-product";
+import { useTranslations } from "next-intl";
+import ImagesDialog from "@/components/shared/images-dialog";
+import { DialogTrigger } from "@/components/ui/dialog";
 
 // Props
 type Props = {
@@ -35,6 +38,9 @@ type Props = {
 };
 
 export default function UpdateProductForm({ product, categories, occasions }: Props) {
+  // Translations
+  const t = useTranslations();
+
   // Hooks
   const form = useForm<UpdateProductValues>({
     defaultValues: {
@@ -46,6 +52,8 @@ export default function UpdateProductForm({ product, categories, occasions }: Pr
       quantity: Number(product.quantity),
       category: product.category,
       occasion: product.occasion,
+      imgCover: product.imgCover,
+      images: product.images,
     },
     resolver: zodResolver(updateProductSchema),
   });
@@ -81,7 +89,7 @@ export default function UpdateProductForm({ product, categories, occasions }: Pr
               <FormItem>
                 {/* Label */}
                 <FormLabel>
-                  <span className="required">Title</span>
+                  <span className="required">{t("title")}</span>
                 </FormLabel>
 
                 {/* Field */}
@@ -103,7 +111,7 @@ export default function UpdateProductForm({ product, categories, occasions }: Pr
               <FormItem className="my-4">
                 {/* Label */}
                 <FormLabel>
-                  <span className="required">Description</span>
+                  <span className="required">{t("description")}</span>
                 </FormLabel>
 
                 {/* Field */}
@@ -127,7 +135,7 @@ export default function UpdateProductForm({ product, categories, occasions }: Pr
                 <FormItem className="w-1/3">
                   {/* Label */}
                   <FormLabel>
-                    <span className="required">Price</span>
+                    <span className="required">{t("price")}</span>
                   </FormLabel>
 
                   {/* Field */}
@@ -152,7 +160,7 @@ export default function UpdateProductForm({ product, categories, occasions }: Pr
               render={({ field }) => (
                 <FormItem className="w-1/3">
                   {/* Label */}
-                  <FormLabel>Discount</FormLabel>
+                  <FormLabel>{t("discount")}</FormLabel>
 
                   {/* Field */}
                   <FormControl>
@@ -176,7 +184,7 @@ export default function UpdateProductForm({ product, categories, occasions }: Pr
               render={({ field }) => (
                 <FormItem className="w-1/3">
                   {/* Label */}
-                  <FormLabel>Price after discount</FormLabel>
+                  <FormLabel>{t("price-after-discount")}</FormLabel>
 
                   {/* Field */}
                   <FormControl>
@@ -198,7 +206,7 @@ export default function UpdateProductForm({ product, categories, occasions }: Pr
               <FormItem className="my-4">
                 {/* Label */}
                 <FormLabel>
-                  <span className="required">Quantity</span>
+                  <span className="required">{t("quantity")}</span>
                 </FormLabel>
 
                 {/* Field */}
@@ -225,14 +233,14 @@ export default function UpdateProductForm({ product, categories, occasions }: Pr
               <FormItem className="my-4">
                 {/* Label */}
                 <FormLabel>
-                  <span className="required">Category</span>
+                  <span className="required">{t("category")}</span>
                 </FormLabel>
 
                 {/* Field */}
                 <FormControl>
                   <Select onValueChange={field.onChange} value={field.value}>
                     <SelectTrigger className="w-full">
-                      <SelectValue />
+                      <SelectValue placeholder={t("select-category")} />
                     </SelectTrigger>
                     <SelectContent>
                       {categories.map((cat) => (
@@ -258,14 +266,14 @@ export default function UpdateProductForm({ product, categories, occasions }: Pr
               <FormItem className="mb-4">
                 {/* Label */}
                 <FormLabel>
-                  <span className="required">Occasion</span>
+                  <span className="required">{t("occasion")}</span>
                 </FormLabel>
 
                 {/* Field */}
                 <FormControl>
                   <Select onValueChange={field.onChange} value={field.value}>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select occasion" />
+                      <SelectValue placeholder={t("select-occasion")} />
                     </SelectTrigger>
                     <SelectContent>
                       {occasions.map((occ) => (
@@ -284,21 +292,41 @@ export default function UpdateProductForm({ product, categories, occasions }: Pr
           />
 
           {/* Product images */}
+          {/* Image cover */}
           <div className="flex gap-2 justify-end text-sm mb-4">
-            <Button variant="outline" className="text-blue-600 w-48">
-              <Image /> View product cover
-            </Button>
+            <ImagesDialog
+              images={[{ src: product.imgCover, alt: "Product cover" }]}
+              trigger={
+                <DialogTrigger asChild>
+                  <Button variant="outline" className="text-blue-600 w-48">
+                    <Image /> {t("view-product-cover")}
+                  </Button>
+                </DialogTrigger>
+              }
+            />
 
-            <Button variant="outline" className="text-blue-600 w-48">
-              <Images /> View product gallery
-            </Button>
+            {/* Images */}
+            <ImagesDialog
+              images={product.images.map((img) => ({
+                src: img,
+                alt: "Product image",
+              }))}
+              trigger={
+                <DialogTrigger asChild>
+                  <Button variant="outline" className="text-blue-600 w-48">
+                    <Images /> {t("view-product-gallery")}
+                  </Button>
+                </DialogTrigger>
+              }
+            />
           </div>
 
           {/* Update product error */}
           {error && <ErrorMessage message={error.message} />}
 
           <Button type="submit" variant="primary" className="capitalize mt-24">
-            update product {isPending && <LoaderCircle className="me-2 animate-spin" size={16} />}
+            {t("update-product")}{" "}
+            {isPending && <LoaderCircle className="me-2 animate-spin" size={16} />}
           </Button>
         </form>
       </Form>
