@@ -21,7 +21,7 @@ export default function AuthToggleLocale() {
     <div className="ms-auto w-10">
       <button
         onClick={toggleLocale}
-        className="px-3 outline-none text-zinc-700 dark:text-zinc-50"
+        className=" outline-none text-zinc-700 dark:text-zinc-50"
       >
         {locale === "ar" ? "English" : "العربية"}
       </button>

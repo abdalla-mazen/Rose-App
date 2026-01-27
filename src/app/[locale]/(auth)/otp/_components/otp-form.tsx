@@ -3,16 +3,16 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
-import { redirect, Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 import { useToast } from "@/hooks/use-toast";
-import { createOtpSchema, type OtpSchemaType } from "@/lib/schemas/otpSchema";
 import { useTranslations } from "next-intl";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { Button } from "@/components/ui/button";
-import  OtpTimer from "./otp-timer";
+import OtpTimer from "./otp-timer";
 import { useVerifyOtpMutation } from "@/hooks/use-otp";
+import { createOtpSchema, OtpSchemaType } from "@/lib/schemas/otp.schema";
 
 type OtpFormProps = {
   email: string;
@@ -22,15 +22,16 @@ type OtpFormProps = {
 };
 
 export default function OtpForm({ email, setEmail, setTimeLeft }: OtpFormProps) {
+  const router = useRouter();
   const { toast } = useToast();
-  const t = useTranslations("OTP");
+  const t = useTranslations();
   const otpSchema = createOtpSchema(t);
 
   // Restore email & timer from localStorage
   useEffect(() => {
-    const storedEmail = localStorage.getItem("reset_email");
+    const storedEmail = localStorage.getItem("email");
     if (!storedEmail) {
-      redirect("/forgot-password");
+      router.push("/forget");
       return;
     }
     setEmail(storedEmail);
@@ -38,7 +39,7 @@ export default function OtpForm({ email, setEmail, setTimeLeft }: OtpFormProps) 
     const storedTimer = localStorage.getItem("timer");
     const remainingTime = storedTimer ? parseInt(storedTimer, 10) : 60;
     setTimeLeft(remainingTime);
-  }, [setEmail, setTimeLeft]);
+  }, [setEmail, setTimeLeft, router]);
 
   // Setup form validation
   const form = useForm<OtpSchemaType>({
@@ -54,9 +55,10 @@ export default function OtpForm({ email, setEmail, setTimeLeft }: OtpFormProps) 
         description: t("otp-success-description"),
       });
       localStorage.removeItem("timer");
-      redirect("/reset-password");
+      router.push("/newpassword");
     },
     onError: (error) => {
+      console.log(error);
       toast({
         variant: "destructive",
         title: t("otp-error-title"),
@@ -67,8 +69,7 @@ export default function OtpForm({ email, setEmail, setTimeLeft }: OtpFormProps) 
 
   // Form submit
   const onSubmit = (data: OtpSchemaType) => {
-    if (!email) return;
-    verifyMutation.mutate({ otp: data.otp, email });
+    verifyMutation.mutate(data);
   };
 
   if (!email) return null;
@@ -83,7 +84,10 @@ export default function OtpForm({ email, setEmail, setTimeLeft }: OtpFormProps) 
         <span>
           {t("otp-description")} <span className="font-medium">{email}</span>
         </span>
-        <Link href="/forgot-password" className="text-blue-700 text-sm underline hover:text-blue-800">
+        <Link
+          href="/forgot-password"
+          className="text-blue-700 text-sm underline hover:text-blue-800"
+        >
           {t("otp-edit")}
         </Link>
         <div className="relative w-full after:block after:h-[1px] after:bg-zinc-200" />
@@ -91,7 +95,10 @@ export default function OtpForm({ email, setEmail, setTimeLeft }: OtpFormProps) 
 
       {/* OTP form */}
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 flex flex-col items-center">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-4 flex flex-col items-center"
+        >
           {/* OTP input */}
           <FormField
             control={form.control}

@@ -34,6 +34,7 @@ export default function ResetPassword() {
 
   //  Function
   const onSubmit = (values: ResetPasswordValues) => {
+    localStorage.removeItem("email");
     resetPassword(values);
   };
 

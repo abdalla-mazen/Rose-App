@@ -86,6 +86,9 @@
   "otp-resend-success": "تم إرسال رمز جديد إلى بريدك الإلكتروني",
   "otp-resend-failed": "فشل في إرسال الرمز",
   "otp-resend-error": "حدث خطأ، يرجى المحاولة مرة أخرى",
+  "otp-validation-min": "كود التحقق يجب ألا يقل عن 6 أرقام",
+  "otp-validation-max": "كود التحقق يجب ألا يزيد عن 7 أرقام",
+  "otp-validation-regex": "كود التحقق يجب أن يحتوي على أرقام فقط",
   "notifications": {
     "title": "الإشعارات",
     "unreadCount": "({count})",

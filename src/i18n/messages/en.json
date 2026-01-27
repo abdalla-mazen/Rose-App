@@ -89,6 +89,9 @@
   "otp-resend-success": "A new code has been sent to your email",
   "otp-resend-failed": "Failed to resend OTP",
   "otp-resend-error": "Something went wrong, please try again",
+   "otp-validation-min": "OTP must be at least 6 digits",
+  "otp-validation-max": "OTP must not exceed 7 digits",
+  "otp-validation-regex": "OTP must contain numbers only",
   "notifications": {
     "title": "Notifications",
     "unreadCount": "({count})",

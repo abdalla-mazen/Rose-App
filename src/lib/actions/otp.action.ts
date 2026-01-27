@@ -1,6 +1,6 @@
 "use server";
 
-const API_BASE = process.env.API!;
+
 
 type VerifyOtpResponse = {
   success: boolean;
@@ -10,21 +10,19 @@ type VerifyOtpResponse = {
 
 export async function verifyOtpAction({
   otp,
-  email,
 }: {
   otp: string;
-  email: string;
 }): Promise<VerifyOtpResponse> {
-  if (!otp || !email)
+  if (!otp )
     return { success: false, message: "OTP and email are required" };
 
   try {
-    const res = await fetch(`${API_BASE}/auth/verify-otp`, {
+    const res = await fetch(`${process.env.API}/auth/verifyResetCode`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ otp, email }),
+      body: JSON.stringify( { resetCode: otp } ),
       cache: "no-store",
     });
 

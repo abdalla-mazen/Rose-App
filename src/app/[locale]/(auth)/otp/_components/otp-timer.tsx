@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
 export default function OtpTimer({ email }: { email: string }) {
   const { toast } = useToast();
   const { resend, isPending } = useResendOtp();
-  const t = useTranslations("OTP"); // ✅ Translation hook
+  const t = useTranslations();
   const [timeLeft, setTimeLeft] = useState(0);
 
   // Load timer from localStorage
@@ -38,12 +38,13 @@ export default function OtpTimer({ email }: { email: string }) {
   // Resend OTP handler
   const handleResend = () => {
     resend(email, {
-      onSuccess: (res: any) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      onSuccess: (res) => {
         toast({ title: t("otp-resend-success") });
         setTimeLeft(60);
         localStorage.setItem("timer", "60");
       },
-      onError: (err: any) => {
+      onError: (err: Error) => {
         toast({
           variant: "destructive",
           title: t("otp-resend-failed"),
@@ -57,22 +58,12 @@ export default function OtpTimer({ email }: { email: string }) {
     <div className="flex justify-end w-full">
       {timeLeft > 0 ? (
         // Timer countdown
-        <Button
-          type="button"
-          variant="link"
-          disabled
-          className="text-md font-medium no-underline"
-        >
+        <Button type="button" variant="link" disabled className="text-md font-medium no-underline">
           {t("otp-resend-wait", { seconds: timeLeft })}
         </Button>
       ) : (
         // Resend button
-        <Button
-          type="button"
-          variant="ghost"
-          onClick={handleResend}
-          disabled={isPending}
-        >
+        <Button type="button" variant="ghost" onClick={handleResend} disabled={isPending}>
           {isPending ? t("otp-resend-sending") : t("otp-resend")}
         </Button>
       )}
