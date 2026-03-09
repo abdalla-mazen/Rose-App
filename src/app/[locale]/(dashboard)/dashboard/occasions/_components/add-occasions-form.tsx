@@ -70,7 +70,7 @@ export default function AddOccasionsForm() {
           control={form.control}
           name="image"
           render={({ field: { onChange, ...field } }) => (
-            <div className="pb-32">
+            <div>
               <FormLabel className="text-sm font-medium text-zinc-800 dark:text-zinc-100">
                 {t("occasion-image")}{" "}
                 <span className="text-maroon-600 dark:text-softPink-300">*</span>

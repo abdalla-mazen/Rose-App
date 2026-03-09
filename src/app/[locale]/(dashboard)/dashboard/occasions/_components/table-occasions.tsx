@@ -73,27 +73,27 @@ export default function TableOccasions({ data, totalPages, currentPage }: Props)
       </div>
 
       {/* Table */}
-      <div className="overflow-hidden rounded-xl">
+      <div className="overflow-hidden rounded-xl dark:bg-zinc-800">
         <Table className="px-5">
           <TableHeader>
-            <TableRow className="bg-zinc-50">
-              <TableHead className="w-40 text-zinc-900 text-sm font-medium px-5">
+            <TableRow className="bg-zinc-50 dark:bg-zinc-700">
+              <TableHead className="w-40 text-zinc-900 text-sm font-medium px-5 dark:text-white">
                 {t("name")}
               </TableHead>
-              <TableHead className="text-zinc-900 text-sm font-medium">{t("products")}</TableHead>
-              <TableHead className="text-right sr-only">{t("actions-buttons")}</TableHead>
+              <TableHead className="text-zinc-900 text-sm font-medium dark:text-white">{t("products")}</TableHead>
+              <TableHead className="text-right sr-only dark:text-white">{t("actions-buttons")}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {isPending ? (
               <TableRow>
-                <TableCell colSpan={3} className="text-center py-8 text-gray-500">
+                <TableCell colSpan={3} className="text-center py-8 text-gray-500 dark:text-gray-400">
                   {t("loading")}...
                 </TableCell>
               </TableRow>
             ) : data.length > 0 ? (
               data.map((item) => (
-                <TableRow key={item._id} className="hover:bg-maroon-50">
+                <TableRow key={item._id} className="hover:bg-maroon-50 dark:hover:bg-zinc-700">
                   <TableCell className="font-medium px-5">{item.name}</TableCell>
                   <TableCell>
                     {item.productsCount} {t("products")}

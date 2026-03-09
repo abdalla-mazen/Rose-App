@@ -1,40 +1,76 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { useFilters } from "@/hooks/use-filters";
+import { useEffect, useState } from "react";
 import FilterSection from "./filter-section";
+import CategoriesFilter from "./components/categories-filter";
 import OccasionFilter from "./components/occasion-filter";
 import PriceFilter from "./components/price-filter";
+import { useFilters } from "@/hooks/use-filters";
+import {
+  Sidebar,
+  SidebarHeader,
+  SidebarContent,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarTrigger,
+  useSidebar,
+} from "@/components/ui/sidebar";
 
 export default function FiltersSidebar() {
-  const t = useTranslations();
-  const { resetOccasions, currentFilters } =
-    useFilters();
+  const { currentFilters, resetCategories, resetOccasions } = useFilters();
+  const { state } = useSidebar(); // 👈 نعرف مفتوح ولا مقفول
 
-  const hasOccasionFilters =
-    currentFilters.occasionIds && currentFilters.occasionIds.length > 0;
-  const hasPriceFilters =
-    currentFilters.minPrice !== undefined ||
-    currentFilters.maxPrice !== undefined;
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return <div suppressHydrationWarning />;
 
   return (
-    <aside className="w-1/4 border-r border-zinc-100 pr-6 flex flex-col justify-between min-h-screen bg-white">
-      <div>
-        <FilterSection
-          title={t("occasions")}
-          onReset={resetOccasions}
-          hasActiveFilters={hasOccasionFilters}
-        >
-          <OccasionFilter />
-        </FilterSection>
+    <Sidebar side="left" variant="sidebar" collapsible="icon"    className="relative top-0 h-full">
+      <SidebarHeader className="flex justify-center">
+        
+        <SidebarTrigger />
 
-        <FilterSection
-          title={t("priceRange")}
-          hasActiveFilters={hasPriceFilters}
-        >
-          <PriceFilter />
-        </FilterSection>
-      </div>
-    </aside>
+        
+        {state !== "collapsed" && (
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton>
+                Filters
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        )}
+      </SidebarHeader>
+
+    
+      {state !== "collapsed" && (
+        <SidebarContent className="p-4 space-y-6">
+          <FilterSection
+            title="Categories"
+            onReset={resetCategories}
+            hasActiveFilters={!!currentFilters.categoryIds?.length}
+          >
+            <CategoriesFilter />
+          </FilterSection>
+
+          <FilterSection
+            title="Occasions"
+            onReset={resetOccasions}
+            hasActiveFilters={!!currentFilters.occasionIds?.length}
+          >
+            <OccasionFilter />
+          </FilterSection>
+
+          <FilterSection title="Price">
+            <PriceFilter />
+          </FilterSection>
+        </SidebarContent>
+      )}
+    </Sidebar>
   );
 }

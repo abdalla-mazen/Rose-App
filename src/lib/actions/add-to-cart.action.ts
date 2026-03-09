@@ -2,6 +2,7 @@
 
 import { JSON_HEADER } from "@/lib/constants/shared.constant";
 import getToken from "@/lib/utils/get-token";
+import { revalidatePath } from "next/cache";
 
 // Types
 type AddToCartFields = {
@@ -24,7 +25,7 @@ export const AddToCartAction = async (data: AddToCartFields) => {
     });
 
     const payload: ApiResponse<AddToCartResponse> = await response.json();
-
+    revalidatePath("/cart");
     return payload;
   } catch (error) {
     console.error("Add to cart error:", error);

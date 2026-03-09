@@ -56,7 +56,7 @@ const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
         )}
         <div
           className={cn(
-            "flex items-center justify-between gap-3 rounded-lg border px-3 py-2 min-h-[44px] bg-white",
+            "flex items-center justify-between gap-3 rounded-lg border px-3 py-2 min-h-[44px] bg-white dark:bg-zinc-700",
             error ? "border-red-600" : "border-zinc-200",
             error && "border-red-500 focus-visible:ring-maroon-600",
             "dark:hover:bg-zinc-700  dark:text-white dark:placeholder:text-zinc-400 dark:focus-visible:ring-softPink-400 dark:disabled:bg-zinc-800 dark:disabled:text-zinc-600 dark:disable"

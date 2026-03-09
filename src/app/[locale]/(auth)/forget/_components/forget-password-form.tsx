@@ -53,7 +53,7 @@ export default function ForgetPassword() {
               </div>
               <Alert className="dark:bg-zinc-800 mb-4 border-maroon-600 dark:border-softPink-300 text-center">
                 <AlertDescription className="text-zinc-700 dark:text-zinc-50">
-                  {t("operationFailed")}
+                   {t("operationFailed")}
                 </AlertDescription>
               </Alert>
             </>

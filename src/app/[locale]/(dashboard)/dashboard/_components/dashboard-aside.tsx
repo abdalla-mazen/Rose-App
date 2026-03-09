@@ -73,7 +73,7 @@ export default function DashboardAside() {
   };
 
   return (
-    <aside className="fixed flex flex-col items-center bg-white p-4 border-zinc-100 border-r w-[19rem] h-screen">
+    <aside className="fixed flex flex-col items-center bg-white p-4 border-zinc-100 border-r w-[19rem] h-screen dark:bg-zinc-800 ">
       {/* Logo */}
       <Image
         src={"/assets/images/logo.png"}
@@ -94,10 +94,11 @@ export default function DashboardAside() {
                 <Link
                   href={link.href}
                   className={cn(
-                    "flex items-center gap-2 hover:bg-maroon-50 mb-4 p-2.5 rounded-lg outline-maroon-400 w-60 h-14 font-bold text-zinc-800 hover:text-maroon-600 text-lg capitalize cursor-pointer",
+                    "flex items-center gap-2 hover:bg-maroon-50 mb-4 p-2.5 rounded-lg outline-maroon-400 w-60 h-14 font-bold text-zinc-800 hover:text-maroon-600 dark:text-white hover:dark:text-softPink-500  text-lg capitalize cursor-pointer",
                     {
-                      "text-maroon-600 bg-maroon-50 ": isActive,
-                      "bg-maroon-600 text-white justify-center font-semibold text-base ":
+                      "text-maroon-600 bg-maroon-50  dark:bg-softPink-400 dark:text-white ":
+                        isActive,
+                      "bg-maroon-600 text-white  dark:bg-softPink-500 justify-center font-semibold text-base ":
                         isPreviewLink,
                     },
                   )}
@@ -133,13 +134,17 @@ export default function DashboardAside() {
 
         {/* UserName and email */}
         <div className="flex flex-col">
-          <span className="font-bold text-zinc-800 text-sm">{session?.user?.firstName}</span>
-          <span className="font-semibold text-zinc-5 text-xs 00">{session?.user?.email}</span>
+          <span className="font-bold text-zinc-800 text-sm dark:text-white">
+            {session?.user?.firstName}
+          </span>
+          <span className="font-semibold text-zinc-5 lowercase text-xs 00">
+            {session?.user?.email}
+          </span>
         </div>
 
         {/* Dropdown */}
         <button onClick={dropdownHandler}>
-          <div className="relative">
+          <div className="relative z-50">
             {showDropdownBtns && <DropdownBtns dropdownHandler={dropdownHandler} />}
           </div>
           <EllipsisVertical className="text-zinc-500 translate-x-4 translate-y-1" />

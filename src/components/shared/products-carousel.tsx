@@ -42,7 +42,7 @@ export default function ProductsCarousel({ products = [] }: Props) {
     >
       <CarouselContent className="-ms-4">
         {products.map((product) => (
-          <CarouselItem key={product._id} className="ps-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+          <CarouselItem key={product._id} className="ps-4 md:basis-1/2 lg:basis-1/3 xl:h-[420px]  xl:basis-1/4">
             {/* Display products in carousel */}
             <CardProduct product={product} />
           </CarouselItem>

@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 
 export default function CardS() {
+  // Translations
   const t = useTranslations();
   const locale = useLocale();
   const isRTL = locale === "ar";
@@ -14,7 +15,7 @@ export default function CardS() {
   return (
     <div>
       {/* Card container */}
-      <Card className="text-white w-[280px] h-[420px] rounded-2xl overflow-hidden flex flex-col justify-between relative">
+      <Card className="text-white w-full  md:w-[280px] h-[420px] rounded-2xl overflow-hidden flex flex-col justify-between relative">
         {/* Bg image */}
         <div className="absolute inset-0">
           <Image

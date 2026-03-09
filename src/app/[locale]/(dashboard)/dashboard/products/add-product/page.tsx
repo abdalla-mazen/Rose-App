@@ -10,7 +10,7 @@ export default async function Page() {
   const categories = await FetchCategories();
 
   return (
-    <div className="p-7">
+    <div >
       {/* Add product title */}
       <h1 className="font-semibold text-2xl mb-7">Add a New Product</h1>
 

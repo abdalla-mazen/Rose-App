@@ -3,7 +3,6 @@ import { verifyOtpAction } from "@/lib/actions/otp.action";
 
 type VerifyOtpData = {
   otp: string;
-  email: string;
 };
 
 type VerifyOtpCallbacks = {
@@ -16,9 +15,11 @@ export const useVerifyOtpMutation = (callbacks?: VerifyOtpCallbacks) => {
     mutationKey: ["verify-otp"],
     mutationFn: async (data: VerifyOtpData) => {
       const result = await verifyOtpAction(data);
+      console.log(result);
       if (!result.success) {
         throw new Error(result.message);
       }
+      
       return result;
     },
     onSuccess: callbacks?.onSuccess,

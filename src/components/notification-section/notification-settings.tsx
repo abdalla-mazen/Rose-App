@@ -17,7 +17,7 @@ import { useTranslations } from "next-intl";
 
 export default function NotificationMenu({ id }: { id: string }) {
   const queryClient = useQueryClient();
-  const t = useTranslations("notifications");
+  const t = useTranslations(); // بدون namespace، لأن كل keys one level مع prefix notification-
 
   // Mark a specific notification as read
   const markAsRead = useMutation({
@@ -57,7 +57,9 @@ export default function NotificationMenu({ id }: { id: string }) {
           className="flex rtl:flex-row-reverse items-center gap-2"
         >
           <Check className="w-4 h-4 text-gray-600" />
-          <span>{markAsRead.isPending ? t("marking") : t("markAsRead")}</span>
+          <span>
+            {markAsRead.isPending ? t("notification-marking") : t("notification-markAsRead")}
+          </span>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
@@ -69,7 +71,11 @@ export default function NotificationMenu({ id }: { id: string }) {
           className="flex rtl:flex-row-reverse items-center gap-2 text-red-600 focus:text-red-700"
         >
           <Trash2 className="w-4 h-4 text-red-600" />
-          <span>{deleteNotif.isPending ? t("deleting") : t("deleteNotification")}</span>
+          <span>
+            {deleteNotif.isPending
+              ? t("notification-deleting")
+              : t("notification-deleteNotification")}
+          </span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

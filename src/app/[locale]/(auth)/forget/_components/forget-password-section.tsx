@@ -27,7 +27,7 @@ export default function ForgetPasswordSection() {
         <span className="mt-5 text-zinc-800 dark:text-zinc-50 text-sm text-center [&::first-letter]:uppercase">
           {t("forget-text-register")}{" "}
           <Link
-            href="/signup"
+            href="/register"
             className="font-bold text-maroon-700 dark:text-softPink-300"
           >
             {t("forget-text-register-link")}

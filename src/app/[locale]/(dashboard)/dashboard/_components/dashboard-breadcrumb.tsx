@@ -1,66 +1,3 @@
-// "use client";
-
-// import {
-//   Breadcrumb,
-//   BreadcrumbItem,
-//   BreadcrumbLink,
-//   BreadcrumbList,
-//   BreadcrumbPage,
-//   BreadcrumbSeparator,
-// } from "@/components/ui/breadcrumb";
-// import Link from "next/link";
-// import { usePathname } from "next/navigation";
-// import { Fragment } from "react";
-
-// export default function DashboardBreadcrumb() {
-//   const pathname = usePathname();
-//   let pathArray = pathname.split("/").filter((x) => x);
-
-//   // Remove locale segments (en or ar)
-//   if (pathArray[0] === "en" || pathArray[0] === "ar") {
-//     pathArray = pathArray.slice(1);
-//   }
-
-//   return (
-//     <nav className="bg-white p-4 border-zinc-100 border-b w-full text-gray-500 text-sm">
-//       <div className="flex items-center gap-1">
-//         <Breadcrumb>
-//           <BreadcrumbList>
-//             <BreadcrumbItem>
-//               <BreadcrumbLink asChild>
-//                 <Link href="/dashboard" className="capitalize">
-//                   dashboard{" "}
-//                 </Link>
-//               </BreadcrumbLink>
-//             </BreadcrumbItem>
-//             {pathArray.length >= 2 && <BreadcrumbSeparator />}
-//             {pathArray.slice(1).map((link, index) => {
-//               const href = "/" + pathArray.slice(1, index + 1).join("/");
-//               const isLast = index === pathArray.slice(1).length - 1;
-//               return (
-//                 <Fragment key={index}>
-//                   <BreadcrumbItem>
-//                     {!isLast ? (
-//                       <BreadcrumbLink asChild>
-//                         <Link href={href} className="capitalize">
-//                           {link}
-//                         </Link>
-//                       </BreadcrumbLink>
-//                     ) : (
-//                       <BreadcrumbPage className="capitalize">{link}</BreadcrumbPage>
-//                     )}
-//                   </BreadcrumbItem>
-//                   {!isLast && <BreadcrumbSeparator />}
-//                 </Fragment>
-//               );
-//             })}
-//           </BreadcrumbList>
-//         </Breadcrumb>
-//       </div>
-//     </nav>
-//   );
-// }
-
 "use client";
 
 import { usePathname } from "next/navigation";
@@ -88,13 +25,15 @@ export default function DashboardBreadcrumb() {
   const isCategoriesRoot = segments.includes("categories");
 
   return (
-    <nav className="bg-white p-4 border-b text-sm text-gray-500">
+    <nav className="bg-white p-4 border-b text-sm text-gray-500 dark:text-white dark:bg-zinc-700  w-full">
       <Breadcrumb>
         <BreadcrumbList>
           {/* Dashboard root */}
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link href="/dashboard">Dashboard</Link>
+              <Link href="/dashboard" className="dark:text-white">
+                Dashboard
+              </Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
 
@@ -104,7 +43,9 @@ export default function DashboardBreadcrumb() {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link href="/dashboard/products">Products</Link>
+                  <Link href="/dashboard/products" className="dark:text-white">
+                    Products
+                  </Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </>
@@ -115,7 +56,7 @@ export default function DashboardBreadcrumb() {
             <>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage>Add Product</BreadcrumbPage>
+                <BreadcrumbPage className="dark:text-white">Add Product</BreadcrumbPage>
               </BreadcrumbItem>
             </>
           )}
@@ -125,7 +66,7 @@ export default function DashboardBreadcrumb() {
             <>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage>Update Product: {title}</BreadcrumbPage>
+                <BreadcrumbPage className="dark:text-white">Update Product: {title}</BreadcrumbPage>
               </BreadcrumbItem>
             </>
           )}
@@ -136,7 +77,9 @@ export default function DashboardBreadcrumb() {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link href="/dashboard/occasions">Occasions</Link>
+                  <Link href="/dashboard/occasions" className="dark:text-white">
+                    Occasions
+                  </Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </>
@@ -148,7 +91,9 @@ export default function DashboardBreadcrumb() {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link href="/dashboard/categories">Categories</Link>
+                  <Link href="/dashboard/categories" className="dark:text-white">
+                    Categories
+                  </Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </>

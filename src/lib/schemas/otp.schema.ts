@@ -4,9 +4,9 @@ export const createOtpSchema = (t: (key: string) => string) =>
   z.object({
     otp: z
       .string()
-      .min(6, t("otp.validation.min"))
-      .max(6, t("otp.validation.max"))
-      .regex(/^[0-9]+$/, t("otp.validation.regex")),
+      .min(6, t("otp-validation-min"))
+      .max(7, t("otp-validation-max"))
+      .regex(/^[0-9]+$/, t("otp-validation-regex")),
   });
 
 export type OtpSchemaType = z.infer<ReturnType<typeof createOtpSchema>>;

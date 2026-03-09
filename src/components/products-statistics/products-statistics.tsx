@@ -12,23 +12,49 @@ export default async function ProductsStatistics() {
   const products = await ProductsStatisticsDashboardApi();
 
   // Get top product background function
-  function getTopProductBackground(index: number) {
-    switch (index) {
-      case 0:
-        return "font-medium bg-[linear-gradient(90deg,rgba(223,172,22,0.25)_0%,rgba(223,172,22,0.1)_100%)]";
-      case 1:
-        return "font-medium bg-[linear-gradient(90deg,rgba(117,127,149,0.25)_0%,rgba(117,127,149,0.1)_100%)]";
-      case 2:
-        return "font-medium bg-[linear-gradient(90deg,rgba(145,68,0,0.25)_0%,rgba(145,68,0,0.1)_100%)]";
-      default:
-        return "bg-zinc-100";
-    }
-  }
+  // function getTopProductBackground(index: number) {
+  //   switch (index) {
+  //     case 0:
+  //       return "font-medium bg-[linear-gradient(90deg,rgba(223,172,22,0.25)_0%,rgba(223,172,22,0.1)_100%)]";
+  //     case 1:
+  //       return "font-medium bg-[linear-gradient(90deg,rgba(117,127,149,0.25)_0%,rgba(117,127,149,0.1)_100%)]";
+  //     case 2:
+  //       return "font-medium bg-[linear-gradient(90deg,rgba(145,68,0,0.25)_0%,rgba(145,68,0,0.1)_100%)]";
+  //     default:
+  //       return "bg-zinc-100";
+  //   }
+  // }
+function getTopProductBackground(index: number) {
+  switch (index) {
+    case 0:
+      return `
+        font-medium 
+        bg-[linear-gradient(90deg,rgba(223,172,22,0.25)_0%,rgba(223,172,22,0.1)_100%)]
+        dark:bg-[linear-gradient(90deg,rgba(223,172,22,0.35)_0%,rgba(223,172,22,0.15)_100%)]
+      `;
 
+    case 1:
+      return `
+        font-medium 
+        bg-[linear-gradient(90deg,rgba(117,127,149,0.25)_0%,rgba(117,127,149,0.1)_100%)]
+        dark:bg-[linear-gradient(90deg,rgba(117,127,149,0.35)_0%,rgba(117,127,149,0.15)_100%)]
+      `;
+
+    case 2:
+      return `
+        font-medium 
+        bg-[linear-gradient(90deg,rgba(145,68,0,0.25)_0%,rgba(145,68,0,0.1)_100%)]
+        dark:bg-[linear-gradient(90deg,rgba(145,68,0,0.35)_0%,rgba(145,68,0,0.15)_100%)]
+      `;
+
+    default:
+      return "bg-zinc-100 dark:bg-zinc-800";
+  }
+}
   return (
     <div className="flex gap-6 pl-10 max-w-[1096px]">
       {/* Top selling products */}
-      <div className="bg-white p-6 rounded-lg w-full">
+      <div className="bg-white p-6 rounded-lg w-full dark:bg-zinc-900">
         {/* Top selling products header */}
         <h1 className="mb-6 font-semibold text-2xl capitalize">{t("top-selling-products")}</h1>
 
@@ -63,7 +89,7 @@ export default async function ProductsStatistics() {
       </div>
 
       {/* Low stock products */}
-      <div className="bg-white p-6 rounded-lg w-full">
+      <div className="bg-white p-6 rounded-lg w-full dark:bg-zinc-900">
         {/* Top selling products header */}
         <h1 className="mb-6 font-semibold text-2xl capitalize">{t("low-stock-products")}</h1>
 
