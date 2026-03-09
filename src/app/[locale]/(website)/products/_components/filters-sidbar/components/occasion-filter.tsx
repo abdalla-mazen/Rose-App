@@ -2,120 +2,95 @@
 
 import Image from "next/image";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useTranslations } from "next-intl";
-import { useOccasionsInfinite } from "@/hooks/use-occasions-infinite";
-import { useFilters } from "@/hooks/use-filters";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { useOccasionsInfinite } from "@/hooks/use-occasions-infinite";
+import { useFilters } from "@/hooks/use-filters";
 
 export default function OccasionFilter() {
-  //Translations
-  const t = useTranslations();
   const { currentFilters, toggleOccasion } = useFilters();
-  const selectedOccasions = currentFilters.occasionIds || [];
+  const selected = currentFilters.occasionIds || [];
 
-  // Fetch occasions with infinite scroll  
-  const {
-    occasionsPages,
-    fetchNextPage,
-    hasNextPage,
-    isLoading,
-    error,
-  } = useOccasionsInfinite(true);
+  const { data, fetchNextPage, hasNextPage, isFetching, isLoading, error } =
+    useOccasionsInfinite(true);
 
-  const allOccasions = occasionsPages?.pages.flatMap((p) => p.occasions) || [];
-
-  // Loading (Skeleton)
+  //  Loading  first time
   if (isLoading) {
     return (
-      <div className="grid grid-cols-2 gap-2 max-h-[400px] overflow-y-auto pr-2">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <Skeleton key={i} className="bg-zinc-300 rounded-xl h-[80px]" />
+      <div className="grid grid-cols-2 gap-2">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <Skeleton key={i} className="h-[80px]" />
         ))}
       </div>
     );
   }
 
-  // Error
+  //  Error state
   if (error) {
     return (
-      <div className="text-sm text-red-600 py-4 text-center">
-        {t("errorLoading")}
-      </div>
+      <p className="text-sm text-red-500 text-center py-4">
+        Error loading occasions: {error.message}
+      </p>
     );
   }
 
-  // Empty
-  if (!allOccasions.length) {
-    return (
-      <div className="text-sm text-gray-500 py-4 text-center">
-        {t("noOccasions")}
-      </div>
-    );
+  // Collect all occasions
+  const occasions = data?.pages?.flatMap((page) => page.items ?? []) ?? [];
+  console.log("occasions array:", occasions);
+
+  if (!occasions.length && !isFetching) {
+    return <p className="text-sm text-gray-500 text-center py-4">No occasions</p>;
   }
 
-  // UI with InfiniteScroll library
   return (
-    <div
-      className={cn(
-        "h-96 overflow-auto [scrollbar-width:none] [-ms-overflow-style:none]"
-      )}
-      id="occasions-scroll-container"
+    <InfiniteScroll
+      dataLength={occasions.length}
+      next={fetchNextPage}
+      hasMore={!!hasNextPage}
+      height={384}
+      loader={
+        <div className="grid grid-cols-2 gap-2 mt-2">
+          {Array.from({ length: 2 }).map((_, i) => (
+            <Skeleton key={i} className="h-[80px]" />
+          ))}
+        </div>
+      }
     >
-      <InfiniteScroll
-        dataLength={allOccasions.length}
-        next={fetchNextPage}
-        hasMore={!!hasNextPage}
-        loader={
-          <div className="grid grid-cols-2 gap-2 mt-2">
-            {Array.from({ length: 2 }).map((_, i) => (
-              <Skeleton key={i} className="h-[80px] rounded-xl bg-zinc-300" />
-            ))}
-          </div>
-        }
-        scrollableTarget="occasions-scroll-container"
-      >
-        {/* Grid of occasion cards */}
-        <div className="grid grid-cols-2 gap-2 pr-2">
-          {allOccasions.map((occ) => {
-            const isSelected = selectedOccasions.includes(occ._id);
-            return (
-              <Button
-                key={occ._id}
-                onClick={() => toggleOccasion(occ._id)}
-                variant="ghost"
-                className={cn(
-                  "relative h-[80px] w-full rounded-xl overflow-hidden group transition-all p-0",
-                  isSelected ? "ring-2 ring-red-600" : "",
-                )}
-              >
-                {/* Occasion image */}
+      <div className="grid grid-cols-2 gap-2 pr-2">
+        {occasions.map((occ) => {
+          const isSelected = selected.includes(occ._id);
+
+          return (
+            <Button
+              key={occ._id}
+              onClick={() => toggleOccasion(occ._id)}
+              variant="ghost"
+              className={cn(
+                "relative h-[80px] w-full rounded-xl overflow-hidden p-0",
+                isSelected && "ring-2 ring-red-600",
+              )}
+            >
+              <div className=" w-full h-full">
                 <Image
-                  src={occ.image}
+                  src={`https://flower.elevateegy.com/uploads/${occ.image}`}
                   alt={occ.name}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  sizes="(max-width: 768px) 50vw, 200px"
+                  className="object-cover"
                 />
+              </div>
 
-                {/* Overlay effect */}
-                <div
-                  className={cn(
-                    "absolute inset-0 transition-colors",
-                    isSelected ? "bg-red-600/40" : "bg-black/30 group-hover:bg-black/40"
-                  )}
-                />
+              <div
+                className={cn("absolute inset-0", isSelected ? "bg-red-600/40" : "bg-black/30")}
+              />
 
-                {/* Occasion name label */}
-                <span className="absolute inset-0 flex items-center justify-center text-white font-medium text-center px-1">
-                  {occ.name}
-                </span>
-              </Button>
-            );
-          })}
-        </div>
-      </InfiniteScroll>
-    </div>
+              <span className="absolute inset-0 flex items-center justify-center text-white font-medium text-center px-1">
+                {occ.name}
+              </span>
+            </Button>
+          );
+        })}
+      </div>
+    </InfiniteScroll>
   );
 }

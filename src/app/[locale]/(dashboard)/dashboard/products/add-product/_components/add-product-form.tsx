@@ -87,7 +87,7 @@ export default function AddProductForm({ occasions, categories }: Props) {
       formData.append("imgCover", values.imgCover[0]);
     }
 
-    values.images.forEach((file, index) => {
+    values.images.forEach((file) => {
       formData.append(`images`, file);
     });
 
@@ -95,7 +95,7 @@ export default function AddProductForm({ occasions, categories }: Props) {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg w-[1081px]">
+    <div className="bg-white p-6 rounded-lg w-[1081px] dark:bg-zinc-800">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-[746px]">
           {/* Product title */}
@@ -247,11 +247,11 @@ export default function AddProductForm({ occasions, categories }: Props) {
                   </FormLabel>
 
                   <FormControl>
-                    <div className="border rounded-lg p-2 flex items-center justify-between">
+                    <div className="border dark:border-zinc-600 rounded-lg p-2 flex items-center justify-between">
                       {field.value.length > 0 ? (
                         typeof field.value[0] === "string" ? (
                           <img
-                            src={field.value[0]} // URL موجود مسبقًا
+                            src={field.value[0]} 
                             alt="Cover preview"
                             className="w-full h-40 object-cover rounded-md mb-3"
                           />
@@ -274,7 +274,7 @@ export default function AddProductForm({ occasions, categories }: Props) {
                         onChange={(e) => {
                           const file = e.target.files?.[0];
                           if (file) {
-                            field.onChange([file]); // ✅ حط File مباشرة في array
+                            field.onChange([file]);
                           }
                         }}
                       />
@@ -307,7 +307,7 @@ export default function AddProductForm({ occasions, categories }: Props) {
                     </FormLabel>
 
                     <FormControl>
-                      <div className="border rounded-lg p-2">
+                      <div className="border dark:border-zinc-600 rounded-lg p-2">
                         {/* Preview Grid */}
                         <div className="grid grid-cols-3 gap-2 mb-2">
                           {galleryFiles.map((file, index) => (
@@ -327,7 +327,7 @@ export default function AddProductForm({ occasions, categories }: Props) {
                           id="galleryInput"
                           onChange={(e) => {
                             const files = Array.from(e.target.files || []);
-                            field.onChange([...galleryFiles, ...files]); // ✅ خزّن File objects مباشرة
+                            field.onChange([...galleryFiles, ...files]);
                           }}
                         />
 
@@ -367,7 +367,7 @@ export default function AddProductForm({ occasions, categories }: Props) {
                     </SelectTrigger>
                     <SelectContent>
                       {categories.map((cat) => (
-                        <SelectItem value={cat._id}>{cat.name}</SelectItem>
+                        <SelectItem key={cat._id} value={cat._id}>{cat.name}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -398,7 +398,7 @@ export default function AddProductForm({ occasions, categories }: Props) {
                     </SelectTrigger>
                     <SelectContent>
                       {occasions.map((occ) => (
-                        <SelectItem value={occ._id}>{occ.name}</SelectItem>
+                        <SelectItem key={occ._id} value={occ._id}>{occ.name}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -413,7 +413,7 @@ export default function AddProductForm({ occasions, categories }: Props) {
           {/* Add product error */}
           {error && <ErrorMessage message={error.message} />}
 
-          <Button type="submit" disabled={isPending} variant="primary" className="capitalize mt-24">
+          <Button type="submit" disabled={isPending} variant="primary" className="capitalize ">
             {t("add-product")}{" "}
             {isPending && <LoaderCircle className="me-2 animate-spin" size={16} />}
           </Button>

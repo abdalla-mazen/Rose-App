@@ -1,34 +1,3 @@
-// import React, { Suspense } from "react";
-// import { fetchOccasions } from "@/lib/apis/occasion.api";
-// import TableOccasions from "./_components/table-occasions";
-// import { TableOccasionsSkeleton } from "@/components/skeletons/occasions-table.skeletons";
-// import AddOccasionsBtn from "./_components/add-occasions-btn";
-// import { getTranslations } from "next-intl/server";
-
-// export default async function page() {
-//  const t = await getTranslations();
-
-//   // Fetch occasions
-//   const data = await fetchOccasions();
-
-//   return (
-//     <div className="  bg-white px-6 rounded-lg  w-full mt-5 ">
-//       <div className="flex justify-between pt-6 mb-5   ">
-//         {/* Header */}
-//         <h1 className="text-2xl font-semibold text-zinc-800   ">{t("all-occasions")}</h1>
-
-//         {/* Add occasions button */}
-//         <AddOccasionsBtn />
-//       </div>
-
-//       {/* Occasions Table */}
-//       <Suspense fallback={<TableOccasionsSkeleton />}>
-//         <TableOccasions data={data} />
-//       </Suspense>
-//     </div>
-//   );
-// }
-
 import React, { Suspense } from "react";
 import { fetchOccasions } from "@/lib/apis/occasion.api";
 import TableOccasions from "./_components/table-occasions";
@@ -55,9 +24,9 @@ export default async function page({ searchParams }: PageProps) {
   const data = await fetchOccasions({ page, search, limit: 10 });
 
   return (
-    <div className="bg-white px-6 rounded-lg w-full mt-5">
+    <div className="bg-white px-6 rounded-lg w-full mt-5 dark:bg-zinc-800 ">
       <div className="flex justify-between pt-6 mb-5">
-        <h1 className="text-2xl font-semibold text-zinc-800">{t("all-occasions")}</h1>
+        <h1 className="text-2xl font-semibold text-zinc-800 dark:text-zinc-50">{t("all-occasions")}</h1>
         <AddOccasionsBtn />
       </div>
 

@@ -7,7 +7,7 @@ export default function DropdownBtns({ dropdownHandler }: { dropdownHandler: () 
   const { data: session } = useSession();
 
   return (
-    <ul className="bottom-4 absolute bg-white [&>*]:p-3 border border-zinc-100 rounded-lg divide-y-2 w-64 font-medium text-zinc-700 text-sm capitalize">
+    <ul className="bottom-4 absolute bg-white [&>*]:p-3 border -left-16 border-zinc-100 rounded-lg divide-y-2 w-56 font-medium text-zinc-700 text-sm capitalize">
       {/* User Name */}
       <li className="font-semibold text-maroon-700 text-start translate-x-1">
         {session?.user.firstName} {session?.user.lastName}

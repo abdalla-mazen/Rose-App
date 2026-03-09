@@ -1,10 +1,8 @@
-// Dashboard Layout
-
-import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { NextIntlClientProvider } from "next-intl";
 import DashboardClientLayout from "./_components/dashboard-client-layout";
 import Providers from "@/components/providers";
-import { notFound } from "next/navigation";
-import { routing } from "@/i18n/routing";
+import { redirect } from "next/navigation";
+
 import { getMessages, setRequestLocale } from "next-intl/server";
 
 type Props = {
@@ -12,24 +10,19 @@ type Props = {
   params: { locale: string };
 };
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
-
 export default async function DashboardLayout({ children, params: { locale } }: Props) {
-  // Ensure that the incoming `locale` is valid
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
+  if (locale !== "en") {
+    redirect("/en/dashboard");
   }
 
-  // Enable static rendering
-  setRequestLocale(locale);
+  setRequestLocale("en");
 
-  const messages = await getMessages({ locale });
+  const messages = await getMessages({ locale: "en" });
+
   return (
-    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} suppressHydrationWarning>
+    <html lang="en" dir="ltr" suppressHydrationWarning>
       <body>
-        <NextIntlClientProvider messages={messages} locale={locale}>
+        <NextIntlClientProvider messages={messages} locale="en">
           <Providers>
             <DashboardClientLayout>{children}</DashboardClientLayout>
           </Providers>

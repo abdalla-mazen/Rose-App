@@ -1,42 +1,39 @@
-// hooks/use-occasions-infinite.ts
 "use client";
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { filtersApi } from "@/lib/apis/filter-products.api";
 
 export function useOccasionsInfinite(open: boolean) {
-  const pageSize = 10;
+  const limit = 10;
 
-  const query = useInfiniteQuery({
+  return useInfiniteQuery({
     queryKey: ["occasions"],
     queryFn: async ({ pageParam = 1 }) => {
-      const response = await filtersApi.getFilters();
-      const allOccasions = response.filters.occasions;
+      const res = await filtersApi.getFilters();
 
-      // simulate pagination
-      const start = (pageParam - 1) * pageSize;
-      const end = start + pageSize;
-      const occasions = allOccasions.slice(start, end);
+      // Handle different response structures
+      const all = res?.filters?.occasions || res?.occasions || [];
 
-      return {
-        occasions,
-        meta: {
-          currentPage: pageParam,
-          totalPages: Math.ceil(allOccasions.length / pageSize),
-        },
+      if (!Array.isArray(all)) {
+        console.error("Occasions is not an array:", all);
+        throw new Error("Invalid API response: occasions is not an array");
+      }
+
+      const start = (pageParam - 1) * limit;
+      const end = start + limit;
+      const items = all.slice(start, end);
+
+      const result = {
+        items,
+        nextPage: end < all.length ? pageParam + 1 : undefined,
       };
-    },
-    getNextPageParam: (lastPage) => {
-      if (lastPage.meta.currentPage >= lastPage.meta.totalPages) return undefined;
-      return lastPage.meta.currentPage + 1;
-    },
-    initialPageParam: 1,
-    enabled: open, // fetch only when open = true
-    staleTime: 5 * 60 * 1000,
-  });
 
-  return {
-    ...query,
-    occasionsPages: query.data,
-  };
+      return result;
+    },
+    getNextPageParam: (lastPage) => lastPage.nextPage,
+    initialPageParam: 1,
+    enabled: open,
+    staleTime: 5 * 60 * 1000,
+    retry: 1,
+  });
 }

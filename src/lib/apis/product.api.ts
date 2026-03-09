@@ -15,7 +15,8 @@ export async function BestSellingApi() {
 
 // Fetch products by occasions API in most popular component
 export async function MostPopularApi(occasion: string) {
-  const response = await fetch(`${process.env.API}/products?occasion=${occasion}&sort=-sold`, {
+  console.log(occasion);
+  const response = await fetch(`https://flower.elevateegy.com/api/v1/products?occasion=${occasion}&sort=-sold`, {
     cache: "no-store",
   });
 
@@ -24,7 +25,7 @@ export async function MostPopularApi(occasion: string) {
   if ("error" in payload) {
     throw new Error(payload.error);
   }
-
+console.log(payload.products);
   return payload.products;
 }
 

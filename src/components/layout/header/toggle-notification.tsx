@@ -19,7 +19,7 @@ export default function ToggleNotification() {
   return (
     <>
       {icons.map((item) => (
-        <li className="relative" key={item.id}>
+        <li className="relative list-none" key={item.id}>
           <Link
             onClick={() =>
               item.id === 3

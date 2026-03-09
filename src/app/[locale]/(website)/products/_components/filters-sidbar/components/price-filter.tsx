@@ -1,135 +1,105 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
-import { useTranslations } from "next-intl";
 import { useFilters } from "@/hooks/use-filters";
 import { filtersApi } from "@/lib/apis/filter-products.api";
 import { useDebounce } from "@/hooks/use-debounce";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 import FilterSection from "../filter-section";
-import { PriceFilterFormData, priceFilterSchema } from "@/lib/schemas/price.schema";
+import { Slider } from "@/components/ui/slider";
+
 
 export default function PriceFilter() {
-  const t = useTranslations("filters");
   const { currentFilters, updateFilters } = useFilters();
 
-  // Fetch price range from API
+  // 🔹 Fetch price range
   const { data, isLoading } = useQuery({
     queryKey: ["filters"],
-    queryFn: filtersApi.getFilters,
+    queryFn: () => filtersApi.getFilters(),
     staleTime: 5 * 60 * 1000,
   });
 
-  const priceRange = data?.filters.priceRange;
+  const priceRange = data?.filters?.priceRange;
+  const min = priceRange?.min ?? 0;
+  const max = priceRange?.max ?? 1000;
 
-  // Form setup with Zod validation
-  const {
-    register,
-    watch,
-    formState: { errors },
-    setValue,
-  } = useForm<PriceFilterFormData>({
-    resolver: zodResolver(priceFilterSchema),
-    defaultValues: {
-      minPrice: currentFilters.minPrice || "",
-      maxPrice: currentFilters.maxPrice || "",
-    },
-    mode: "onChange",
-  });
+  //  Slider state
+  const [value, setValue] = useState<[number, number]>([
+    currentFilters.minPrice ?? min,
+    currentFilters.maxPrice ?? max,
+  ]);
 
-  const minPrice = watch("minPrice");
-  const maxPrice = watch("maxPrice");
+  //  Debounce slider
+  const debouncedValue = useDebounce(value, 500);
 
-  // Debounce inputs
-  const debouncedMinPrice = useDebounce(minPrice, 500);
-  const debouncedMaxPrice = useDebounce(maxPrice, 500);
-
-  // Sync form values with current filters
+  //  Sync from URL → slider
   useEffect(() => {
-    setValue("minPrice", currentFilters.minPrice || "");
-    setValue("maxPrice", currentFilters.maxPrice || "");
-  }, [currentFilters.minPrice, currentFilters.maxPrice, setValue]);
+    setValue([
+      currentFilters.minPrice ?? min,
+      currentFilters.maxPrice ?? max,
+    ]);
+  }, [currentFilters.minPrice, currentFilters.maxPrice, min, max]);
 
-  // Update filters after debounce
+  // 🔹 Update filters after debounce
   useEffect(() => {
-    const minVal = typeof debouncedMinPrice === "number" ? debouncedMinPrice : undefined;
-    const maxVal = typeof debouncedMaxPrice === "number" ? debouncedMaxPrice : undefined;
+    const [minPrice, maxPrice] = debouncedValue;
 
-    if (minVal !== currentFilters.minPrice || maxVal !== currentFilters.maxPrice) {
-      updateFilters({ minPrice: minVal, maxPrice: maxVal });
+    if (
+      minPrice !== currentFilters.minPrice ||
+      maxPrice !== currentFilters.maxPrice
+    ) {
+      updateFilters({
+        minPrice,
+        maxPrice,
+      });
     }
-  }, [debouncedMinPrice, debouncedMaxPrice]);
+  }, [
+    debouncedValue,
+    currentFilters.minPrice,
+    currentFilters.maxPrice,
+    updateFilters,
+  ]);
 
-  // Loading skeleton
+  //  Loading
   if (isLoading) {
     return (
       <FilterSection title="">
-        <div className="flex gap-2 w-full">
-          <Skeleton className="rounded-lg w-full h-9" />
-          <Skeleton className="rounded-lg w-full h-9" />
-        </div>
+        <Skeleton className="h-10 w-full rounded-lg" />
       </FilterSection>
     );
   }
 
-  // Price inputs
   return (
     <FilterSection
-      title="" // Hide title
-      hasActiveFilters={!!(currentFilters.minPrice || currentFilters.maxPrice)}
+      title=""
+      hasActiveFilters={
+        currentFilters.minPrice !== undefined ||
+        currentFilters.maxPrice !== undefined
+      }
       onReset={() => {
-        setValue("minPrice", "");
-        setValue("maxPrice", "");
-        updateFilters({ minPrice: undefined, maxPrice: undefined });
+        setValue([min, max]);
+        updateFilters({
+          minPrice: undefined,
+          maxPrice: undefined,
+        });
       }}
     >
-      <div className="flex gap-2">
-        {/* Min price input */}
-        <div className="flex-1">
-          <Input
-            type="number"
-            {...register("minPrice", { valueAsNumber: true })}
-            min={priceRange?.min}
-            max={priceRange?.max}
-            className={cn(
-              "px-2 py-1 border rounded-lg focus:outline-none focus:ring-2 w-full text-sm transition-all",
-              errors.minPrice
-                ? "border-red-500 focus:ring-red-200"
-                : "border-gray-300 focus:ring-red-200",
-            )}
-          />
-          {errors.minPrice && (
-            <p className="mt-1 text-red-600 text-xs" role="alert">
-              {errors.minPrice.message}
-            </p>
-          )}
+      <div className="space-y-3">
+        {/*  Numbers */}
+        <div className="flex items-center justify-between text-sm text-muted-foreground">
+          <span>{value[0]}</span>
+          <span>{value[1]}</span>
         </div>
 
-        {/* Max price input */}
-        <div className="flex-1">
-          <Input
-            type="number"
-            {...register("maxPrice", { valueAsNumber: true })}
-            min={priceRange?.min}
-            max={priceRange?.max}
-            className={cn(
-              "px-2 py-1 border rounded-lg focus:outline-none focus:ring-2 w-full text-sm transition-all",
-              errors.maxPrice
-                ? "border-red-500 focus:ring-red-200"
-                : "border-gray-300 focus:ring-red-200",
-            )}
-          />
-          {errors.maxPrice && (
-            <p className="mt-1 text-red-600 text-xs" role="alert">
-              {errors.maxPrice.message}
-            </p>
-          )}
-        </div>
+        {/*  Slider */}
+        <Slider
+          value={value}
+          onValueChange={(v) => setValue(v as [number, number])}
+          min={min}
+          max={max}
+          step={1}
+        />
       </div>
     </FilterSection>
   );
