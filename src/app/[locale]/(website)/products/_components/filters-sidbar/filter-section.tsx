@@ -52,21 +52,13 @@ interface Props {
   hasActiveFilters?: boolean;
 }
 
-export default function FilterSection({
-  title,
-  children,
-  onReset,
-  hasActiveFilters,
-}: Props) {
+export default function FilterSection({ title, children, onReset, hasActiveFilters }: Props) {
   return (
     <div className="mb-6">
       <div className="flex justify-between mb-3">
         <h3 className="font-semibold">{title}</h3>
         {hasActiveFilters && onReset && (
-          <button
-            onClick={onReset}
-            className="flex items-center gap-1 text-red-600"
-          >
+          <button onClick={onReset} className="flex items-center gap-1 text-red-600">
             <X size={14} />
             Reset
           </button>

@@ -110,7 +110,6 @@ import UserDropdown from "./user-dropdown";
 import ToggleNotification from "./toggle-notification";
 import { GetUserDataApi } from "@/lib/apis/get-user-data.api";
 
-
 export default async function Header() {
   const t = await getTranslations();
   const session = await getServerSession(authOptions);
@@ -142,24 +141,36 @@ export default async function Header() {
         </div>
 
         {/* Search */}
-        <div className="w-full lg:flex-1">
-          <InputSearch
-            className="h-12 w-full lg:me-4"
-            id="search"
-            name="search"
-            placeholder={t("searchPlaceholder")}
-          />
+        <div className="flex w-full">
+          <div className="w-full lg:flex-1">
+            <InputSearch
+              className="h-12 w-full lg:me-4"
+              id="search"
+              name="search"
+              placeholder={t("searchPlaceholder")}
+            />
+          </div>
+
+          <div className="flex items-center justify-center">
+            {session ? (
+              <UserDropdown userData={userData} />
+            ) : (
+              <Link href="/login" className="flex items-center px-4 py-4">
+                <User size={20} /> {t("login")}{" "}
+              </Link>
+            )}
+          </div>
         </div>
 
         {/* Desktop user actions */}
         <div className="hidden lg:flex items-center gap-3">
-          {session ? (
+          {/* {session ? (
             <UserDropdown userData={userData} />
           ) : (
             <Link href="/login" className="flex items-center px-4 py-4">
               <User size={20} /> {t("login")}{" "}
             </Link>
-          )}
+          )} */}
 
           <ul className="flex items-center gap-3 px-4 py-3.5 border-x border-zinc-200">
             <ToggleNotification />

@@ -36,8 +36,6 @@
 
 //   // Fetch products when selectedOccasion changes Effect
 
-
-
 //   useEffect(() => {
 //     if (!selectedOccasion) return;
 
@@ -120,9 +118,6 @@
 //   );
 // }
 
-
-
-
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -150,16 +145,10 @@ type Props = {
   locale: string;
 };
 
-export default function MostPopularClient({
-  occasions,
-  products: initialProducts,
-  locale,
-}: Props) {
+export default function MostPopularClient({ occasions, products: initialProducts, locale }: Props) {
   const t = useTranslations();
 
-  const [selectedOccasion, setSelectedOccasion] = useState<string>(
-    occasions[0]?._id || "",
-  );
+  const [selectedOccasion, setSelectedOccasion] = useState<string>(occasions[0]?._id || "");
   const [products, setProducts] = useState<Product[]>(initialProducts);
   const [loading, setLoading] = useState(false);
 
@@ -241,9 +230,7 @@ export default function MostPopularClient({
 
       {/* View All */}
       <div className="flex justify-end items-center gap-2 mt-12 w-full font-semibold text-maroon-600 dark:text-softPink-200 cursor-pointer">
-        <button onClick={() => allProducts(selectedOccasion)}>
-          {t("mostpopular-view-btn")}
-        </button>
+        <button onClick={() => allProducts(selectedOccasion)}>{t("mostpopular-view-btn")}</button>
         <span>{locale === "ar" ? <MoveLeft /> : <MoveRight />}</span>
       </div>
     </section>
