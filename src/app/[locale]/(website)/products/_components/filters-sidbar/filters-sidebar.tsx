@@ -13,13 +13,12 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
 
 export default function FiltersSidebar() {
   const { currentFilters, resetCategories, resetOccasions } = useFilters();
-  const { state } = useSidebar(); // 👈 نعرف مفتوح ولا مقفول
+  const { state } = useSidebar();
 
   const [mounted, setMounted] = useState(false);
 
@@ -30,24 +29,17 @@ export default function FiltersSidebar() {
   if (!mounted) return <div suppressHydrationWarning />;
 
   return (
-    <Sidebar side="left" variant="sidebar" collapsible="icon"    className="relative top-0 h-full">
+    <Sidebar side="left" variant="sidebar" collapsible="icon" className="relative top-0 h-full">
       <SidebarHeader className="flex justify-center">
-        
-        <SidebarTrigger />
-
-        
         {state !== "collapsed" && (
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton>
-                Filters
-              </SidebarMenuButton>
+              <SidebarMenuButton>Filters</SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
         )}
       </SidebarHeader>
 
-    
       {state !== "collapsed" && (
         <SidebarContent className="p-4 space-y-6">
           <FilterSection
