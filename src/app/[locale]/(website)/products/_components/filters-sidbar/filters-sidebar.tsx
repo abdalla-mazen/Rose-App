@@ -13,13 +13,12 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
 
 export default function FiltersSidebar() {
   const { currentFilters, resetCategories, resetOccasions } = useFilters();
-  const { state } = useSidebar(); // 👈 نعرف مفتوح ولا مقفول
+  const { state } = useSidebar();
 
   const [mounted, setMounted] = useState(false);
 
@@ -32,8 +31,6 @@ export default function FiltersSidebar() {
   return (
     <Sidebar side="left" variant="sidebar" collapsible="icon" className="relative top-0 h-full">
       <SidebarHeader className="flex justify-center">
-        <SidebarTrigger />
-
         {state !== "collapsed" && (
           <SidebarMenu>
             <SidebarMenuItem>
