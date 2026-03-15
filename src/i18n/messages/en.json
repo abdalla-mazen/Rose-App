@@ -27,7 +27,7 @@
   "about-statement-3": "perfect for Every Occasion",
   "about-statement-4": "fast & Reliable Delivery",
   "gallery": "gallery",
-  "gallery-title": "<span><span1>check Out</span1> our Wonderful</span> Gallery",
+  "gallery-title": "check out our wonderful gallery",
   "companies": "trusted by over <span>4.5k+</span> companies",
   "testimonial-title": "Testimonials",
   "testimonial-subtitle": "Real Words from Happy Customers",
@@ -409,7 +409,7 @@
   "dataRetentionTitle": "Data Retention",
   "dataRetentionContent": "We retain your information only as long as necessary to fulfill your orders and comply with legal obligations.",
   "contactContent": "If you have any questions about this Privacy Policy, please contact us at support@yourstore.com.",
-   "faqsTitle": "Frequently Asked Questions",
+  "faqsTitle": "Frequently Asked Questions",
   "faqsSubtitle": "Find answers to common questions about our gifts and services.",
   "faq1Question": "What types of gifts do you offer?",
   "faq1Answer": "We offer a wide range of gifts including flowers, chocolates, personalized items, and gift hampers.",
@@ -423,4 +423,3 @@
   "faq5Answer": "You can reach us via email at support@yourstore.com or call us at +20-XXXXXXXXXX.",
   "wishlist": "Wishlist"
 }
-

@@ -41,6 +41,7 @@ import { useTranslations } from "next-intl";
 import TestimonialSection from "./testimonial-section";
 import { Suspense } from "react";
 import { Loader2 } from "lucide-react";
+import Subtitle from "../shared/subtitle";
 
 export default function TestimonialPage() {
   const t = useTranslations();
@@ -53,41 +54,13 @@ export default function TestimonialPage() {
           className="
             flex flex-col items-center gap-3
             w-full px-4
-            lg:w-2/5
           "
         >
           <h2 className="font-sarabun font-medium text-softPink-500 dark:text-maroon-400 text-sm uppercase tracking-wider">
             {t("testimonial-title")}
           </h2>
 
-          <p
-            className="
-              relative font-sarabun font-bold
-              text-maroon-700 dark:text-softPink-200
-              text-2xl sm:text-3xl text-center
-            "
-          >
-            {t("testimonial-subtitle")}
-
-            {/* Background highlight */}
-            <span
-              className="
-                absolute bottom-1 left-1/2 -translate-x-1/2 -z-10
-                bg-softPink-100 dark:bg-zinc-700
-                rounded-tr-[20px] rounded-br-[20px]
-                w-[80%] sm:w-[70%] h-4
-              "
-            />
-
-            {/* Underline */}
-            <span
-              className="
-                absolute bottom-0 left-1/2 -translate-x-1/2 -z-10
-                bg-softPink-600 dark:bg-softPink-500
-                w-32 sm:w-40 h-0.5
-              "
-            />
-          </p>
+          <Subtitle title={t("testimonial-subtitle")} />
         </div>
       </section>
 

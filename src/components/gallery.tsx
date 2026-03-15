@@ -75,9 +75,9 @@
 //   );
 // }
 
-
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import Subtitle from "./shared/subtitle";
 
 // Gallery Images
 const GALLERY = [
@@ -106,7 +106,9 @@ export default function Gallery() {
           {t("gallery")}
         </span>
 
-        <h2 className="flex justify-center items-center gap-2 text-maroon-700 dark:text-softPink-200 text-2xl sm:text-3xl lg:text-4xl capitalize">
+        <Subtitle title={t("gallery-title")} />
+
+        {/* <h2 className="flex justify-center items-center gap-2 text-maroon-700 dark:text-softPink-200 text-2xl sm:text-3xl lg:text-4xl capitalize">
           {t.rich("gallery-title", {
             span: (chunk) => (
               <span className="relative before:absolute before:bottom-1 before:left-1 before:-z-10 before:bg-softPink-100 before:dark:bg-zinc-700 before:w-[95%] before:h-4 before:rounded-e-2xl">
@@ -119,7 +121,7 @@ export default function Gallery() {
               </span>
             ),
           })}
-        </h2>
+        </h2> */}
       </div>
 
       {/* Images */}
