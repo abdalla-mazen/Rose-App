@@ -1,7 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { Trash2, ShoppingBag, ArrowLeft, Tag } from "lucide-react";
+import { useState, useEffect } from "react";
+import {
+  Trash2,
+  ShoppingBag,
+  Tag,
+  MoveRight,
+  MoveLeft,
+  Loader2,
+  BrushCleaning,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -11,6 +19,9 @@ import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import EmptyCart from "./empty-cart";
 import useClearCart from "../_hooks/use-clear-cart";
+import useUpdateQuantity from "../_hooks/use-update-quantity";
+import { useTranslations } from "next-intl";
+import useRemoveItem from "../_hooks/use-remove-item";
 
 interface CartClientProps {
   dataCart: CartResponse;
@@ -38,24 +49,50 @@ function StarRating({ avg, count }: { avg: number; count: number }) {
 }
 
 export default function CartClient({ dataCart }: CartClientProps) {
+  // Translations
+  const t = useTranslations();
+
+  // Hooks
   const { clear, isPending } = useClearCart();
+  const { removeItem, isPending: isRemovePending, variables: removeVariables } = useRemoveItem();
+  const { updateQuantity, isPending: isUpdatePending } = useUpdateQuantity();
 
-  const [cartItems, setCartItems] = useState<CartItem[]>(dataCart.cart.cartItems);
+  const [cartItems, setCartItems] = useState<CartItem[]>(dataCart?.cart?.cartItems || []);
 
-  const updateQty = (id: string, delta: number) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item._id === id ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item,
-      ),
+  // Effects
+  useEffect(() => {
+    setCartItems(dataCart?.cart?.cartItems || []);
+  }, [dataCart]);
+
+  // Update quantity
+  const updateQty = (id: string, productId: string, delta: number) => {
+    const item = cartItems.find((i) => i._id === id);
+    if (!item) return;
+
+    const newQuantity = Math.max(1, item.quantity + delta);
+
+    // Optimistic Update
+    setCartItems((prev) => prev.map((i) => (i._id === id ? { ...i, quantity: newQuantity } : i)));
+
+    // Call API
+    updateQuantity(
+      { productId, quantity: newQuantity },
+      {
+        onError: () => {
+          // Revert optimistic update on failure
+          setCartItems((prev) =>
+            prev.map((i) => (i._id === id ? { ...i, quantity: item.quantity } : i)),
+          );
+        },
+      },
     );
   };
 
-  const removeItem = (id: string) => {
-    setCartItems((prev) => prev.filter((item) => item._id !== id));
-  };
+  // const removeItem = (id: string) => {
+  //   setCartItems((prev) => prev.filter((item) => item._id !== id));
+  // };
 
-  const clearCart = () => clear();
-
+  // Calculations
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.product.priceAfterDiscount * item.quantity,
     0,
@@ -73,10 +110,10 @@ export default function CartClient({ dataCart }: CartClientProps) {
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <ShoppingBag className="text-rose-500 w-6 h-6" />
-            <h1 className="text-2xl font-bold text-gray-900">Cart</h1>
+            <h1 className="capitalize text-2xl font-bold text-gray-900">{t("cart")}</h1>
             {cartItems.length > 0 && (
-              <Badge className="bg-rose-100  text-rose-600 hover:bg-rose-100 font-semibold border-0">
-                {cartItems.length} <span className="p-2">products</span>
+              <Badge className="bg-rose-100 text-rose-600 hover:bg-rose-100 border-0 px-3 font-bold">
+                {cartItems.length} <span className="p-2">{t("cart-products")}</span>
               </Badge>
             )}
           </div>
@@ -84,11 +121,11 @@ export default function CartClient({ dataCart }: CartClientProps) {
             <Button
               variant="outline"
               disabled={isPending}
-              onClick={clearCart}
-              className="text-rose-500 border-rose-200 hover:bg-rose-50 w-fit hover:text-rose-600 gap-1.5"
+              onClick={() => clear()}
+              className="capitalize bg-maroon-50 text-maroon-600 hover:bg-maroon-100 gap-2 w-fit"
             >
-              <Trash2 className="w-3.5 h-3.5" />
-              Clear Cart
+              <BrushCleaning className="w-3.5 h-3.5" />
+              {t("clear-cart")} {isPending && <Loader2 className="animate-spin" />}
             </Button>
           )}
         </div>
@@ -122,7 +159,7 @@ export default function CartClient({ dataCart }: CartClientProps) {
                         />
                         {hasDiscount && (
                           <Badge className="absolute top-1 left-1 bg-rose-500 text-white text-[9px] px-1 py-0 h-3.5 rounded-sm border-0">
-                            SALE
+                            {t("sale")}
                           </Badge>
                         )}
                       </div>
@@ -146,18 +183,24 @@ export default function CartClient({ dataCart }: CartClientProps) {
                       </div>
 
                       {/* Right: Remove + Qty + Line total */}
-                      <div className="flex flex-col items-end gap-2 flex-shrink-0">
+                      <div className="flex flex-col items-end gap-2">
                         <button
-                          onClick={() => removeItem(item._id)}
-                          className="text-gray-300 hover:text-rose-500 transition-colors p-1 rounded-md hover:bg-rose-50"
+                          onClick={() => removeItem({ productId: item.product._id })}
+                          disabled={
+                            isRemovePending && removeVariables?.productId === item.product._id
+                          }
+                          className="flex items-center gap-2 px-3 py-2 text-sm capitalize bg-red-600 text-white hover:bg-red-700 rounded-md"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-4 h-4" /> {t("remove")}{" "}
+                          {isRemovePending && removeVariables?.productId === item.product._id && (
+                            <Loader2 className="animate-spin" />
+                          )}
                         </button>
 
                         {/* Qty Control */}
                         <div className="flex items-center border border-rose-200 rounded-lg overflow-hidden bg-white">
                           <button
-                            onClick={() => updateQty(item._id, -1)}
+                            onClick={() => updateQty(item._id, item.product._id, -1)}
                             className="w-8 h-8 flex items-center justify-center text-rose-400 hover:bg-rose-50 transition-colors text-lg font-medium"
                           >
                             −
@@ -166,7 +209,7 @@ export default function CartClient({ dataCart }: CartClientProps) {
                             {item.quantity}
                           </span>
                           <button
-                            onClick={() => updateQty(item._id, 1)}
+                            onClick={() => updateQty(item._id, item.product._id, 1)}
                             className="w-8 h-8 flex items-center justify-center text-rose-400 hover:bg-rose-50 transition-colors text-lg font-medium"
                           >
                             +
@@ -188,11 +231,11 @@ export default function CartClient({ dataCart }: CartClientProps) {
             <Button
               asChild
               variant="outline"
-              className="gap-2 border-rose-200 text-rose-500 hover:bg-rose-50 hover:text-rose-600 mt-1"
+              className="md:w-1/3 w-full gap-2 bg-maroon-600 hover:bg-maroon-700 hover:text-white text-white rounded-xl mt-1"
             >
-              <Link href="/checkout" className="flex items-center gap-2 w-full">
-                <ArrowLeft className="w-4 h-4" />
-                Continue Shopping
+              <Link href="/" className="capitalize flex items-center gap-2">
+                <MoveLeft className="w-4 h-4" />
+                {t("continue-shopping")}
               </Link>
             </Button>
           )}
@@ -203,11 +246,13 @@ export default function CartClient({ dataCart }: CartClientProps) {
           <div className="w-full lg:w-72 flex-shrink-0">
             <Card className="border-rose-100 shadow-sm sticky top-24">
               <CardContent className="p-5 space-y-4">
-                <h2 className="font-bold text-gray-900 text-base">Order Summary</h2>
+                <h2 className="capitalize font-bold text-gray-900 text-base">
+                  {t("order-summary")}
+                </h2>
 
                 <div className="space-y-2.5 text-sm">
-                  <div className="flex justify-between text-gray-500">
-                    <span>Original Price</span>
+                  <div className="capitalize flex justify-between text-gray-500">
+                    <span>{t("original-price")}</span>
                     <span className="line-through text-gray-400">
                       {originalTotal.toLocaleString()} EGP
                     </span>
@@ -215,37 +260,42 @@ export default function CartClient({ dataCart }: CartClientProps) {
                   {savings > 0 && (
                     <div className="flex justify-between">
                       <span className="text-green-600 flex items-center gap-1">
-                        <Tag className="w-3 h-3" /> Discount
+                        <Tag className="w-3 h-3" /> {t("discount")}
                       </span>
                       <span className="text-green-600 font-medium">
                         − {savings.toLocaleString()} EGP
                       </span>
                     </div>
                   )}
-                  <div className="flex justify-between text-gray-500">
-                    <span>Shipping</span>
-                    <span className="text-green-500 font-medium">Free</span>
+                  <div className="capitalize flex justify-between text-gray-500">
+                    <span>{t("shipping")}</span>
+                    <span className="text-green-500 font-medium">{t("free")}</span>
                   </div>
                 </div>
 
                 <Separator className="bg-rose-100" />
 
                 <div className="flex justify-between font-bold text-gray-900">
-                  <span>Total</span>
+                  <span>{t("total")}</span>
                   <span className="text-rose-600 text-lg">{subtotal.toLocaleString()} EGP</span>
                 </div>
 
                 {savings > 0 && (
-                  <div className="bg-green-50 border border-green-100 rounded-lg px-3 py-2 text-xs text-green-700 font-medium text-center">
-                    You save {savings.toLocaleString()} EGP!
+                  <div className="capitalize bg-green-50 border border-green-100 rounded-lg px-3 py-2 text-xs text-green-700 font-medium text-center">
+                    {t("you-saved")} {savings.toLocaleString()} EGP!
                   </div>
                 )}
 
-                <Button className="w-full bg-rose-500 hover:bg-rose-600 text-white font-semibold h-11 rounded-xl shadow-md shadow-rose-100 transition-all">
-                  Proceed to Checkout
+                <Button
+                  asChild
+                  className="capitalize w-full bg-maroon-600 hover:bg-maroon-700 text-white font-semibold h-11 rounded-xl shadow-md shadow-rose-100 transition-all"
+                >
+                  <Link href="/addresses" className="flex items-center gap-2">
+                    {t("to-checkout")} <MoveRight />
+                  </Link>
                 </Button>
 
-                <p className="text-center text-xs text-gray-400">Secure checkout · Free returns</p>
+                <p className="text-center text-xs text-gray-400">{t("secure-checkout")}</p>
               </CardContent>
             </Card>
           </div>

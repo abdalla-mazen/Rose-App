@@ -11,7 +11,7 @@ export default async function Page() {
   const userData = await GetUserDataApi();
 
   return (
-    <div className="mx-auto mb-72 max-w-7xl text-zinc-800 dark:text-zinc-50">
+    <div className="mx-auto mb-72 max-w-7xl text-zinc-800 dark:text-zinc-50 p-4">
       <h1 className="mt-16 mb-9 font-bold text-5xl capitalize">{t("update-profile")}</h1>
 
       <AccountClient userData={userData} />
