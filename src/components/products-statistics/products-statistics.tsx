@@ -24,33 +24,33 @@ export default async function ProductsStatistics() {
   //       return "bg-zinc-100";
   //   }
   // }
-function getTopProductBackground(index: number) {
-  switch (index) {
-    case 0:
-      return `
+  function getTopProductBackground(index: number) {
+    switch (index) {
+      case 0:
+        return `
         font-medium 
         bg-[linear-gradient(90deg,rgba(223,172,22,0.25)_0%,rgba(223,172,22,0.1)_100%)]
         dark:bg-[linear-gradient(90deg,rgba(223,172,22,0.35)_0%,rgba(223,172,22,0.15)_100%)]
       `;
 
-    case 1:
-      return `
+      case 1:
+        return `
         font-medium 
         bg-[linear-gradient(90deg,rgba(117,127,149,0.25)_0%,rgba(117,127,149,0.1)_100%)]
         dark:bg-[linear-gradient(90deg,rgba(117,127,149,0.35)_0%,rgba(117,127,149,0.15)_100%)]
       `;
 
-    case 2:
-      return `
+      case 2:
+        return `
         font-medium 
         bg-[linear-gradient(90deg,rgba(145,68,0,0.25)_0%,rgba(145,68,0,0.1)_100%)]
         dark:bg-[linear-gradient(90deg,rgba(145,68,0,0.35)_0%,rgba(145,68,0,0.15)_100%)]
       `;
 
-    default:
-      return "bg-zinc-100 dark:bg-zinc-800";
+      default:
+        return "bg-zinc-100 dark:bg-zinc-800";
+    }
   }
-}
   return (
     <div className="flex gap-6 pl-10 max-w-[1096px]">
       {/* Top selling products */}
@@ -94,9 +94,7 @@ function getTopProductBackground(index: number) {
         <h1 className="mb-6 font-semibold text-2xl capitalize">{t("low-stock-products")}</h1>
 
         {products?.lowStockProducts.map((lowProd) => (
-          <div
-          key={lowProd._id}
-          className="flex justify-between my-2.5 py-1 border-b">
+          <div key={lowProd._id} className="flex justify-between my-2.5 py-1 border-b">
             {/* Product title */}
             <h3>{lowProd.title.split(" ").slice(0, 5).join(" ")}... </h3>
 
