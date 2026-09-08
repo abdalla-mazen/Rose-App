@@ -1,7 +1,8 @@
-import { MapPin, PenLine, Phone, Trash2 } from "lucide-react";
+import { ArrowRight, MapPin, PenLine, Phone, Trash2 } from "lucide-react";
 import DeleteAddressModal from "./delete-address-modal";
 import { DialogTrigger } from "@/components/ui/dialog";
 import { useAddresses } from "./address-modal";
+import { Link } from "@/i18n/navigation";
 
 export default function AddressItem({ address }: { address: { [key: string]: string } }) {
   // Context
@@ -29,13 +30,17 @@ export default function AddressItem({ address }: { address: { [key: string]: str
             </span>
 
             {/* City */}
-            <span className="font-semibold text-zinc-800 text-2xl">{address.city}</span>
+            <span className="font-semibold text-zinc-800 dark:text-white text-2xl">
+              {address.city}
+            </span>
           </div>
 
           {/* Phone number */}
           <div className="flex justify-between items-center">
-            <Phone className="mr-1 w-5 h-5 text-zinc-800" />
-            <span className="font-medium text-zinc-600 text-lg">{address.phone}</span>
+            <Phone className="mr-1 w-5 h-5 text-zinc-800 dark:text-gray-400" />
+            <span className="font-medium text-zinc-600 text-lg dark:text-gray-400">
+              {address.phone}
+            </span>
           </div>
         </div>
 
@@ -48,7 +53,7 @@ export default function AddressItem({ address }: { address: { [key: string]: str
         <div className="top-5 -right-4 absolute flex flex-col items-center gap-4">
           <span
             onClick={handleEditClick}
-            className="flex justify-center items-center bg-zinc-50 border border-zinc-400 rounded-full w-9 h-9 cursor-pointer"
+            className="flex justify-center items-center bg-zinc-50 dark:bg-zinc-800 border border-zinc-400 rounded-full w-9 h-9 cursor-pointer"
           >
             <PenLine className="w-4 h-4" />
           </span>
@@ -65,6 +70,22 @@ export default function AddressItem({ address }: { address: { [key: string]: str
             addressId={address._id}
           />
         </div>
+        <Link href={`/checkout?address=${address._id}`} className="right-6 bottom-4 absolute">
+          <span
+            className="
+      flex justify-center items-center
+      bg-maroon-600 hover:bg-maroon-700
+      dark:bg-softPink-700 hover:dark:bg-softPink-800
+      rounded-full
+      w-9 h-9
+      text-white
+      cursor-pointer
+      transition-colors
+    "
+          >
+            <ArrowRight className="w-4 h-4 rtl:rotate-180" />
+          </span>
+        </Link>
       </div>
     </li>
   );

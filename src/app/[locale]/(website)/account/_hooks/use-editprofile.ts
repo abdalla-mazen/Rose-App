@@ -4,13 +4,12 @@ import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { deleteMyAccountAction, editProfileAction } from "../_actions/edit-profile.action";
 
 export function useEditprofile() {
   // Translations
   const t = useTranslations();
-  const router = useRouter();
+
 
   const { isPending, error, mutate } = useMutation({
     mutationFn: async (data: AccountEditprofileFields) => {

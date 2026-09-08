@@ -1,14 +1,20 @@
 export async function GetTestimonial() {
-  const res = await fetch(`https://flower.elevateegy.com/api/v1/testimonials`, {
+  const res = await fetch("https://flower.elevateegy.com/api/v1/testimonials", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
     cache: "no-store",
   });
+
   const payload: ApiResponse<TestimonialApiResponse> = await res.json();
-  if ("code" in payload) {
-    throw new Error(payload.message);
+
+  if (!("testimonials" in payload)) {
+    throw new Error(
+      "message" in payload && typeof payload.message === "string"
+        ? payload.message
+        : "Failed to fetch testimonials",
+    );
   }
 
   let testimonials = payload.testimonials || [];
@@ -16,11 +22,11 @@ export async function GetTestimonial() {
   if (testimonials.length === 1) {
     testimonials = Array(6).fill(testimonials[0]);
   }
-  //creating special key
+
   const testimonialsWithKeys = testimonials.map((item, index) => ({
     ...item,
     __key: `${item._id || "fake"}-${index}`,
   }));
 
-  return testimonials;
+  return testimonialsWithKeys;
 }

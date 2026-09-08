@@ -125,7 +125,7 @@ export default function NewAddressForm({ setStep, editingAddress }: NewAddressFo
       {/* Step 1 - Address Details */}
       {localStep === 1 && (
         <div>
-          <h2 className="mb-6 font-bold text-zinc-800 text-3xl capitalize">
+          <h2 className="mb-6 font-bold text-zinc-800 dark:text-white text-3xl capitalize">
             {editingAddress ? t("update-your-address") : t("add-new-address")}
           </h2>
 
@@ -133,7 +133,7 @@ export default function NewAddressForm({ setStep, editingAddress }: NewAddressFo
             <StepsProgress currentStep={1} />
           </div>
 
-          <h3 className="mb-4 pb-3 border-zinc-200 border-b font-medium text-maroon-600 text-2xl capitalize">
+          <h3 className="mb-4 pb-3 border-zinc-200  border-b font-medium text-maroon-600 text-2xl capitalize">
             {t("enter-address-details")}
           </h3>
 
@@ -164,7 +164,7 @@ export default function NewAddressForm({ setStep, editingAddress }: NewAddressFo
                 name="address"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="font-medium text-sm capitalize">{t("address")}</FormLabel>
+                    <FormLabel className="font-medium  text-sm capitalize">{t("address")}</FormLabel>
                     <FormControl>
                       <Textarea placeholder={t("review-comment-placeholder")} {...field} />
                     </FormControl>

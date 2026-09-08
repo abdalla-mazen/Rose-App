@@ -1,5 +1,5 @@
 import React from "react";
-import AccountEditProfile from "../../../account/_components/account-editprofile";
+import AccountEditProfile from "@/app/[locale]/(website)/account/_components/account-editprofile";
 import { GetUserDataApi } from "@/lib/apis/get-user-data.api";
 import { getTranslations } from "next-intl/server";
 

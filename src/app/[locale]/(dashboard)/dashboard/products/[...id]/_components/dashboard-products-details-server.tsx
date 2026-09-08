@@ -1,5 +1,6 @@
 import React from "react";
 import UpdateProductForm from "./update-product-form";
+import { Occasion } from "@/lib/types/occasion";
 
 // Props
 type Props = {

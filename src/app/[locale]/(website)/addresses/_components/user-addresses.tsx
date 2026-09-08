@@ -21,7 +21,7 @@ export default function UserAddress({ setStep }: { setStep: (step: number) => vo
   return (
     <div>
       <div className="flex justify-between items-center mb-9 pb-4 border-zinc-200 border-b">
-        <span className="font-bold text-zinc-800 text-3xl capitalize"> {t("my-addresses")}</span>
+        <span className="font-bold text-zinc-800 dark:text-white text-3xl capitalize"> {t("my-addresses")}</span>
         <Button variant="secondary" className="w-44 capitalize" onClick={handleAddNewAddress}>
           {t("add-new-address")}
         </Button>

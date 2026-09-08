@@ -6,6 +6,7 @@ import { MostPopularApi } from "@/lib/apis/product.api";
 import { useTranslations } from "next-intl";
 import DisplayProduct from "../../display-product";
 import { MoveLeft, MoveRight } from "lucide-react";
+import { Occasion } from "@/lib/types/occasion";
 
 // Props type
 type Props = {
@@ -21,7 +22,7 @@ export default function MostPopularClient({ occasions, products: initialProducts
 
   // Hooks
   const [selectedOccasion, setSelectedOccasion] = useState<string>(occasions[0]?._id || "");
-  const [products, setProducts] = useState<any[]>(initialProducts);
+  const [products, setProducts] = useState<Product[]>(initialProducts);
   const [loading, setLoading] = useState(false);
 
   // Fetch products when selectedOccasion changes Effect

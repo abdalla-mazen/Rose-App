@@ -23,12 +23,14 @@ export async function uploadPhotoAction(formData: FormData) {
     const data = await backendRes.json();
 
     if (backendRes.ok) {
-      // ✅ لو الصورة اتحدثت بنجاح، نعمل Revalidate لبيانات المستخدم
       revalidateTag("user-profile");
     }
 
     return { ...data, success: backendRes.ok };
-  } catch (err: any) {
-    return { success: false, message: err.message };
+  } catch (err: unknown) {
+    return {
+      success: false,
+      message: err instanceof Error ? err.message : "Something went wrong",
+    };
   }
 }

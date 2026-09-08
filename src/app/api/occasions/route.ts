@@ -7,10 +7,9 @@ export async function GET(request: Request) {
 
   try {
     // Fetch occasions from API
-    const res = await fetch(
-      `${process.env.API}/occasions?page=${page}&limit=10`,  
-      { cache: "no-store" }
-    );
+    const res = await fetch(`${process.env.API}/occasions?page=${page}&limit=10`, {
+      cache: "no-store",
+    });
 
     if (!res.ok) {
       throw new Error("Failed to fetch occasions");
@@ -19,11 +18,13 @@ export async function GET(request: Request) {
     // Return JSON data
     const data = await res.json();
     return NextResponse.json(data);
-  } catch (error: any) {
-    // Return error response
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: "Error fetching occasions", message: error.message },
-      { status: 500 }
+      {
+        error: "Error fetching occasions",
+        message: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 },
     );
   }
 }

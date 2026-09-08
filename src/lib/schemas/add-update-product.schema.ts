@@ -1,4 +1,4 @@
-import { string, z } from "zod";
+import { z } from "zod";
 
 export const addProductSchema = z.object({
   title: z.string().nonempty("Product title is required"),

@@ -1,7 +1,6 @@
 "use client";
 
 import { Pie, PieChart } from "recharts";
-
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { useOrderStatus } from "../_hooks/orders-status";
@@ -30,7 +29,17 @@ const chartConfig = {
     label: "Canceled",
     color: "#DC2626",
   },
-};
+} as const;
+
+// Helper: safely get config for a given status id
+function getStatusConfig(id: string) {
+  return (
+    chartConfig[id as keyof typeof chartConfig] ?? {
+      label: id,
+      color: "#999999",
+    }
+  );
+}
 
 export function OrdersStatus() {
   // Data
@@ -50,7 +59,7 @@ export function OrdersStatus() {
     status: item._id,
     count: item.count,
     percent: total ? Math.round((item.count / total) * 100) : 0,
-    fill: chartConfig[item._id].color,
+    fill: getStatusConfig(item._id).color,
   }));
 
   return (
@@ -75,7 +84,7 @@ export function OrdersStatus() {
               cy="50%"
               innerRadius={60}
               outerRadius={100}
-              label={<CustomLabel />}
+              label={(props) => <CustomLabel {...props} />}
               labelLine={false}
             />
           </PieChart>
@@ -88,9 +97,8 @@ export function OrdersStatus() {
           <div key={item.status} className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
               <span className="rounded-full w-3 h-3" style={{ backgroundColor: item.fill }} />
-              <span>{chartConfig[item.status]?.label}</span>
+              <span>{getStatusConfig(item.status).label}</span>
             </div>
-
             <span>
               {item.count} ({item.percent}%)
             </span>

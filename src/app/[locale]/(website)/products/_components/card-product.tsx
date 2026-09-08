@@ -212,7 +212,7 @@ export default function CardProduct({ product }: { product: Product }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const { addToCart, error: addToCartError, isPending: isAddingToCart } = useAddToCart();
   const { addToWishList, error: addToWishListError } = useWishlist();
- const { deleteFromWishList, error, isPending } = useDeleteWishlist();
+ const { deleteFromWishList} = useDeleteWishlist();
   
   // Check if user is logged in effect
   useEffect(() => {

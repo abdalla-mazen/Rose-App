@@ -1,15 +1,22 @@
-// Type
-// type Props = {
-// cx:string,
-// cy:string,
-// midAngle:number,
-// innerRadius:number,
-// outerRadius:number,
-// percent:number
-// }
+type CustomLabelProps = {
+  cx?: number;
+  cy?: number;
+  midAngle?: number;
+  innerRadius?: number;
+  outerRadius?: number;
+  percent?: number;
+  [key: string]: unknown;
+};
 
-export function CustomLabel(props) {
-  const { cx, cy, midAngle, innerRadius, outerRadius, percent } = props;
+export function CustomLabel(props: CustomLabelProps) {
+  const {
+    cx = 0,
+    cy = 0,
+    midAngle = 0,
+    innerRadius = 0,
+    outerRadius = 0,
+    percent = 0,
+  } = props;
 
   // Calculate label position
   const RADIAN = Math.PI / 180;
@@ -36,7 +43,7 @@ export function CustomLabel(props) {
         fontSize="10"
         fontWeight="bold"
       >
-        {percent}%
+        {Math.round((percent as number) * 100)}%
       </text>
     </g>
   );

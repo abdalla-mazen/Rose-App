@@ -83,7 +83,7 @@ export default function AccountEditProfile({ userData, showButtonChangePassword 
   };
 
   const onSubmit: SubmitHandler<AccountProfileValues> = async (data) => {
-    const { gender, ...filteredData } = data;
+    const { ...filteredData } = data;
     editProfile(filteredData);
   };
 

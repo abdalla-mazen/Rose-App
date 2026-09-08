@@ -1,6 +1,9 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import {
+  keepPreviousData,
+  useQuery,
+} from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 
 const API_BASE = process.env.NEXT_PUBLIC_API;
@@ -21,7 +24,7 @@ export function useProductQuery() {
   return useQuery({
     queryKey: ["products", query],
     queryFn: () => fetchProducts(query),
-    keepPreviousData: true,
+   placeholderData: keepPreviousData,
     staleTime: 1000 * 60 * 5,
   });
 }

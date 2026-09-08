@@ -10,7 +10,12 @@ type ResendOtpResponse = {
 export async function resendOtpAction(
   email: string
 ): Promise<ResendOtpResponse> {
-  if (!email) return { success: false, message: "Email is required" };
+  if (!email) {
+    return {
+      success: false,
+      message: "Email is required",
+    };
+  }
 
   try {
     const res = await fetch(`${API_BASE}/auth/forgotPasswords`, {
@@ -35,10 +40,11 @@ export async function resendOtpAction(
       success: true,
       message: data?.message || "New OTP sent successfully",
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     return {
       success: false,
-      message: error.message || "Something went wrong",
+      message:
+        error instanceof Error ? error.message : "Something went wrong",
     };
   }
 }

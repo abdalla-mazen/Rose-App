@@ -41,7 +41,8 @@ export default function AddOccasionsForm() {
     if (values.image) {
       formData.append("image", values.image);
     }
-    addOccasion(formData as unknown as occasions);
+
+    addOccasion(formData);
   };
 
   return (

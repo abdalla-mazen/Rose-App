@@ -1,11 +1,7 @@
-
-import { useTranslations } from "next-intl";
 import z from "zod";
 
 // Coupon Schema
 export const useCouponSchema = () => {
-  // Translation
-  const t = useTranslations();
 
   // Schema
   return z.object({

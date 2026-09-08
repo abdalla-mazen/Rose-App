@@ -40,8 +40,9 @@ export default function DeleteDialog({
       await deleteHook(itemId);
       toast.success(t("deleted-successfully"));
       setOpen(false);
-    } catch (error: any) {
-      toast.error(error.message || t("delete-failed"));
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : t("delete-failed");
+      toast.error(message);
     } finally {
       setIsDeleting(false);
     }

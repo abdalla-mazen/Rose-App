@@ -1,5 +1,5 @@
 import React from "react";
-import AccountChangePassword from "../../../account/_components/account-changepassword";
+import AccountChangePassword from "@/app/[locale]/(website)/account/_components/account-changepassword";
 import { useTranslations } from "next-intl";
 
 export default function Page() {

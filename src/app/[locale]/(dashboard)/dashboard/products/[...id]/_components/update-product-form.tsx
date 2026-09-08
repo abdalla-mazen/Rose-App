@@ -14,7 +14,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
-import { Image, Images, LoaderCircle, Upload } from "lucide-react";
+import { Image, Images, LoaderCircle } from "lucide-react";
 import ErrorMessage from "@/components/shared/error-message";
 import {
   Select,
@@ -74,7 +74,7 @@ export default function UpdateProductForm({ product, categories, occasions }: Pr
 
   // On submit
   const onSubmit: SubmitHandler<UpdateProductValues> = async (values) => {
-    const { discount, occasion, ...data } = values; // remove discount , occasion
+    const {  ...data } = values; // remove discount , occasion
     await updateProduct(data);
   };
 

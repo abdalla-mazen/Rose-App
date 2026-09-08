@@ -22,7 +22,7 @@ export default function AddressMap({ setStep, onSelect, initialCenter }: Address
   return (
     <div className="space-y-6">
       {/* Heading */}
-      <h2 className="mb-6 font-bold text-zinc-800 text-3xl capitalize">{t("add-new-address")}</h2>
+      <h2 className="mb-6 font-bold text-zinc-800 text-3xl dark:text-white capitalize">{t("add-new-address")}</h2>
 
       {/* Progress bar */}
       <div className="mb-4">

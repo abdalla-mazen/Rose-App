@@ -22,8 +22,8 @@ export default function DisplayProduct(product: Product) {
 
   // Hooks
   const [loggedIn, setLoggedIn] = useState(false);
-  const { addToCart, error: addToCartError, isPending: isAddingToCart } = useAddToCart();
-  const { addToWishList, error: addToWishListError, isPending: isAddingToWishList } = useWishlist();
+  const { addToCart, isPending: isAddingToCart } = useAddToCart();
+  const { addToWishList, isPending: isAddingToWishList } = useWishlist();
 
   // Check if user is logged in effect
   useEffect(() => {

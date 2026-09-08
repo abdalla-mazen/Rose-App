@@ -5,7 +5,7 @@ import getToken from "../utils/get-token";
 
 export async function cashPayment(data :AddressPayload) {
   const token = await getToken();
-
+console.log(data)
   const response = await fetch(`${process.env.API}/orders`, {
     method: "POST",
     headers: {
@@ -15,6 +15,6 @@ export async function cashPayment(data :AddressPayload) {
     body: JSON.stringify(data),
   });
   const payload = await response.json();
-
+console.log(payload);
   return payload;
 }

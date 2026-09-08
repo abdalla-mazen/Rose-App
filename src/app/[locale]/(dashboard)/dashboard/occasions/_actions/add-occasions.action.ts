@@ -2,11 +2,11 @@
 
 import getToken from "@/lib/utils/get-token";
 
-export type ImageFile = `${string}.${"jpg" | "jpeg" | "png" | "gif"}`;
 export interface occasions {
   name: string;
-  image: ImageFile;
+  image: File;
 }
+
 export default async function addOccasions(formData: FormData) {
   const token = await getToken();
 
