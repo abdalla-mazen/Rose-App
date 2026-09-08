@@ -1,36 +1,142 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌹 Rose App
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?logo=tailwind-css)
+![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-black?logo=vercel)
 
-First, run the development server:
+A modern, multilingual e-commerce platform for flowers and gifts, built with **Next.js 14**, **TypeScript**, and **Tailwind CSS**.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🔗 Live Demo
+
+https://rose-app-blond.vercel.app/
+
+## ✨ Features
+
+### 🛍️ Customer Storefront
+
+* User registration and login
+* Forgot password, OTP verification, and password reset
+* Arabic & English with full RTL support
+* Product browsing, search, filtering, and pagination
+* Filters by category, occasion, rating, and price
+* Product details with reviews, ratings, and related products
+* Shopping cart with quantity management
+* Guest cart with automatic merge after login
+* Wishlist
+* Checkout and order placement
+* Location selection using Leaflet maps
+* Cash on Delivery and Stripe credit card payments
+* Profile, addresses, password, and order history management
+* Notifications
+* Responsive design with dark mode
+
+### 🛠️ Admin Dashboard
+
+* Protected admin-only routes
+* Dashboard overview and statistics
+* Revenue, orders, products, and category analytics
+* Interactive charts using Recharts
+* Product CRUD operations
+* Category and occasion management
+* Order management and status updates
+* Admin profile and password management
+
+## 🧰 Tech Stack
+
+* **Next.js 14** — App Router
+* **React 18**
+* **TypeScript**
+* **Tailwind CSS**
+* **shadcn/ui & Radix UI**
+* **TanStack React Query**
+* **React Hook Form & Zod**
+* **NextAuth.js**
+* **next-intl**
+* **Framer Motion**
+* **Recharts**
+* **React Leaflet**
+* **Embla Carousel**
+* **Sonner**
+* **Stripe**
+* **REST API**
+* **Vercel**
+
+## 🏗️ Architecture
+
+The application follows a modular Next.js architecture using the App Router, reusable components, custom hooks, server actions, API utilities, authentication, and middleware-based route protection.
+
+## 📁 Project Structure
+
+```text
+src/
+├── app/              # Application routes and pages
+├── components/       # Reusable UI components
+├── hooks/            # Custom React hooks
+├── lib/              # API helpers, server actions, schemas & utilities
+├── i18n/             # Internationalization configuration
+├── auth.ts           # NextAuth configuration
+└── middleware.ts     # Authentication & route protection
+
+public/               # Static assets and images
+next.config.mjs       # Next.js configuration
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Getting Started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* Node.js 20.x or later
+* Yarn
 
-## Learn More
+### 1. Clone the repository
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+git clone https://github.com/abdalla-mazen/rose-app.git
+cd rose-app
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. Install dependencies
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+yarn install
+```
 
-## Deploy on Vercel
+### Environment Variables
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Create a `.env.local` file in the project root:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```env
+API="https://flower.elevateegy.com/api/v1"
+NEXT_PUBLIC_API="https://flower.elevateegy.com/api/v1"
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+```
+
+### Available Scripts
+
+```bash
+yarn dev
+yarn build
+yarn start
+yarn lint
+```
+
+## ☁️ Deployment
+
+The application is deployed on Vercel.
+
+Live application:
+
+https://rose-app-blond.vercel.app/
+
+## 💡 Project Highlights
+
+* Fully responsive e-commerce experience
+* Arabic & English internationalization
+* RTL support
+* Secure authentication and protected routes
+* Guest cart and cart synchronization
+* Stripe payment integration
+* Admin dashboard with analytics
+* Modern component-based architecture
+* Server and client-side rendering with Next.js
